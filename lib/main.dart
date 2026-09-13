@@ -48,6 +48,7 @@ class CartModel extends ChangeNotifier {
       items.add({
         'name': dish['name'],
         'price': dish['price'],
+        'image': dish['image'],
         'quantity': 1,
       });
     }
@@ -193,10 +194,34 @@ class _HomeScreenState extends State<HomeScreen> {
       'image': 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4',
       'description': 'Restaurant spécialisé dans la cuisine internationale et les grillades de premier choix à Ngor.',
       'menu': [
-        {'name': 'Brochettes géantes de gambas', 'price': '8 500 FCFA', 'desc': 'Gambas fraîches marinées aux herbes.', 'available': true},
-        {'name': 'Filet de zébu sauce poivre', 'price': '7 000 FCFA', 'desc': 'Tendre morceau de zébu et frites maison.', 'available': true},
-        {'name': 'Burger signature Seven', 'price': '6 000 FCFA', 'desc': 'Bœuf haché, cheddar affiché, sauce secrète.', 'available': true},
-        {'name': 'Jus de Bissap frais', 'price': '1 000 FCFA', 'desc': 'Fait maison à la menthe.', 'available': true},
+        {
+          'name': 'Brochettes géantes de gambas',
+          'price': '8 500 FCFA',
+          'desc': 'Gambas fraîches marinées aux herbes.',
+          'image': 'https://images.unsplash.com/photo-1565557623262-b51c2513a641',
+          'available': true
+        },
+        {
+          'name': 'Filet de zébu sauce poivre',
+          'price': '7 000 FCFA',
+          'desc': 'Tendre morceau de zébu et frites maison.',
+          'image': 'https://images.unsplash.com/photo-1558030006-450675393462',
+          'available': true
+        },
+        {
+          'name': 'Burger signature Seven',
+          'price': '6 000 FCFA',
+          'desc': 'Bœuf haché, cheddar affiché, sauce secrète.',
+          'image': 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd',
+          'available': true
+        },
+        {
+          'name': 'Jus de Bissap frais',
+          'price': '1 000 FCFA',
+          'desc': 'Fait maison à la menthe.',
+          'image': 'https://images.unsplash.com/photo-1556679343-c7306c1976bc',
+          'available': true
+        },
       ],
       'reviews_list': [
         {'author': 'Mamadou Diallo', 'rating': 5, 'comment': 'Superbe cadre à Ngor, les gambas étaient exceptionnelles !'},
@@ -215,9 +240,27 @@ class _HomeScreenState extends State<HomeScreen> {
       'image': 'https://images.unsplash.com/photo-1544025162-d76694265947',
       'description': 'Gastronomie française et poissons frais avec vue panoramique sur l’océan au Plateau.',
       'menu': [
-        {'name': 'Langouste grillée au beurre blanc', 'price': '14 000 FCFA', 'desc': 'Pêche locale du jour.', 'available': true},
-        {'name': 'Mérou à la dieppoise', 'price': '8 500 FCFA', 'desc': 'Poisson frais mijoté aux petits légumes.', 'available': true},
-        {'name': 'Fondant au chocolat noir', 'price': '3 500 FCFA', 'desc': 'Cœur coulant maison.', 'available': true},
+        {
+          'name': 'Langouste grillée au beurre blanc',
+          'price': '14 000 FCFA',
+          'desc': 'Pêche locale du jour.',
+          'image': 'https://images.unsplash.com/photo-1535400255456-984241443b28',
+          'available': true
+        },
+        {
+          'name': 'Mérou à la dieppoise',
+          'price': '8 500 FCFA',
+          'desc': 'Poisson frais mijoté aux petits légumes.',
+          'image': 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2',
+          'available': true
+        },
+        {
+          'name': 'Fondant au chocolat noir',
+          'price': '3 500 FCFA',
+          'desc': 'Cœur coulant maison.',
+          'image': 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c',
+          'available': true
+        },
       ],
       'reviews_list': [
         {'author': 'Jean Dupont', 'rating': 5, 'comment': 'Vue imprenable et cuisine irréprochable.'},
@@ -236,9 +279,27 @@ class _HomeScreenState extends State<HomeScreen> {
       'image': 'https://images.unsplash.com/photo-1537047902294-62a40c20a6ae',
       'description': 'La référence incontournable de la cuisine sénégalaise traditionnelle les pieds dans l’eau aux Almadies.',
       'menu': [
-        {'name': 'Ceebu Jën (Riz au poisson)', 'price': '3 500 FCFA', 'desc': 'Le plat national authentique rouge.', 'available': true},
-        {'name': 'Poulet Yassa', 'price': '3 000 FCFA', 'desc': 'Poulet mariné oignons et citron vert.', 'available': true},
-        {'name': 'Soupou Kandia', 'price': '3 500 FCFA', 'desc': 'Soupe de gombos à l’huile de palme.', 'available': true},
+        {
+          'name': 'Ceebu Jën (Riz au poisson)',
+          'price': '3 500 FCFA',
+          'desc': 'Le plat national authentique rouge.',
+          'image': 'https://images.unsplash.com/photo-1541544741938-0af808871cc0',
+          'available': true
+        },
+        {
+          'name': 'Poulet Yassa',
+          'price': '3 000 FCFA',
+          'desc': 'Poulet mariné oignons et citron vert.',
+          'image': 'https://images.unsplash.com/photo-1626777552726-4a6b54c97e46',
+          'available': true
+        },
+        {
+          'name': 'Soupou Kandia',
+          'price': '3 500 FCFA',
+          'desc': 'Soupe de gombos à l’huile de palme.',
+          'image': 'https://images.unsplash.com/photo-1547592180-85f173990554',
+          'available': true
+        },
       ],
       'reviews_list': [
         {'author': 'Fatou Sow', 'rating': 4, 'comment': 'Le meilleur ceebu jën de Dakar !'},
@@ -257,9 +318,27 @@ class _HomeScreenState extends State<HomeScreen> {
       'image': 'https://images.unsplash.com/photo-1513104890138-7c749659a591',
       'description': 'Authentiques pizzas italiennes cuites au feu de bois et pâtes fraîches au cœur de Dakar.',
       'menu': [
-        {'name': 'Pizza Margherita di Bufala', 'price': '5 500 FCFA', 'desc': 'Mozzarella di bufala et basilic frais.', 'available': true},
-        {'name': 'Tagliatelles aux fruits de mer', 'price': '6 500 FCFA', 'desc': 'Pâtes fraîches et gambas.', 'available': true},
-        {'name': 'Tiramisu classique', 'price': '3 000 FCFA', 'desc': 'Recette italienne traditionnelle.', 'available': true},
+        {
+          'name': 'Pizza Margherita di Bufala',
+          'price': '5 500 FCFA',
+          'desc': 'Mozzarella di bufala et basilic frais.',
+          'image': 'https://images.unsplash.com/photo-1574071318508-1cdbab80d002',
+          'available': true
+        },
+        {
+          'name': 'Tagliatelles aux fruits de mer',
+          'price': '6 500 FCFA',
+          'desc': 'Pâtes fraîches et gambas.',
+          'image': 'https://images.unsplash.com/photo-1551183053-bf91a1d81141',
+          'available': true
+        },
+        {
+          'name': 'Tiramisu classique',
+          'price': '3 000 FCFA',
+          'desc': 'Recette italienne traditionnelle.',
+          'image': 'https://images.unsplash.com/photo-1571877227200-a0d98ea607e9',
+          'available': true
+        },
       ],
       'reviews_list': [
         {'author': 'Omar Ba', 'rating': 5, 'comment': 'Pizza croustillante et goûteuse !'},
@@ -278,8 +357,20 @@ class _HomeScreenState extends State<HomeScreen> {
       'image': 'https://images.unsplash.com/photo-1559339352-11d035aa65de',
       'description': 'Cadre élégant et climatisé proposant une carte variée de plats internationaux et grillades.',
       'menu': [
-        {'name': 'Entrecôte grillée frites maison', 'price': '9 000 FCFA', 'desc': 'Viande tendre et sauce au choix.', 'available': true},
-        {'name': 'Salade César au poulet', 'price': '4 500 FCFA', 'desc': 'Laitue, croûtons, parmesan et poulet croustillant.', 'available': true},
+        {
+          'name': 'Entrecôte grillée frites maison',
+          'price': '9 000 FCFA',
+          'desc': 'Viande tendre et sauce au choix.',
+          'image': 'https://images.unsplash.com/photo-1603048588665-791ca8aea617',
+          'available': true
+        },
+        {
+          'name': 'Salade César au poulet',
+          'price': '4 500 FCFA',
+          'desc': 'Laitue, croûtons, parmesan et poulet croustillant.',
+          'image': 'https://images.unsplash.com/photo-1540420773420-3366772f4999',
+          'available': true
+        },
       ],
       'reviews_list': [
         {'author': 'Sophie Martin', 'rating': 4, 'comment': 'Parfait pour un déjeuner au Plateau.'},
@@ -298,8 +389,20 @@ class _HomeScreenState extends State<HomeScreen> {
       'image': 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e',
       'description': 'Fusion parfaite entre cuisine locale sénégalaise et saveurs internationales.',
       'menu': [
-        {'name': 'Thiéboudienne bento fusion', 'price': '5 000 FCFA', 'desc': 'Riz rouge revisité haut de gamme.', 'available': true},
-        {'name': 'Carpaccio de dorade aux agrumes', 'price': '4 500 FCFA', 'desc': 'Dorade fraîche, pamplemousse et citron.', 'available': true},
+        {
+          'name': 'Thiéboudienne bento fusion',
+          'price': '5 000 FCFA',
+          'desc': 'Riz rouge revisité haut de gamme.',
+          'image': 'https://images.unsplash.com/photo-1541544741938-0af808871cc0',
+          'available': true
+        },
+        {
+          'name': 'Carpaccio de dorade aux agrumes',
+          'price': '4 500 FCFA',
+          'desc': 'Dorade fraîche, pamplemousse et citron.',
+          'image': 'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb',
+          'available': true
+        },
       ],
       'reviews_list': [
         {'author': 'Khadija Fall', 'rating': 5, 'comment': 'Un concept novateur et délicieux.'},
@@ -584,30 +687,43 @@ class RestaurantDetailScreen extends StatelessWidget {
                       elevation: 1,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                       child: Padding(
-                        padding: const EdgeInsets.all(12.0),
+                        padding: const EdgeInsets.all(10.0),
                         child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: Image.network(
+                                item['image'],
+                                width: 70,
+                                height: 70,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            const SizedBox(width: 12),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(item['name'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                                  const SizedBox(height: 2),
+                                  Text(item['desc'], style: const TextStyle(fontSize: 12, color: Colors.grey)),
                                   const SizedBox(height: 4),
-                                  Text(item['desc'], style: const TextStyle(fontSize: 13, color: Colors.grey)),
-                                  const SizedBox(height: 6),
-                                  Text(item['price'], style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.deepOrange, fontSize: 14)),
+                                  Text(item['price'], style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.deepOrange, fontSize: 13)),
                                 ],
                               ),
                             ),
-                            const SizedBox(width: 10),
+                            const SizedBox(width: 8),
                             isAvailable
                                 ? ElevatedButton(
-                                    style: ElevatedButton.styleFrom(backgroundColor: Colors.deepOrange, foregroundColor: Colors.white),
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.deepOrange,
+                                      foregroundColor: Colors.white,
+                                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                                    ),
                                     onPressed: () => _addDishToCart(context, item),
-                                    child: const Text('+ Ajouter'),
+                                    child: const Text('+ Ajouter', style: TextStyle(fontSize: 12)),
                                   )
-                                : const Text('Indisponible', style: TextStyle(color: Colors.red, fontSize: 12)),
+                                : const Text('Indisponible', style: TextStyle(color: Colors.red, fontSize: 11)),
                           ],
                         ),
                       ),
@@ -698,20 +814,37 @@ class CartScreen extends StatelessWidget {
                     final item = cartManager.items[index];
                     return Card(
                       margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                      child: ListTile(
-                        title: Text(item['name'], style: const TextStyle(fontWeight: FontWeight.bold)),
-                        subtitle: Text(item['price']),
-                        trailing: Row(
-                          mainAxisSize: MainAxisSize.min,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
                           children: [
-                            IconButton(
-                              icon: const Icon(Icons.remove_circle_outline),
-                              onPressed: () => cartManager.updateQuantity(index, -1),
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(6),
+                              child: Image.network(item['image'], width: 50, height: 50, fit: BoxFit.cover),
                             ),
-                            Text('${item['quantity']}', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-                            IconButton(
-                              icon: const Icon(Icons.add_circle_outline),
-                              onPressed: () => cartManager.updateQuantity(index, 1),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(item['name'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+                                  Text(item['price'], style: const TextStyle(color: Colors.deepOrange, fontSize: 12)),
+                                ],
+                              ),
+                            ),
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                IconButton(
+                                  icon: const Icon(Icons.remove_circle_outline, size: 20),
+                                  onPressed: () => cartManager.updateQuantity(index, -1),
+                                ),
+                                Text('${item['quantity']}', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                                IconButton(
+                                  icon: const Icon(Icons.add_circle_outline, size: 20),
+                                  onPressed: () => cartManager.updateQuantity(index, 1),
+                                ),
+                              ],
                             ),
                           ],
                         ),
@@ -993,7 +1126,7 @@ class SettingsScreen extends StatelessWidget {
         children: const [
           ListTile(leading: Icon(Icons.language, color: Colors.deepOrange), title: Text('Langue'), subtitle: Text('Français')),
           ListTile(leading: Icon(Icons.location_city, color: Colors.deepOrange), title: Text('Ville'), subtitle: Text('Dakar, Sénégal')),
-          ListTile(leading: Icon(Icons.info_outline, color: Colors.deepOrange), title: Text('DEKK FOOD'), subtitle: Text('Version 1.2.0 - Sénégal Ready')),
+          ListTile(leading: Icon(Icons.info_outline, color: Colors.deepOrange), title: Text('DEKK FOOD'), subtitle: Text('Version 1.3.0 - Sénégal Ready')),
         ],
       ),
     );
