@@ -5,6 +5,99 @@ void main() {
   runApp(const MyApp());
 }
 
+// ==========================================
+// GESTIONNAIRE GLOBAL DU PANIER (STATE)
+// ==========================================
+class CartModel extends ChangeNotifier {
+  static final CartModel _instance = CartModel._internal();
+  factory CartModel() => _instance;
+  CartModel._internal();
+
+  String? restaurantName;
+  String? restaurantPhone;
+  final List<Map<String, dynamic>> items = [];
+
+  int get totalItems {
+    int count = 0;
+    for (var item in items) {
+      count += (item['quantity'] as int);
+    }
+    return count;
+  }
+
+  int get subtotal {
+    int sum = 0;
+    for (var item in items) {
+      int price = int.parse(item['price'].replaceAll(RegExp(r'[^0-9]'), ''));
+      sum += price * (item['quantity'] as int);
+    }
+    return sum;
+  }
+
+  void addItem(String resName, String resPhone, Map<String, dynamic> dish) {
+    if (restaurantName != null && restaurantName != resName) {
+      // Un autre restaurant est déjà dans le panier
+      return; 
+    }
+    restaurantName = resName;
+    restaurantPhone = resPhone;
+
+    final index = items.indexWhere((i) => i['name'] == dish['name']);
+    if (index >= 0) {
+      items[index]['quantity'] = (items[index]['quantity'] as int) + 1;
+    } else {
+      items.add({
+        'name': dish['name'],
+        'price': dish['price'],
+        'quantity': 1,
+      });
+    }
+    notifyListeners();
+  }
+
+  void updateQuantity(int index, int delta) {
+    items[index]['quantity'] = (items[index]['quantity'] as int) + delta;
+    if (items[index]['quantity'] <= 0) {
+      items.removeAt(index);
+    }
+    if (items.isEmpty) {
+      restaurantName = null;
+      restaurantPhone = null;
+    }
+    notifyListeners();
+  }
+
+  void clear() {
+    restaurantName = null;
+    restaurantPhone = null;
+    items.clear();
+    notifyListeners();
+  }
+}
+
+final cartManager = CartModel();
+
+// ==========================================
+// HISTORIQUE DES COMMANDES LOCALES
+// ==========================================
+class OrderHistoryModel extends ChangeNotifier {
+  static final OrderHistoryModel _instance = OrderHistoryModel._internal();
+  factory OrderHistoryModel() => _instance;
+  OrderHistoryModel._internal();
+
+  final List<Map<String, dynamic>> orders = [];
+
+  void addOrder(Map<String, dynamic> order) {
+    orders.insert(0, order);
+    notifyListeners();
+  }
+}
+
+final orderHistoryManager = OrderHistoryModel();
+
+// ==========================================
+// APPLICATION PRINCIPALE
+// ==========================================
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -15,7 +108,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
-        scaffoldBackgroundColor: const Color(0xFFF3F4F6), // Fond général gris très clair et moderne
+        scaffoldBackgroundColor: const Color(0xFFF3F4F6),
         useMaterial3: true,
       ),
       home: const MainNavigationScreen(),
@@ -23,9 +116,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// ==========================================
-// BARRE DE NAVIGATION PRINCIPALE (2026)
-// ==========================================
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
 
@@ -38,6 +128,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
 
   final List<Widget> _screens = [
     const HomeScreen(),
+    const OrdersScreen(),
     const FavoritesScreen(),
     const SettingsScreen(),
   ];
@@ -46,33 +137,43 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _screens[_currentIndex],
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: _currentIndex,
-        onDestinationSelected: (index) => setState(() => _currentIndex = index),
-        destinations: const [
-          NavigationDestination(
-            icon: Icon(Icons.explore_outlined),
-            selectedIcon: Icon(Icons.explore, color: Colors.deepOrange),
-            label: 'Découvrir',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.favorite_border),
-            selectedIcon: Icon(Icons.favorite, color: Colors.deepOrange),
-            label: 'Favoris',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.settings_outlined),
-            selectedIcon: Icon(Icons.settings, color: Colors.deepOrange),
-            label: 'Paramètres',
-          ),
-        ],
+      bottomNavigationBar: AnimatedBuilder(
+        animation: cartManager,
+        builder: (context, child) {
+          return NavigationBar(
+            selectedIndex: _currentIndex,
+            onDestinationSelected: (index) => setState(() => _currentIndex = index),
+            destinations: [
+              const NavigationDestination(
+                icon: Icon(Icons.explore_outlined),
+                selectedIcon: Icon(Icons.explore, color: Colors.deepOrange),
+                label: 'Découvrir',
+              ),
+              NavigationDestination(
+                icon: const Icon(Icons.receipt_long_outlined),
+                selectedIcon: const Icon(Icons.receipt_long, color: Colors.deepOrange),
+                label: 'Commandes',
+              ),
+              const NavigationDestination(
+                icon: Icon(Icons.favorite_border),
+                selectedIcon: Icon(Icons.favorite, color: Colors.deepOrange),
+                label: 'Favoris',
+              ),
+              const NavigationDestination(
+                icon: Icon(Icons.settings_outlined),
+                selectedIcon: Icon(Icons.settings, color: Colors.deepOrange),
+                label: 'Paramètres',
+              ),
+            ],
+          );
+        },
       ),
     );
   }
 }
 
 // ==========================================
-// 1. ÉCRAN DÉCOUVRIR (CASES GRISES & HORIZONTALES)
+// 1. ÉCRAN DÉCOUVRIR
 // ==========================================
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -98,13 +199,12 @@ class _HomeScreenState extends State<HomeScreen> {
       'image': 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4',
       'description': 'Restaurant spécialisé dans la cuisine internationale et les grillades de premier choix dans un cadre exceptionnel à Ngor.',
       'menu': [
-        {'name': 'Brochettes géantes de gambas', 'price': '8 500 FCFA', 'desc': 'Gambas fraîches marinées aux herbes.'},
-        {'name': 'Filet de zébu sauce poivre', 'price': '7 000 FCFA', 'desc': 'Tendre morceau de zébu et frites maison.'},
-        {'name': 'Jus de Bissap frais', 'price': '1 000 FCFA', 'desc': 'Fait maison à la menthe.'},
+        {'name': 'Brochettes géantes de gambas', 'price': '8 500 FCFA', 'desc': 'Gambas fraîches marinées aux herbes.', 'available': true},
+        {'name': 'Filet de zébu sauce poivre', 'price': '7 000 FCFA', 'desc': 'Tendre morceau de zébu et frites maison.', 'available': true},
+        {'name': 'Jus de Bissap frais', 'price': '1 000 FCFA', 'desc': 'Fait maison à la menthe.', 'available': true},
       ],
       'reviews_list': [
         {'author': 'Mamadou Diallo', 'rating': 5, 'comment': 'Superbe cadre à Ngor, les gambas étaient exceptionnelles !'},
-        {'author': 'Awa Ndiaye', 'rating': 4, 'comment': 'Très bon service et plats délicieux.'},
       ]
     },
     {
@@ -120,12 +220,12 @@ class _HomeScreenState extends State<HomeScreen> {
       'image': 'https://images.unsplash.com/photo-1544025162-d76694265947',
       'description': 'Gastronomie française et poissons frais avec vue panoramique sur l’océan au Plateau.',
       'menu': [
-        {'name': 'Langouste grillée au beurre blanc', 'price': '14 000 FCFA', 'desc': 'Pêche locale du jour.'},
-        {'name': 'Mérou à la dieppoise', 'price': '8 500 FCFA', 'desc': 'Poisson frais mijoté aux petits légumes.'},
-        {'name': 'Fondant au chocolat noir', 'price': '3 500 FCFA', 'desc': 'Cœur coulant maison.'},
+        {'name': 'Langouste grillée au beurre blanc', 'price': '14 000 FCFA', 'desc': 'Pêche locale du jour.', 'available': true},
+        {'name': 'Mérou à la dieppoise', 'price': '8 500 FCFA', 'desc': 'Poisson frais mijoté aux petits légumes.', 'available': true},
+        {'name': 'Fondant au chocolat noir', 'price': '3 500 FCFA', 'desc': 'Cœur coulant maison.', 'available': true},
       ],
       'reviews_list': [
-        {'author': 'Jean Dupont', 'rating': 5, 'comment': 'Vue imprenable et cuisine gastronomique irréprochable.'},
+        {'author': 'Jean Dupont', 'rating': 5, 'comment': 'Vue imprenable et cuisine irréprochable.'},
       ]
     },
     {
@@ -141,60 +241,18 @@ class _HomeScreenState extends State<HomeScreen> {
       'image': 'https://images.unsplash.com/photo-1537047902294-62a40c20a6ae',
       'description': 'La référence incontournable de la cuisine sénégalaise traditionnelle les pieds dans l’eau aux Almadies.',
       'menu': [
-        {'name': 'Ceebu Jën (Riz au poisson)', 'price': '3 500 FCFA', 'desc': 'Le plat national authentique rouge.'},
-        {'name': 'Poulet Yassa', 'price': '3 000 FCFA', 'desc': 'Poulet mariné oignons et citron vert.'},
-        {'name': 'Thiéboudienne poulet', 'price': '3 500 FCFA', 'desc': 'Riz au poisson blanc ou poulet.'},
+        {'name': 'Ceebu Jën (Riz au poisson)', 'price': '3 500 FCFA', 'desc': 'Le plat national authentique rouge.', 'available': true},
+        {'name': 'Poulet Yassa', 'price': '3 000 FCFA', 'desc': 'Poulet mariné oignons et citron vert.', 'available': true},
       ],
       'reviews_list': [
-        {'author': 'Fatou Sow', 'rating': 4, 'comment': 'Le meilleur ceebu jën de Dakar, ambiance authentique.'},
-      ]
-    },
-    {
-      'name': 'Reine Margarita',
-      'neighborhood': 'Plateau',
-      'cuisine': 'Italienne & Pizzeria',
-      'rating': 4.4,
-      'reviews': 396,
-      'price': '3 000 – 7 000 FCFA',
-      'phone': '+221 78 444 99 55',
-      'whatsapp': '+221 78 444 99 55',
-      'address': 'Dakar Plateau',
-      'image': 'https://images.unsplash.com/photo-1513104890138-7c749659a591',
-      'description': 'Authentiques pizzas italiennes cuites au feu de bois et pâtes fraîches au cœur de Dakar.',
-      'menu': [
-        {'name': 'Pizza Margherita di Bufala', 'price': '5 500 FCFA', 'desc': 'Mozzarella di bufala et basilic frais.'},
-        {'name': 'Tagliatelles aux fruits de mer', 'price': '6 500 FCFA', 'desc': 'Pâtes fraîches et gambas.'},
-        {'name': 'Tiramisu classique', 'price': '3 000 FCFA', 'desc': 'Recette italienne traditionnelle.'},
-      ],
-      'reviews_list': [
-        {'author': 'Omar Ba', 'rating': 5, 'comment': 'Pizza croustillante et goûteuse, un régal !'},
-      ]
-    },
-    {
-      'name': 'La Fourchette',
-      'neighborhood': 'Plateau',
-      'cuisine': 'Internationale & Grillades',
-      'rating': 4.3,
-      'reviews': 1110,
-      'price': '4 000 – 12 000 FCFA',
-      'phone': '+221 33 842 66 66',
-      'whatsapp': '+221 33 842 66 66',
-      'address': 'Rue Parent, Dakar Plateau',
-      'image': 'https://images.unsplash.com/photo-1559339352-11d035aa65de',
-      'description': 'Cadre élégant et climatisé proposant une carte variée de plats internationaux et grillades.',
-      'menu': [
-        {'name': 'Entrecôte grillée frites maison', 'price': '9 000 FCFA', 'desc': 'Viande tendre et sauce au choix.'},
-        {'name': 'Salade César au poulet', 'price': '4 500 FCFA', 'desc': 'Laitue, croûtons, parmesan et poulet croustillant.'},
-      ],
-      'reviews_list': [
-        {'author': 'Sophie Martin', 'rating': 4, 'comment': 'Idéal pour un déjeuner d’affaires au Plateau.'},
+        {'author': 'Fatou Sow', 'rating': 4, 'comment': 'Le meilleur ceebu jën de Dakar !'},
       ]
     },
   ];
 
   @override
   Widget build(BuildContext context) {
-    final filteredRestaurants = restaurants.where((r) {
+    final filtered = restaurants.where((r) {
       final name = r['name'].toString().toLowerCase();
       final neighborhood = r['neighborhood'].toString().toLowerCase();
       final cuisine = r['cuisine'].toString().toLowerCase();
@@ -207,6 +265,38 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text('DEKK FOOD - Sénégal', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
         backgroundColor: Colors.deepOrange,
         centerTitle: true,
+        actions: [
+          // Indicateur Panier dans l'AppBar
+          AnimatedBuilder(
+            animation: cartManager,
+            builder: (context, child) {
+              if (cartManager.totalItems == 0) return const SizedBox.shrink();
+              return Stack(
+                alignment: Alignment.center,
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.shopping_cart, color: Colors.white),
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const CartScreen()));
+                    },
+                  ),
+                  Positioned(
+                    right: 8,
+                    top: 8,
+                    child: Container(
+                      padding: const EdgeInsets.all(4),
+                      decoration: const BoxDecoration(color: Colors.yellow, shape: BoxShape.circle),
+                      child: Text(
+                        '${cartManager.totalItems}',
+                        style: const TextStyle(color: Colors.black, fontSize: 10, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
+        ],
       ),
       body: Column(
         children: [
@@ -224,16 +314,16 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           Expanded(
-            child: filteredRestaurants.isEmpty
+            child: filtered.isEmpty
                 ? const Center(child: Text('Aucun restaurant trouvé.'))
                 : ListView.builder(
-                    itemCount: filteredRestaurants.length,
+                    itemCount: filtered.length,
                     itemBuilder: (context, index) {
-                      final r = filteredRestaurants[index];
+                      final r = filtered[index];
                       return Container(
                         margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                         decoration: BoxDecoration(
-                          color: const Color(0xFFE5E7EB), // Boîte en gris élégant
+                          color: const Color(0xFFE5E7EB),
                           borderRadius: BorderRadius.circular(14),
                         ),
                         child: InkWell(
@@ -248,7 +338,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           },
                           child: Padding(
                             padding: const EdgeInsets.all(10.0),
-                            // SUPERPOSITION HORIZONTALE (Image à gauche, Texte au milieu, Flèche à droite)
                             child: Row(
                               children: [
                                 ClipRRect(
@@ -260,23 +349,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        r['name'],
-                                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black87),
-                                      ),
+                                      Text(r['name'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                                       const SizedBox(height: 4),
-                                      Text(
-                                        '${r['neighborhood']} · ${r['cuisine']}',
-                                        style: const TextStyle(color: Colors.black54, fontSize: 13),
-                                      ),
+                                      Text('${r['neighborhood']} · ${r['cuisine']}', style: const TextStyle(color: Colors.black54, fontSize: 13)),
                                       const SizedBox(height: 6),
                                       Row(
                                         children: [
                                           const Icon(Icons.star, color: Colors.amber, size: 16),
-                                          Text(
-                                            ' ${r['rating']} (${r['reviews']} avis)',
-                                            style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 12, color: Colors.black87),
-                                          ),
+                                          Text(' ${r['rating']} (${r['reviews']} avis)', style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 12)),
                                         ],
                                       ),
                                     ],
@@ -298,42 +378,79 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 // ==========================================
-// 2. FICHE RESTAURANT COMPLÈTE & IMMERSIVE
+// 2. FICHE RESTAURANT & AJOUT AU PANIER
 // ==========================================
 class RestaurantDetailScreen extends StatelessWidget {
   final Map<String, dynamic> restaurant;
 
   const RestaurantDetailScreen({super.key, required this.restaurant});
 
-  Future<void> _makePhoneCall(String phone) async {
-    final Uri launchUri = Uri(scheme: 'tel', path: phone);
-    await launchUrl(launchUri);
-  }
+  void _addDishToCart(BuildContext context, Map<String, dynamic> dish) {
+    final resName = restaurant['name'];
+    final resPhone = restaurant['phone'];
 
-  Future<void> _openWhatsApp(String whatsapp) async {
-    final Uri uri = Uri.parse('https://wa.me/${whatsapp.replaceAll(RegExp(r'[^0-9]'), '')}');
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
-    }
-  }
-
-  Future<void> _openMap(String address) async {
-    final Uri uri = Uri.parse('https://maps.google.com/?q=${Uri.encodeComponent(address)}');
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    if (cartManager.restaurantName != null && cartManager.restaurantName != resName) {
+      showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: const Text('Changer de restaurant ?'),
+          content: Text('Votre panier contient des articles de ${cartManager.restaurantName}. Voulez-vous le vider pour commander chez $resName ?'),
+          actions: [
+            TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Annuler')),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.deepOrange, foregroundColor: Colors.white),
+              onPressed: () {
+                cartManager.clear();
+                cartManager.addItem(resName, resPhone, dish);
+                Navigator.pop(ctx);
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('${dish['name']} ajouté au panier !')));
+              },
+              child: const Text('Vider et continuer'),
+            ),
+          ],
+        ),
+      );
+    } else {
+      cartManager.addItem(resName, resPhone, dish);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('${dish['name']} ajouté au panier !')));
     }
   }
 
   @override
   Widget build(BuildContext context) {
     final menu = restaurant['menu'] as List;
-    final reviewsList = restaurant['reviews_list'] as List;
 
     return Scaffold(
       appBar: AppBar(
         title: Text(restaurant['name'], style: const TextStyle(color: Colors.white)),
         backgroundColor: Colors.deepOrange,
         iconTheme: const IconThemeData(color: Colors.white),
+        actions: [
+          AnimatedBuilder(
+            animation: cartManager,
+            builder: (context, child) {
+              if (cartManager.totalItems == 0) return const SizedBox.shrink();
+              return Stack(
+                alignment: Alignment.center,
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.shopping_cart, color: Colors.white),
+                    onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const CartScreen())),
+                  ),
+                  Positioned(
+                    right: 8,
+                    top: 8,
+                    child: Container(
+                      padding: const EdgeInsets.all(4),
+                      decoration: const BoxDecoration(color: Colors.yellow, shape: BoxShape.circle),
+                      child: Text('${cartManager.totalItems}', style: const TextStyle(color: Colors.black, fontSize: 10, fontWeight: FontWeight.bold)),
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -361,75 +478,315 @@ class RestaurantDetailScreen extends StatelessWidget {
                     children: [
                       ElevatedButton.icon(
                         style: ElevatedButton.styleFrom(backgroundColor: Colors.green, foregroundColor: Colors.white),
-                        onPressed: () => _makePhoneCall(restaurant['phone']),
+                        onPressed: () => launchUrl(Uri(scheme: 'tel', path: restaurant['phone'])),
                         icon: const Icon(Icons.phone),
                         label: const Text('Appeler'),
                       ),
                       ElevatedButton.icon(
                         style: ElevatedButton.styleFrom(backgroundColor: Colors.teal, foregroundColor: Colors.white),
-                        onPressed: () => _openWhatsApp(restaurant['whatsapp']),
+                        onPressed: () => launchUrl(Uri.parse('https://wa.me/${restaurant['whatsapp'].replaceAll(RegExp(r'[^0-9]'), '')}')),
                         icon: const Icon(Icons.chat),
                         label: const Text('WhatsApp'),
                       ),
                     ],
                   ),
                   const Divider(height: 30),
-                  const Text('À propos', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                  const SizedBox(height: 6),
-                  Text(restaurant['description'], style: const TextStyle(color: Colors.black87, height: 1.4)),
-                  const Divider(height: 30),
-                  const Text('⭐ Spécialités & Menu', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  const Text('⭐ Menu & Commander', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                   const SizedBox(height: 8),
-                  ...menu.map((item) => Card(
-                        margin: const EdgeInsets.symmetric(vertical: 4),
-                        elevation: 1,
-                        child: ListTile(
-                          title: Text(item['name'], style: const TextStyle(fontWeight: FontWeight.bold)),
-                          subtitle: Text(item['desc'], style: const TextStyle(fontSize: 13, color: Colors.grey)),
-                          trailing: Text(item['price'], style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.deepOrange)),
+                  ...menu.map((item) {
+                    final bool isAvailable = item['available'] ?? true;
+                    return Card(
+                      margin: const EdgeInsets.symmetric(vertical: 4),
+                      elevation: 1,
+                      child: ListTile(
+                        title: Text(item['name'], style: const TextStyle(fontWeight: FontWeight.bold)),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(item['desc'], style: const TextStyle(fontSize: 13, color: Colors.grey)),
+                            const SizedBox(height: 4),
+                            Text(item['price'], style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.deepOrange)),
+                          ],
                         ),
-                      )),
-                  const Divider(height: 30),
-                  const Text('📍 Localisation', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                  const SizedBox(height: 6),
-                  Text(restaurant['address']),
-                  const SizedBox(height: 10),
-                  ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(backgroundColor: Colors.deepOrange, foregroundColor: Colors.white),
-                    onPressed: () => _openMap(restaurant['address']),
-                    icon: const Icon(Icons.map),
-                    label: const Text('Voir l’itinéraire sur la carte'),
-                  ),
-                  const Divider(height: 30),
-                  const Text('⭐ Avis des clients', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                  const SizedBox(height: 8),
-                  ...reviewsList.map((rev) => Card(
-                        margin: const EdgeInsets.symmetric(vertical: 4),
-                        color: Colors.grey.shade50,
-                        elevation: 0,
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  Text(rev['author'], style: const TextStyle(fontWeight: FontWeight.bold)),
-                                  const Spacer(),
-                                  const Icon(Icons.star, color: Colors.amber, size: 16),
-                                  Text(' ${rev['rating']}/5'),
-                                ],
-                              ),
-                              const SizedBox(height: 4),
-                              Text(rev['comment'], style: const TextStyle(color: Colors.black87)),
-                            ],
-                          ),
-                        ),
-                      )),
+                        trailing: isAvailable
+                            ? ElevatedButton(
+                                style: ElevatedButton.styleFrom(backgroundColor: Colors.deepOrange, foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(horizontal: 12)),
+                                onPressed: () => _addDishToCart(context, item),
+                                child: const Text('+ Ajouter'),
+                              )
+                            : const Text('Indisponible', style: TextStyle(color: Colors.red, fontSize: 12)),
+                      ),
+                    );
+                  }),
                 ],
               ),
             ),
           ],
+        ),
+      ),
+      bottomNavigationBar: AnimatedBuilder(
+        animation: cartManager,
+        builder: (context, child) {
+          if (cartManager.totalItems == 0 || cartManager.restaurantName != restaurant['name']) {
+            return const SizedBox.shrink();
+          }
+          return Container(
+            padding: const EdgeInsets.all(12),
+            color: Colors.white,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.green, foregroundColor: Colors.white, padding: const EdgeInsets.all(14)),
+              onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const CartScreen())),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(Icons.shopping_cart),
+                  const SizedBox(width: 8),
+                  Text('Voir mon panier (${cartManager.totalItems} articles) · ${cartManager.subtotal} FCFA', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+// ==========================================
+// 3. ÉCRAN PANIER & CHECKOUT
+// ==========================================
+class CartScreen extends StatelessWidget {
+  const CartScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Mon Panier', style: TextStyle(color: Colors.white)),
+        backgroundColor: Colors.deepOrange,
+        iconTheme: const IconThemeData(color: Colors.white),
+      ),
+      body: AnimatedBuilder(
+        animation: cartManager,
+        builder: (context, child) {
+          if (cartManager.items.isEmpty) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(Icons.shopping_cart_outlined, size: 64, color: Colors.grey),
+                  const SizedBox(height: 16),
+                  const Text('Votre panier est vide.', style: TextStyle(fontSize: 16, color: Colors.grey)),
+                  const SizedBox(height: 16),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(backgroundColor: Colors.deepOrange, foregroundColor: Colors.white),
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text('Découvrir les restaurants'),
+                  ),
+                ],
+              ),
+            );
+          }
+
+          return Column(
+            children: [
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(12),
+                color: Colors.orange.shade50,
+                child: Text('Restaurant : ${cartManager.restaurantName}', style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.deepOrange)),
+              ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: cartManager.items.length,
+                  itemBuilder: (context, index) {
+                    final item = cartManager.items[index];
+                    return Card(
+                      margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                      child: ListTile(
+                        title: Text(item['name'], style: const TextStyle(fontWeight: FontWeight.bold)),
+                        subtitle: Text(item['price']),
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            IconButton(
+                              icon: const Icon(Icons.remove_circle_outline),
+                              onPressed: () => cartManager.updateQuantity(index, -1),
+                            ),
+                            Text('${item['quantity']}', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                            IconButton(
+                              icon: const Icon(Icons.add_circle_outline),
+                              onPressed: () => cartManager.updateQuantity(index, 1),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: const BoxDecoration(color: Colors.white, boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 4)]),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text('Sous-total', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                        Text('${cartManager.subtotal} FCFA', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.deepOrange)),
+                      ],
+                    ),
+                    const SizedBox(height: 12),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(backgroundColor: Colors.deepOrange, foregroundColor: Colors.white, padding: const EdgeInsets.all(14)),
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => const CheckoutScreen()));
+                        },
+                        child: const Text('Finaliser la commande', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+}
+
+// ==========================================
+// 4. ÉCRAN INFORMATIONS CLIENT & VALIDATION
+// ==========================================
+class CheckoutScreen extends StatefulWidget {
+  const CheckoutScreen({super.key});
+
+  @override
+  State<CheckoutScreen> createState() => _CheckoutScreenState();
+}
+
+class _CheckoutScreenState extends State<CheckoutScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final _nameController = TextEditingController();
+  final _phoneController = TextEditingController();
+  final _addressController = TextEditingController();
+  String _orderType = 'Livraison';
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Finaliser la commande', style: TextStyle(color: Colors.white)),
+        backgroundColor: Colors.deepOrange,
+        iconTheme: const IconThemeData(color: Colors.white),
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16.0),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text('Mode de réception', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+              Row(
+                children: [
+                  Expanded(
+                    child: RadioListTile<String>(
+                      title: const Text('Livraison'),
+                      value: 'Livraison',
+                      groupValue: _orderType,
+                      onChanged: (val) => setState(() => _orderType = val!),
+                    ),
+                  ),
+                  Expanded(
+                    child: RadioListTile<String>(
+                      title: const Text('Retrait'),
+                      value: 'Retrait',
+                      groupValue: _orderType,
+                      onChanged: (val) => setState(() => _orderType = val!),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 12),
+              TextFormField(
+                controller: _nameController,
+                decoration: const InputDecoration(labelText: 'Votre Nom *', border: OutlineInputBorder()),
+                validator: (val) => val == null || val.isEmpty ? 'Veuillez entrer votre nom' : null,
+              ),
+              const SizedBox(height: 12),
+              TextFormField(
+                controller: _phoneController,
+                keyboardType: TextInputType.phone,
+                decoration: const InputDecoration(labelText: 'Numéro de téléphone *', border: OutlineInputBorder()),
+                validator: (val) => val == null || val.isEmpty ? 'Veuillez entrer votre numéro' : null,
+              ),
+              if (_orderType == 'Livraison') ...[
+                const SizedBox(height: 12),
+                TextFormField(
+                  controller: _addressController,
+                  decoration: const InputDecoration(labelText: 'Adresse de livraison *', border: OutlineInputBorder()),
+                  validator: (val) => _orderType == 'Livraison' && (val == null || val.isEmpty) ? 'Adresse obligatoire' : null,
+                ),
+              ],
+              const SizedBox(height: 24),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.green, foregroundColor: Colors.white, padding: const EdgeInsets.all(14)),
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {
+                      final orderId = 'DF-${DateTime.now().year}${DateTime.now().month.toString().padLeft(2, '0')}${DateTime.now().day.toString().padLeft(2, '0')}-${DateTime.now().millisecondsSinceEpoch.toString().substring(8)}';
+                      
+                      final orderData = {
+                        'orderId': orderId,
+                        'restaurantName': cartManager.restaurantName,
+                        'restaurantPhone': cartManager.restaurantPhone,
+                        'items': List<Map<String, dynamic>>.from(cartManager.items),
+                        'subtotal': cartManager.subtotal,
+                        'name': _nameController.text,
+                        'phone': _phoneController.text,
+                        'address': _addressController.text,
+                        'orderType': _orderType,
+                        'date': DateTime.now().toString().substring(0, 16),
+                        'status': 'En attente de confirmation',
+                      };
+
+                      orderHistoryManager.addOrder(orderData);
+
+                      // Construction du message WhatsApp encodé
+                      String msg = "Bonjour,\nNouvelle commande DEKK FOOD #$orderId\nRestaurant : ${cartManager.restaurantName}\n\nClient :\nNom : ${_nameController.text}\nTéléphone : ${_phoneController.text}\nMode : $_orderType\nAdresse : ${_addressController.text}\n\nCommande :\n";
+                      for (var item in cartManager.items) {
+                        msg += "- ${item['quantity']} × ${item['name']} (${item['price']})\n";
+                      }
+                      msg += "\nSous-total : ${cartManager.subtotal} FCFA\n(Commandé via DEKK FOOD)";
+
+                      final whatsappUrl = Uri.parse('https://wa.me/${cartManager.restaurantPhone?.replaceAll(RegExp(r'[^0-9]'), '')}?text=${Uri.encodeComponent(msg)}');
+                      
+                      cartManager.clear();
+
+                      if (await canLaunchUrl(whatsappUrl)) {
+                        await launchUrl(whatsappUrl, mode: LaunchMode.externalApplication);
+                      }
+
+                      if (context.mounted) {
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(builder: (context) => OrderSuccessScreen(order: orderData)),
+                          (route) => false,
+                        );
+                      }
+                    }
+                  },
+                  child: const Text('Confirmer la commande (WhatsApp)', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -437,7 +794,122 @@ class RestaurantDetailScreen extends StatelessWidget {
 }
 
 // ==========================================
-// 3. ÉCRAN FAVORIS
+// 5. ÉCRAN DE SUCCÈS
+// ==========================================
+class OrderSuccessScreen extends StatelessWidget {
+  final Map<String, dynamic> order;
+  const OrderSuccessScreen({super.key, required this.order});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Commande Envoyée', style: TextStyle(color: Colors.white)), backgroundColor: Colors.deepOrange),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(Icons.check_circle, color: Colors.green, size: 80),
+              const SizedBox(height: 16),
+              const Text('🎉 Commande envoyée avec succès !', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              const SizedBox(height: 8),
+              Text('Commande #${order['orderId']}', style: const TextStyle(fontSize: 16, color: Colors.grey)),
+              const SizedBox(height: 20),
+              Text('Restaurant : ${order['restaurantName']}', style: const TextStyle(fontSize: 16)),
+              Text('Montant : ${order['subtotal']} FCFA', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.deepOrange)),
+              const SizedBox(height: 30),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.deepOrange, foregroundColor: Colors.white),
+                onPressed: () {
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => const MainNavigationScreen()),
+                    (route) => false,
+                  );
+                },
+                child: const Text('Retour à l’accueil'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// ==========================================
+// 6. ÉCRAN HISTORIQUE DES COMMANDES
+// ==========================================
+class OrdersScreen extends StatelessWidget {
+  const OrdersScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Mes Commandes', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+        backgroundColor: Colors.deepOrange,
+        centerTitle: true,
+      ),
+      body: AnimatedBuilder(
+        animation: orderHistoryManager,
+        builder: (context, child) {
+          if (orderHistoryManager.orders.isEmpty) {
+            return const Center(
+              child: Text('Aucune commande enregistrée pour le moment.', style: TextStyle(color: Colors.grey)),
+            );
+          }
+          return ListView.builder(
+            itemCount: orderHistoryManager.orders.length,
+            itemBuilder: (context, index) {
+              final ord = orderHistoryManager.orders[index];
+              return Card(
+                margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                child: ListTile(
+                  title: Text('#${ord['orderId']} - ${ord['restaurantName']}', style: const TextStyle(fontWeight: FontWeight.bold)),
+                  subtitle: Text('Total : ${ord['subtotal']} FCFA · ${ord['date']}\nStatut : ${ord['status']}'),
+                  isThreeLine: true,
+                  trailing: const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.deepOrange),
+                  onTap: () {
+                    // Détails de la commande
+                    showDialog(
+                      context: context,
+                      builder: (ctx) => AlertDialog(
+                        title: Text('Commande #${ord['orderId']}'),
+                        content: SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text('Restaurant : ${ord['restaurantName']}'),
+                              Text('Client : ${ord['name']} (${ord['phone']})'),
+                              Text('Type : ${ord['orderType']}'),
+                              if (ord['address'].isNotEmpty) Text('Adresse : ${ord['address']}'),
+                              const Divider(),
+                              const Text('Articles :', style: TextStyle(fontWeight: FontWeight.bold)),
+                              ...(ord['items'] as List).map((i) => Text('- ${i['quantity']}× ${i['name']} (${i['price']})')),
+                              const Divider(),
+                              Text('Total : ${ord['subtotal']} FCFA', style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.deepOrange)),
+                            ],
+                          ),
+                        ),
+                        actions: [TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Fermer'))],
+                      ),
+                    );
+                  },
+                ),
+              );
+            },
+          );
+        },
+      ),
+    );
+  }
+}
+
+// ==========================================
+// 7. ÉCRANS FAVORIS & PARAMÈTRES
 // ==========================================
 class FavoritesScreen extends StatelessWidget {
   const FavoritesScreen({super.key});
@@ -445,56 +917,24 @@ class FavoritesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Mes Favoris', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-        backgroundColor: Colors.deepOrange,
-        centerTitle: true,
-      ),
-      body: const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.favorite_border, size: 64, color: Colors.grey),
-            SizedBox(height: 16),
-            Text('Aucun favori pour le moment.', style: TextStyle(color: Colors.grey, fontSize: 16)),
-          ],
-        ),
-      ),
+      appBar: AppBar(title: const Text('Mes Favoris', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)), backgroundColor: Colors.deepOrange, centerTitle: true),
+      body: const Center(child: Text('Aucun favori pour le moment.', style: TextStyle(color: Colors.grey))),
     );
   }
 }
 
-// ==========================================
-// 4. ÉCRAN PARAMÈTRES
-// ==========================================
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Paramètres', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-        backgroundColor: Colors.deepOrange,
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: const Text('Paramètres', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)), backgroundColor: Colors.deepOrange, centerTitle: true),
       body: ListView(
         children: const [
-          ListTile(
-            leading: Icon(Icons.language, color: Colors.deepOrange),
-            title: Text('Langue'),
-            subtitle: Text('Français'),
-          ),
-          ListTile(
-            leading: Icon(Icons.location_city, color: Colors.deepOrange),
-            title: Text('Ville par défaut'),
-            subtitle: Text('Dakar, Sénégal'),
-          ),
-          ListTile(
-            leading: Icon(Icons.info_outline, color: Colors.deepOrange),
-            title: Text('À propos de DEKK FOOD'),
-            subtitle: Text('Version 1.0.0 (Standards 2026)'),
-          ),
+          ListTile(leading: Icon(Icons.language, color: Colors.deepOrange), title: Text('Langue'), subtitle: Text('Français')),
+          ListTile(leading: Icon(Icons.location_city, color: Colors.deepOrange), title: Text('Ville'), subtitle: Text('Dakar, Sénégal')),
+          ListTile(leading: Icon(Icons.info_outline, color: Colors.deepOrange), title: Text('DEKK FOOD'), subtitle: Text('Version 1.1.0 - Marketplace Ready')),
         ],
       ),
     );
