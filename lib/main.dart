@@ -122,7 +122,7 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
                 const Text('🟢 Statut : Vérifié par DEKK FOOD', style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold)),
               ],
             ),
-          ],
+          ),
           actions: [
             if (restaurant['phone'] != null)
               ElevatedButton.icon(
@@ -191,7 +191,7 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: ListTile(
                                   leading: ClipRRect(
-                               ,     borderRadius: BorderRadius.circular(8),
+                                    borderRadius: BorderRadius.circular(8),
                                     child: restaurant['image_url'] != null && restaurant['image_url'].toString().isNotEmpty
                                         ? Image.network(
                                             restaurant['image_url'],
