@@ -208,12 +208,12 @@ class _HomeScreenState extends State<HomeScreen> {
           'desc': 'Tendre morceau de zébu sélectionné, nappé d’une sauce au poivre vert et accompagné de frites maison.',
           'image': 'https://images.unsplash.com/photo-1558030006-450675393462',
           'available': true,
-          'hygiene': 'Viande certifiée Halal, conservée en chambre froide à température contrôlée. Cuisson à cœur rigoureuse pour garantir sécurité et tendreté.'
+          'hygiene': 'Viande certifiée, conservée en chambre froide à température contrôlée. Cuisson à cœur rigoureuse pour garantir sécurité et tendreté.'
         },
         {
           'name': 'Burger signature Seven',
           'price': '6 000 FCFA',
-          'desc': 'Bœuf haché pur muscle, cheddar affiché, crudités fraîches du marché et sauce secrète du chef.',
+          'desc': 'Bœuf haché pur muscle, cheddar, crudités fraîches du marché et sauce secrète du chef.',
           'image': 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd',
           'available': true,
           'hygiene': 'Légumes trempés dans une solution assainissante avant découpe. Personnel portant gants et charlottes en cuisine.'
@@ -255,7 +255,7 @@ class _HomeScreenState extends State<HomeScreen> {
           'desc': 'Poisson frais mijoté aux petits légumes et fruits de mer.',
           'image': 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2',
           'available': true,
-          'hygiene': 'Ustensiles en inox stérilisés et plans de travail lavés avec des produits désinfectants de qualité professionnelle.'
+          'hygiene': 'Ustensiles en inox stérilisés et plans de travail lavés avec des produits désinfectants professionnels.'
         },
         {
           'name': 'Fondant au chocolat noir',
@@ -263,7 +263,7 @@ class _HomeScreenState extends State<HomeScreen> {
           'desc': 'Cœur coulant maison au chocolat noir pur beurre de cacao.',
           'image': 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c',
           'available': true,
-          'hygiene': 'Ingrédients de première qualité manipulés dans le strict respect de l’hygiène pâtissière (port de gants et masques).'
+          'hygiene': 'Ingrédients de première qualité manipulés dans le strict respect de l’hygiène pâtissière.'
         },
       ],
     },
@@ -286,7 +286,7 @@ class _HomeScreenState extends State<HomeScreen> {
           'desc': 'Le plat national authentique rouge, avec thiof frais, légumes variés du terroir et bissap blanc.',
           'image': 'https://images.unsplash.com/photo-1541544741938-0af808871cc0',
           'available': true,
-          'hygiene': 'Poisson frais du marché de Soumbédioune lavé à l’eau purifiée. Cuisson traditionnelle dans des conditions d’hygiène irréprochables.'
+          'hygiene': 'Poisson frais du marché de Soumbédioune lavé à l’eau purifiée. Cuisson traditionnelle irréprochable.'
         },
         {
           'name': 'Poulet Yassa',
@@ -302,7 +302,7 @@ class _HomeScreenState extends State<HomeScreen> {
           'desc': 'Soupe de gombos fondants à l’huile de palme, crevettes et morceaux de viande.',
           'image': 'https://images.unsplash.com/photo-1547592180-85f173990554',
           'available': true,
-          'hygiene': 'Gombos frais triés un à un et lavés avec soin. Respect strict de la chaîne du chaud pour éviter toute prolifération bactérienne.'
+          'hygiene': 'Gombos frais triés un à un et lavés avec soin. Respect strict de la chaîne du chaud.'
         },
       ],
     },
@@ -325,7 +325,7 @@ class _HomeScreenState extends State<HomeScreen> {
           'desc': 'Mozzarella di bufala fondante, sauce tomate italienne et basilic frais.',
           'image': 'https://images.unsplash.com/photo-1574071318508-1cdbab80d002',
           'available': true,
-          'hygiene': 'Pâte pétrie chaque matin dans un laboratoire désinfecté. Cuisson au four à bois à haute température garantissant une sécurité alimentaire totale.'
+          'hygiene': 'Pâte pétrie chaque matin dans un laboratoire désinfecté. Cuisson au four à bois à haute température.'
         },
         {
           'name': 'Tagliatelles aux fruits de mer',
@@ -333,77 +333,7 @@ class _HomeScreenState extends State<HomeScreen> {
           'desc': 'Pâtes fraîches maison et gambas sautées à l’ail.',
           'image': 'https://images.unsplash.com/photo-1551183053-bf91a1d81141',
           'available': true,
-          'hygiene': 'Produits de la mer frais conservés sous glace contrôlée. Respect des normes d’hygiène européennes et locales.'
-        },
-        {
-          'name': 'Tiramisu classique',
-          'price': '3 000 FCFA',
-          'desc': 'Recette italienne traditionnelle au mascarpone et café.',
-          'image': 'https://images.unsplash.com/photo-1571877227200-a0d98ea607e9',
-          'available': true,
-          'hygiene': 'Œufs frais contrôlés quotidiennement et conservation au réfrigérateur à +4°C maximum.'
-        },
-      ],
-    },
-    {
-      'name': 'La Fourchette',
-      'neighborhood': 'Plateau',
-      'cuisine': 'Internationale & Grillades',
-      'rating': 4.3,
-      'reviews': 1110,
-      'price': '4 000 – 12 000 FCFA',
-      'phone': '+221 33 842 66 66',
-      'whatsapp': '+221 33 842 66 66',
-      'address': 'Rue Parent, Dakar Plateau',
-      'image': 'https://images.unsplash.com/photo-1559339352-11d035aa65de',
-      'description': 'Cadre élégant et climatisé proposant une carte variée de plats internationaux et grillades.',
-      'menu': [
-        {
-          'name': 'Entrecôte grillée frites maison',
-          'price': '9 000 FCFA',
-          'desc': 'Viande tendre et sauce au choix.',
-          'image': 'https://images.unsplash.com/photo-1603048588665-791ca8aea617',
-          'available': true,
-          'hygiene': 'Viande importée certifiée, traçabilité garantie de l’abattoir à l’assiette. Hygiène des cuisines certifiée.'
-        },
-        {
-          'name': 'Salade César au poulet',
-          'price': '4 500 FCFA',
-          'desc': 'Laitue, croûtons, parmesan et poulet croustillant.',
-          'image': 'https://images.unsplash.com/photo-1540420773420-3366772f4999',
-          'available': true,
-          'hygiene': 'Légumes lavés et désinfectés dans une solution bactéricide alimentaire agrée.'
-        },
-      ],
-    },
-    {
-      'name': 'Casa Teranga',
-      'neighborhood': 'Almadies',
-      'cuisine': 'Gastronomie & Fusion',
-      'rating': 4.7,
-      'reviews': 276,
-      'price': '4 000 – 12 000 FCFA',
-      'phone': '+221 78 451 15 10',
-      'whatsapp': '+221 78 451 15 10',
-      'address': 'Almadies, Dakar',
-      'image': 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e',
-      'description': 'Fusion parfaite entre cuisine locale sénégalaise et saveurs internationales.',
-      'menu': [
-        {
-          'name': 'Thiéboudienne bento fusion',
-          'price': '5 000 FCFA',
-          'desc': 'Riz rouge revisité haut de gamme.',
-          'image': 'https://images.unsplash.com/photo-1541544741938-0af808871cc0',
-          'available': true,
-          'hygiene': 'Préparation dans un espace ultra-propre avec désinfection systématique des plans de travail.'
-        },
-        {
-          'name': 'Carpaccio de dorade aux agrumes',
-          'price': '4 500 FCFA',
-          'desc': 'Dorade fraîche, pamplemousse et citron.',
-          'image': 'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb',
-          'available': true,
-          'hygiene': 'Poisson manipulé exclusivement avec des gants stériles et tranché avec des couteaux désinfectés.'
+          'hygiene': 'Produits de la mer frais conservés sous glace contrôlée. Respect des normes d’hygiène.'
         },
       ],
     },
@@ -771,7 +701,7 @@ class _DishDetailScreenState extends State<DishDetailScreen> {
                 cartManager.clear();
                 cartManager.addItem(resName, resPhone, widget.dish, quantity: quantity);
                 Navigator.pop(ctx);
-                Navigator.pop(context); // Retourner à la liste
+                Navigator.pop(context);
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('$quantity x ${widget.dish['name']} ajouté au panier !')));
               },
               child: const Text('Vider et continuer'),
@@ -781,7 +711,7 @@ class _DishDetailScreenState extends State<DishDetailScreen> {
       );
     } else {
       cartManager.addItem(resName, resPhone, widget.dish, quantity: quantity);
-      Navigator.pop(context); // Retourner à la liste
+      Navigator.pop(context);
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('$quantity x ${widget.dish['name']} ajouté au panier !')));
     }
   }
@@ -824,7 +754,6 @@ class _DishDetailScreenState extends State<DishDetailScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Grande image du plat en haut
             Image.network(
               widget.dish['image'],
               height: 280,
@@ -1281,7 +1210,7 @@ class OrdersScreen extends StatelessWidget {
 }
 
 class FavoritesScreen extends StatelessWidget {
-  const FavoritesScreen::new({super.key});
+  const FavoritesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -1303,7 +1232,7 @@ class SettingsScreen extends StatelessWidget {
         children: const [
           ListTile(leading: Icon(Icons.language, color: Colors.deepOrange), title: Text('Langue'), subtitle: Text('Français')),
           ListTile(leading: Icon(Icons.location_city, color: Colors.deepOrange), title: Text('Ville'), subtitle: Text('Dakar, Sénégal')),
-          ListTile(leading: Icon(Icons.info_outline, color: Colors.deepOrange), title: Text('DEKK FOOD'), subtitle: Text('Version 1.4.0 - Hygiène & Sécurité')),
+          ListTile(leading: Icon(Icons.info_outline, color: Colors.deepOrange), title: Text('DEKK FOOD'), subtitle: Text('Version 1.5.0 - Production Ready')),
         ],
       ),
     );
