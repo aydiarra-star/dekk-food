@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
+        scaffoldBackgroundColor: const Color(0xFFF3F4F6), // Fond général gris très clair et moderne
         useMaterial3: true,
       ),
       home: const MainNavigationScreen(),
@@ -71,7 +72,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
 }
 
 // ==========================================
-// 1. ÉCRAN DÉCOUVRIR (LISTE DES RESTOS DE DAKAR)
+// 1. ÉCRAN DÉCOUVRIR (CASES GRISES & HORIZONTALES)
 // ==========================================
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -83,7 +84,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   String _searchQuery = '';
 
-  // Les plus grands restaurants de Dakar avec menus, prix, avis et localisation complets
   final List<Map<String, dynamic>> restaurants = const [
     {
       'name': 'Seven Seven Dakar',
@@ -210,7 +210,6 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Column(
         children: [
-          // Barre de recherche fluide
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: TextField(
@@ -218,9 +217,9 @@ class _HomeScreenState extends State<HomeScreen> {
               decoration: InputDecoration(
                 hintText: 'Rechercher un restaurant, quartier, spécialité...',
                 prefixIcon: const Icon(Icons.search, color: Colors.deepOrange),
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
                 filled: true,
-                fillColor: Colors.grey.shade100,
+                fillColor: Colors.white,
               ),
             ),
           ),
@@ -231,12 +230,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemCount: filteredRestaurants.length,
                     itemBuilder: (context, index) {
                       final r = filteredRestaurants[index];
-                      return Card(
+                      return Container(
                         margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                        elevation: 2,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFE5E7EB), // Boîte en gris élégant
+                          borderRadius: BorderRadius.circular(14),
+                        ),
                         child: InkWell(
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(14),
                           onTap: () {
                             Navigator.push(
                               context,
@@ -246,26 +247,36 @@ class _HomeScreenState extends State<HomeScreen> {
                             );
                           },
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(10.0),
+                            // SUPERPOSITION HORIZONTALE (Image à gauche, Texte au milieu, Flèche à droite)
                             child: Row(
                               children: [
                                 ClipRRect(
-                                  borderRadius: BorderRadius.circular(8),
-                                  child: Image.network(r['image'], width: 70, height: 70, fit: BoxFit.cover),
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Image.network(r['image'], width: 75, height: 75, fit: BoxFit.cover),
                                 ),
-                                const SizedBox(width: 12),
+                                const SizedBox(width: 14),
                                 Expanded(
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Text(r['name'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                                      Text(
+                                        r['name'],
+                                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black87),
+                                      ),
                                       const SizedBox(height: 4),
-                                      Text('${r['neighborhood']} · ${r['cuisine']}', style: const TextStyle(color: Colors.grey, fontSize: 13)),
-                                      const SizedBox(height: 4),
+                                      Text(
+                                        '${r['neighborhood']} · ${r['cuisine']}',
+                                        style: const TextStyle(color: Colors.black54, fontSize: 13),
+                                      ),
+                                      const SizedBox(height: 6),
                                       Row(
                                         children: [
                                           const Icon(Icons.star, color: Colors.amber, size: 16),
-                                          Text(' ${r['rating']} (${r['reviews']} avis)', style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 12)),
+                                          Text(
+                                            ' ${r['rating']} (${r['reviews']} avis)',
+                                            style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 12, color: Colors.black87),
+                                          ),
                                         ],
                                       ),
                                     ],
@@ -328,9 +339,7 @@ class RestaurantDetailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Grande photo de couverture
             Image.network(restaurant['image'], height: 230, width: double.infinity, fit: BoxFit.cover),
-            
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
@@ -347,8 +356,6 @@ class RestaurantDetailScreen extends StatelessWidget {
                   const SizedBox(height: 6),
                   Text('💰 ${restaurant['price']}', style: const TextStyle(color: Colors.grey, fontWeight: FontWeight.w500)),
                   const SizedBox(height: 16),
-
-                  // Boutons d'action rapide
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -367,14 +374,10 @@ class RestaurantDetailScreen extends StatelessWidget {
                     ],
                   ),
                   const Divider(height: 30),
-
-                  // À propos
                   const Text('À propos', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                   const SizedBox(height: 6),
                   Text(restaurant['description'], style: const TextStyle(color: Colors.black87, height: 1.4)),
                   const Divider(height: 30),
-
-                  // Spécialités & Menu
                   const Text('⭐ Spécialités & Menu', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                   const SizedBox(height: 8),
                   ...menu.map((item) => Card(
@@ -387,8 +390,6 @@ class RestaurantDetailScreen extends StatelessWidget {
                         ),
                       )),
                   const Divider(height: 30),
-
-                  // Localisation
                   const Text('📍 Localisation', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                   const SizedBox(height: 6),
                   Text(restaurant['address']),
@@ -400,8 +401,6 @@ class RestaurantDetailScreen extends StatelessWidget {
                     label: const Text('Voir l’itinéraire sur la carte'),
                   ),
                   const Divider(height: 30),
-
-                  // Avis clients
                   const Text('⭐ Avis des clients', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                   const SizedBox(height: 8),
                   ...reviewsList.map((rev) => Card(
