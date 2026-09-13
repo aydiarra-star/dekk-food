@@ -30,6 +30,9 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// ==========================================
+// 1. ÉCRAN PRINCIPAL : LISTE & RECHERCHE
+// ==========================================
 class RestaurantListScreen extends StatefulWidget {
   const RestaurantListScreen({super.key});
 
@@ -89,143 +92,8 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
   }
 
   Future<void> _makePhoneCall(String phoneNumber) async {
-    final Uri launchUri = Uri(
-      scheme: 'tel',
-      path: phoneNumber,
-    );
+    final Uri launchUri = Uri(scheme: 'tel', path: phoneNumber);
     await launchUrl(launchUri);
-  }
-
-  // Fonction pour retourner des menus et spécialités adaptés selon le restaurant
-  Map<String, String> _getMenuAndSpecialty(String restaurantName) {
-    switch (restaurantName) {
-      case 'Seven Seven Dakar':
-        return {
-          'specialty': 'Cuisine internationale raffinée et grillades de premier choix.',
-          'menus': '• Brochettes géantes de gambas\n• Filet de zébu sauce poivre\n• Cocktails tropicaux maison'
-        };
-      case 'Restaurant Le Lagon 1':
-        return {
-          'specialty': 'Gastronomie française et poissons frais avec vue panoramique sur l’océan.',
-          'menus': '• Langouste grillée au beurre blanc\n• Mérou à la dieppoise\n• Fondant au chocolat noir'
-        };
-      case 'YOUYOU':
-        return {
-          'specialty': 'Plats internationaux branchés, ambiance lounge et moderne.',
-          'menus': '• Burgers gourmets signature\n• Wok de poulet aux légumes croquants\n• Tiramisu revisité'
-        };
-      case 'Casa Teranga':
-        return {
-          'specialty': 'Fusion entre cuisine locale sénégalaise et saveurs internationales.',
-          'menus': '• Thiéboudienne revisité en bento\n• Carpaccio de dorade aux agrumes\n• Poulet Yassa moderne'
-        };
-      case 'Reine Margarita':
-        return {
-          'specialty': 'Authentiques pizzas italiennes cuites au feu de bois et pâtes fraîches.',
-          'menus': '• Pizza Margherita di Bufala\n• Tagliatelles aux fruits de mer\n• Panna Cotta aux fruits rouges'
-        };
-      case 'La Fourchette':
-        return {
-          'specialty': 'Carte internationale variée, cadre climatisé et élégant au Plateau.',
-          'menus': '• Entrecôte grillée frites maison\n• Salade César au poulet croustillant\n• Crêpes suzette'
-        };
-      case 'Chez Fatou':
-        return {
-          'specialty': 'La référence incontournable de la cuisine sénégalaise traditionnelle les pieds dans l’eau.',
-          'menus': '• Ceebu Jën (Riz au poisson traditionnel)\n• Soupou Kandia (Soupe de gombos)\n• Poisson braisé aux oignons confits'
-        };
-      case 'Club de Pêche':
-        return {
-          'specialty': 'Spécialités de la mer ultra-fraîches pêchées du jour.',
-          'menus': '• Plateau de fruits de mer royal\n• Poisson capitaine grillé\n• Brochettes de lotte'
-        };
-      case 'Le Coste Dakar':
-        return {
-          'specialty': 'Cuisine fusion moderne, ambiance chic et branchée.',
-          'menus': '• Tataki de thon sésame\n• Filet de bœuf Rossini\n• Moelleux au chocolat coulant'
-        };
-      case 'Nostra Restaurant':
-        return {
-          'specialty': 'Saveurs italiennes et méditerranéennes au cœur de Dakar.',
-          'menus': '• Lasagnes traditionnelles au four\n• Risotto aux gambas\n• Tiramisu classique'
-        };
-      case 'Restaurant Altiné':
-        return {
-          'specialty': 'Saveurs authentiques d’Afrique de l’Ouest et plats sénégalais faits maison.',
-          'menus': '• Mafé traditionnel au bœuf\n• Thiéboudienne rouge\n• Bissap frais et gingembre'
-        };
-      case 'Restaurant Le Carré':
-        return {
-          'specialty': 'Brasserie chic et lounge aux Almadies, idéal pour dîner ou verre entre amis.',
-          'menus': '• Burger Le Carré & frites fraîches\n• Tartare de bœuf à l’italienne\n• Salade gourmande au saumon'
-        };
-      case 'La Terrasse Farid':
-        return {
-          'specialty': 'Cuisine libanaise authentique et plats internationaux sur une magnifique terrasse.',
-          'menus': '• Assortiment de mezzés libanais\n• Grillades mixtes (chawarma, taouk)\n• Baklavas traditionnels'
-        };
-      default:
-        return {
-          'specialty': 'Cuisine variée et de qualité.',
-          'menus': '• Plats du chef\n• Desserts maison'
-        };
-    }
-  }
-
-  void _showRestaurantDetails(BuildContext context, Map<String, dynamic> restaurant) {
-    final name = restaurant['name'] ?? 'Restaurant';
-    final details = _getMenuAndSpecialty(name);
-
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(name, style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.deepOrange)),
-          content: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                if (restaurant['image_url'] != null)
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: Image.network(restaurant['image_url'], height: 140, width: double.infinity, fit: BoxFit.cover),
-                  ),
-                const SizedBox(height: 12),
-                Text('📍 Quartier : ${restaurant['neighborhood'] ?? 'N/A'}', style: const TextStyle(fontWeight: FontWeight.w500)),
-                Text('🍽️ Cuisine : ${restaurant['cuisine_type'] ?? 'N/A'}'),
-                Text('⭐ Note : ${restaurant['rating']} (${restaurant['review_count'] ?? 0} avis)'),
-                Text('🏠 Adresse : ${restaurant['address'] ?? 'N/A'}'),
-                Text('📞 Téléphone : ${restaurant['phone'] ?? 'N/A'}'),
-                const Divider(height: 20, thickness: 1.5),
-                const Text('🔥 Spécialité :', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black87)),
-                Text(details['specialty'] ?? '', style: const TextStyle(fontStyle: FontStyle.italic)),
-                const SizedBox(height: 8),
-                const Text('📋 Menus Phares :', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black87)),
-                Text(details['menus'] ?? ''),
-                const SizedBox(height: 10),
-                const Text('🟢 Statut : Vérifié par DEKK FOOD', style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold, fontSize: 12)),
-              ],
-            ),
-          ),
-          actions: [
-            if (restaurant['phone'] != null)
-              ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.green, foregroundColor: Colors.white),
-                onPressed: () {
-                  _makePhoneCall(restaurant['phone']);
-                },
-                icon: const Icon(Icons.phone),
-                label: const Text('Appeler'),
-              ),
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: const Text('Fermer'),
-            ),
-          ],
-        );
-      },
-    );
   }
 
   @override
@@ -251,9 +119,7 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
                         onPressed: () => _filterRestaurants(''),
                       )
                     : null,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
               ),
             ),
           ),
@@ -267,19 +133,29 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
                         itemBuilder: (context, index) {
                           final restaurant = _filteredRestaurants[index];
                           final reviews = restaurant['review_count'] ?? 0;
+                          final coverImg = restaurant['cover_photo'] ?? restaurant['image_url'] ?? '';
+
                           return Card(
                             margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                             elevation: 2,
                             child: InkWell(
-                              onTap: () => _showRestaurantDetails(context, restaurant),
+                              onTap: () {
+                                // Redirection vers la Super Fiche Restaurant
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => RestaurantDetailScreen(restaurant: restaurant),
+                                  ),
+                                );
+                              },
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: ListTile(
                                   leading: ClipRRect(
                                     borderRadius: BorderRadius.circular(8),
-                                    child: restaurant['image_url'] != null && restaurant['image_url'].toString().isNotEmpty
+                                    child: coverImg.isNotEmpty
                                         ? Image.network(
-                                            restaurant['image_url'],
+                                            coverImg,
                                             width: 60,
                                             height: 60,
                                             fit: BoxFit.cover,
@@ -295,7 +171,7 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
                                   subtitle: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Text('${restaurant['cuisine_type'] ?? ''} • ${restaurant['neighborhood'] ?? ''}'),
+                                      Text('${restaurant['neighborhood'] ?? ''} · ${restaurant['price_range'] ?? ''}'),
                                       if (restaurant['phone'] != null)
                                         InkWell(
                                           onTap: () => _makePhoneCall(restaurant['phone']),
@@ -339,6 +215,211 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
                       ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+// ==========================================
+// 2. LA SUPER FICHE RESTAURANT (DÉTAILS)
+// ==========================================
+class RestaurantDetailScreen extends StatefulWidget {
+  final Map<String, dynamic> restaurant;
+
+  const RestaurantDetailScreen({super.key, required this.restaurant});
+
+  @override
+  State<RestaurantDetailScreen> createState() => _RestaurantDetailScreenState();
+}
+
+class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
+  String _menuSearchQuery = '';
+
+  Future<void> _launchUrl(String urlString) async {
+    final Uri uri = Uri.parse(urlString);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    }
+  }
+
+  Future<void> _makePhoneCall(String phoneNumber) async {
+    final Uri launchUri = Uri(scheme: 'tel', path: phoneNumber);
+    await launchUrl(launchUri);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final r = widget.restaurant;
+    final String name = r['name'] ?? 'Restaurant';
+    final double rating = (r['rating'] ?? 4.0).toDouble();
+    final int reviewCount = r['review_count'] ?? 0;
+    final String neighborhood = r['neighborhood'] ?? 'Dakar';
+    final String priceRange = r['price_range'] ?? 'Prix non spécifié';
+    final String coverPhoto = r['cover_photo'] ?? r['image_url'] ?? 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4';
+    final String description = r['description'] ?? 'Restaurant vérifié par DEKK FOOD proposant de superbes spécialités.';
+    final String phone = r['phone'] ?? '';
+    final String whatsapp = r['whatsapp'] ?? '';
+
+    return Scaffold(
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            expandedHeight: 240.0,
+            pinned: true,
+            backgroundColor: Colors.deepOrange,
+            iconTheme: const IconThemeData(color: Colors.white),
+            flexibleSpace: FlexibleSpaceBar(
+              background: Stack(
+                fit: StackFit.expand,
+                children: [
+                  Image.network(coverPhoto, fit: BoxFit.cover),
+                  const DecoratedBox(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [Colors.transparent, Colors.black54],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.between,
+                    children: [
+                      Expanded(
+                        child: Text(name, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: Colors.green.shade50,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: Colors.green),
+                        ),
+                        child: const Text('🟢 Ouvert', style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold, fontSize: 12)),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 6),
+                  Row(
+                    children: [
+                      const Icon(Icons.star, color: Colors.amber, size: 18),
+                      const SizedBox(width: 4),
+                      Text('$rating', style: const TextStyle(fontWeight: FontWeight.bold)),
+                      Text(' · ($reviewCount avis) · ', style: const TextStyle(color: Colors.grey)),
+                      const Icon(Icons.location_on, color: Colors.red, size: 16),
+                      Text(neighborhood),
+                    ],
+                  ),
+                  const SizedBox(height: 6),
+                  Text('💰 $priceRange', style: const TextStyle(fontWeight: FontWeight.w500, color: Colors.grey)),
+                  const SizedBox(height: 16),
+
+                  // Boutons d'Action Rapide
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      _buildActionButton(Icons.directions, 'Itinéraire', () {
+                        _launchUrl('https://maps.google.com/?q=${Uri.encodeComponent(name + ' ' + neighborhood)}');
+                      }),
+                      if (phone.isNotEmpty)
+                        _buildActionButton(Icons.phone, 'Appeler', () => _makePhoneCall(phone)),
+                      if (whatsapp.isNotEmpty)
+                        _buildActionButton(Icons.chat, 'WhatsApp', () => _launchUrl('https://wa.me/${whatsapp.replaceAll(RegExp(r'[^0-9]'), '')}')),
+                      _buildActionButton(Icons.share, 'Partager', () {
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Lien copié !')));
+                      }),
+                    ],
+                  ),
+                  const Divider(height: 30),
+
+                  // À propos
+                  const Text('À propos', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 8),
+                  Text(description, style: const TextStyle(color: Colors.black87, height: 1.4)),
+                  const Divider(height: 30),
+
+                  // Recherche dans le menu (« Que veux-tu manger ? »)
+                  const Text('🔎 Rechercher dans le menu', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 8),
+                  TextField(
+                    onChanged: (value) => setState(() => _menuSearchQuery = value.toLowerCase()),
+                    decoration: InputDecoration(
+                      hintText: 'Ex: yassa, bissap, gambas...',
+                      prefixIcon: const Icon(Icons.search),
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+
+                  // Menu & Spécialités
+                  const Text('⭐ Spécialités & Menu', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 8),
+                  _buildMenuItem('Brochettes géantes de gambas', 'Gambas fraîches marinées aux herbes.', '8 500 FCFA'),
+                  _buildMenuItem('Filet de zébu sauce poivre', 'Tendre morceau de zébu et frites.', '7 000 FCFA'),
+                  _buildMenuItem('Poulet braisé signature', 'Mariné aux épices locales.', '4 500 FCFA'),
+                  _buildMenuItem('Jus de Bissap frais', 'Fait maison à la menthe.', '1 000 FCFA'),
+
+                  const Divider(height: 30),
+
+                  // Horaires
+                  const Text('🕐 Horaires', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 8),
+                  const Text('Lundi - Jeudi : 11:00 – 23:30'),
+                  const Text('Vendredi - Samedi : 11:00 – 00:00'),
+                  const Text('Dimanche : 12:00 – 23:00'),
+                  const SizedBox(height: 4),
+                  const Text('Dernière mise à jour : 13 septembre 2026', style: TextStyle(fontSize: 11, color: Colors.grey)),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildActionButton(IconData icon, String label, VoidCallback onTap) {
+    return InkWell(
+      onTap: onTap,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          CircleAvatar(
+            radius: 22,
+            backgroundColor: Colors.deepOrange.shade50,
+            child: Icon(icon, color: Colors.deepOrange, size: 20),
+          ),
+          const SizedBox(height: 4),
+          Text(label, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500)),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMenuItem(String title, String desc, String price) {
+    if (_menuSearchQuery.isNotEmpty &&
+        !title.toLowerCase().contains(_menuSearchQuery) &&
+        !desc.toLowerCase().contains(_menuSearchQuery)) {
+      return const SizedBox.shrink();
+    }
+
+    return Card(
+      margin: const EdgeInsets.symmetric(vertical: 4),
+      elevation: 1,
+      child: ListTile(
+        title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
+        subtitle: Text(desc, style: const TextStyle(fontSize: 13, color: Colors.grey)),
+        trailing: Text(price, style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.deepOrange)),
       ),
     );
   }
