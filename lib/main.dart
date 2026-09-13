@@ -167,7 +167,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
 }
 
 // ==========================================
-// 1. ÉCRAN DÉCOUVRIR (TOUS LES RESTOS DE DAKAR)
+// 1. ÉCRAN DÉCOUVRIR (DAKAR, PETITE CÔTE & DIAMNIADIO)
 // ==========================================
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -178,13 +178,15 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   String _searchQuery = '';
-  String _selectedNeighborhood = 'Tous';
+  String _selectedZone = 'Tous';
 
-  // Base complète exhaustive de tous les grands restaurants de Dakar
+  // Base complète : Dakar, Petite Côte (Saly, Mbour, Ngaparou) et Diamniadio / AIBD
   final List<Map<String, dynamic>> restaurants = const [
+    // --- DAKAR ---
     {
       'name': 'Seven Seven Dakar',
-      'neighborhood': 'Ngor',
+      'neighborhood': 'Ngor (Dakar)',
+      'zone': 'Dakar',
       'cuisine': 'International & Grillades',
       'rating': 4.8,
       'reviews': 2122,
@@ -203,50 +205,12 @@ class _HomeScreenState extends State<HomeScreen> {
           'available': true,
           'hygiene': 'Gambas de la pêche locale du jour, contrôlées selon les normes HACCP. Cuisine désinfectée en continu.'
         },
-        {
-          'name': 'Filet de zébu sauce poivre',
-          'price': '7 000 FCFA',
-          'desc': 'Tendre morceau de zébu sélectionné, sauce poivre vert et frites maison.',
-          'image': 'https://images.unsplash.com/photo-1558030006-450675393462',
-          'available': true,
-          'hygiene': 'Viande certifiée et conservée en chambre froide à température contrôlée.'
-        },
-      ],
-    },
-    {
-      'name': 'Restaurant Le Lagon 1',
-      'neighborhood': 'Plateau',
-      'cuisine': 'Française & Poissons',
-      'rating': 4.4,
-      'reviews': 2345,
-      'price': '5 000 – 15 000 FCFA',
-      'phone': '+221 33 821 53 22',
-      'whatsapp': '+221 33 821 53 22',
-      'address': 'Route de la Corniche Est, Dakar',
-      'image': 'https://images.unsplash.com/photo-1544025162-d76694265947',
-      'description': 'Gastronomie française et poissons frais avec vue panoramique sur l’océan au Plateau.',
-      'menu': [
-        {
-          'name': 'Langouste grillée au beurre blanc',
-          'price': '14 000 FCFA',
-          'desc': 'Pêche locale du jour cuisinée au beurre blanc onctueux.',
-          'image': 'https://images.unsplash.com/photo-1535400255456-984241443b28',
-          'available': true,
-          'hygiene': 'Arrivage direct des pêcheurs artisanaux sans rupture de la chaîne du froid.'
-        },
-        {
-          'name': 'Fondant au chocolat noir',
-          'price': '3 500 FCFA',
-          'desc': 'Cœur coulant maison au chocolat noir pur beurre de cacao.',
-          'image': 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c',
-          'available': true,
-          'hygiene': 'Ingrédients de première qualité manipulés dans le strict respect de l’hygiène pâtissière.'
-        },
       ],
     },
     {
       'name': 'Chez Fatou',
-      'neighborhood': 'Almadies',
+      'neighborhood': 'Almadies (Dakar)',
+      'zone': 'Dakar',
       'cuisine': 'Sénégalaise & Grillades',
       'rating': 4.0,
       'reviews': 2265,
@@ -265,151 +229,137 @@ class _HomeScreenState extends State<HomeScreen> {
           'available': true,
           'hygiene': 'Poisson frais du marché de Soumbédioune lavé à l’eau purifiée. Cuisson irréprochable.'
         },
-        {
-          'name': 'Poulet Yassa',
-          'price': '3 000 FCFA',
-          'desc': 'Poulet fermier mariné longuement aux oignons confits, citron vert et moutarde.',
-          'image': 'https://images.unsplash.com/photo-1626777552726-4a6b54c97e46',
-          'available': true,
-          'hygiene': 'Poulets rigoureusement lavés au vinaigre et citron. Cuisine désinfectée en continu.'
-        },
       ],
     },
+
+    // --- PETITE CÔTE (SALY, MBOUR, NGAPAROU) ---
     {
-      'name': 'Reine Margarita',
-      'neighborhood': 'Plateau',
-      'cuisine': 'Italienne & Pizzeria',
-      'rating': 4.4,
-      'reviews': 396,
-      'price': '3 000 – 7 000 FCFA',
-      'phone': '+221 78 444 99 55',
-      'whatsapp': '+221 78 444 99 55',
-      'address': 'Dakar Plateau',
-      'image': 'https://images.unsplash.com/photo-1513104890138-7c749659a591',
-      'description': 'Authentiques pizzas italiennes cuites au feu de bois et pâtes fraîches au cœur de Dakar.',
-      'menu': [
-        {
-          'name': 'Pizza Margherita di Bufala',
-          'price': '5 500 FCFA',
-          'desc': 'Mozzarella di bufala fondante, sauce tomate italienne et basilic frais.',
-          'image': 'https://images.unsplash.com/photo-1574071318508-1cdbab80d002',
-          'available': true,
-          'hygiene': 'Pâte pétrie chaque matin dans un laboratoire désinfecté. Cuisson au four à bois haute température.'
-        },
-      ],
-    },
-    {
-      'name': 'Le Jardin Thaï',
-      'neighborhood': 'Mermoz',
-      'cuisine': 'Asiatique & Thaïlandaise',
-      'rating': 4.6,
-      'reviews': 950,
-      'price': '4 000 – 11 000 FCFA',
-      'phone': '+221 33 825 12 34',
-      'whatsapp': '+221 33 825 12 34',
-      'address': 'Avenue Bourguiba, Mermoz, Dakar',
-      'image': 'https://images.unsplash.com/photo-1552611052-33e04de081de',
-      'description': 'Spécialités thaïlandaises authentiques et nouilles sautées dans un jardin verdoyant à Mermoz.',
-      'menu': [
-        {
-          'name': 'Pad Thaï aux crevettes',
-          'price': '6 500 FCFA',
-          'desc': 'Nouilles de riz sautées, crevettes fraîches, cacahuètes concassées et sauce tamarin.',
-          'image': 'https://images.unsplash.com/photo-1559847844-5315695dadae',
-          'available': true,
-          'hygiene': 'Ingrédients frais importés et locaux triés et lavés selon les normes HACCP strictes.'
-        },
-      ],
-    },
-    {
-      'name': 'Le Alkimia',
-      'neighborhood': 'Fann Résidence',
-      'cuisine': 'Gastronomie Internationale',
+      'name': 'Le Baobab Saly',
+      'neighborhood': 'Saly Portudal',
+      'zone': 'Petite Côte',
+      'cuisine': 'Poissons & Gastronomie',
       'rating': 4.7,
-      'reviews': 1420,
-      'price': '6 000 – 18 000 FCFA',
-      'phone': '+221 33 869 00 00',
-      'whatsapp': '+221 33 869 00 00',
-      'address': 'Fann Résidence, Dakar',
-      'image': 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5',
-      'description': 'Restaurant lounge haut de gamme proposant une cuisine raffinée à Fann Résidence.',
+      'reviews': 1530,
+      'price': '4 000 – 12 000 FCFA',
+      'phone': '+221 33 957 12 34',
+      'whatsapp': '+221 33 957 12 34',
+      'address': 'Station Saly, Saly Portudal',
+      'image': 'https://images.unsplash.com/photo-1537047902294-62a40c20a6ae',
+      'description': 'Cadre paradisiaque en bord de mer à Saly, spécialisé dans les produits de la mer.',
       'menu': [
         {
-          'name': 'Pavé de saumon grillé sauce agrumes',
-          'price': '11 000 FCFA',
-          'desc': 'Saumon frais, mousseline de patate douce et réduction d’agrumes.',
-          'image': 'https://images.unsplash.com/photo-1467003909585-2f8a72700288',
-          'available': true,
-          'hygiene': 'Saumon frais certifié qualité supérieure conservé en chaîne du froid continue.'
-        },
-      ],
-    },
-    {
-      'name': 'N’Gor Bi',
-      'neighborhood': 'Ngor',
-      'cuisine': 'Poissons & Grillades',
-      'rating': 4.5,
-      'reviews': 1890,
-      'price': '3 000 – 9 000 FCFA',
-      'phone': '+221 77 632 45 89',
-      'whatsapp': '+221 77 632 45 89',
-      'address': 'Plage de Ngor, Dakar',
-      'image': 'https://images.unsplash.com/photo-1544025162-d76694265947',
-      'description': 'Grillades de poissons les pieds dans le sable sur la magnifique plage de Ngor.',
-      'menu': [
-        {
-          'name': 'Thiof entier braisé au feu de bois',
-          'price': '8 000 FCFA',
-          'desc': 'Gros thiof frais aux épices locales, manioc et aloco.',
+          'name': 'Lotte braisée aux épices douces',
+          'price': '9 000 FCFA',
+          'desc': 'Queue de lotte fraîche marinée au piment doux et cuite au feu de bois.',
           'image': 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2',
           'available': true,
-          'hygiene': 'Poisson pêché du jour par les pêcheurs de l’île de Ngor. Nettoyage à l’eau purifiée.'
+          'hygiene': 'Poissons de la criée de Mbour contrôlés rigoureusement et cuisinés dans un environnement stérile.'
+        },
+        {
+          'name': 'Crevettes sautées à l’ail',
+          'price': '7 500 FCFA',
+          'desc': 'Gambas de la Petite Côte sautées à l’huile d’olive et persil frais.',
+          'image': 'https://images.unsplash.com/photo-1565557623262-b51c2513a641',
+          'available': true,
+          'hygiene': 'Décorticage avec gants alimentaires et respect total de la chaîne du froid.'
         },
       ],
     },
     {
-      'name': 'Le Cozy',
-      'neighborhood': 'Point E',
-      'cuisine': 'Brasserie & Burgers',
-      'rating': 4.4,
-      'reviews': 820,
-      'price': '3 500 – 9 000 FCFA',
-      'phone': '+221 33 824 11 22',
-      'whatsapp': '+221 33 824 11 22',
-      'address': 'Point E, Dakar',
-      'image': 'https://images.unsplash.com/photo-1550547660-d9450f859349',
-      'description': 'Ambiance cosy et décontractée au Point E, idéal pour des burgers et grillades.',
+      'name': 'La Kaz’ Mbour',
+      'neighborhood': 'Mbour Centre',
+      'zone': 'Petite Côte',
+      'cuisine': 'Sénégalaise & Grillades',
+      'rating': 4.5,
+      'reviews': 890,
+      'price': '2 500 – 7 000 FCFA',
+      'phone': '+221 77 412 88 99',
+      'whatsapp': '+221 77 412 88 99',
+      'address': 'Avenue Demba Diop, Mbour',
+      'image': 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5',
+      'description': 'Le repère incontournable des grillades et plats locaux au cœur de Mbour.',
       'menu': [
         {
-          'name': 'Burger double cheddar bacon',
-          'price': '6 500 FCFA',
-          'desc': 'Deux steaks hachés, double cheddar coulant, bacon croustillant et frites.',
+          'name': 'Poulet Yassa Mbourou',
+          'price': '3 000 FCFA',
+          'desc': 'Poulet fermier aux oignons caramélisés et riz brisé parfumé.',
+          'image': 'https://images.unsplash.com/photo-1626777552726-4a6b54c97e46',
+          'available': true,
+          'hygiene': 'Volaille fraîche locale lavée au citron et vinaigre. Plans de travail désinfectés.'
+        },
+      ],
+    },
+    {
+      'name': 'Le Pelican Ngaparou',
+      'neighborhood': 'Ngaparou',
+      'zone': 'Petite Côte',
+      'cuisine': 'Française & Fusion',
+      'rating': 4.6,
+      'reviews': 710,
+      'price': '5 000 – 14 000 FCFA',
+      'phone': '+221 33 958 60 50',
+      'whatsapp': '+221 33 958 60 50',
+      'address': 'Route de la Corniche, Ngaparou',
+      'image': 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4',
+      'description': 'Restaurant pieds dans l’eau à Ngaparou proposant une cuisine raffinée.',
+      'menu': [
+        {
+          'name': 'Filet de Dorade royale en croûte d’herbes',
+          'price': '8 500 FCFA',
+          'desc': 'Dorade fraîche pêchée à Ngaparou, écrasé de pomme de terre à l’huile d’olive.',
+      'image': 'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb',
+          'available': true,
+          'hygiene': 'Produits frais garantis du jour, normes d’hygiène européennes et locales appliquées.'
+        },
+      ],
+    },
+
+    // --- DIAMNIADIO & AIBD ---
+    {
+      'name': 'Diamniadio Express Diner',
+      'neighborhood': 'Centre Urbain Diamniadio',
+      'zone': 'Diamniadio / AIBD',
+      'cuisine': 'Fast-Food & Repas Rapides',
+      'rating': 4.3,
+      'reviews': 450,
+      'price': '2 500 – 6 000 FCFA',
+      'phone': '+221 78 111 22 33',
+      'whatsapp': '+221 78 111 22 33',
+      'address': 'Proche Sphères Ministérielles, Diamniadio',
+      'image': 'https://images.unsplash.com/photo-1550547660-d9450f859349',
+      'description': 'Idéal pour les employés et voyageurs cherchant un repas rapide et savoureux à Diamniadio.',
+      'menu': [
+        {
+          'name': 'Burger Géant Diamniadio',
+          'price': '4 500 FCFA',
+          'desc': 'Steak haché gros format, cheddar fondant, frites dorées et boisson fraîche.',
           'image': 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd',
           'available': true,
-          'hygiene': 'Viande fraîche hachée sur place chaque matin. Respect rigoureux de la chaîne du froid.'
+          'hygiene': 'Cuisson express sécurisée, respect des températures de conservation des viandes.'
         },
       ],
     },
     {
-      'name': 'Le Patio',
-      'neighborhood': 'Ouakam',
-      'cuisine': 'Libanaise & Méditerranéenne',
-      'rating': 4.5,
-      'reviews': 640,
-      'price': '3 500 – 10 000 FCFA',
-      'phone': '+221 77 123 44 55',
-      'whatsapp': '+221 77 123 44 55',
-      'address': 'Route de Ouakam, Dakar',
-      'image': 'https://images.unsplash.com/photo-1544025162-d76694265947',
-      'description': 'Mezzés libanais authentiques, chawarmas et grillades orientales à Ouakam.',
+      'name': 'La Halte AIBD',
+      'neighborhood': 'Environs AIBD',
+      'zone': 'Diamniadio / AIBD',
+      'cuisine': 'Traditionnelle & Snack Aéroport',
+      'rating': 4.4,
+      'reviews': 920,
+      'price': '3 000 – 8 000 FCFA',
+      'phone': '+221 77 888 99 00',
+      'whatsapp': '+221 77 888 99 00',
+      'address': 'Route de l’Aéroport Blaise Diagne (AIBD)',
+      'image': 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5',
+      'description': 'Le point de restauration idéal avant votre vol ou juste après votre atterrissage à l’AIBD.',
       'menu': [
         {
-          'name': 'Assortiment de Mezzés libanais',
-          'price': '7 000 FCFA',
-          'desc': 'Houmous, moutabal, falafels croustillants, feuilles de vigne et pain libanais.',
+          'name': 'Mafé traditionnel au bœuf',
+          'price': '3 500 FCFA',
+          'desc': 'Tendre bœuf mijoté dans une riche sauce onctueuse à la pâte d’arachide.',
           'image': 'https://images.unsplash.com/photo-1541544741938-0af808871cc0',
           'available': true,
-          'hygiene': 'Préparation artisanale journalière avec des produits frais et des herbes rigoureusement lavées.'
+          'hygiene': 'Préparation chaude maintenue à température réglementaire, idéal pour les voyageurs.'
         },
       ],
     },
@@ -417,19 +367,20 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Liste exhaustive des quartiers de Dakar pour le filtre instantané
-    final neighborhoods = ['Tous', 'Plateau', 'Almadies', 'Ngor', 'Mermoz', 'Fann Résidence', 'Point E', 'Ouakam'];
+    // Filtres géographiques par grande zone du Sénégal
+    final zones = ['Tous', 'Dakar', 'Petite Côte', 'Diamniadio / AIBD'];
 
     final filtered = restaurants.where((r) {
       final name = r['name'].toString().toLowerCase();
       final neighborhood = r['neighborhood'].toString().toLowerCase();
+      final zone = r['zone'].toString().toLowerCase();
       final cuisine = r['cuisine'].toString().toLowerCase();
       final query = _searchQuery.toLowerCase();
 
-      final matchesSearch = name.contains(query) || neighborhood.contains(query) || cuisine.contains(query);
-      final matchesNeighborhood = _selectedNeighborhood == 'Tous' || r['neighborhood'] == _selectedNeighborhood;
+      final matchesSearch = name.contains(query) || neighborhood.contains(query) || zone.contains(query) || cuisine.contains(query);
+      final matchesZone = _selectedZone == 'Tous' || r['zone'] == _selectedZone;
 
-      return matchesSearch && matchesNeighborhood;
+      return matchesSearch && matchesZone;
     }).toList();
 
     return Scaffold(
@@ -471,7 +422,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: TextField(
               onChanged: (val) => setState(() => _searchQuery = val),
               decoration: InputDecoration(
-                hintText: 'Rechercher un restaurant, plat ou quartier...',
+                hintText: 'Rechercher (Dakar, Saly, Mbour, AIBD, plat)...',
                 prefixIcon: const Icon(Icons.search, color: Colors.deepOrange),
                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
                 filled: true,
@@ -484,19 +435,19 @@ class _HomeScreenState extends State<HomeScreen> {
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.symmetric(horizontal: 8),
-              itemCount: neighborhoods.length,
+              itemCount: zones.length,
               itemBuilder: (context, index) {
-                final nbr = neighborhoods[index];
-                final isSelected = _selectedNeighborhood == nbr;
+                final z = zones[index];
+                final isSelected = _selectedZone == z;
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 4),
                   child: ChoiceChip(
-                    label: Text(nbr),
+                    label: Text(z),
                     selected: isSelected,
                     selectedColor: Colors.deepOrange,
                     labelStyle: TextStyle(color: isSelected ? Colors.white : Colors.black87, fontWeight: FontWeight.bold),
                     onSelected: (selected) {
-                      setState(() => _selectedNeighborhood = nbr);
+                      setState(() => _selectedZone = z);
                     },
                   ),
                 );
@@ -1308,8 +1259,8 @@ class SettingsScreen extends StatelessWidget {
       body: ListView(
         children: const [
           ListTile(leading: Icon(Icons.language, color: Colors.deepOrange), title: Text('Langue'), subtitle: Text('Français')),
-          ListTile(leading: Icon(Icons.location_city, color: Colors.deepOrange), title: Text('Ville'), subtitle: Text('Dakar, Sénégal')),
-          ListTile(leading: Icon(Icons.info_outline, color: Colors.deepOrange), title: Text('DEKK FOOD'), subtitle: Text('Version 1.6.0 - All Dakar Restaurants')),
+          ListTile(leading: Icon(Icons.location_city, color: Colors.deepOrange), title: Text('Zone'), subtitle: Text('Dakar, Petite Côte & Diamniadio')),
+          ListTile(leading: Icon(Icons.info_outline, color: Colors.deepOrange), title: Text('DEKK FOOD'), subtitle: Text('Version 1.7.0 - National Expansion')),
         ],
       ),
     );
