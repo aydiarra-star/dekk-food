@@ -180,7 +180,7 @@ class _HomeScreenState extends State<HomeScreen> {
   String _searchQuery = '';
   String _selectedZone = 'Tous';
 
-  // Base enrichie et structurée avec images propres par restaurant et par plat
+  // Liste exhaustive de tous les restaurants du corridor avec GPS et images spécifiques
   final List<Map<String, dynamic>> restaurants = const [
     // --- DAKAR ---
     {
@@ -194,16 +194,17 @@ class _HomeScreenState extends State<HomeScreen> {
       'phone': '+221 78 593 78 78',
       'whatsapp': '+221 78 593 78 78',
       'address': 'Route de Ngor, Dakar',
+      'gpsQuery': 'Seven Seven Dakar Ngor',
       'image': 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4',
-      'description': 'Restaurant spécialisé dans la cuisine internationale et les grillades de premier choix à Ngor.',
+      'description': 'Restaurant incontournable de grillades et de cuisine internationale à Ngor.',
       'menu': [
         {
           'name': 'Brochettes géantes de gambas',
           'price': '8 500 FCFA',
-          'desc': 'Gambas fraîches marinées aux herbes fines, grillées à la flamme et servies avec du riz parfumé.',
+          'desc': 'Gambas fraîches marinées aux herbes fines, grillées à la flamme et riz parfumé.',
           'image': 'https://images.unsplash.com/photo-1565557623262-b51c2513a641',
           'available': true,
-          'hygiene': 'Gambas issues de la pêche locale du jour, contrôlées et déveinées selon les normes strictes d’hygiène HACCP.'
+          'hygiene': 'Gambas de la pêche locale du jour, contrôlées selon les normes HACCP. Cuisine désinfectée en continu.'
         },
         {
           'name': 'Filet de zébu sauce poivre',
@@ -211,7 +212,7 @@ class _HomeScreenState extends State<HomeScreen> {
           'desc': 'Tendre morceau de zébu sélectionné, nappé d’une sauce au poivre vert et frites maison.',
           'image': 'https://images.unsplash.com/photo-1558030006-450675393462',
           'available': true,
-          'hygiene': 'Viande certifiée, conservée en chambre froide à température contrôlée.'
+          'hygiene': 'Viande certifiée et conservée en chambre froide à température contrôlée.'
         },
       ],
     },
@@ -226,6 +227,7 @@ class _HomeScreenState extends State<HomeScreen> {
       'phone': '+221 33 821 53 22',
       'whatsapp': '+221 33 821 53 22',
       'address': 'Route de la Corniche Est, Dakar',
+      'gpsQuery': 'Le Lagon 1 Dakar Plateau',
       'image': 'https://images.unsplash.com/photo-1544025162-d76694265947',
       'description': 'Gastronomie française et poissons frais avec vue panoramique sur l’océan au Plateau.',
       'menu': [
@@ -250,6 +252,7 @@ class _HomeScreenState extends State<HomeScreen> {
       'phone': '+221 33 820 92 38',
       'whatsapp': '+221 33 820 92 38',
       'address': 'Corniche des Almadies, Dakar',
+      'gpsQuery': 'Chez Fatou Almadies Dakar',
       'image': 'https://images.unsplash.com/photo-1537047902294-62a40c20a6ae',
       'description': 'La référence incontournable de la cuisine sénégalaise traditionnelle aux Almadies.',
       'menu': [
@@ -271,21 +274,224 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       ],
     },
+    {
+      'name': 'Reine Margarita',
+      'neighborhood': 'Plateau',
+      'zone': 'Dakar',
+      'cuisine': 'Italienne & Pizzeria',
+      'rating': 4.4,
+      'reviews': 396,
+      'price': '3 000 – 7 000 FCFA',
+      'phone': '+221 78 444 99 55',
+      'whatsapp': '+221 78 444 99 55',
+      'address': 'Dakar Plateau',
+      'gpsQuery': 'Reine Margarita Dakar Plateau',
+      'image': 'https://images.unsplash.com/photo-1513104890138-7c749659a591',
+      'description': 'Authentiques pizzas italiennes cuites au feu de bois et pâtes fraîches au cœur de Dakar.',
+      'menu': [
+        {
+          'name': 'Pizza Margherita di Bufala',
+          'price': '5 500 FCFA',
+          'desc': 'Mozzarella di bufala fondante, sauce tomate italienne et basilic frais.',
+          'image': 'https://images.unsplash.com/photo-1574071318508-1cdbab80d002',
+          'available': true,
+          'hygiene': 'Pâte pétrie chaque matin dans un laboratoire désinfecté.'
+        },
+      ],
+    },
+    {
+      'name': 'Le Jardin Thaï',
+      'neighborhood': 'Mermoz',
+      'zone': 'Dakar',
+      'cuisine': 'Asiatique & Thaïlandaise',
+      'rating': 4.6,
+      'reviews': 950,
+      'price': '4 000 – 11 000 FCFA',
+      'phone': '+221 33 825 12 34',
+      'whatsapp': '+221 33 825 12 34',
+      'address': 'Avenue Bourguiba, Mermoz',
+      'gpsQuery': 'Le Jardin Thai Mermoz Dakar',
+      'image': 'https://images.unsplash.com/photo-1552611052-33e04de081de',
+      'description': 'Spécialités thaïlandaises authentiques et nouilles sautées dans un jardin verdoyant.',
+      'menu': [
+        {
+          'name': 'Pad Thaï aux crevettes',
+          'price': '6 500 FCFA',
+          'desc': 'Nouilles de riz sautées, crevettes fraîches et sauce tamarin.',
+          'image': 'https://images.unsplash.com/photo-1559847844-5315695dadae',
+          'available': true,
+          'hygiene': 'Ingrédients frais triés et lavés selon les normes HACCP.'
+        },
+      ],
+    },
+    {
+      'name': 'Le Alkimia',
+      'neighborhood': 'Fann Résidence',
+      'zone': 'Dakar',
+      'cuisine': 'Gastronomie Internationale',
+      'rating': 4.7,
+      'reviews': 1420,
+      'price': '6 000 – 18 000 FCFA',
+      'phone': '+221 33 869 00 00',
+      'whatsapp': '+221 33 869 00 00',
+      'address': 'Fann Résidence, Dakar',
+      'gpsQuery': 'Le Alkimia Fann Résidence Dakar',
+      'image': 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5',
+      'description': 'Restaurant lounge haut de gamme proposant une cuisine raffinée à Fann Résidence.',
+      'menu': [
+        {
+          'name': 'Pavé de saumon grillé',
+          'price': '11 000 FCFA',
+          'desc': 'Saumon frais, mousseline de patate douce et réduction d’agrumes.',
+          'image': 'https://images.unsplash.com/photo-1467003909585-2f8a72700288',
+          'available': true,
+          'hygiene': 'Saumon frais certifié qualité supérieure conservé sous chaîne du froid.'
+        },
+      ],
+    },
+    {
+      'name': 'N’Gor Bi',
+      'neighborhood': 'Ngor',
+      'zone': 'Dakar',
+      'cuisine': 'Poissons & Grillades',
+      'rating': 4.5,
+      'reviews': 1890,
+      'price': '3 000 – 9 000 FCFA',
+      'phone': '+221 77 632 45 89',
+      'whatsapp': '+221 77 632 45 89',
+      'address': 'Plage de Ngor, Dakar',
+      'gpsQuery': 'Plage de Ngor Dakar',
+      'image': 'https://images.unsplash.com/photo-1544025162-d76694265947',
+      'description': 'Grillades de poissons les pieds dans le sable sur la magnifique plage de Ngor.',
+      'menu': [
+        {
+          'name': 'Thiof entier braisé',
+          'price': '8 000 FCFA',
+          'desc': 'Gros thiof frais aux épices locales, manioc et aloco.',
+          'image': 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2',
+          'available': true,
+          'hygiene': 'Poisson pêché du jour par les pêcheurs de l’île de Ngor.'
+        },
+      ],
+    },
+    {
+      'name': 'Le Cozy',
+      'neighborhood': 'Point E',
+      'zone': 'Dakar',
+      'cuisine': 'Brasserie & Burgers',
+      'rating': 4.4,
+      'reviews': 820,
+      'price': '3 500 – 9 000 FCFA',
+      'phone': '+221 33 824 11 22',
+      'whatsapp': '+221 33 824 11 22',
+      'address': 'Point E, Dakar',
+      'gpsQuery': 'Le Cozy Point E Dakar',
+      'image': 'https://images.unsplash.com/photo-1550547660-d9450f859349',
+      'description': 'Ambiance cosy et décontractée au Point E, idéal pour des burgers et grillades.',
+      'menu': [
+        {
+          'name': 'Burger double cheddar bacon',
+          'price': '6 500 FCFA',
+          'desc': 'Deux steaks hachés, double cheddar coulant, bacon croustillant et frites.',
+          'image': 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd',
+          'available': true,
+          'hygiene': 'Viande fraîche hachée sur place chaque matin.'
+        },
+      ],
+    },
+    {
+      'name': 'Le Patio',
+      'neighborhood': 'Ouakam',
+      'zone': 'Dakar',
+      'cuisine': 'Libanaise & Méditerranéenne',
+      'rating': 4.5,
+      'reviews': 640,
+      'price': '3 500 – 10 000 FCFA',
+      'phone': '+221 77 123 44 55',
+      'whatsapp': '+221 77 123 44 55',
+      'address': 'Route de Ouakam, Dakar',
+      'gpsQuery': 'Le Patio Ouakam Dakar',
+      'image': 'https://images.unsplash.com/photo-1544025162-d76694265947',
+      'description': 'Mezzés libanais authentiques, chawarmas et grillades orientales à Ouakam.',
+      'menu': [
+        {
+          'name': 'Assortiment de Mezzés libanais',
+          'price': '7 000 FCFA',
+          'desc': 'Houmous, moutabal, falafels croustillants et feuilles de vigne.',
+          'image': 'https://images.unsplash.com/photo-1541544741938-0af808871cc0',
+          'available': true,
+          'hygiene': 'Préparation artisanale journalière avec des produits frais.'
+        },
+      ],
+    },
+
+    // --- RUFISQUE ---
+    {
+      'name': 'Le Requin Rufisque',
+      'neighborhood': 'Rufisque Centre',
+      'zone': 'Rufisque',
+      'cuisine': 'Poissons & Cuisine Sénégalaise',
+      'rating': 4.2,
+      'reviews': 410,
+      'price': '2 500 – 6 000 FCFA',
+      'phone': '+221 33 836 10 20',
+      'whatsapp': '+221 33 836 10 20',
+      'address': 'Boulevard Maurice Delafosse, Rufisque',
+      'gpsQuery': 'Rufisque Centre',
+      'image': 'https://images.unsplash.com/photo-1537047902294-62a40c20a6ae',
+      'description': 'Institution historique de Rufisque proposant du poisson frais et des plats locaux.',
+      'menu': [
+        {
+          'name': 'Thieboudienne rouge de Rufisque',
+          'price': '3 000 FCFA',
+          'desc': 'Riz au poisson traditionnel préparé selon la pure tradition rufisquoise.',
+          'image': 'https://images.unsplash.com/photo-1541544741938-0af808871cc0',
+          'available': true,
+          'hygiene': 'Poisson frais du port de Rufisque lavé et contrôlé.'
+        },
+      ],
+    },
 
     // --- DIAMNIADIO / AIBD ---
     {
-      'name': 'La Halte AIBD',
-      'neighborhood': 'Diamniadio / AIBD',
+      'name': 'Diamniadio Express Diner',
+      'neighborhood': 'Diamniadio',
       'zone': 'Diamniadio / AIBD',
-      'cuisine': 'Traditionnelle & Snack',
+      'cuisine': 'Fast-Food & Repas Rapides',
+      'rating': 4.3,
+      'reviews': 450,
+      'price': '2 500 – 6 000 FCFA',
+      'phone': '+221 78 111 22 33',
+      'whatsapp': '+221 78 111 22 33',
+      'address': 'Sphères Ministérielles, Diamniadio',
+      'gpsQuery': 'Diamniadio Express Diner',
+      'image': 'https://images.unsplash.com/photo-1550547660-d9450f859349',
+      'description': 'Idéal pour les employés et voyageurs cherchant un repas rapide et savoureux à Diamniadio.',
+      'menu': [
+        {
+          'name': 'Burger Géant Diamniadio',
+          'price': '4 500 FCFA',
+          'desc': 'Steak haché gros format, cheddar fondant et frites dorées.',
+          'image': 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd',
+          'available': true,
+          'hygiene': 'Cuisson express sécurisée et respect des températures.'
+        },
+      ],
+    },
+    {
+      'name': 'La Halte AIBD',
+      'neighborhood': 'AIBD',
+      'zone': 'Diamniadio / AIBD',
+      'cuisine': 'Traditionnelle & Snack Aéroport',
       'rating': 4.4,
       'reviews': 920,
       'price': '3 000 – 8 000 FCFA',
       'phone': '+221 77 888 99 00',
       'whatsapp': '+221 77 888 99 00',
       'address': 'Route de l’Aéroport Blaise Diagne',
+      'gpsQuery': 'Aéroport International Blaise Diagne AIBD',
       'image': 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5',
-      'description': 'Le point de restauration idéal avant votre vol ou en transit à Diamniadio / AIBD.',
+      'description': 'Le point de restauration idéal avant votre vol ou juste après votre atterrissage.',
       'menu': [
         {
           'name': 'Mafé traditionnel au bœuf',
@@ -293,15 +499,15 @@ class _HomeScreenState extends State<HomeScreen> {
           'desc': 'Tendre bœuf mijoté dans une riche sauce onctueuse à la pâte d’arachide.',
           'image': 'https://images.unsplash.com/photo-1541544741938-0af808871cc0',
           'available': true,
-          'hygiene': 'Préparation chaude maintenue à température réglementaire dans un cadre propre.'
+          'hygiene': 'Préparation chaude maintenue à température réglementaire.'
         },
       ],
     },
 
-    // --- PETITE CÔTE (SALY, MBOUR, NGAPAROU, SOMONE) ---
+    // --- PETITE CÔTE (MBOUR, SALY, NGAPAROU, SOMONE, POPENGUINE, NIANING) ---
     {
       'name': 'Le Baobab Saly',
-      'neighborhood': 'Saly Portudal',
+      'neighborhood': 'Saly',
       'zone': 'Petite Côte',
       'cuisine': 'Poissons & Fruits de mer',
       'rating': 4.7,
@@ -310,6 +516,7 @@ class _HomeScreenState extends State<HomeScreen> {
       'phone': '+221 33 957 12 34',
       'whatsapp': '+221 33 957 12 34',
       'address': 'Station Saly, Saly Portudal',
+      'gpsQuery': 'Le Baobab Saly Portudal',
       'image': 'https://images.unsplash.com/photo-1537047902294-62a40c20a6ae',
       'description': 'Cadre paradisiaque en bord de mer à Saly, spécialisé dans les produits de la mer.',
       'menu': [
@@ -319,15 +526,7 @@ class _HomeScreenState extends State<HomeScreen> {
           'desc': 'Queue de lotte fraîche marinée au piment doux et cuite au feu de bois.',
           'image': 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2',
           'available': true,
-          'hygiene': 'Poissons de la criée de Mbour contrôlés rigoureusement et cuisinés dans un environnement stérile.'
-        },
-        {
-          'name': 'Crevettes sautées à l’ail',
-          'price': '7 500 FCFA',
-          'desc': 'Gambas de la Petite Côte sautées à l’huile d’olive et persil frais.',
-          'image': 'https://images.unsplash.com/photo-1565557623262-b51c2513a641',
-          'available': true,
-          'hygiene': 'Décorticage avec gants alimentaires et respect total de la chaîne du froid.'
+          'hygiene': 'Poissons de la criée de Mbour contrôlés rigoureusement.'
         },
       ],
     },
@@ -342,6 +541,7 @@ class _HomeScreenState extends State<HomeScreen> {
       'phone': '+221 77 412 88 99',
       'whatsapp': '+221 77 412 88 99',
       'address': 'Avenue Demba Diop, Mbour',
+      'gpsQuery': 'Mbour Centre',
       'image': 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5',
       'description': 'Le repère incontournable des grillades et plats locaux au cœur de Mbour.',
       'menu': [
@@ -351,7 +551,7 @@ class _HomeScreenState extends State<HomeScreen> {
           'desc': 'Poulet fermier aux oignons caramélisés et riz brisé parfumé.',
           'image': 'https://images.unsplash.com/photo-1626777552726-4a6b54c97e46',
           'available': true,
-          'hygiene': 'Volaille fraîche locale lavée au citron et vinaigre. Plans de travail désinfectés.'
+          'hygiene': 'Volaille fraîche locale lavée au citron et vinaigre.'
         },
       ],
     },
@@ -366,16 +566,17 @@ class _HomeScreenState extends State<HomeScreen> {
       'phone': '+221 33 958 60 50',
       'whatsapp': '+221 33 958 60 50',
       'address': 'Route de la Corniche, Ngaparou',
+      'gpsQuery': 'Ngaparou Petite Cote',
       'image': 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4',
       'description': 'Restaurant pieds dans l’eau à Ngaparou proposant une cuisine raffinée.',
       'menu': [
         {
-          'name': 'Filet de Dorade royale en croûte',
+          'name': 'Filet de Dorade royale',
           'price': '8 500 FCFA',
-          'desc': 'Dorade fraîche pêchée à Ngaparou, écrasé de pomme de terre à l’huile d’olive.',
+          'desc': 'Dorade fraîche pêchée à Ngaparou, écrasé de pomme de terre.',
           'image': 'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb',
           'available': true,
-          'hygiene': 'Produits frais garantis du jour, normes d’hygiène européennes et locales appliquées.'
+          'hygiene': 'Produits frais garantis du jour.'
         },
       ],
     },
@@ -390,16 +591,67 @@ class _HomeScreenState extends State<HomeScreen> {
       'phone': '+221 33 957 88 00',
       'whatsapp': '+221 33 957 88 00',
       'address': 'Lagune de la Somone',
+      'gpsQuery': 'Somone Lagoon',
       'image': 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e',
       'description': 'Vue imprenable sur la lagune de la Somone avec des poissons frais et grillades.',
       'menu': [
         {
           'name': 'Capitaine grillé de la lagune',
           'price': '7 500 FCFA',
-          'desc': 'Poisson capitaine frais grillé aux herbes et bananes plantains sautées.',
+          'desc': 'Poisson capitaine frais grillé aux herbes et bananes plantains.',
           'image': 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2',
           'available': true,
-          'hygiene': 'Poissons rigoureusement contrôlés et conservés sous glace stérile.'
+          'hygiene': 'Poissons rigoureusement contrôlés.'
+        },
+      ],
+    },
+    {
+      'name': 'L’Escale de Popenguine',
+      'neighborhood': 'Popenguine',
+      'zone': 'Petite Côte',
+      'cuisine': 'Traditionnelle & Poissons',
+      'rating': 4.5,
+      'reviews': 340,
+      'price': '3 000 – 8 000 FCFA',
+      'phone': '+221 33 952 11 11',
+      'whatsapp': '+221 33 952 11 11',
+      'address': 'Sanctuaire Popenguine',
+      'gpsQuery': 'Popenguine',
+      'image': 'https://images.unsplash.com/photo-1544025162-d76694265947',
+      'description': 'Restaurant paisible face à l’océan à Popenguine.',
+      'menu': [
+        {
+          'name': 'Couscous de la mer',
+          'price': '6 500 FCFA',
+          'desc': 'Couscous aux poissons frais de roche et légumes.',
+          'image': 'https://images.unsplash.com/photo-1541544741938-0af808871cc0',
+          'available': true,
+          'hygiene': 'Produits frais locaux préparés dans le respect des normes d’hygiène.'
+        },
+      ],
+    },
+    {
+      'name': 'Le Palm Beach Nianing',
+      'neighborhood': 'Nianing',
+      'zone': 'Petite Côte',
+      'cuisine': 'Grillades & Plage',
+      'rating': 4.6,
+      'reviews': 480,
+      'price': '4 000 – 11 000 FCFA',
+      'phone': '+221 33 957 44 33',
+      'whatsapp': '+221 33 957 44 33',
+      'address': 'Baie de Nianing',
+      'gpsQuery': 'Nianing',
+      'image': 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4',
+      'description': 'Détente et grillades au bord des baobabs et de la plage à Nianing.',
+      'menu': [
+        {
+          'name': 'Brochettes de lotte marinées',
+          'price': '8 000 FCFA',
+          'desc': 'Lotte fraîche, poivrons grillés et riz basmati.',
+          'image': 'https://images.unsplash.com/photo-1565557623262-b51c2513a641',
+          'available': true,
+          'hygiene': 'Chaîne du froid respectée et nettoyage constant des cuisines.'
         },
       ],
     },
@@ -407,8 +659,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Filtres géographiques conformes au corridor
-    final zones = ['Tous', 'Dakar', 'Diamniadio / AIBD', 'Petite Côte'];
+    // Filtres géographiques par zone
+    final zones = ['Tous', 'Dakar', 'Rufisque', 'Diamniadio / AIBD', 'Petite Côte'];
 
     final filtered = restaurants.where((r) {
       final name = r['name'].toString().toLowerCase();
@@ -560,12 +812,20 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 // ==========================================
-// 2. FICHE RESTAURANT COMPLÈTE & LISTE DES PLATS
+// 2. FICHE RESTAURANT COMPLÈTE, GPS & PLATS
 // ==========================================
 class RestaurantDetailScreen extends StatelessWidget {
   final Map<String, dynamic> restaurant;
 
   const RestaurantDetailScreen({super.key, required this.restaurant});
+
+  void _openGpsNavigation() async {
+    final query = Uri.encodeComponent(restaurant['gpsQuery'] ?? restaurant['name'] + ' ' + restaurant['address']);
+    final googleMapsUrl = Uri.parse('https://www.google.com/maps/search/?api=1&query=$query');
+    if (await canLaunchUrl(googleMapsUrl)) {
+      await launchUrl(googleMapsUrl, mode: LaunchMode.externalApplication);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -624,20 +884,28 @@ class RestaurantDetailScreen extends StatelessWidget {
                   const SizedBox(height: 6),
                   Text('💰 ${restaurant['price']}', style: const TextStyle(color: Colors.grey, fontWeight: FontWeight.w500)),
                   const SizedBox(height: 16),
+                  
+                  // Boutons d'action (Appel, WhatsApp, Itinéraire GPS)
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       ElevatedButton.icon(
                         style: ElevatedButton.styleFrom(backgroundColor: Colors.green, foregroundColor: Colors.white),
                         onPressed: () => launchUrl(Uri(scheme: 'tel', path: restaurant['phone'])),
-                        icon: const Icon(Icons.phone),
+                        icon: const Icon(Icons.phone, size: 18),
                         label: const Text('Appeler'),
                       ),
                       ElevatedButton.icon(
                         style: ElevatedButton.styleFrom(backgroundColor: Colors.teal, foregroundColor: Colors.white),
                         onPressed: () => launchUrl(Uri.parse('https://wa.me/${restaurant['whatsapp'].replaceAll(RegExp(r'[^0-9]'), '')}')),
-                        icon: const Icon(Icons.chat),
+                        icon: const Icon(Icons.chat, size: 18),
                         label: const Text('WhatsApp'),
+                      ),
+                      ElevatedButton.icon(
+                        style: ElevatedButton.styleFrom(backgroundColor: Colors.blue, foregroundColor: Colors.white),
+                        onPressed: _openGpsNavigation,
+                        icon: const Icon(Icons.directions, size: 18),
+                        label: const Text('GPS'),
                       ),
                     ],
                   ),
@@ -1299,8 +1567,8 @@ class SettingsScreen extends StatelessWidget {
       body: ListView(
         children: const [
           ListTile(leading: Icon(Icons.language, color: Colors.deepOrange), title: Text('Langue'), subtitle: Text('Français')),
-          ListTile(leading: Icon(Icons.location_city, color: Colors.deepOrange), title: Text('Corridor'), subtitle: Text('Dakar → Diamniadio → Petite Côte')),
-          ListTile(leading: Icon(Icons.info_outline, color: Colors.deepOrange), title: Text('DEKK FOOD'), subtitle: Text('Version 2.0.0 - Corridor Expansion')),
+          ListTile(leading: Icon(Icons.location_city, color: Colors.deepOrange), title: Text('Corridor'), subtitle: Text('Dakar → Rufisque → Diamniadio → Petite Côte')),
+          ListTile(leading: Icon(Icons.info_outline, color: Colors.deepOrange), title: Text('DEKK FOOD'), subtitle: Text('Version 2.1.0 - GPS & Complete List')),
         ],
       ),
     );
