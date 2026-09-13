@@ -4,7 +4,6 @@ on:
   push:
     branches: [ main ]
 
-# Définition des permissions requises pour GitHub Pages
 permissions:
   contents: read
   pages: write
@@ -13,6 +12,12 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    
+    # AJOUT DE L'ENVIRONNEMENT REQUIS ICI
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
     steps:
       - uses: actions/checkout@v4
 
