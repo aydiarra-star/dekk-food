@@ -34,7 +34,7 @@ class CartModel extends ChangeNotifier {
     return sum;
   }
 
-  void addItem(String resName, String resPhone, Map<String, dynamic> dish) {
+  void addItem(String resName, String resPhone, Map<String, dynamic> dish, {int quantity = 1}) {
     if (restaurantName != null && restaurantName != resName) {
       return; 
     }
@@ -43,13 +43,13 @@ class CartModel extends ChangeNotifier {
 
     final index = items.indexWhere((i) => i['name'] == dish['name']);
     if (index >= 0) {
-      items[index]['quantity'] = (items[index]['quantity'] as int) + 1;
+      items[index]['quantity'] = (items[index]['quantity'] as int) + quantity;
     } else {
       items.add({
         'name': dish['name'],
         'price': dish['price'],
         'image': dish['image'],
-        'quantity': 1,
+        'quantity': quantity,
       });
     }
     notifyListeners();
@@ -197,35 +197,36 @@ class _HomeScreenState extends State<HomeScreen> {
         {
           'name': 'Brochettes géantes de gambas',
           'price': '8 500 FCFA',
-          'desc': 'Gambas fraîches marinées aux herbes.',
+          'desc': 'Gambas fraîches marinées aux herbes fines, grillées à la flamme et servies avec du riz parfumé.',
           'image': 'https://images.unsplash.com/photo-1565557623262-b51c2513a641',
-          'available': true
+          'available': true,
+          'hygiene': 'Gambas issues de la pêche locale du jour, contrôlées et déveinées selon les normes strictes d’hygiène HACCP. Cuisine entièrement désinfectée après chaque service.'
         },
         {
           'name': 'Filet de zébu sauce poivre',
           'price': '7 000 FCFA',
-          'desc': 'Tendre morceau de zébu et frites maison.',
+          'desc': 'Tendre morceau de zébu sélectionné, nappé d’une sauce au poivre vert et accompagné de frites maison.',
           'image': 'https://images.unsplash.com/photo-1558030006-450675393462',
-          'available': true
+          'available': true,
+          'hygiene': 'Viande certifiée Halal, conservée en chambre froide à température contrôlée. Cuisson à cœur rigoureuse pour garantir sécurité et tendreté.'
         },
         {
           'name': 'Burger signature Seven',
           'price': '6 000 FCFA',
-          'desc': 'Bœuf haché, cheddar affiché, sauce secrète.',
+          'desc': 'Bœuf haché pur muscle, cheddar affiché, crudités fraîches du marché et sauce secrète du chef.',
           'image': 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd',
-          'available': true
+          'available': true,
+          'hygiene': 'Légumes trempés dans une solution assainissante avant découpe. Personnel portant gants et charlottes en cuisine.'
         },
         {
           'name': 'Jus de Bissap frais',
           'price': '1 000 FCFA',
-          'desc': 'Fait maison à la menthe.',
+          'desc': 'Fait maison à la menthe et à la fleur d’oranger, fraîchement pressé.',
           'image': 'https://images.unsplash.com/photo-1556679343-c7306c1976bc',
-          'available': true
+          'available': true,
+          'hygiene': 'Préparé avec de l’eau filtrée et purifiée. Mis en bouteille stérile dans un environnement propre et climatisé.'
         },
       ],
-      'reviews_list': [
-        {'author': 'Mamadou Diallo', 'rating': 5, 'comment': 'Superbe cadre à Ngor, les gambas étaient exceptionnelles !'},
-      ]
     },
     {
       'name': 'Restaurant Le Lagon 1',
@@ -243,28 +244,28 @@ class _HomeScreenState extends State<HomeScreen> {
         {
           'name': 'Langouste grillée au beurre blanc',
           'price': '14 000 FCFA',
-          'desc': 'Pêche locale du jour.',
+          'desc': 'Pêche locale du jour cuisinée au beurre blanc onctueux.',
           'image': 'https://images.unsplash.com/photo-1535400255456-984241443b28',
-          'available': true
+          'available': true,
+          'hygiene': 'Arrivage direct des pêcheurs artisanaux sans rupture de la chaîne du froid. Contrôle vétérinaire rigoureux.'
         },
         {
           'name': 'Mérou à la dieppoise',
           'price': '8 500 FCFA',
-          'desc': 'Poisson frais mijoté aux petits légumes.',
+          'desc': 'Poisson frais mijoté aux petits légumes et fruits de mer.',
           'image': 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2',
-          'available': true
+          'available': true,
+          'hygiene': 'Ustensiles en inox stérilisés et plans de travail lavés avec des produits désinfectants de qualité professionnelle.'
         },
         {
           'name': 'Fondant au chocolat noir',
           'price': '3 500 FCFA',
-          'desc': 'Cœur coulant maison.',
+          'desc': 'Cœur coulant maison au chocolat noir pur beurre de cacao.',
           'image': 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c',
-          'available': true
+          'available': true,
+          'hygiene': 'Ingrédients de première qualité manipulés dans le strict respect de l’hygiène pâtissière (port de gants et masques).'
         },
       ],
-      'reviews_list': [
-        {'author': 'Jean Dupont', 'rating': 5, 'comment': 'Vue imprenable et cuisine irréprochable.'},
-      ]
     },
     {
       'name': 'Chez Fatou',
@@ -282,28 +283,28 @@ class _HomeScreenState extends State<HomeScreen> {
         {
           'name': 'Ceebu Jën (Riz au poisson)',
           'price': '3 500 FCFA',
-          'desc': 'Le plat national authentique rouge.',
+          'desc': 'Le plat national authentique rouge, avec thiof frais, légumes variés du terroir et bissap blanc.',
           'image': 'https://images.unsplash.com/photo-1541544741938-0af808871cc0',
-          'available': true
+          'available': true,
+          'hygiene': 'Poisson frais du marché de Soumbédioune lavé à l’eau purifiée. Cuisson traditionnelle dans des conditions d’hygiène irréprochables.'
         },
         {
           'name': 'Poulet Yassa',
           'price': '3 000 FCFA',
-          'desc': 'Poulet mariné oignons et citron vert.',
+          'desc': 'Poulet fermier mariné longuement aux oignons confits, citron vert et moutarde.',
           'image': 'https://images.unsplash.com/photo-1626777552726-4a6b54c97e46',
-          'available': true
+          'available': true,
+          'hygiene': 'Poulets rigoureusement lavés au vinaigre et citron avant marinade. Cuisine désinfectée en continu.'
         },
         {
           'name': 'Soupou Kandia',
           'price': '3 500 FCFA',
-          'desc': 'Soupe de gombos à l’huile de palme.',
+          'desc': 'Soupe de gombos fondants à l’huile de palme, crevettes et morceaux de viande.',
           'image': 'https://images.unsplash.com/photo-1547592180-85f173990554',
-          'available': true
+          'available': true,
+          'hygiene': 'Gombos frais triés un à un et lavés avec soin. Respect strict de la chaîne du chaud pour éviter toute prolifération bactérienne.'
         },
       ],
-      'reviews_list': [
-        {'author': 'Fatou Sow', 'rating': 4, 'comment': 'Le meilleur ceebu jën de Dakar !'},
-      ]
     },
     {
       'name': 'Reine Margarita',
@@ -321,28 +322,28 @@ class _HomeScreenState extends State<HomeScreen> {
         {
           'name': 'Pizza Margherita di Bufala',
           'price': '5 500 FCFA',
-          'desc': 'Mozzarella di bufala et basilic frais.',
+          'desc': 'Mozzarella di bufala fondante, sauce tomate italienne et basilic frais.',
           'image': 'https://images.unsplash.com/photo-1574071318508-1cdbab80d002',
-          'available': true
+          'available': true,
+          'hygiene': 'Pâte pétrie chaque matin dans un laboratoire désinfecté. Cuisson au four à bois à haute température garantissant une sécurité alimentaire totale.'
         },
         {
           'name': 'Tagliatelles aux fruits de mer',
           'price': '6 500 FCFA',
-          'desc': 'Pâtes fraîches et gambas.',
+          'desc': 'Pâtes fraîches maison et gambas sautées à l’ail.',
           'image': 'https://images.unsplash.com/photo-1551183053-bf91a1d81141',
-          'available': true
+          'available': true,
+          'hygiene': 'Produits de la mer frais conservés sous glace contrôlée. Respect des normes d’hygiène européennes et locales.'
         },
         {
           'name': 'Tiramisu classique',
           'price': '3 000 FCFA',
-          'desc': 'Recette italienne traditionnelle.',
+          'desc': 'Recette italienne traditionnelle au mascarpone et café.',
           'image': 'https://images.unsplash.com/photo-1571877227200-a0d98ea607e9',
-          'available': true
+          'available': true,
+          'hygiene': 'Œufs frais contrôlés quotidiennement et conservation au réfrigérateur à +4°C maximum.'
         },
       ],
-      'reviews_list': [
-        {'author': 'Omar Ba', 'rating': 5, 'comment': 'Pizza croustillante et goûteuse !'},
-      ]
     },
     {
       'name': 'La Fourchette',
@@ -362,19 +363,18 @@ class _HomeScreenState extends State<HomeScreen> {
           'price': '9 000 FCFA',
           'desc': 'Viande tendre et sauce au choix.',
           'image': 'https://images.unsplash.com/photo-1603048588665-791ca8aea617',
-          'available': true
+          'available': true,
+          'hygiene': 'Viande importée certifiée, traçabilité garantie de l’abattoir à l’assiette. Hygiène des cuisines certifiée.'
         },
         {
           'name': 'Salade César au poulet',
           'price': '4 500 FCFA',
           'desc': 'Laitue, croûtons, parmesan et poulet croustillant.',
           'image': 'https://images.unsplash.com/photo-1540420773420-3366772f4999',
-          'available': true
+          'available': true,
+          'hygiene': 'Légumes lavés et désinfectés dans une solution bactéricide alimentaire agrée.'
         },
       ],
-      'reviews_list': [
-        {'author': 'Sophie Martin', 'rating': 4, 'comment': 'Parfait pour un déjeuner au Plateau.'},
-      ]
     },
     {
       'name': 'Casa Teranga',
@@ -394,19 +394,18 @@ class _HomeScreenState extends State<HomeScreen> {
           'price': '5 000 FCFA',
           'desc': 'Riz rouge revisité haut de gamme.',
           'image': 'https://images.unsplash.com/photo-1541544741938-0af808871cc0',
-          'available': true
+          'available': true,
+          'hygiene': 'Préparation dans un espace ultra-propre avec désinfection systématique des plans de travail.'
         },
         {
           'name': 'Carpaccio de dorade aux agrumes',
           'price': '4 500 FCFA',
           'desc': 'Dorade fraîche, pamplemousse et citron.',
           'image': 'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb',
-          'available': true
+          'available': true,
+          'hygiene': 'Poisson manipulé exclusivement avec des gants stériles et tranché avec des couteaux désinfectés.'
         },
       ],
-      'reviews_list': [
-        {'author': 'Khadija Fall', 'rating': 5, 'comment': 'Un concept novateur et délicieux.'},
-      ]
     },
   ];
 
@@ -563,43 +562,12 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 // ==========================================
-// 2. FICHE RESTAURANT COMPLÈTE & TOUS LES MENUS
+// 2. FICHE RESTAURANT COMPLÈTE & LISTE DES PLATS
 // ==========================================
 class RestaurantDetailScreen extends StatelessWidget {
   final Map<String, dynamic> restaurant;
 
   const RestaurantDetailScreen({super.key, required this.restaurant});
-
-  void _addDishToCart(BuildContext context, Map<String, dynamic> dish) {
-    final resName = restaurant['name'];
-    final resPhone = restaurant['phone'];
-
-    if (cartManager.restaurantName != null && cartManager.restaurantName != resName) {
-      showDialog(
-        context: context,
-        builder: (ctx) => AlertDialog(
-          title: const Text('Changer de restaurant ?'),
-          content: Text('Votre panier contient des articles de ${cartManager.restaurantName}. Voulez-vous le vider pour commander chez $resName ?'),
-          actions: [
-            TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Annuler')),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.deepOrange, foregroundColor: Colors.white),
-              onPressed: () {
-                cartManager.clear();
-                cartManager.addItem(resName, resPhone, dish);
-                Navigator.pop(ctx);
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('${dish['name']} ajouté au panier !')));
-              },
-              child: const Text('Vider et continuer'),
-            ),
-          ],
-        ),
-      );
-    } else {
-      cartManager.addItem(resName, resPhone, dish);
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('${dish['name']} ajouté au panier !')));
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -678,7 +646,7 @@ class RestaurantDetailScreen extends StatelessWidget {
                   const Divider(height: 30),
                   const Text('📜 Menu Complet & Commander', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                   const SizedBox(height: 4),
-                  const Text('Faites votre choix parmi tous les plats proposés :', style: TextStyle(color: Colors.grey, fontSize: 13)),
+                  const Text('Touchez un plat pour voir les détails et les garanties d’hygiène :', style: TextStyle(color: Colors.grey, fontSize: 13)),
                   const SizedBox(height: 12),
                   ...menu.map((item) {
                     final bool isAvailable = item['available'] ?? true;
@@ -686,45 +654,51 @@ class RestaurantDetailScreen extends StatelessWidget {
                       margin: const EdgeInsets.symmetric(vertical: 6),
                       elevation: 1,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Row(
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child: Image.network(
-                                item['image'],
-                                width: 70,
-                                height: 70,
-                                fit: BoxFit.cover,
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(12),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DishDetailScreen(
+                                restaurant: restaurant,
+                                dish: item,
                               ),
                             ),
-                            const SizedBox(width: 12),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(item['name'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
-                                  const SizedBox(height: 2),
-                                  Text(item['desc'], style: const TextStyle(fontSize: 12, color: Colors.grey)),
-                                  const SizedBox(height: 4),
-                                  Text(item['price'], style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.deepOrange, fontSize: 13)),
-                                ],
+                          );
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Row(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(8),
+                                child: Image.network(
+                                  item['image'],
+                                  width: 70,
+                                  height: 70,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
-                            ),
-                            const SizedBox(width: 8),
-                            isAvailable
-                                ? ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.deepOrange,
-                                      foregroundColor: Colors.white,
-                                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-                                    ),
-                                    onPressed: () => _addDishToCart(context, item),
-                                    child: const Text('+ Ajouter', style: TextStyle(fontSize: 12)),
-                                  )
-                                : const Text('Indisponible', style: TextStyle(color: Colors.red, fontSize: 11)),
-                          ],
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(item['name'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                                    const SizedBox(height: 2),
+                                    Text(item['desc'], maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 12, color: Colors.grey)),
+                                    const SizedBox(height: 4),
+                                    Text(item['price'], style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.deepOrange, fontSize: 13)),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              isAvailable
+                                  ? const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.deepOrange)
+                                  : const Text('Indisponible', style: TextStyle(color: Colors.red, fontSize: 11)),
+                            ],
+                          ),
                         ),
                       ),
                     );
@@ -764,7 +738,210 @@ class RestaurantDetailScreen extends StatelessWidget {
 }
 
 // ==========================================
-// 3. ÉCRAN PANIER & CHECKOUT
+// 3. PAGE DÉTAIL DU PLAT, HYGIÈNE & COMMANDE
+// ==========================================
+class DishDetailScreen extends StatefulWidget {
+  final Map<String, dynamic> restaurant;
+  final Map<String, dynamic> dish;
+
+  const DishDetailScreen({super.key, required this.restaurant, required this.dish});
+
+  @override
+  State<DishDetailScreen> createState() => _DishDetailScreenState();
+}
+
+class _DishDetailScreenState extends State<DishDetailScreen> {
+  int quantity = 1;
+
+  void _addToCartAndNotify() {
+    final resName = widget.restaurant['name'];
+    final resPhone = widget.restaurant['phone'];
+
+    if (cartManager.restaurantName != null && cartManager.restaurantName != resName) {
+      showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: const Text('Changer de restaurant ?'),
+          content: Text('Votre panier contient des articles de ${cartManager.restaurantName}. Voulez-vous le vider pour commander chez $resName ?'),
+          actions: [
+            TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Annuler')),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.deepOrange, foregroundColor: Colors.white),
+              onPressed: () {
+                cartManager.clear();
+                cartManager.addItem(resName, resPhone, widget.dish, quantity: quantity);
+                Navigator.pop(ctx);
+                Navigator.pop(context); // Retourner à la liste
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('$quantity x ${widget.dish['name']} ajouté au panier !')));
+              },
+              child: const Text('Vider et continuer'),
+            ),
+          ],
+        ),
+      );
+    } else {
+      cartManager.addItem(resName, resPhone, widget.dish, quantity: quantity);
+      Navigator.pop(context); // Retourner à la liste
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('$quantity x ${widget.dish['name']} ajouté au panier !')));
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.dish['name'], style: const TextStyle(color: Colors.white)),
+        backgroundColor: Colors.deepOrange,
+        iconTheme: const IconThemeData(color: Colors.white),
+        actions: [
+          AnimatedBuilder(
+            animation: cartManager,
+            builder: (context, child) {
+              if (cartManager.totalItems == 0) return const SizedBox.shrink();
+              return Stack(
+                alignment: Alignment.center,
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.shopping_cart, color: Colors.white),
+                    onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const CartScreen())),
+                  ),
+                  Positioned(
+                    right: 8,
+                    top: 8,
+                    child: Container(
+                      padding: const EdgeInsets.all(4),
+                      decoration: const BoxDecoration(color: Colors.yellow, shape: BoxShape.circle),
+                      child: Text('${cartManager.totalItems}', style: const TextStyle(color: Colors.black, fontSize: 10, fontWeight: FontWeight.bold)),
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Grande image du plat en haut
+            Image.network(
+              widget.dish['image'],
+              height: 280,
+              width: double.infinity,
+              fit: BoxFit.cover,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          widget.dish['name'],
+                          style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Text(
+                        widget.dish['price'],
+                        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.deepOrange),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    'Restaurant : ${widget.restaurant['name']} (📍 ${widget.restaurant['neighborhood']})',
+                    style: const TextStyle(color: Colors.grey, fontSize: 14),
+                  ),
+                  const SizedBox(height: 16),
+                  const Text('Description du plat', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                  const SizedBox(height: 6),
+                  Text(
+                    widget.dish['desc'],
+                    style: const TextStyle(fontSize: 15, color: Colors.black87, height: 1.4),
+                  ),
+                  const SizedBox(height: 20),
+                  
+                  // Encadré hygiène et propreté rassurant
+                  Container(
+                    padding: const EdgeInsets.all(14),
+                    decoration: BoxDecoration(
+                      color: Colors.green.shade50,
+                      border: Border.all(color: Colors.green.shade200),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Row(
+                          children: [
+                            Icon(Icons.verified, color: Colors.green, size: 22),
+                            SizedBox(width: 8),
+                            Text(
+                              'Garantie Hygiène & Propreté',
+                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.green),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          widget.dish['hygiene'] ?? 'Ingrédients frais rigoureusement contrôlés, préparés dans le strict respect des normes d’hygiène et de sécurité alimentaire DEKK FOOD.',
+                          style: const TextStyle(fontSize: 13.5, color: Colors.black87, height: 1.4),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+
+                  // Sélecteur de quantité
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text('Quantité : ', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                      IconButton(
+                        icon: const Icon(Icons.remove_circle_outline, size: 28, color: Colors.deepOrange),
+                        onPressed: () {
+                          if (quantity > 1) setState(() => quantity--);
+                        },
+                      ),
+                      Text('$quantity', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                      IconButton(
+                        icon: const Icon(Icons.add_circle_outline, size: 28, color: Colors.deepOrange),
+                        onPressed: () => setState(() => quantity++),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: Container(
+        padding: const EdgeInsets.all(12),
+        color: Colors.white,
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.deepOrange,
+            foregroundColor: Colors.white,
+            padding: const EdgeInsets.all(14),
+          ),
+          onPressed: _addToCartAndNotify,
+          child: Text(
+            'Commander · (${int.parse(widget.dish['price'].replaceAll(RegExp(r'[^0-9]'), '')) * quantity} FCFA)',
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// ==========================================
+// 4. ÉCRAN PANIER & CHECKOUT
 // ==========================================
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -888,7 +1065,7 @@ class CartScreen extends StatelessWidget {
 }
 
 // ==========================================
-// 4. CHECKOUT & WHATSAPP
+// 5. CHECKOUT & WHATSAPP
 // ==========================================
 class CheckoutScreen extends StatefulWidget {
   const CheckoutScreen({super.key});
@@ -1021,7 +1198,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
 }
 
 // ==========================================
-// 5. ÉCRAN DE SUCCÈS & HISTORIQUE
+// 6. ÉCRAN DE SUCCÈS & HISTORIQUE
 // ==========================================
 class OrderSuccessScreen extends StatelessWidget {
   final Map<String, dynamic> order;
@@ -1104,7 +1281,7 @@ class OrdersScreen extends StatelessWidget {
 }
 
 class FavoritesScreen extends StatelessWidget {
-  const FavoritesScreen({super.key});
+  const FavoritesScreen::new({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -1126,7 +1303,7 @@ class SettingsScreen extends StatelessWidget {
         children: const [
           ListTile(leading: Icon(Icons.language, color: Colors.deepOrange), title: Text('Langue'), subtitle: Text('Français')),
           ListTile(leading: Icon(Icons.location_city, color: Colors.deepOrange), title: Text('Ville'), subtitle: Text('Dakar, Sénégal')),
-          ListTile(leading: Icon(Icons.info_outline, color: Colors.deepOrange), title: Text('DEKK FOOD'), subtitle: Text('Version 1.3.0 - Sénégal Ready')),
+          ListTile(leading: Icon(Icons.info_outline, color: Colors.deepOrange), title: Text('DEKK FOOD'), subtitle: Text('Version 1.4.0 - Hygiène & Sécurité')),
         ],
       ),
     );
