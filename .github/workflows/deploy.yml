@@ -24,13 +24,11 @@ jobs:
       - name: Install Dependencies
         run: flutter pub get
 
-      - name: Enable Web & Create Web Dir
-        run: |
-          flutter config --enable-web
-          flutter create . --platforms web
+      - name: Enable Web
+        run: flutter config --enable-web
 
       - name: Build Web
-        run: flutter build web --release --base-href "/dekk-food/"
+        run: flutter build web --release --base-href=/dekk-food/
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
