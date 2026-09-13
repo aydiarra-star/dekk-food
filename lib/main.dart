@@ -51,7 +51,7 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
 
   Future<void> _fetchRestaurants() async {
     try {
-      final response = await _supabase.from('restaurants').select();
+      final response = await _supabase.from('restaurants').select().order('rating', ascending: false);
       setState(() {
         _restaurants = List<Map<String, dynamic>>.from(response);
         _filteredRestaurants = _restaurants;
@@ -102,7 +102,7 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
             child: TextField(
               onChanged: _filterRestaurants,
               decoration: InputDecoration(
-                hintText: 'Rechercher par quartier (ex: Almadies, Ngor)...',
+                hintText: 'Rechercher (Almadies, Ngor, Libanais, Pizza)...',
                 prefixIcon: const Icon(Icons.search),
                 suffixIcon: _searchQuery.isNotEmpty
                     ? IconButton(
@@ -125,6 +125,7 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
                         itemCount: _filteredRestaurants.length,
                         itemBuilder: (context, index) {
                           final restaurant = _filteredRestaurants[index];
+                          final reviews = restaurant['review_count'] ?? 0;
                           return Card(
                             margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                             elevation: 2,
@@ -153,15 +154,26 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
                                   if (restaurant['phone'] != null) Text('📞 ${restaurant['phone']}'),
                                 ],
                               ),
-                              trailing: Row(
+                              trailing: Column(
+                                mainCenter: MainAxisAlignment.center,
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  const Icon(Icons.star, color: Colors.amber, size: 20),
-                                  const SizedBox(width: 4),
-                                  Text(
-                                    '${restaurant['rating'] ?? '4.0'}',
-                                    style: const TextStyle(fontWeight: FontWeight.bold),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      const Icon(Icons.star, color: Colors.amber, size: 18),
+                                      const SizedBox(width: 4),
+                                      Text(
+                                        '${restaurant['rating'] ?? '4.0'}',
+                                        style: const TextStyle(fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
                                   ),
+                                  if (reviews > 0)
+                                    Text(
+                                      '($reviews avis)',
+                                      style: const TextStyle(fontSize: 10, color: Colors.grey),
+                                    ),
                                 ],
                               ),
                             ),
