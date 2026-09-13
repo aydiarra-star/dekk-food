@@ -167,7 +167,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
 }
 
 // ==========================================
-// 1. ÉCRAN DÉCOUVRIR (DAKAR, PETITE CÔTE & DIAMNIADIO)
+// 1. ÉCRAN DÉCOUVRIR (DAKAR → PETITE CÔTE)
 // ==========================================
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -180,12 +180,12 @@ class _HomeScreenState extends State<HomeScreen> {
   String _searchQuery = '';
   String _selectedZone = 'Tous';
 
-  // Base complète : Dakar, Petite Côte (Saly, Mbour, Ngaparou) et Diamniadio / AIBD
+  // Base enrichie et structurée avec images propres par restaurant et par plat
   final List<Map<String, dynamic>> restaurants = const [
     // --- DAKAR ---
     {
       'name': 'Seven Seven Dakar',
-      'neighborhood': 'Ngor (Dakar)',
+      'neighborhood': 'Ngor',
       'zone': 'Dakar',
       'cuisine': 'International & Grillades',
       'rating': 4.8,
@@ -195,21 +195,53 @@ class _HomeScreenState extends State<HomeScreen> {
       'whatsapp': '+221 78 593 78 78',
       'address': 'Route de Ngor, Dakar',
       'image': 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4',
-      'description': 'Restaurant incontournable de grillades et de cuisine internationale à Ngor.',
+      'description': 'Restaurant spécialisé dans la cuisine internationale et les grillades de premier choix à Ngor.',
       'menu': [
         {
           'name': 'Brochettes géantes de gambas',
           'price': '8 500 FCFA',
-          'desc': 'Gambas fraîches marinées aux herbes fines, grillées à la flamme et riz parfumé.',
+          'desc': 'Gambas fraîches marinées aux herbes fines, grillées à la flamme et servies avec du riz parfumé.',
           'image': 'https://images.unsplash.com/photo-1565557623262-b51c2513a641',
           'available': true,
-          'hygiene': 'Gambas de la pêche locale du jour, contrôlées selon les normes HACCP. Cuisine désinfectée en continu.'
+          'hygiene': 'Gambas issues de la pêche locale du jour, contrôlées et déveinées selon les normes strictes d’hygiène HACCP.'
+        },
+        {
+          'name': 'Filet de zébu sauce poivre',
+          'price': '7 000 FCFA',
+          'desc': 'Tendre morceau de zébu sélectionné, nappé d’une sauce au poivre vert et frites maison.',
+          'image': 'https://images.unsplash.com/photo-1558030006-450675393462',
+          'available': true,
+          'hygiene': 'Viande certifiée, conservée en chambre froide à température contrôlée.'
+        },
+      ],
+    },
+    {
+      'name': 'Restaurant Le Lagon 1',
+      'neighborhood': 'Plateau',
+      'zone': 'Dakar',
+      'cuisine': 'Française & Poissons',
+      'rating': 4.4,
+      'reviews': 2345,
+      'price': '5 000 – 15 000 FCFA',
+      'phone': '+221 33 821 53 22',
+      'whatsapp': '+221 33 821 53 22',
+      'address': 'Route de la Corniche Est, Dakar',
+      'image': 'https://images.unsplash.com/photo-1544025162-d76694265947',
+      'description': 'Gastronomie française et poissons frais avec vue panoramique sur l’océan au Plateau.',
+      'menu': [
+        {
+          'name': 'Langouste grillée au beurre blanc',
+          'price': '14 000 FCFA',
+          'desc': 'Pêche locale du jour cuisinée au beurre blanc onctueux.',
+          'image': 'https://images.unsplash.com/photo-1535400255456-984241443b28',
+          'available': true,
+          'hygiene': 'Arrivage direct des pêcheurs artisanaux sans rupture de la chaîne du froid.'
         },
       ],
     },
     {
       'name': 'Chez Fatou',
-      'neighborhood': 'Almadies (Dakar)',
+      'neighborhood': 'Almadies',
       'zone': 'Dakar',
       'cuisine': 'Sénégalaise & Grillades',
       'rating': 4.0,
@@ -219,25 +251,59 @@ class _HomeScreenState extends State<HomeScreen> {
       'whatsapp': '+221 33 820 92 38',
       'address': 'Corniche des Almadies, Dakar',
       'image': 'https://images.unsplash.com/photo-1537047902294-62a40c20a6ae',
-      'description': 'La référence de la cuisine sénégalaise traditionnelle les pieds dans l’eau aux Almadies.',
+      'description': 'La référence incontournable de la cuisine sénégalaise traditionnelle aux Almadies.',
       'menu': [
         {
           'name': 'Ceebu Jën (Riz au poisson)',
           'price': '3 500 FCFA',
-          'desc': 'Le plat national authentique rouge, avec thiof frais et légumes du terroir.',
+          'desc': 'Le plat national authentique rouge, avec thiof frais et légumes variés.',
           'image': 'https://images.unsplash.com/photo-1541544741938-0af808871cc0',
           'available': true,
-          'hygiene': 'Poisson frais du marché de Soumbédioune lavé à l’eau purifiée. Cuisson irréprochable.'
+          'hygiene': 'Poisson frais du marché de Soumbédioune lavé à l’eau purifiée.'
+        },
+        {
+          'name': 'Poulet Yassa',
+          'price': '3 000 FCFA',
+          'desc': 'Poulet fermier mariné longuement aux oignons confits, citron vert et moutarde.',
+          'image': 'https://images.unsplash.com/photo-1626777552726-4a6b54c97e46',
+          'available': true,
+          'hygiene': 'Poulets rigoureusement lavés au vinaigre et citron avant marinade.'
         },
       ],
     },
 
-    // --- PETITE CÔTE (SALY, MBOUR, NGAPAROU) ---
+    // --- DIAMNIADIO / AIBD ---
+    {
+      'name': 'La Halte AIBD',
+      'neighborhood': 'Diamniadio / AIBD',
+      'zone': 'Diamniadio / AIBD',
+      'cuisine': 'Traditionnelle & Snack',
+      'rating': 4.4,
+      'reviews': 920,
+      'price': '3 000 – 8 000 FCFA',
+      'phone': '+221 77 888 99 00',
+      'whatsapp': '+221 77 888 99 00',
+      'address': 'Route de l’Aéroport Blaise Diagne',
+      'image': 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5',
+      'description': 'Le point de restauration idéal avant votre vol ou en transit à Diamniadio / AIBD.',
+      'menu': [
+        {
+          'name': 'Mafé traditionnel au bœuf',
+          'price': '3 500 FCFA',
+          'desc': 'Tendre bœuf mijoté dans une riche sauce onctueuse à la pâte d’arachide.',
+          'image': 'https://images.unsplash.com/photo-1541544741938-0af808871cc0',
+          'available': true,
+          'hygiene': 'Préparation chaude maintenue à température réglementaire dans un cadre propre.'
+        },
+      ],
+    },
+
+    // --- PETITE CÔTE (SALY, MBOUR, NGAPAROU, SOMONE) ---
     {
       'name': 'Le Baobab Saly',
       'neighborhood': 'Saly Portudal',
       'zone': 'Petite Côte',
-      'cuisine': 'Poissons & Gastronomie',
+      'cuisine': 'Poissons & Fruits de mer',
       'rating': 4.7,
       'reviews': 1530,
       'price': '4 000 – 12 000 FCFA',
@@ -267,7 +333,7 @@ class _HomeScreenState extends State<HomeScreen> {
     },
     {
       'name': 'La Kaz’ Mbour',
-      'neighborhood': 'Mbour Centre',
+      'neighborhood': 'Mbour',
       'zone': 'Petite Côte',
       'cuisine': 'Sénégalaise & Grillades',
       'rating': 4.5,
@@ -304,62 +370,36 @@ class _HomeScreenState extends State<HomeScreen> {
       'description': 'Restaurant pieds dans l’eau à Ngaparou proposant une cuisine raffinée.',
       'menu': [
         {
-          'name': 'Filet de Dorade royale en croûte d’herbes',
+          'name': 'Filet de Dorade royale en croûte',
           'price': '8 500 FCFA',
           'desc': 'Dorade fraîche pêchée à Ngaparou, écrasé de pomme de terre à l’huile d’olive.',
-      'image': 'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb',
+          'image': 'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb',
           'available': true,
           'hygiene': 'Produits frais garantis du jour, normes d’hygiène européennes et locales appliquées.'
         },
       ],
     },
-
-    // --- DIAMNIADIO & AIBD ---
     {
-      'name': 'Diamniadio Express Diner',
-      'neighborhood': 'Centre Urbain Diamniadio',
-      'zone': 'Diamniadio / AIBD',
-      'cuisine': 'Fast-Food & Repas Rapides',
-      'rating': 4.3,
-      'reviews': 450,
-      'price': '2 500 – 6 000 FCFA',
-      'phone': '+221 78 111 22 33',
-      'whatsapp': '+221 78 111 22 33',
-      'address': 'Proche Sphères Ministérielles, Diamniadio',
-      'image': 'https://images.unsplash.com/photo-1550547660-d9450f859349',
-      'description': 'Idéal pour les employés et voyageurs cherchant un repas rapide et savoureux à Diamniadio.',
+      'name': 'La Case de la Somone',
+      'neighborhood': 'Somone',
+      'zone': 'Petite Côte',
+      'cuisine': 'Poissons & Spécialités locales',
+      'rating': 4.7,
+      'reviews': 620,
+      'price': '4 000 – 10 000 FCFA',
+      'phone': '+221 33 957 88 00',
+      'whatsapp': '+221 33 957 88 00',
+      'address': 'Lagune de la Somone',
+      'image': 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e',
+      'description': 'Vue imprenable sur la lagune de la Somone avec des poissons frais et grillades.',
       'menu': [
         {
-          'name': 'Burger Géant Diamniadio',
-          'price': '4 500 FCFA',
-          'desc': 'Steak haché gros format, cheddar fondant, frites dorées et boisson fraîche.',
-          'image': 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd',
+          'name': 'Capitaine grillé de la lagune',
+          'price': '7 500 FCFA',
+          'desc': 'Poisson capitaine frais grillé aux herbes et bananes plantains sautées.',
+          'image': 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2',
           'available': true,
-          'hygiene': 'Cuisson express sécurisée, respect des températures de conservation des viandes.'
-        },
-      ],
-    },
-    {
-      'name': 'La Halte AIBD',
-      'neighborhood': 'Environs AIBD',
-      'zone': 'Diamniadio / AIBD',
-      'cuisine': 'Traditionnelle & Snack Aéroport',
-      'rating': 4.4,
-      'reviews': 920,
-      'price': '3 000 – 8 000 FCFA',
-      'phone': '+221 77 888 99 00',
-      'whatsapp': '+221 77 888 99 00',
-      'address': 'Route de l’Aéroport Blaise Diagne (AIBD)',
-      'image': 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5',
-      'description': 'Le point de restauration idéal avant votre vol ou juste après votre atterrissage à l’AIBD.',
-      'menu': [
-        {
-          'name': 'Mafé traditionnel au bœuf',
-          'price': '3 500 FCFA',
-          'desc': 'Tendre bœuf mijoté dans une riche sauce onctueuse à la pâte d’arachide.',
-          'image': 'https://images.unsplash.com/photo-1541544741938-0af808871cc0',
-          'available': true,
-          'hygiene': 'Préparation chaude maintenue à température réglementaire, idéal pour les voyageurs.'
+          'hygiene': 'Poissons rigoureusement contrôlés et conservés sous glace stérile.'
         },
       ],
     },
@@ -367,8 +407,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Filtres géographiques par grande zone du Sénégal
-    final zones = ['Tous', 'Dakar', 'Petite Côte', 'Diamniadio / AIBD'];
+    // Filtres géographiques conformes au corridor
+    final zones = ['Tous', 'Dakar', 'Diamniadio / AIBD', 'Petite Côte'];
 
     final filtered = restaurants.where((r) {
       final name = r['name'].toString().toLowerCase();
@@ -1259,8 +1299,8 @@ class SettingsScreen extends StatelessWidget {
       body: ListView(
         children: const [
           ListTile(leading: Icon(Icons.language, color: Colors.deepOrange), title: Text('Langue'), subtitle: Text('Français')),
-          ListTile(leading: Icon(Icons.location_city, color: Colors.deepOrange), title: Text('Zone'), subtitle: Text('Dakar, Petite Côte & Diamniadio')),
-          ListTile(leading: Icon(Icons.info_outline, color: Colors.deepOrange), title: Text('DEKK FOOD'), subtitle: Text('Version 1.7.0 - National Expansion')),
+          ListTile(leading: Icon(Icons.location_city, color: Colors.deepOrange), title: Text('Corridor'), subtitle: Text('Dakar → Diamniadio → Petite Côte')),
+          ListTile(leading: Icon(Icons.info_outline, color: Colors.deepOrange), title: Text('DEKK FOOD'), subtitle: Text('Version 2.0.0 - Corridor Expansion')),
         ],
       ),
     );
