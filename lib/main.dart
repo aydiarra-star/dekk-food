@@ -96,12 +96,91 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
     await launchUrl(launchUri);
   }
 
+  // Fonction pour retourner des menus et spécialités adaptés selon le restaurant
+  Map<String, String> _getMenuAndSpecialty(String restaurantName) {
+    switch (restaurantName) {
+      case 'Seven Seven Dakar':
+        return {
+          'specialty': 'Cuisine internationale raffinée et grillades de premier choix.',
+          'menus': '• Brochettes géantes de gambas\n• Filet de zébu sauce poivre\n• Cocktails tropicaux maison'
+        };
+      case 'Restaurant Le Lagon 1':
+        return {
+          'specialty': 'Gastronomie française et poissons frais avec vue panoramique sur l’océan.',
+          'menus': '• Langouste grillée au beurre blanc\n• Mérou à la dieppoise\n• Fondant au chocolat noir'
+        };
+      case 'YOUYOU':
+        return {
+          'specialty': 'Plats internationaux branchés, ambiance lounge et moderne.',
+          'menus': '• Burgers gourmets signature\n• Wok de poulet aux légumes croquants\n• Tiramisu revisité'
+        };
+      case 'Casa Teranga':
+        return {
+          'specialty': 'Fusion entre cuisine locale sénégalaise et saveurs internationales.',
+          'menus': '• Thiéboudienne revisité en bento\n• Carpaccio de dorade aux agrumes\n• Poulet Yassa moderne'
+        };
+      case 'Reine Margarita':
+        return {
+          'specialty': 'Authentiques pizzas italiennes cuites au feu de bois et pâtes fraîches.',
+          'menus': '• Pizza Margherita di Bufala\n• Tagliatelles aux fruits de mer\n• Panna Cotta aux fruits rouges'
+        };
+      case 'La Fourchette':
+        return {
+          'specialty': 'Carte internationale variée, cadre climatisé et élégant au Plateau.',
+          'menus': '• Entrecôte grillée frites maison\n• Salade César au poulet croustillant\n• Crêpes suzette'
+        };
+      case 'Chez Fatou':
+        return {
+          'specialty': 'La référence incontournable de la cuisine sénégalaise traditionnelle les pieds dans l’eau.',
+          'menus': '• Ceebu Jën (Riz au poisson traditionnel)\n• Soupou Kandia (Soupe de gombos)\n• Poisson braisé aux oignons confits'
+        };
+      case 'Club de Pêche':
+        return {
+          'specialty': 'Spécialités de la mer ultra-fraîches pêchées du jour.',
+          'menus': '• Plateau de fruits de mer royal\n• Poisson capitaine grillé\n• Brochettes de lotte'
+        };
+      case 'Le Coste Dakar':
+        return {
+          'specialty': 'Cuisine fusion moderne, ambiance chic et branchée.',
+          'menus': '• Tataki de thon sésame\n• Filet de bœuf Rossini\n• Moelleux au chocolat coulant'
+        };
+      case 'Nostra Restaurant':
+        return {
+          'specialty': 'Saveurs italiennes et méditerranéennes au cœur de Dakar.',
+          'menus': '• Lasagnes traditionnelles au four\n• Risotto aux gambas\n• Tiramisu classique'
+        };
+      case 'Restaurant Altiné':
+        return {
+          'specialty': 'Saveurs authentiques d’Afrique de l’Ouest et plats sénégalais faits maison.',
+          'menus': '• Mafé traditionnel au bœuf\n• Thiéboudienne rouge\n• Bissap frais et gingembre'
+        };
+      case 'Restaurant Le Carré':
+        return {
+          'specialty': 'Brasserie chic et lounge aux Almadies, idéal pour dîner ou verre entre amis.',
+          'menus': '• Burger Le Carré & frites fraîches\n• Tartare de bœuf à l’italienne\n• Salade gourmande au saumon'
+        };
+      case 'La Terrasse Farid':
+        return {
+          'specialty': 'Cuisine libanaise authentique et plats internationaux sur une magnifique terrasse.',
+          'menus': '• Assortiment de mezzés libanais\n• Grillades mixtes (chawarma, taouk)\n• Baklavas traditionnels'
+        };
+      default:
+        return {
+          'specialty': 'Cuisine variée et de qualité.',
+          'menus': '• Plats du chef\n• Desserts maison'
+        };
+    }
+  }
+
   void _showRestaurantDetails(BuildContext context, Map<String, dynamic> restaurant) {
+    final name = restaurant['name'] ?? 'Restaurant';
+    final details = _getMenuAndSpecialty(name);
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text(restaurant['name'] ?? 'Détails', style: const TextStyle(fontWeight: FontWeight.bold)),
+          title: Text(name, style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.deepOrange)),
           content: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -110,16 +189,22 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
                 if (restaurant['image_url'] != null)
                   ClipRRect(
                     borderRadius: BorderRadius.circular(8),
-                    child: Image.network(restaurant['image_url'], height: 150, width: double.infinity, fit: BoxFit.cover),
+                    child: Image.network(restaurant['image_url'], height: 140, width: double.infinity, fit: BoxFit.cover),
                   ),
                 const SizedBox(height: 12),
-                Text('📍 Quartier : ${restaurant['neighborhood'] ?? 'N/A'}'),
+                Text('📍 Quartier : ${restaurant['neighborhood'] ?? 'N/A'}', style: const TextStyle(fontWeight: FontWeight.w500)),
                 Text('🍽️ Cuisine : ${restaurant['cuisine_type'] ?? 'N/A'}'),
                 Text('⭐ Note : ${restaurant['rating']} (${restaurant['review_count'] ?? 0} avis)'),
                 Text('🏠 Adresse : ${restaurant['address'] ?? 'N/A'}'),
                 Text('📞 Téléphone : ${restaurant['phone'] ?? 'N/A'}'),
+                const Divider(height: 20, thickness: 1.5),
+                const Text('🔥 Spécialité :', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black87)),
+                Text(details['specialty'] ?? '', style: const TextStyle(fontStyle: FontStyle.italic)),
+                const SizedBox(height: 8),
+                const Text('📋 Menus Phares :', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black87)),
+                Text(details['menus'] ?? ''),
                 const SizedBox(height: 10),
-                const Text('🟢 Statut : Vérifié par DEKK FOOD', style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold)),
+                const Text('🟢 Statut : Vérifié par DEKK FOOD', style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold, fontSize: 12)),
               ],
             ),
           ),
