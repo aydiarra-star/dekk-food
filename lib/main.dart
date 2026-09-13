@@ -179,7 +179,6 @@ class _HomeScreenState extends State<HomeScreen> {
   String _searchQuery = '';
   String _selectedNeighborhood = 'Tous';
 
-  // Base complète et enrichie des plus grands restaurants de Dakar et du Sénégal
   final List<Map<String, dynamic>> restaurants = const [
     {
       'name': 'Seven Seven Dakar',
@@ -198,7 +197,6 @@ class _HomeScreenState extends State<HomeScreen> {
         {'name': 'Filet de zébu sauce poivre', 'price': '7 000 FCFA', 'desc': 'Tendre morceau de zébu et frites maison.', 'available': true},
         {'name': 'Burger signature Seven', 'price': '6 000 FCFA', 'desc': 'Bœuf haché, cheddar affiché, sauce secrète.', 'available': true},
         {'name': 'Jus de Bissap frais', 'price': '1 000 FCFA', 'desc': 'Fait maison à la menthe.', 'available': true},
-        {'name': 'Jus de Gingembre', 'price': '1 000 FCFA', 'desc': 'Gingembre pressé et citron.', 'available': true},
       ],
       'reviews_list': [
         {'author': 'Mamadou Diallo', 'rating': 5, 'comment': 'Superbe cadre à Ngor, les gambas étaient exceptionnelles !'},
@@ -219,7 +217,6 @@ class _HomeScreenState extends State<HomeScreen> {
       'menu': [
         {'name': 'Langouste grillée au beurre blanc', 'price': '14 000 FCFA', 'desc': 'Pêche locale du jour.', 'available': true},
         {'name': 'Mérou à la dieppoise', 'price': '8 500 FCFA', 'desc': 'Poisson frais mijoté aux petits légumes.', 'available': true},
-        {'name': 'Carpaccio de Saint-Jacques', 'price': '7 500 FCFA', 'desc': 'Huile d’olive et citron vert.', 'available': true},
         {'name': 'Fondant au chocolat noir', 'price': '3 500 FCFA', 'desc': 'Cœur coulant maison.', 'available': true},
       ],
       'reviews_list': [
@@ -241,8 +238,7 @@ class _HomeScreenState extends State<HomeScreen> {
       'menu': [
         {'name': 'Ceebu Jën (Riz au poisson)', 'price': '3 500 FCFA', 'desc': 'Le plat national authentique rouge.', 'available': true},
         {'name': 'Poulet Yassa', 'price': '3 000 FCFA', 'desc': 'Poulet mariné oignons et citron vert.', 'available': true},
-        {'name': 'Soupou Kandia', 'price': '3 500 FCFA', 'desc': 'Soupe de gombos à l’huile de palme et poisson.', 'available': true},
-        {'name': 'Bissap royal', 'price': '1 000 FCFA', 'desc': 'Jus d’hibiscus rafraîchissant.', 'available': true},
+        {'name': 'Soupou Kandia', 'price': '3 500 FCFA', 'desc': 'Soupe de gombos à l’huile de palme.', 'available': true},
       ],
       'reviews_list': [
         {'author': 'Fatou Sow', 'rating': 4, 'comment': 'Le meilleur ceebu jën de Dakar !'},
@@ -262,7 +258,6 @@ class _HomeScreenState extends State<HomeScreen> {
       'description': 'Authentiques pizzas italiennes cuites au feu de bois et pâtes fraîches au cœur de Dakar.',
       'menu': [
         {'name': 'Pizza Margherita di Bufala', 'price': '5 500 FCFA', 'desc': 'Mozzarella di bufala et basilic frais.', 'available': true},
-        {'name': 'Pizza 4 Fromages', 'price': '6 500 FCFA', 'desc': 'Gorgonzola, mozzarella, parmesan, chèvre.', 'available': true},
         {'name': 'Tagliatelles aux fruits de mer', 'price': '6 500 FCFA', 'desc': 'Pâtes fraîches et gambas.', 'available': true},
         {'name': 'Tiramisu classique', 'price': '3 000 FCFA', 'desc': 'Recette italienne traditionnelle.', 'available': true},
       ],
@@ -285,7 +280,6 @@ class _HomeScreenState extends State<HomeScreen> {
       'menu': [
         {'name': 'Entrecôte grillée frites maison', 'price': '9 000 FCFA', 'desc': 'Viande tendre et sauce au choix.', 'available': true},
         {'name': 'Salade César au poulet', 'price': '4 500 FCFA', 'desc': 'Laitue, croûtons, parmesan et poulet croustillant.', 'available': true},
-        {'name': 'Crème brûlée vanille', 'price': '3 000 FCFA', 'desc': 'Croûte de caramel croquante.', 'available': true},
       ],
       'reviews_list': [
         {'author': 'Sophie Martin', 'rating': 4, 'comment': 'Parfait pour un déjeuner au Plateau.'},
@@ -306,38 +300,15 @@ class _HomeScreenState extends State<HomeScreen> {
       'menu': [
         {'name': 'Thiéboudienne bento fusion', 'price': '5 000 FCFA', 'desc': 'Riz rouge revisité haut de gamme.', 'available': true},
         {'name': 'Carpaccio de dorade aux agrumes', 'price': '4 500 FCFA', 'desc': 'Dorade fraîche, pamplemousse et citron.', 'available': true},
-        {'name': 'Mocktail Teranga', 'price': '2 500 FCFA', 'desc': 'Jus de fruits frais et menthe.', 'available': true},
       ],
       'reviews_list': [
         {'author': 'Khadija Fall', 'rating': 5, 'comment': 'Un concept novateur et délicieux.'},
-      ]
-    },
-    {
-      'name': 'Restaurant Altiné',
-      'neighborhood': 'Almadies',
-      'cuisine': 'Sénégalaise & Africaine',
-      'rating': 4.6,
-      'reviews': 41,
-      'price': '3 000 – 7 000 FCFA',
-      'phone': '+221 77 209 80 59',
-      'whatsapp': '+221 77 209 80 59',
-      'address': 'Almadies, Dakar',
-      'image': 'https://images.unsplash.com/photo-1504674900247-0877df9cc836',
-      'description': 'Saveurs authentiques d’Afrique de l’Ouest et plats sénégalais faits maison.',
-      'menu': [
-        {'name': 'Mafé traditionnel au bœuf', 'price': '3 500 FCFA', 'desc': 'Sauce arachide onctueuse et légumes.', 'available': true},
-        {'name': 'Poulet Kedjenou', 'price': '4 000 FCFA', 'desc': 'Poulet mijoté aux épices en cocotte.', 'available': true},
-        {'name': 'Jus de Bouye (Pain de singe)', 'price': '1 000 FCFA', 'desc': 'Boisson naturelle locale.', 'available': true},
-      ],
-      'reviews_list': [
-        {'author': 'Abdoulaye Diop', 'rating': 5, 'comment': 'Le mafé rappelle les plats de maman !'},
       ]
     },
   ];
 
   @override
   Widget build(BuildContext context) {
-    // Liste des quartiers disponibles pour le filtre par position
     final neighborhoods = ['Tous', 'Plateau', 'Almadies', 'Ngor'];
 
     final filtered = restaurants.where((r) {
@@ -386,7 +357,6 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Column(
         children: [
-          // Barre de recherche
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: TextField(
@@ -400,8 +370,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-
-          // Filtre par Quartier / Position au Sénégal
           SizedBox(
             height: 45,
             child: ListView.builder(
@@ -413,7 +381,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 final isSelected = _selectedNeighborhood == nbr;
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 4),
-                  choice: nbr,
                   child: ChoiceChip(
                     label: Text(nbr),
                     selected: isSelected,
@@ -428,7 +395,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           const SizedBox(height: 8),
-
           Expanded(
             child: filtered.isEmpty
                 ? const Center(child: Text('Aucun restaurant trouvé dans cette zone.'))
@@ -611,8 +577,6 @@ class RestaurantDetailScreen extends StatelessWidget {
                   const SizedBox(height: 4),
                   const Text('Faites votre choix parmi tous les plats proposés :', style: TextStyle(color: Colors.grey, fontSize: 13)),
                   const SizedBox(height: 12),
-                  
-                  // Affichage de TOUS les menus du restaurant
                   ...menu.map((item) {
                     final bool isAvailable = item['available'] ?? true;
                     return Card(
@@ -655,7 +619,6 @@ class RestaurantDetailScreen extends StatelessWidget {
           ],
         ),
       ),
-      // BOUTON DE COMMANDE EN BAS FIXE SI PANIER REMPLI POUR CE RESTO
       bottomNavigationBar: AnimatedBuilder(
         animation: cartManager,
         builder: (context, child) {
