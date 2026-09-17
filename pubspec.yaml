@@ -1,7 +1,7 @@
 name: dekk_food
-description: Application de référencement des restaurants au Sénégal.
+description: Guide culinaire et parcours de commande des restaurants du Sénégal.
 publish_to: 'none'
-version: 1.0.0+1
+version: 3.0.0+1
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
@@ -9,8 +9,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  supabase_flutter: ^2.3.4
   cupertino_icons: ^1.0.6
+  shared_preferences: ^2.2.3
+  supabase_flutter: ^2.3.4
+  url_launcher: ^6.2.6
 
 dev_dependencies:
   flutter_test:
