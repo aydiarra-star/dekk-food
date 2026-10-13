@@ -31,21 +31,21 @@ python tools/tests/verifier_schema_postgres.py   # PostgreSQL jetable + contrôl
 
 | Indicateur | Valeur mesurée |
 |---|---|
-| Fiches au total | **112** |
-| Fiches publiées | 110 (2 fiches héritées sans localisation restent non publiées) |
+| Fiches au total | **115** |
+| Fiches publiées | 113 (2 fiches héritées sans localisation restent non publiées) |
 | Régions couvertes | **13 / 14** (Matam manquante, voir §2) |
-| Fiche avec source et date de collecte | 112 / 112 (100 %) |
-| Adresse renseignée | 110 / 112 (98 %) |
-| Coordonnées GPS publiées | 13 / 112 (12 %) — toutes issues d'OpenStreetMap, **aucune vérifiée sur place** |
-| Téléphone | 52 / 112 (46 %) |
-| WhatsApp | 44 / 112 (39 %) |
-| Horaires | 4 / 112 (4 %) — non confirmés, donc aucun badge « ouvert maintenant » |
-| Services déclarés | 34 / 112 (30 %) |
-| Menus avec au moins un prix | 4 / 112 (4 %) — tous « à confirmer » |
+| Fiche avec source et date de collecte | 115 / 115 (100 %) |
+| Adresse renseignée | 113 / 115 (98 %) |
+| Coordonnées GPS publiées | 16 / 115 (14 %) — toutes issues d'OpenStreetMap, **aucune vérifiée sur place** |
+| Téléphone | 52 / 115 (45 %) |
+| WhatsApp | 44 / 115 (38 %) |
+| Horaires | 4 / 115 (3 %) — non confirmés, donc aucun badge « ouvert maintenant » |
+| Services déclarés | 34 / 115 (30 %) |
+| Menus avec au moins un prix | 4 / 115 (3 %) — tous « à confirmer » |
 | Photos authentiques | **0** — 8 illustrations génériques, toutes signalées comme telles |
 | Propriétaire confirmé par une source | **0** — l'application affiche « Propriétaire non renseigné » |
 
-Répartition : Dakar 61, Thiès 14, Ziguinchor 8, Tambacounda 7, Saint-Louis 6,
+Répartition : Dakar 61, Thiès 14, Saint-Louis 9, Ziguinchor 8, Tambacounda 7,
 Diourbel 4, Kaolack 4, Fatick 2, Kaffrine 2, Kolda 1, Louga 1, Kédougou 1,
 Sédhiou 1.
 
@@ -125,14 +125,15 @@ Paires à arbitrer par un humain :
    seule façon de faire passer des fiches en `verifie` et de remplir horaires,
    menus et services. Rien ne remplace cet appel.
 2. **Région de Matam : aucune fiche.** Les sources consultées n'ont renvoyé
-   aucun établissement nommé. À traiter par contact direct avec les
+   aucun établissement nommé (et l'API Overpass limitait fortement les requêtes
+   au-delà de quelques extractions successives). À traiter par contact direct avec les
    établissements (Matam, Ourossogui, Kanel, Ranérou) ou relevé terrain.
-3. **GPS vérifiés : 0.** Les 13 coordonnées existantes sont communautaires
+3. **GPS vérifiés : 0.** Les 16 coordonnées existantes sont communautaires
    (OpenStreetMap) ; à confirmer avant de les présenter comme fiables.
 4. **Photos authentiques : 0.** Aucune photo n'a été publiée faute
    d'autorisation documentée. Il faut une campagne « restaurateur » (accord écrit,
    auteur, date) et le stockage des autorisations.
-5. **Menus réels : 4 fiches sur 112.** Les autres affichent « Menu à confirmer
+5. **Menus réels : 4 fiches sur 115.** Les autres affichent « Menu à confirmer
    auprès du restaurant ». À collecter auprès des restaurateurs (photos de carte
    autorisées).
 6. **Base communautaire Supabase non connectée** dans cette version : avis,

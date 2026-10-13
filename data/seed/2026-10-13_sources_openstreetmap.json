@@ -782,6 +782,126 @@
       "est_publication_visible": true
     },
     {
+      "cle": "openstreetmap:node/9085125463",
+      "numero_fiche": "DF-SL-0007",
+      "nom": "Restaurant chez-soi",
+      "slug": "restaurant-chez-soi-richard-toll",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Richard-Toll (seule fiche nommée de la ville au moment de l'extraction). OpenStreetMap (ODbL), extraction du 2026-10-13, node 9085125463 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Saint-Louis",
+        "departement": "Dagana",
+        "commune": "Richard-Toll",
+        "quartier_libre": "Centre",
+        "adresse_complete": "Richard-Toll",
+        "latitude": 16.464924,
+        "longitude": -15.680982,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/9085125463",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/9085129867",
+      "numero_fiche": "DF-SL-0008",
+      "nom": "Burger City",
+      "slug": "burger-city-richard-toll",
+      "type_etablissement": "fast_food",
+      "categories": [
+        "burgers",
+        "street_food"
+      ],
+      "description_courte": "Fast-food référencé sur OpenStreetMap à Richard-Toll. OpenStreetMap (ODbL), extraction du 2026-10-13, node 9085129867 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Saint-Louis",
+        "departement": "Dagana",
+        "commune": "Richard-Toll",
+        "quartier_libre": "Centre",
+        "adresse_complete": "Richard-Toll",
+        "latitude": 16.4670861,
+        "longitude": -15.703456,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/9085129867",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/12738922213",
+      "numero_fiche": "DF-SL-0009",
+      "nom": "Le Walo",
+      "slug": "le-walo-richard-toll",
+      "type_etablissement": "fast_food",
+      "categories": [
+        "senegalaise",
+        "grillades"
+      ],
+      "description_courte": "Établissement référencé sur OpenStreetMap à Richard-Toll : « plat du jour et dibi » (mention publiée par la source). OpenStreetMap (ODbL), extraction du 2026-10-13, node 12738922213 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Saint-Louis",
+        "departement": "Dagana",
+        "commune": "Richard-Toll",
+        "quartier_libre": "Centre",
+        "adresse_complete": "Richard-Toll",
+        "latitude": 16.4678299,
+        "longitude": -15.7067277,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/12738922213",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
       "cle": "openstreetmap:node/6342092186",
       "numero_fiche": "DF-KE-0001",
       "nom": "Restaurant Le Carrefour",

@@ -1,6 +1,6 @@
 # Couverture du catalogue DEKK FOOD — 2026-10-13
 
-**112 fiches** au total, réparties sur **13 région(s)**.
+**115 fiches** au total, réparties sur **13 région(s)**.
 
 ## Répartition par région
 
@@ -8,9 +8,9 @@
 |---|---|
 | Dakar | 61 |
 | Thiès | 14 |
+| Saint-Louis | 9 |
 | Ziguinchor | 8 |
 | Tambacounda | 7 |
-| Saint-Louis | 6 |
 | Diourbel | 4 |
 | Kaolack | 4 |
 | Fatick | 2 |
@@ -24,30 +24,30 @@
 
 | Indicateur | Fiches | Part |
 |---|---|---|
-| adresse renseignee | 110 | 98 % |
-| gps renseigne | 13 | 12 % |
+| adresse renseignee | 113 | 98 % |
+| gps renseigne | 16 | 14 % |
 | gps verifie | 0 | 0 % |
-| telephone | 52 | 46 % |
-| whatsapp | 44 | 39 % |
-| horaires | 4 | 4 % |
+| telephone | 52 | 45 % |
+| whatsapp | 44 | 38 % |
+| horaires | 4 | 3 % |
 | services | 34 | 30 % |
-| menus avec prix | 4 | 4 % |
+| menus avec prix | 4 | 3 % |
 | plats catalogue | 6 | — |
 | photos authentiques | 0 | 0 % |
 | illustrations generiques seulement | 8 | 7 % |
 | proprietaire confirme | 0 | 0 % |
-| avec source | 112 | 100 % |
-| avec date collecte | 112 | 100 % |
+| avec source | 115 | 100 % |
+| avec date collecte | 115 | 100 % |
 
 ## Champs manquants
 
 | Champ | Fiches concernées |
 |---|---|
-| photo_authentique | 112 |
-| horaires | 108 |
-| menu | 108 |
+| photo_authentique | 115 |
+| horaires | 111 |
+| menu | 111 |
 | gps | 99 |
-| telephone | 60 |
+| telephone | 63 |
 | adresse | 2 |
 
 ## Limites connues

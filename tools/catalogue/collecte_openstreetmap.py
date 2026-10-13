@@ -278,6 +278,27 @@ def main() -> None:
             adresse_complete="Route de Kaolack, Tambacounda", quartier="Kaolack",
             site_web="https://www.horizons-bleus-senegal.com/?-Le-relais-de-Tamba-",
         ),
+        # ------------------------------- Richard-Toll (région de Saint-Louis)
+        FicheOsm(
+            "DF-SL-0007", "Restaurant chez-soi", "richard-toll", "node", 9085125463, 16.4649240, -15.6809820,
+            "Saint-Louis", "Dagana", "Richard-Toll", "restaurant", [],
+            "Restaurant référencé sur OpenStreetMap à Richard-Toll (seule fiche nommée de la ville au "
+            "moment de l'extraction).",
+            adresse_complete="Richard-Toll", quartier="Centre",
+        ),
+        FicheOsm(
+            "DF-SL-0008", "Burger City", "richard-toll", "node", 9085129867, 16.4670861, -15.7034560,
+            "Saint-Louis", "Dagana", "Richard-Toll", "fast_food", ["burgers", "street_food"],
+            "Fast-food référencé sur OpenStreetMap à Richard-Toll.",
+            adresse_complete="Richard-Toll", quartier="Centre",
+        ),
+        FicheOsm(
+            "DF-SL-0009", "Le Walo", "richard-toll", "node", 12738922213, 16.4678299, -15.7067277,
+            "Saint-Louis", "Dagana", "Richard-Toll", "fast_food", ["senegalaise", "grillades"],
+            "Établissement référencé sur OpenStreetMap à Richard-Toll : « plat du jour et dibi » "
+            "(mention publiée par la source).",
+            adresse_complete="Richard-Toll", quartier="Centre",
+        ),
         # ---------------------------------------------------------- Kédougou
         FicheOsm(
             "DF-KE-0001", "Restaurant Le Carrefour", "kedougou", "node", 6342092186, 12.5552069, -12.1806154,
