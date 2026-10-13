@@ -1,0 +1,861 @@
+{
+  "version": 1,
+  "date_collecte": "2026-10-13",
+  "origine": "openstreetmap",
+  "description": "Établissements relevés dans la base cartographique publique OpenStreetMap via l'API Overpass le 2026-10-13 (licence ODbL). Cette source permet de couvrir les régions ignorées des annuaires grand public et de disposer de coordonnées publiées, mais ces coordonnées restent communautaires : elles ne valent pas vérification sur place.",
+  "regles": [
+    "Attribution ODbL conservée : chaque fiche cite www.openstreetmap.org et l'identifiant du nœud.",
+    "Coordonnées publiées mais gps_verifie = false : aucune position n'est certifiée.",
+    "Les horaires OSM sont retranscrits tels quels et marqués confirme = false.",
+    "Les noms d'établissements comportant un patronyme ne sont pas interprétés comme des propriétaires."
+  ],
+  "etablissements": [
+    {
+      "cle": "openstreetmap:node/4788392811",
+      "numero_fiche": "DF-FK-0001",
+      "nom": "Tanti",
+      "slug": "tanti-fatick",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "senegalaise"
+      ],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Fatick (capacité déclarée 20 places, vente à emporter). OpenStreetMap (ODbL), extraction du 2026-10-13, node 4788392811 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Fatick",
+        "departement": "Fatick",
+        "commune": "Fatick",
+        "quartier_libre": "Fatick",
+        "adresse_complete": null,
+        "latitude": 14.3297539,
+        "longitude": -16.4038844,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [
+        "a_emporter"
+      ],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/4788392811",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/8598559615",
+      "numero_fiche": "DF-FK-0002",
+      "nom": "Cafe de la gare",
+      "slug": "cafe-de-la-gare-fatick",
+      "type_etablissement": "cafe_restaurant",
+      "categories": [
+        "petit_dejeuner"
+      ],
+      "description_courte": "Café référencé sur OpenStreetMap à Fatick, connexion Wi-Fi annoncée gratuite (SSID « cafedugare »). OpenStreetMap (ODbL), extraction du 2026-10-13, node 8598559615 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Fatick",
+        "departement": "Fatick",
+        "commune": "Fatick",
+        "quartier_libre": "Gare",
+        "adresse_complete": "Fatick",
+        "latitude": 14.3444471,
+        "longitude": -16.4203542,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221777286387",
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/8598559615"
+        }
+      ],
+      "services": [],
+      "horaires": [
+        {
+          "jour": 0,
+          "service": "continu",
+          "ouverture": "00:00",
+          "fermeture": "23:59",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/8598559615",
+          "date_verification": null
+        },
+        {
+          "jour": 1,
+          "service": "continu",
+          "ouverture": "00:00",
+          "fermeture": "23:59",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/8598559615",
+          "date_verification": null
+        },
+        {
+          "jour": 2,
+          "service": "continu",
+          "ouverture": "00:00",
+          "fermeture": "23:59",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/8598559615",
+          "date_verification": null
+        },
+        {
+          "jour": 3,
+          "service": "continu",
+          "ouverture": "00:00",
+          "fermeture": "23:59",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/8598559615",
+          "date_verification": null
+        },
+        {
+          "jour": 4,
+          "service": "continu",
+          "ouverture": "00:00",
+          "fermeture": "23:59",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/8598559615",
+          "date_verification": null
+        },
+        {
+          "jour": 5,
+          "service": "continu",
+          "ouverture": "00:00",
+          "fermeture": "23:59",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/8598559615",
+          "date_verification": null
+        },
+        {
+          "jour": 6,
+          "service": "continu",
+          "ouverture": "00:00",
+          "fermeture": "23:59",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/8598559615",
+          "date_verification": null
+        }
+      ],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/8598559615",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type, téléphone, horaires publiés",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/5366801721",
+      "numero_fiche": "DF-KA-0001",
+      "nom": "Restaurant Tyma Niang",
+      "slug": "restaurant-tyma-niang-kaffrine",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "senegalaise"
+      ],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Kaffrine. Le nom publié par la source comporte un patronyme (« chez Coumba SOW ») : il n'est pas repris ici comme identité de propriétaire, aucune source ne documentant la gérance. OpenStreetMap (ODbL), extraction du 2026-10-13, node 5366801721 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Kaffrine",
+        "departement": "Kaffrine",
+        "commune": "Kaffrine",
+        "quartier_libre": "Centre",
+        "adresse_complete": "Kaffrine",
+        "latitude": 14.0973368,
+        "longitude": -15.5567383,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "774615116",
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/5366801721"
+        }
+      ],
+      "services": [],
+      "horaires": [
+        {
+          "jour": 0,
+          "service": "continu",
+          "ouverture": "08:00",
+          "fermeture": "23:00",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/5366801721",
+          "date_verification": null
+        },
+        {
+          "jour": 1,
+          "service": "continu",
+          "ouverture": "08:00",
+          "fermeture": "23:00",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/5366801721",
+          "date_verification": null
+        },
+        {
+          "jour": 2,
+          "service": "continu",
+          "ouverture": "08:00",
+          "fermeture": "23:00",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/5366801721",
+          "date_verification": null
+        },
+        {
+          "jour": 3,
+          "service": "continu",
+          "ouverture": "08:00",
+          "fermeture": "23:00",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/5366801721",
+          "date_verification": null
+        },
+        {
+          "jour": 4,
+          "service": "continu",
+          "ouverture": "08:00",
+          "fermeture": "23:00",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/5366801721",
+          "date_verification": null
+        },
+        {
+          "jour": 5,
+          "service": "continu",
+          "ouverture": "08:00",
+          "fermeture": "23:00",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/5366801721",
+          "date_verification": null
+        },
+        {
+          "jour": 6,
+          "service": "continu",
+          "ouverture": "08:00",
+          "fermeture": "23:00",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/5366801721",
+          "date_verification": null
+        }
+      ],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/5366801721",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type, téléphone, horaires publiés",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:way/1033465752",
+      "numero_fiche": "DF-KA-0002",
+      "nom": "Hôtel Keur Venus",
+      "slug": "hotel-keur-venus-kaffrine",
+      "type_etablissement": "restaurant_hotel",
+      "categories": [
+        "burgers",
+        "pizza",
+        "fruits_de_mer",
+        "grillades",
+        "internationale"
+      ],
+      "description_courte": "Hôtel-restaurant référencé sur OpenStreetMap à Kaffrine (Escale) : burgers, pizzas, poulet, sandwichs, fruits de mer et grillades annoncés, cuisine halal déclarée, service 24/7. OpenStreetMap (ODbL), extraction du 2026-10-13, way 1033465752 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Kaffrine",
+        "departement": "Kaffrine",
+        "commune": "Kaffrine",
+        "quartier_libre": "Escale",
+        "adresse_complete": "Escale, Kaffrine",
+        "latitude": 14.1031834,
+        "longitude": -15.5491021,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [
+        {
+          "jour": 0,
+          "service": "continu",
+          "ouverture": "00:00",
+          "fermeture": "23:59",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/way/1033465752",
+          "date_verification": null
+        },
+        {
+          "jour": 1,
+          "service": "continu",
+          "ouverture": "00:00",
+          "fermeture": "23:59",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/way/1033465752",
+          "date_verification": null
+        },
+        {
+          "jour": 2,
+          "service": "continu",
+          "ouverture": "00:00",
+          "fermeture": "23:59",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/way/1033465752",
+          "date_verification": null
+        },
+        {
+          "jour": 3,
+          "service": "continu",
+          "ouverture": "00:00",
+          "fermeture": "23:59",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/way/1033465752",
+          "date_verification": null
+        },
+        {
+          "jour": 4,
+          "service": "continu",
+          "ouverture": "00:00",
+          "fermeture": "23:59",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/way/1033465752",
+          "date_verification": null
+        },
+        {
+          "jour": 5,
+          "service": "continu",
+          "ouverture": "00:00",
+          "fermeture": "23:59",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/way/1033465752",
+          "date_verification": null
+        },
+        {
+          "jour": 6,
+          "service": "continu",
+          "ouverture": "00:00",
+          "fermeture": "23:59",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/way/1033465752",
+          "date_verification": null
+        }
+      ],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/way/1033465752",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type, horaires publiés",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/4283971717",
+      "numero_fiche": "DF-TB-0001",
+      "nom": "Chez Eva",
+      "slug": "chez-eva-tambacounda",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap au centre de Tambacounda. OpenStreetMap (ODbL), extraction du 2026-10-13, node 4283971717 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Tambacounda",
+        "departement": "Tambacounda",
+        "commune": "Tambacounda",
+        "quartier_libre": "Centre",
+        "adresse_complete": "Tambacounda",
+        "latitude": 13.7748981,
+        "longitude": -13.6726426,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/4283971717",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/4283975533",
+      "numero_fiche": "DF-TB-0002",
+      "nom": "La Hortensia",
+      "slug": "la-hortensia-tambacounda",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap le long de la route nationale 1 à Tambacounda. OpenStreetMap (ODbL), extraction du 2026-10-13, node 4283975533 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Tambacounda",
+        "departement": "Tambacounda",
+        "commune": "Tambacounda",
+        "quartier_libre": "Centre",
+        "adresse_complete": "Route nationale 1, Tambacounda",
+        "latitude": 13.7747348,
+        "longitude": -13.6770152,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/4283975533",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/5538419822",
+      "numero_fiche": "DF-TB-0003",
+      "nom": "La Petite Baraque 5 Étoiles",
+      "slug": "la-petite-baraque-5-etoiles-tambacounda",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Tambacounda. OpenStreetMap (ODbL), extraction du 2026-10-13, node 5538419822 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Tambacounda",
+        "departement": "Tambacounda",
+        "commune": "Tambacounda",
+        "quartier_libre": "Centre",
+        "adresse_complete": "Tambacounda",
+        "latitude": 13.7766396,
+        "longitude": -13.6748332,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/5538419822",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/6784956929",
+      "numero_fiche": "DF-TB-0004",
+      "nom": "Gueye Services",
+      "slug": "gueye-services-tambacounda",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Établissement de restauration référencé sur OpenStreetMap à Tambacounda (position relevée sur le terrain par un contributeur OSM). OpenStreetMap (ODbL), extraction du 2026-10-13, node 6784956929 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Tambacounda",
+        "departement": "Tambacounda",
+        "commune": "Tambacounda",
+        "quartier_libre": "Sud",
+        "adresse_complete": "Tambacounda",
+        "latitude": 13.7657965,
+        "longitude": -13.6754546,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/6784956929",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/7705155486",
+      "numero_fiche": "DF-TB-0005",
+      "nom": "Saveurs orientales",
+      "slug": "saveurs-orientales-tambacounda",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap au nord du centre de Tambacounda. OpenStreetMap (ODbL), extraction du 2026-10-13, node 7705155486 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Tambacounda",
+        "departement": "Tambacounda",
+        "commune": "Tambacounda",
+        "quartier_libre": "Nord",
+        "adresse_complete": "Tambacounda",
+        "latitude": 13.7843207,
+        "longitude": -13.6742281,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/7705155486",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/8165136278",
+      "numero_fiche": "DF-TB-0006",
+      "nom": "Best burger",
+      "slug": "best-burger-tambacounda",
+      "type_etablissement": "fast_food",
+      "categories": [
+        "burgers",
+        "street_food"
+      ],
+      "description_courte": "Fast-food référencé sur OpenStreetMap à Tambacounda, en face de la route nationale 1. OpenStreetMap (ODbL), extraction du 2026-10-13, node 8165136278 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Tambacounda",
+        "departement": "Tambacounda",
+        "commune": "Tambacounda",
+        "quartier_libre": "Centre",
+        "adresse_complete": "En face de la route nationale 1, Tambacounda",
+        "latitude": 13.7742977,
+        "longitude": -13.6756985,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [
+        {
+          "jour": 0,
+          "service": "continu",
+          "ouverture": "09:00",
+          "fermeture": "03:00",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/8165136278",
+          "date_verification": null
+        },
+        {
+          "jour": 1,
+          "service": "continu",
+          "ouverture": "09:00",
+          "fermeture": "03:00",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/8165136278",
+          "date_verification": null
+        },
+        {
+          "jour": 2,
+          "service": "continu",
+          "ouverture": "09:00",
+          "fermeture": "03:00",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/8165136278",
+          "date_verification": null
+        },
+        {
+          "jour": 3,
+          "service": "continu",
+          "ouverture": "09:00",
+          "fermeture": "03:00",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/8165136278",
+          "date_verification": null
+        },
+        {
+          "jour": 4,
+          "service": "continu",
+          "ouverture": "09:00",
+          "fermeture": "03:00",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/8165136278",
+          "date_verification": null
+        },
+        {
+          "jour": 5,
+          "service": "continu",
+          "ouverture": "09:00",
+          "fermeture": "03:00",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/8165136278",
+          "date_verification": null
+        },
+        {
+          "jour": 6,
+          "service": "continu",
+          "ouverture": "09:00",
+          "fermeture": "03:00",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/8165136278",
+          "date_verification": null
+        }
+      ],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/8165136278",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type, horaires publiés",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:way/243590824",
+      "numero_fiche": "DF-TB-0007",
+      "nom": "Le Relais de Tamba",
+      "slug": "le-relais-de-tamba-tambacounda",
+      "type_etablissement": "restaurant_hotel",
+      "categories": [],
+      "description_courte": "Hôtel-restaurant référencé sur OpenStreetMap Route de Kaolack à Tambacounda (22 chambres). OpenStreetMap (ODbL), extraction du 2026-10-13, way 243590824 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Tambacounda",
+        "departement": "Tambacounda",
+        "commune": "Tambacounda",
+        "quartier_libre": "Kaolack",
+        "adresse_complete": "Route de Kaolack, Tambacounda",
+        "latitude": 13.7741602,
+        "longitude": -13.6988486,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "site_web",
+          "valeur": "https://www.horizons-bleus-senegal.com/?-Le-relais-de-Tamba-",
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/way/243590824"
+        }
+      ],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/way/243590824",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/6342092186",
+      "numero_fiche": "DF-KE-0001",
+      "nom": "Restaurant Le Carrefour",
+      "slug": "restaurant-le-carrefour-kedougou",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap au centre de Kédougou. OpenStreetMap (ODbL), extraction du 2026-10-13, node 6342092186 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Kédougou",
+        "departement": "Kédougou",
+        "commune": "Kédougou",
+        "quartier_libre": "Centre",
+        "adresse_complete": "Kédougou",
+        "latitude": 12.5552069,
+        "longitude": -12.1806154,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/6342092186",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/4600534190",
+      "numero_fiche": "DF-SE-0001",
+      "nom": "Chez Maty",
+      "slug": "chez-maty-sedhiou",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Sédhiou. Aucun contact n'est publié par la source ; le numéro de téléphone sera ajouté après vérification. OpenStreetMap (ODbL), extraction du 2026-10-13, node 4600534190 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Sédhiou",
+        "departement": "Sédhiou",
+        "commune": "Sédhiou",
+        "quartier_libre": "Centre",
+        "adresse_complete": "Sédhiou",
+        "latitude": 12.7091364,
+        "longitude": -15.5583737,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/4600534190",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    }
+  ]
+}
