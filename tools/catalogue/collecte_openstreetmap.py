@@ -550,6 +550,132 @@ def main() -> None:
             "source déclare une appréciation « 3 étoiles », un accès fauteuil roulant praticable et une "
             "zone fumeurs : appréciation déclarative, non contrôlée par DEKK FOOD.",
         ),
+        # ---------------------------- Cap Skirring / Kabrousse (relevé Overpass 2026-10-13)
+        FicheOsm(
+            "DF-ZG-0011", "Sun Cafe", "cap-skirring", "node", 5300760963, 12.4276278, -16.6660012,
+            "Ziguinchor", "Oussouye", "Diemb\u00e9ring", "restaurant", [],
+            "Restaurant référencé sur OpenStreetMap au nord de Cap Skirring. La source ne publie ni horaire ni contact.",
+        ),
+        FicheOsm(
+            "DF-ZG-0012", "L'acacia, chez Fatou", "cap-skirring", "node", 5492878126, 12.3866479, -16.7364388,
+            "Ziguinchor", "Oussouye", "Diemb\u00e9ring", "restaurant", [],
+            "Restaurant référencé sur OpenStreetMap à Cap Skirring. La source ne publie ni horaire ni contact.",
+        ),
+        FicheOsm(
+            "DF-ZG-0013", "Carpe Rouge", "cap-skirring", "node", 5492878323, 12.3870554, -16.7380773,
+            "Ziguinchor", "Oussouye", "Diemb\u00e9ring", "restaurant", [],
+            "Restaurant référencé sur OpenStreetMap à Cap Skirring. La source ne publie ni horaire ni contact.",
+        ),
+        FicheOsm(
+            "DF-ZG-0014", "Les Palmiers", "cap-skirring", "node", 5558705022, 12.3869255, -16.7393618,
+            "Ziguinchor", "Oussouye", "Diemb\u00e9ring", "restaurant", [],
+            "Restaurant référencé sur OpenStreetMap à Cap Skirring. La source ne publie ni horaire ni contact.",
+        ),
+        FicheOsm(
+            "DF-ZG-0015", "casa pizzeria", "cap-skirring", "node", 6297514397, 12.3854044, -16.7358599,
+            "Ziguinchor", "Oussouye", "Diemb\u00e9ring", "pizzeria", ['pizza'],
+            "Pizzeria référencée sur OpenStreetMap à Cap Skirring. Un site web est indiqué par la source ; il n'a pas été ouvert ni contrôlé par DEKK FOOD.",
+            site_web="https://www.cap-skirring.voyage/pizzeria-cap-skirring-casa-pizza.html",
+        ),
+        FicheOsm(
+            "DF-ZG-0016", "Chez loulou", "cap-skirring", "node", 6299909316, 12.3712665, -16.7268051,
+            "Ziguinchor", "Oussouye", "Diemb\u00e9ring", "restaurant", ['pizza'],
+            "Restaurant référencé sur OpenStreetMap rue de Kabrousse (Cap Skirring) ; la source le classe en pizza. Téléphone publié par la source, non appelé par DEKK FOOD.",
+            adresse_complete="Rue de Kabrousse, Cap Skirring",
+            telephone="78 432 74 93",
+        ),
+        FicheOsm(
+            "DF-ZG-0017", "Case Bambou", "cap-skirring", "node", 7027861085, 12.3875150, -16.7382638,
+            "Ziguinchor", "Oussouye", "Diemb\u00e9ring", "restaurant", [],
+            "Restaurant référencé sur OpenStreetMap à Cap Skirring. Téléphone publié par la source, non appelé par DEKK FOOD.",
+            telephone="+221 77 547 91 26",
+        ),
+        FicheOsm(
+            "DF-ZG-0018", "La petite Suisse", "cap-skirring", "node", 9707035057, 12.3719604, -16.7319171,
+            "Ziguinchor", "Oussouye", "Diemb\u00e9ring", "restaurant", [],
+            "Restaurant référencé sur OpenStreetMap à Cap Skirring ; la fiche source porte une date de contrôle communautaire (check_date 2025-02-28) qui ne vaut pas vérification par DEKK FOOD.",
+        ),
+        FicheOsm(
+            "DF-ZG-0019", "cap7 restauration", "cap-skirring", "node", 10287666409, 12.3886128, -16.7479818,
+            "Ziguinchor", "Oussouye", "Diemb\u00e9ring", "restaurant", [],
+            "Restaurant référencé sur OpenStreetMap à Cap Skirring. La source ne publie ni horaire ni contact.",
+        ),
+        FicheOsm(
+            "DF-ZG-0020", "Mussuwam", "cap-skirring", "node", 10709189044, 12.3733060, -16.7321697,
+            "Ziguinchor", "Oussouye", "Diemb\u00e9ring", "restaurant", ['senegalaise'],
+            "Restaurant référencé sur OpenStreetMap à Cap Skirring (cuisine régionale selon la source, contrôle communautaire daté du 2025-02-28). Ni le téléphone ni le site web publiés par la source n'ont été vérifiés : le numéro indiqué comporte un nombre de chiffres inhabituel, il reste à confirmer.",
+        ),
+        FicheOsm(
+            "DF-ZG-0021", "Filaos", "cap-skirring", "node", 12625727296, 12.3521544, -16.7263982,
+            "Ziguinchor", "Oussouye", "Diemb\u00e9ring", "restaurant", ['fruits_de_mer'],
+            "Restaurant référencé sur OpenStreetMap vers Kabrousse ; la source le classe en poisson. Accès fauteuil roulant déclaré non praticable (tag déclaratif).",
+        ),
+        FicheOsm(
+            "DF-ZG-0022", "Bar de la mer", "cap-skirring", "node", 12625732210, 12.3498297, -16.7244241,
+            "Ziguinchor", "Oussouye", "Diemb\u00e9ring", "restaurant", [],
+            "Établissement référencé sur OpenStreetMap vers Kabrousse (bar-restaurant). Accès fauteuil roulant déclaré non praticable (tag déclaratif).",
+        ),
+        FicheOsm(
+            "DF-ZG-0023", "Le Diamota - bar restaurant", "cap-skirring", "node", 12626031429, 12.3543897, -16.7284188,
+            "Ziguinchor", "Oussouye", "Diemb\u00e9ring", "restaurant", [],
+            "Bar-restaurant référencé sur OpenStreetMap vers Kabrousse ; ouverture déclarative Mo-Su 09:00-22:00 (non confirmée) et téléphone publié par la source, non appelé par DEKK FOOD.",
+            telephone="+221 77 657 55 09",
+        ),
+        FicheOsm(
+            "DF-ZG-0024", "Soleil", "cap-skirring", "node", 12626083113, 12.3582705, -16.7298521,
+            "Ziguinchor", "Oussouye", "Diemb\u00e9ring", "restaurant", [],
+            "Restaurant référencé sur OpenStreetMap vers Kabrousse. La source ne publie ni horaire ni contact.",
+        ),
+        FicheOsm(
+            "DF-ZG-0025", "Chez Barlo et Mina - bar restaurant", "cap-skirring", "node", 12626097463, 12.3665884, -16.7306921,
+            "Ziguinchor", "Oussouye", "Diemb\u00e9ring", "restaurant", [],
+            "Bar-restaurant référencé sur OpenStreetMap vers Kabrousse. Téléphone publié par la source, non appelé par DEKK FOOD.",
+            telephone="+221774077326",
+        ),
+        FicheOsm(
+            "DF-ZG-0026", "Kassumay", "cap-skirring", "node", 12626105420, 12.3722286, -16.7320595,
+            "Ziguinchor", "Oussouye", "Diemb\u00e9ring", "restaurant", [],
+            "Restaurant référencé sur OpenStreetMap à Cap Skirring. Téléphone publié par la source, non appelé par DEKK FOOD.",
+            telephone="+221774036265",
+        ),
+        FicheOsm(
+            "DF-ZG-0027", "Burette No stress", "cap-skirring", "node", 12626109868, 12.3719935, -16.7321015,
+            "Ziguinchor", "Oussouye", "Diemb\u00e9ring", "restaurant", [],
+            "Restaurant référencé sur OpenStreetMap à Cap Skirring. La source ne publie ni horaire ni contact.",
+        ),
+        FicheOsm(
+            "DF-ZG-0028", "Boudody", "cap-skirring", "node", 12630031286, 12.3685630, -16.7308137,
+            "Ziguinchor", "Oussouye", "Diemb\u00e9ring", "restaurant", [],
+            "Restaurant référencé sur OpenStreetMap à Cap Skirring. Téléphone publié par la source, non appelé par DEKK FOOD.",
+            telephone="+221775449752",
+        ),
+        FicheOsm(
+            "DF-ZG-0029", "Africabane", "cap-skirring", "node", 12630098151, 12.3749759, -16.7332617,
+            "Ziguinchor", "Oussouye", "Diemb\u00e9ring", "restaurant", [],
+            "Restaurant référencé sur OpenStreetMap à Cap Skirring. La source ne publie ni horaire ni contact.",
+        ),
+        FicheOsm(
+            "DF-ZG-0030", "Le paillotin", "cap-skirring", "node", 12630379459, 12.3759571, -16.7335245,
+            "Ziguinchor", "Oussouye", "Diemb\u00e9ring", "restaurant", ['street_food'],
+            "Restaurant référencé sur OpenStreetMap à Cap Skirring ; la source mentionne salades et brochettes.",
+        ),
+        FicheOsm(
+            "DF-ZG-0031", "Kaye-FI", "cap-skirring", "node", 12635790425, 12.3488321, -16.7235005,
+            "Ziguinchor", "Oussouye", "Diemb\u00e9ring", "restaurant", [],
+            "Restaurant référencé sur OpenStreetMap vers Kabrousse. Téléphone publié par la source, non appelé par DEKK FOOD ; la fiche source renvoie aussi vers une photo Wikimedia Commons (non reprise ici).",
+            telephone="+22177 773 07 72",
+        ),
+        FicheOsm(
+            "DF-ZG-0032", "Le Régal", "cap-skirring", "node", 12766745546, 12.3864734, -16.7369784,
+            "Ziguinchor", "Oussouye", "Diemb\u00e9ring", "restaurant", [],
+            "Restaurant référencé sur OpenStreetMap à Cap Skirring. Téléphone publié par la source, non appelé par DEKK FOOD.",
+            telephone="+221 77 506 57 88",
+        ),
+        FicheOsm(
+            "DF-ZG-0033", "Le petit gourmet", "cap-skirring", "node", 12766745553, 12.3853345, -16.7359807,
+            "Ziguinchor", "Oussouye", "Diemb\u00e9ring", "restaurant", [],
+            "Restaurant référencé sur OpenStreetMap à Cap Skirring. La source ne publie ni horaire ni contact.",
+        ),
         # ---------------------------------------------------------- Kédougou
         FicheOsm(
             "DF-KE-0001", "Restaurant Le Carrefour", "kedougou", "node", 6342092186, 12.5552069, -12.1806154,

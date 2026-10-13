@@ -94,10 +94,10 @@ ni transmise.
 
 Extractions `amenity in (restaurant, fast_food, cafe)` sur des rectangles urbains, via le
 miroir `overpass.openstreetmap.fr` (l'API principale répondait « server too busy »).
-**61 fiches** en sont issues, toutes en `a_confirmer`, `gps_verifie = false`, avec
+**84 fiches** en sont issues, toutes en `a_confirmer`, `gps_verifie = false`, avec
 l'identifiant du nœud ou du chemin et la date d'extraction.
 
-Communes avec au moins un résultat : Bignona, Diourbel, Fatick, Joal-Fadiouth, Kaffrine, Kaolack, Kolda, Kébémer, Kédougou, Louga, Ourossogui, Richard-Toll, Sédhiou, Tambacounda, Tivaouane, Touba Mosquée.
+Communes avec au moins un résultat (24) : Bignona, Diourbel, Fatick, Joal-Fadiouth, Kaffrine, Kaolack, Kolda, Kébémer, Kédougou, Louga, Ourossogui, Richard-Toll, Sédhiou, Tambacounda, Tivaouane, Touba Mosquée.
 
 Agglomérations interrogées **sans aucun POI nommé** : Matam-ville, Vélingara, Foundiougne,
 Kanel, Guinguinéo, Nioro du Rip, Podor, Mékhé, Linguère, Sédhiou, Kédougou (villes), Saint-Louis

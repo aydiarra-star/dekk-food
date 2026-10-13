@@ -153,6 +153,28 @@ def executer_verifications() -> int:
             print(f"ÉCHEC  {nom} : {str(exc)[:600]}")
             echecs += 1
 
+    # --- Aucune fiche ne doit disparaître entre le catalogue et la base
+    try:
+        import json as _json
+
+        catalogue = _json.loads((RACINE / "assets/data/catalogue.json").read_text(encoding="utf-8"))
+        attendues = len(catalogue["etablissements"])
+        presentes = recuperer("select count(*) from public.restaurants;")[0][0]
+        total_slugs, slugs_distincts = recuperer(
+            "select count(*), count(distinct slug) from public.restaurants;"
+        )[0]
+        if attendues != presentes:
+            print(f"ÉCHEC  fiches perdues à l'amorçage : {attendues} au catalogue, {presentes} en base")
+            echecs += 1
+        elif total_slugs != slugs_distincts:
+            print(f"ÉCHEC  slugs dupliqués en base : {total_slugs} fiches pour {slugs_distincts} slugs")
+            echecs += 1
+        else:
+            print(f"OK     les {presentes} fiches du catalogue sont toutes en base, slugs uniques")
+    except Exception as exc:  # noqa: BLE001
+        print(f"ÉCHEC  contrôle catalogue/base : {str(exc)[:600]}")
+        echecs += 1
+
     # --- Parité des doublons détectés entre la base (SQL) et le pipeline (Python)
     try:
         import json as _json

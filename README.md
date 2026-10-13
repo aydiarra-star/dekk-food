@@ -13,7 +13,7 @@ Sénégal, **avec la provenance de chaque information**.
 
 ```
 lib/                     application Flutter (écrans, modèles, état, widgets)
-assets/data/catalogue.json   catalogue embarqué (généré, 142 fiches)
+assets/data/catalogue.json   catalogue embarqué (généré, 183 fiches)
 data/seed/               fichiers de collecte (source de vérité)
 data/templates/          modèle d'import CSV
 docs/                    audit, sources, architecture, rapports de couverture

@@ -2655,6 +2655,962 @@
       "est_publication_visible": true
     },
     {
+      "cle": "openstreetmap:node/5300760963",
+      "numero_fiche": "DF-ZG-0011",
+      "nom": "Sun Cafe",
+      "slug": "sun-cafe-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap au nord de Cap Skirring. La source ne publie ni horaire ni contact. OpenStreetMap (ODbL), extraction du 2026-10-13, node 5300760963 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.4276278,
+        "longitude": -16.6660012,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/5300760963",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/5492878126",
+      "numero_fiche": "DF-ZG-0012",
+      "nom": "L'acacia, chez Fatou",
+      "slug": "l-acacia-chez-fatou-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Cap Skirring. La source ne publie ni horaire ni contact. OpenStreetMap (ODbL), extraction du 2026-10-13, node 5492878126 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.3866479,
+        "longitude": -16.7364388,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/5492878126",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/5492878323",
+      "numero_fiche": "DF-ZG-0013",
+      "nom": "Carpe Rouge",
+      "slug": "carpe-rouge-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Cap Skirring. La source ne publie ni horaire ni contact. OpenStreetMap (ODbL), extraction du 2026-10-13, node 5492878323 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.3870554,
+        "longitude": -16.7380773,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/5492878323",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/5558705022",
+      "numero_fiche": "DF-ZG-0014",
+      "nom": "Les Palmiers",
+      "slug": "les-palmiers-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Cap Skirring. La source ne publie ni horaire ni contact. OpenStreetMap (ODbL), extraction du 2026-10-13, node 5558705022 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.3869255,
+        "longitude": -16.7393618,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/5558705022",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/6297514397",
+      "numero_fiche": "DF-ZG-0015",
+      "nom": "casa pizzeria",
+      "slug": "casa-pizzeria-cap-skirring",
+      "type_etablissement": "pizzeria",
+      "categories": [
+        "pizza"
+      ],
+      "description_courte": "Pizzeria référencée sur OpenStreetMap à Cap Skirring. Un site web est indiqué par la source ; il n'a pas été ouvert ni contrôlé par DEKK FOOD. OpenStreetMap (ODbL), extraction du 2026-10-13, node 6297514397 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.3854044,
+        "longitude": -16.7358599,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "site_web",
+          "valeur": "https://www.cap-skirring.voyage/pizzeria-cap-skirring-casa-pizza.html",
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/6297514397"
+        }
+      ],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/6297514397",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/6299909316",
+      "numero_fiche": "DF-ZG-0016",
+      "nom": "Chez loulou",
+      "slug": "chez-loulou-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "pizza"
+      ],
+      "description_courte": "Restaurant référencé sur OpenStreetMap rue de Kabrousse (Cap Skirring) ; la source le classe en pizza. Téléphone publié par la source, non appelé par DEKK FOOD. OpenStreetMap (ODbL), extraction du 2026-10-13, node 6299909316 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": "Rue de Kabrousse, Cap Skirring",
+        "latitude": 12.3712665,
+        "longitude": -16.7268051,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "78 432 74 93",
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/6299909316"
+        }
+      ],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/6299909316",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type, téléphone",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/7027861085",
+      "numero_fiche": "DF-ZG-0017",
+      "nom": "Case Bambou",
+      "slug": "case-bambou-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Cap Skirring. Téléphone publié par la source, non appelé par DEKK FOOD. OpenStreetMap (ODbL), extraction du 2026-10-13, node 7027861085 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.387515,
+        "longitude": -16.7382638,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221 77 547 91 26",
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/7027861085"
+        }
+      ],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/7027861085",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type, téléphone",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/9707035057",
+      "numero_fiche": "DF-ZG-0018",
+      "nom": "La petite Suisse",
+      "slug": "la-petite-suisse-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Cap Skirring ; la fiche source porte une date de contrôle communautaire (check_date 2025-02-28) qui ne vaut pas vérification par DEKK FOOD. OpenStreetMap (ODbL), extraction du 2026-10-13, node 9707035057 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.3719604,
+        "longitude": -16.7319171,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/9707035057",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/10287666409",
+      "numero_fiche": "DF-ZG-0019",
+      "nom": "cap7 restauration",
+      "slug": "cap7-restauration-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Cap Skirring. La source ne publie ni horaire ni contact. OpenStreetMap (ODbL), extraction du 2026-10-13, node 10287666409 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.3886128,
+        "longitude": -16.7479818,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/10287666409",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/10709189044",
+      "numero_fiche": "DF-ZG-0020",
+      "nom": "Mussuwam",
+      "slug": "mussuwam-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "senegalaise"
+      ],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Cap Skirring (cuisine régionale selon la source, contrôle communautaire daté du 2025-02-28). Ni le téléphone ni le site web publiés par la source n'ont été vérifiés : le numéro indiqué comporte un nombre de chiffres inhabituel, il reste à confirmer. OpenStreetMap (ODbL), extraction du 2026-10-13, node 10709189044 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.373306,
+        "longitude": -16.7321697,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/10709189044",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/12625727296",
+      "numero_fiche": "DF-ZG-0021",
+      "nom": "Filaos",
+      "slug": "filaos-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "fruits_de_mer"
+      ],
+      "description_courte": "Restaurant référencé sur OpenStreetMap vers Kabrousse ; la source le classe en poisson. Accès fauteuil roulant déclaré non praticable (tag déclaratif). OpenStreetMap (ODbL), extraction du 2026-10-13, node 12625727296 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.3521544,
+        "longitude": -16.7263982,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/12625727296",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/12625732210",
+      "numero_fiche": "DF-ZG-0022",
+      "nom": "Bar de la mer",
+      "slug": "bar-de-la-mer-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Établissement référencé sur OpenStreetMap vers Kabrousse (bar-restaurant). Accès fauteuil roulant déclaré non praticable (tag déclaratif). OpenStreetMap (ODbL), extraction du 2026-10-13, node 12625732210 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.3498297,
+        "longitude": -16.7244241,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/12625732210",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/12626031429",
+      "numero_fiche": "DF-ZG-0023",
+      "nom": "Le Diamota - bar restaurant",
+      "slug": "le-diamota-bar-restaurant-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Bar-restaurant référencé sur OpenStreetMap vers Kabrousse ; ouverture déclarative Mo-Su 09:00-22:00 (non confirmée) et téléphone publié par la source, non appelé par DEKK FOOD. OpenStreetMap (ODbL), extraction du 2026-10-13, node 12626031429 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.3543897,
+        "longitude": -16.7284188,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221 77 657 55 09",
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/12626031429"
+        }
+      ],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/12626031429",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type, téléphone",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/12626083113",
+      "numero_fiche": "DF-ZG-0024",
+      "nom": "Soleil",
+      "slug": "soleil-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap vers Kabrousse. La source ne publie ni horaire ni contact. OpenStreetMap (ODbL), extraction du 2026-10-13, node 12626083113 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.3582705,
+        "longitude": -16.7298521,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/12626083113",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/12626097463",
+      "numero_fiche": "DF-ZG-0025",
+      "nom": "Chez Barlo et Mina - bar restaurant",
+      "slug": "chez-barlo-et-mina-bar-restaurant-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Bar-restaurant référencé sur OpenStreetMap vers Kabrousse. Téléphone publié par la source, non appelé par DEKK FOOD. OpenStreetMap (ODbL), extraction du 2026-10-13, node 12626097463 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.3665884,
+        "longitude": -16.7306921,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221774077326",
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/12626097463"
+        }
+      ],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/12626097463",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type, téléphone",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/12626105420",
+      "numero_fiche": "DF-ZG-0026",
+      "nom": "Kassumay",
+      "slug": "kassumay-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Cap Skirring. Téléphone publié par la source, non appelé par DEKK FOOD. OpenStreetMap (ODbL), extraction du 2026-10-13, node 12626105420 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.3722286,
+        "longitude": -16.7320595,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221774036265",
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/12626105420"
+        }
+      ],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/12626105420",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type, téléphone",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/12626109868",
+      "numero_fiche": "DF-ZG-0027",
+      "nom": "Burette No stress",
+      "slug": "burette-no-stress-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Cap Skirring. La source ne publie ni horaire ni contact. OpenStreetMap (ODbL), extraction du 2026-10-13, node 12626109868 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.3719935,
+        "longitude": -16.7321015,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/12626109868",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/12630031286",
+      "numero_fiche": "DF-ZG-0028",
+      "nom": "Boudody",
+      "slug": "boudody-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Cap Skirring. Téléphone publié par la source, non appelé par DEKK FOOD. OpenStreetMap (ODbL), extraction du 2026-10-13, node 12630031286 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.368563,
+        "longitude": -16.7308137,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221775449752",
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/12630031286"
+        }
+      ],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/12630031286",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type, téléphone",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/12630098151",
+      "numero_fiche": "DF-ZG-0029",
+      "nom": "Africabane",
+      "slug": "africabane-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Cap Skirring. La source ne publie ni horaire ni contact. OpenStreetMap (ODbL), extraction du 2026-10-13, node 12630098151 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.3749759,
+        "longitude": -16.7332617,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/12630098151",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/12630379459",
+      "numero_fiche": "DF-ZG-0030",
+      "nom": "Le paillotin",
+      "slug": "le-paillotin-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "street_food"
+      ],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Cap Skirring ; la source mentionne salades et brochettes. OpenStreetMap (ODbL), extraction du 2026-10-13, node 12630379459 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.3759571,
+        "longitude": -16.7335245,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/12630379459",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/12635790425",
+      "numero_fiche": "DF-ZG-0031",
+      "nom": "Kaye-FI",
+      "slug": "kaye-fi-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap vers Kabrousse. Téléphone publié par la source, non appelé par DEKK FOOD ; la fiche source renvoie aussi vers une photo Wikimedia Commons (non reprise ici). OpenStreetMap (ODbL), extraction du 2026-10-13, node 12635790425 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.3488321,
+        "longitude": -16.7235005,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+22177 773 07 72",
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/12635790425"
+        }
+      ],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/12635790425",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type, téléphone",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/12766745546",
+      "numero_fiche": "DF-ZG-0032",
+      "nom": "Le Régal",
+      "slug": "le-regal-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Cap Skirring. Téléphone publié par la source, non appelé par DEKK FOOD. OpenStreetMap (ODbL), extraction du 2026-10-13, node 12766745546 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.3864734,
+        "longitude": -16.7369784,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221 77 506 57 88",
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/12766745546"
+        }
+      ],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/12766745546",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type, téléphone",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/12766745553",
+      "numero_fiche": "DF-ZG-0033",
+      "nom": "Le petit gourmet",
+      "slug": "le-petit-gourmet-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Cap Skirring. La source ne publie ni horaire ni contact. OpenStreetMap (ODbL), extraction du 2026-10-13, node 12766745553 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.3853345,
+        "longitude": -16.7359807,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/12766745553",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
       "cle": "openstreetmap:node/6342092186",
       "numero_fiche": "DF-KE-0001",
       "nom": "Restaurant Le Carrefour",

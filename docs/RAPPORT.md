@@ -31,21 +31,21 @@ python tools/tests/verifier_schema_postgres.py   # PostgreSQL jetable + contrôl
 
 | Indicateur | Valeur mesurée |
 |---|---|
-| Fiches au total | **160** |
-| Fiches publiées | 158 (2 fiches héritées sans localisation restent non publiées) |
-| Régions couvertes | **14 / 14** — Matam est représentée depuis le 13/10/2026 (1 fiche relevée sur OpenStreetMap à Ourossogui), mais la profondeur reste très inégale (Dakar 61 fiches contre 1 en Matam, Kédougou et Sédhiou) |
-| Fiche avec source et date de collecte | 160 / 160 (100 %) |
-| Adresse renseignée | 124 / 160 (78 %) |
-| Coordonnées GPS publiées | 62 / 160 (39 %) — toutes issues d'OpenStreetMap, **aucune vérifiée sur place** |
-| Téléphone | 54 / 160 (34 %) |
-| WhatsApp | 44 / 160 (28 %) |
-| Horaires | 4 / 160 (2 %) — non confirmés, donc aucun badge « ouvert maintenant » |
-| Services déclarés | 34 / 160 (21 %) |
-| Menus avec au moins un prix | 4 / 160 (2 %) — tous « à confirmer » |
+| Fiches au total | **183** |
+| Fiches publiées | 183 (2 fiches héritées sans localisation restent non publiées) |
+| Régions couvertes | **14 / 14** — Matam est représentée depuis le 13/10/2026 (1 fiche relevée sur OpenStreetMap à Ourossogui), mais la profondeur reste très inégale (voir §2) |
+| Fiche avec source et date de collecte | 183 / 183 (100 %) |
+| Adresse renseignée | 125 / 183 (68 %) |
+| Coordonnées GPS publiées | 85 / 183 (46 %) — toutes issues d'OpenStreetMap, **aucune vérifiée sur place** |
+| Téléphone | 62 / 183 (34 %) |
+| WhatsApp | 44 / 183 (24 %) |
+| Horaires | 4 / 183 (2 %) — non confirmés, donc aucun badge « ouvert maintenant » |
+| Services déclarés | 34 / 183 (19 %) |
+| Menus avec au moins un prix | 4 / 183 (2 %) — tous « à confirmer » |
 | Photos authentiques | **0** — 8 illustrations génériques, toutes signalées comme telles |
 | Propriétaire confirmé par une source | **0** — l'application affiche « Propriétaire non renseigné » |
 
-Répartition : Dakar 61, Thiès 28, Kaolack 15, Diourbel 13, Ziguinchor 10, Saint-Louis 9, Louga 7, Tambacounda 7, Kolda 3, Fatick 2, Kaffrine 2, Matam 1, Kédougou 1, Sédhiou 1, horaires 156, menu 156, telephone 106, gps 98, adresse 36.
+Répartition : Dakar 61, Ziguinchor 33, Thiès 28, Kaolack 15, Diourbel 13, Saint-Louis 9, Louga 7, Tambacounda 7, Kolda 3, Fatick 2, Kaffrine 2, Matam 1, Kédougou 1, Sédhiou 1, horaires 179, menu 179, telephone 121, gps 98, adresse 58.
 Ziguinchor 8, Tambacounda 7, Louga 5, Kolda 3, Fatick 2, Kaffrine 2, Matam 1,
 Kédougou 1, Sédhiou 1.
 
@@ -137,12 +137,12 @@ Paires à arbitrer par un humain :
    identifié « Samassa » à Ourossogui, ce qui met fin à l'absence totale de fiche,
    mais aucune source consultée ne permet encore de couvrir Matam, Kanel ou
    Ranérou. À traiter par contact direct avec les établissements ou relevé terrain.
-3. **GPS vérifiés : 0.** Les 62 coordonnées existantes sont communautaires
+3. **GPS vérifiés : 0.** Les 85 coordonnées existantes sont communautaires
    (OpenStreetMap) ; à confirmer avant de les présenter comme fiables.
 4. **Photos authentiques : 0.** Aucune photo n'a été publiée faute
    d'autorisation documentée. Il faut une campagne « restaurateur » (accord écrit,
    auteur, date) et le stockage des autorisations.
-5. **Menus réels : 4 fiches sur 160.** Les autres affichent « Menu à confirmer
+5. **Menus réels : 4 fiches sur 183.** Les autres affichent « Menu à confirmer
    auprès du restaurant ». À collecter auprès des restaurateurs (photos de carte
    autorisées).
 6. **Base communautaire Supabase non connectée** dans cette version : avis,
