@@ -97,11 +97,11 @@ miroir `overpass.openstreetmap.fr` (l'API principale répondait « server too bu
 **84 fiches** en sont issues, toutes en `a_confirmer`, `gps_verifie = false`, avec
 l'identifiant du nœud ou du chemin et la date d'extraction.
 
-Communes avec au moins un résultat (24) : Bignona, Diourbel, Fatick, Joal-Fadiouth, Kaffrine, Kaolack, Kolda, Kébémer, Kédougou, Louga, Ourossogui, Richard-Toll, Sédhiou, Tambacounda, Tivaouane, Touba Mosquée.
+Communes avec au moins un résultat (18) : Bignona, Diembéring, Diourbel, Fatick, Joal-Fadiouth, Kaffrine, Kaolack, Kolda, Kébémer, Kédougou, Louga, Ourossogui, Richard-Toll, Sokone, Sédhiou, Tambacounda, Tivaouane, Touba Mosquée.
 
 Agglomérations interrogées **sans aucun POI nommé** : Matam-ville, Vélingara, Foundiougne,
 Kanel, Guinguinéo, Nioro du Rip, Podor, Mékhé, Linguère, Sédhiou, Kédougou (villes), Saint-Louis
-(ville). Une absence dans OpenStreetMap **ne prouve pas** l'absence de restaurants : elle
+(ville), Goudomp, Bounkiling, Salémata, Oussouye, Toubakouta, Birkelane. Une absence dans OpenStreetMap **ne prouve pas** l'absence de restaurants : elle
 signifie que la zone est peu ou pas cartographiée. Ces villes restent à couvrir par d'autres
 sources ou par relevé terrain.
 
