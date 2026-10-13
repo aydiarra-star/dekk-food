@@ -32,6 +32,7 @@ class DiagnosticScreen extends StatelessWidget {
           final regions = depot.couvertureParRegion;
           final total = qualite['fiches_total'] ?? 1;
 
+
           return ListView(
             padding: const EdgeInsets.all(14),
             children: [
@@ -49,7 +50,7 @@ class DiagnosticScreen extends StatelessWidget {
               _ligne('À confirmer', '${qualite['niveau_a_confirmer'] ?? 0}'),
               _ligne('Fermeture à vérifier', '${qualite['niveau_fermeture_a_verifier'] ?? 0}'),
               const TitreSection('Complétude des informations', icone: Icons.fact_check_outlined),
-              _ligneAvecPart('Adresse renseignée', qualite['fiches_adresse'] ?? 0, total as int),
+              _ligneAvecPart('Adresse renseignée', qualite['fiches_adresse'] ?? 0, total),
               _ligneAvecPart('Coordonnées GPS', qualite['fiches_gps'] ?? 0, total),
               _ligneAvecPart('GPS vérifié sur place', qualite['fiches_gps_verifie'] ?? 0, total),
               _ligneAvecPart('Téléphone', qualite['fiches_telephone'] ?? 0, total),
