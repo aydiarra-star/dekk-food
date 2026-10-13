@@ -50,14 +50,43 @@ jobs:
         with:
           channel: 'stable'
 
+      # Les sorties sont renvoyées dans les annotations du job : elles restent
+      # lisibles même lorsque les journaux complets de l'exécution ne sont pas
+      # téléchargeables.
       - name: Installer les dépendances
-        run: flutter pub get
+        run: |
+          set +e
+          flutter pub get > /tmp/pub.log 2>&1
+          code=$?
+          if [ $code -ne 0 ]; then
+            head -n 10 /tmp/pub.log | sed 's/%/%25/g' | while IFS= read -r ligne; do echo "::error title=flutter pub get::${ligne}"; done
+            exit $code
+          fi
+          tail -n 3 /tmp/pub.log
 
       - name: Analyse statique
-        run: flutter analyze
+        run: |
+          set +e
+          flutter analyze > /tmp/analyze.log 2>&1
+          code=$?
+          if [ $code -ne 0 ]; then
+            head -n 10 /tmp/analyze.log | sed 's/%/%25/g' | while IFS= read -r ligne; do echo "::error title=flutter analyze::${ligne}"; done
+            cat /tmp/analyze.log
+            exit $code
+          fi
+          tail -n 3 /tmp/analyze.log
 
       - name: Tests
-        run: flutter test
+        run: |
+          set +e
+          flutter test > /tmp/test.log 2>&1
+          code=$?
+          if [ $code -ne 0 ]; then
+            head -n 10 /tmp/test.log | sed 's/%/%25/g' | while IFS= read -r ligne; do echo "::error title=flutter test::${ligne}"; done
+            cat /tmp/test.log
+            exit $code
+          fi
+          tail -n 3 /tmp/test.log
 
       - name: Compilation web à blanc
         run: flutter build web --release --base-href=/dekk-food/
