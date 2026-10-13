@@ -31,21 +31,21 @@ python tools/tests/verifier_schema_postgres.py   # PostgreSQL jetable + contrôl
 
 | Indicateur | Valeur mesurée |
 |---|---|
-| Fiches au total | **183** |
-| Fiches publiées | 183 (2 fiches héritées sans localisation restent non publiées) |
+| Fiches au total | **185** |
+| Fiches publiées | 183 en base sur 185 — les 2 fiches héritées sans localisation (Diamniadio Express Diner, La Halte AIBD) restent non publiées côté base |
 | Régions couvertes | **14 / 14** — Matam est représentée depuis le 13/10/2026 (1 fiche relevée sur OpenStreetMap à Ourossogui), mais la profondeur reste très inégale (voir §2) |
-| Fiche avec source et date de collecte | 183 / 183 (100 %) |
-| Adresse renseignée | 125 / 183 (68 %) |
-| Coordonnées GPS publiées | 85 / 183 (46 %) — toutes issues d'OpenStreetMap, **aucune vérifiée sur place** |
-| Téléphone | 62 / 183 (34 %) |
-| WhatsApp | 44 / 183 (24 %) |
-| Horaires | 4 / 183 (2 %) — non confirmés, donc aucun badge « ouvert maintenant » |
-| Services déclarés | 34 / 183 (19 %) |
-| Menus avec au moins un prix | 4 / 183 (2 %) — tous « à confirmer » |
+| Fiche avec source et date de collecte | 185 / 185 (100 %) |
+| Adresse renseignée | 125 / 185 (68 %) |
+| Coordonnées GPS publiées | 87 / 185 (47 %) — toutes issues d'OpenStreetMap, **aucune vérifiée sur place** |
+| Téléphone | 63 / 185 (34 %) |
+| WhatsApp | 44 / 185 (24 %) |
+| Horaires | 4 / 185 (2 %) — non confirmés, donc aucun badge « ouvert maintenant » |
+| Services déclarés | 34 / 185 (18 %) |
+| Menus avec au moins un prix | 4 / 185 (2 %) — tous « à confirmer » |
 | Photos authentiques | **0** — 8 illustrations génériques, toutes signalées comme telles |
 | Propriétaire confirmé par une source | **0** — l'application affiche « Propriétaire non renseigné » |
 
-Répartition : Dakar 61, Ziguinchor 33, Thiès 28, Kaolack 15, Diourbel 13, Saint-Louis 9, Louga 7, Tambacounda 7, Kolda 3, Fatick 2, Kaffrine 2, Matam 1, Kédougou 1, Sédhiou 1, horaires 179, menu 179, telephone 121, gps 98, adresse 58.
+Répartition : Dakar 61, Ziguinchor 33, Thiès 28, Kaolack 15, Diourbel 13, Saint-Louis 9, Louga 7, Tambacounda 7, Fatick 4, Kolda 3, Kaffrine 2, Matam 1, Kédougou 1, Sédhiou 1, horaires 181, menu 181, telephone 122, gps 98, adresse 60.
 Ziguinchor 8, Tambacounda 7, Louga 5, Kolda 3, Fatick 2, Kaffrine 2, Matam 1,
 Kédougou 1, Sédhiou 1.
 
@@ -137,12 +137,12 @@ Paires à arbitrer par un humain :
    identifié « Samassa » à Ourossogui, ce qui met fin à l'absence totale de fiche,
    mais aucune source consultée ne permet encore de couvrir Matam, Kanel ou
    Ranérou. À traiter par contact direct avec les établissements ou relevé terrain.
-3. **GPS vérifiés : 0.** Les 85 coordonnées existantes sont communautaires
+3. **GPS vérifiés : 0.** Les 87 coordonnées existantes sont communautaires
    (OpenStreetMap) ; à confirmer avant de les présenter comme fiables.
 4. **Photos authentiques : 0.** Aucune photo n'a été publiée faute
    d'autorisation documentée. Il faut une campagne « restaurateur » (accord écrit,
    auteur, date) et le stockage des autorisations.
-5. **Menus réels : 4 fiches sur 183.** Les autres affichent « Menu à confirmer
+5. **Menus réels : 4 fiches sur 185.** Les autres affichent « Menu à confirmer
    auprès du restaurant ». À collecter auprès des restaurateurs (photos de carte
    autorisées).
 6. **Base communautaire Supabase non connectée** dans cette version : avis,
@@ -206,3 +206,11 @@ flutter run -d chrome        # ou: flutter build web --release
 - Ne pas contourner les protections techniques des sources.
 - Ne pas déclarer le recensement complet tant que la couverture n'est pas
   mesurée et les limites documentées.
+
+12. **Divergence connue entre la base et l'application.** Les deux fiches héritées
+    (Diamniadio Express Diner, La Halte AIBD) sont exclues de la publication par la
+    base (sans région), mais le catalogue embarqué dans l'application les conserve
+    en statut « à vérifier » : il n'expose pas encore de drapeau de publication.
+    À trancher : soit elles sont complétées (région, adresse), soit elles sont
+    retirées du catalogue embarqué — la correction doit passer par le pipeline,
+    avec le même contrôle que le reste (aucune suppression sans validation).

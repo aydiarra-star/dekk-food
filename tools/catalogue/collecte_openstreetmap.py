@@ -676,6 +676,19 @@ def main() -> None:
             "Ziguinchor", "Oussouye", "Diemb\u00e9ring", "restaurant", [],
             "Restaurant référencé sur OpenStreetMap à Cap Skirring. La source ne publie ni horaire ni contact.",
         ),
+        # --------------------------------------------------- Sokone (Fatick)
+        FicheOsm(
+            "DF-FK-0003", "Jokkoo", "sokone", "node", 4985311436, 13.8842123, -16.3715018,
+            "Fatick", "Foundiougne", "Sokone", "restaurant", [],
+            "Restaurant référencé sur OpenStreetMap à Sokone. La source ne publie ni horaire ni contact.",
+        ),
+        FicheOsm(
+            "DF-FK-0004", "Auberge Restaurant Le Cailcedrat", "sokone", "node", 13477136101, 13.8860018, -16.3717177,
+            "Fatick", "Foundiougne", "Sokone", "restaurant_hotel", [],
+            "Auberge-restaurant référencée sur OpenStreetMap à Sokone ; la source déclare un accès Wi-Fi "
+            "(tag internet_access=wlan, déclaratif) et un téléphone, non appelé par DEKK FOOD.",
+            telephone="774305204",
+        ),
         # ---------------------------------------------------------- Kédougou
         FicheOsm(
             "DF-KE-0001", "Restaurant Le Carrefour", "kedougou", "node", 6342092186, 12.5552069, -12.1806154,

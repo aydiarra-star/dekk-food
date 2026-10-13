@@ -1,6 +1,6 @@
 # Couverture du catalogue DEKK FOOD — 2026-10-13
 
-**183 fiches** au total, réparties sur **14 région(s)**.
+**185 fiches** au total, réparties sur **14 région(s)**.
 
 ## Répartition par région
 
@@ -14,8 +14,8 @@
 | Saint-Louis | 9 |
 | Louga | 7 |
 | Tambacounda | 7 |
+| Fatick | 4 |
 | Kolda | 3 |
-| Fatick | 2 |
 | Kaffrine | 2 |
 | Matam | 1 |
 | Kédougou | 1 |
@@ -26,30 +26,30 @@
 | Indicateur | Fiches | Part |
 |---|---|---|
 | adresse renseignee | 125 | 68 % |
-| gps renseigne | 85 | 46 % |
+| gps renseigne | 87 | 47 % |
 | gps verifie | 0 | 0 % |
-| telephone | 62 | 34 % |
+| telephone | 63 | 34 % |
 | whatsapp | 44 | 24 % |
 | horaires | 4 | 2 % |
-| services | 34 | 19 % |
+| services | 34 | 18 % |
 | menus avec prix | 4 | 2 % |
 | plats catalogue | 6 | — |
 | photos authentiques | 0 | 0 % |
 | illustrations generiques seulement | 8 | 4 % |
 | proprietaire confirme | 0 | 0 % |
-| avec source | 183 | 100 % |
-| avec date collecte | 183 | 100 % |
+| avec source | 185 | 100 % |
+| avec date collecte | 185 | 100 % |
 
 ## Champs manquants
 
 | Champ | Fiches concernées |
 |---|---|
-| photo_authentique | 183 |
-| horaires | 179 |
-| menu | 179 |
-| telephone | 121 |
+| photo_authentique | 185 |
+| horaires | 181 |
+| menu | 181 |
+| telephone | 122 |
 | gps | 98 |
-| adresse | 58 |
+| adresse | 60 |
 
 ## Limites connues
 

@@ -3611,6 +3611,90 @@
       "est_publication_visible": true
     },
     {
+      "cle": "openstreetmap:node/4985311436",
+      "numero_fiche": "DF-FK-0003",
+      "nom": "Jokkoo",
+      "slug": "jokkoo-sokone",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Sokone. La source ne publie ni horaire ni contact. OpenStreetMap (ODbL), extraction du 2026-10-13, node 4985311436 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Fatick",
+        "departement": "Foundiougne",
+        "commune": "Sokone",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 13.8842123,
+        "longitude": -16.3715018,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/4985311436",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/13477136101",
+      "numero_fiche": "DF-FK-0004",
+      "nom": "Auberge Restaurant Le Cailcedrat",
+      "slug": "auberge-restaurant-le-cailcedrat-sokone",
+      "type_etablissement": "restaurant_hotel",
+      "categories": [],
+      "description_courte": "Auberge-restaurant référencée sur OpenStreetMap à Sokone ; la source déclare un accès Wi-Fi (tag internet_access=wlan, déclaratif) et un téléphone, non appelé par DEKK FOOD. OpenStreetMap (ODbL), extraction du 2026-10-13, node 13477136101 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Fatick",
+        "departement": "Foundiougne",
+        "commune": "Sokone",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 13.8860018,
+        "longitude": -16.3717177,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "774305204",
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/13477136101"
+        }
+      ],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/13477136101",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type, téléphone",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
       "cle": "openstreetmap:node/6342092186",
       "numero_fiche": "DF-KE-0001",
       "nom": "Restaurant Le Carrefour",
