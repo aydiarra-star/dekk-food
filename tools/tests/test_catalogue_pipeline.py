@@ -156,8 +156,17 @@ def test_rapport_de_couverture_mesure_les_manques() -> None:
     couverture = rapport.rapport_couverture(fiches)
     assert couverture["total_fiches"] == len(fiches)
     assert couverture["regions_couvertes"], "aucune région mesurée"
-    assert len(couverture["regions_couvertes"]) < 14, (
-        "Le catalogue ne doit pas prétendre couvrir les 14 régions tant que Matam est absente"
+    # Matam est couverte depuis le 13/10/2026 (relevé OpenStreetMap à Ourossogui) :
+    # les 14 régions sont représentées, mais la couverture reste partielle et inégale.
+    assert len(couverture["regions_couvertes"]) == 14, (
+        "les 14 régions doivent être représentées dans le catalogue"
+    )
+    assert "Matam" in couverture["regions_couvertes"], "la région de Matam doit être mesurée"
+    # Le référentiel compte 46 départements : la collecte doit rester mesurablement
+    # incomplète à cette échelle, et le rapport doit continuer à le publier.
+    # La couverture reste très partielle : la mesure des manques doit rester publiée.
+    assert couverture["qualite"]["horaires"] < couverture["total_fiches"], (
+        "le rapport doit continuer à mesurer les données manquantes (horaires)"
     )
     qualite = couverture["qualite"]
     assert qualite["avec_source"] == len(fiches)
@@ -165,6 +174,13 @@ def test_rapport_de_couverture_mesure_les_manques() -> None:
     assert couverture["limites"], "les limites de la collecte doivent être documentées"
 
 
+
+def test_aucun_slug_duplique_dans_le_catalogue() -> None:
+    """Deux fiches au même slug s'écraseraient lors de l'amorçage : c'est interdit."""
+    donnees = json.loads(CATALOGUE.read_text(encoding="utf-8"))
+    slugs = [etablissement["slug"] for etablissement in donnees["etablissements"] if etablissement.get("slug")]
+    doublons = sorted({slug for slug in slugs if slugs.count(slug) > 1})
+    assert not doublons, f"slugs dupliqués dans le catalogue : {doublons}"
 
 if __name__ == "__main__":  # pragma: no cover
     raise SystemExit(pytest.main([__file__, "-q"]))

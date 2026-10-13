@@ -169,3 +169,17 @@ def detecter(
                 candidats.append(candidat)
     candidats.sort(key=lambda c: c.score, reverse=True)
     return candidats
+
+
+def slugs_dupliques(etablissements: Iterable[Etablissement]) -> dict[str, list[str]]:
+    """Repère les slugs portés par plusieurs fiches.
+
+    La base n'accepte qu'une seule fiche par slug : sans ce contrôle, une fiche
+    disparaîtrait silencieusement lors de l'amorçage (doublon jamais signalé).
+    """
+    par_slug: dict[str, list[str]] = {}
+    for etablissement in etablissements:
+        par_slug.setdefault(etablissement.slug, []).append(
+            f"{etablissement.numero_fiche or 'sans numéro'} — {etablissement.nom}"
+        )
+    return {slug: fiches for slug, fiches in par_slug.items() if len(fiches) > 1}

@@ -1,22 +1,23 @@
 # Couverture du catalogue DEKK FOOD — 2026-10-13
 
-**115 fiches** au total, réparties sur **13 région(s)**.
+**160 fiches** au total, réparties sur **14 région(s)**.
 
 ## Répartition par région
 
 | Région | Fiches |
 |---|---|
 | Dakar | 61 |
-| Thiès | 14 |
+| Thiès | 28 |
+| Kaolack | 15 |
+| Diourbel | 13 |
+| Ziguinchor | 10 |
 | Saint-Louis | 9 |
-| Ziguinchor | 8 |
+| Louga | 7 |
 | Tambacounda | 7 |
-| Diourbel | 4 |
-| Kaolack | 4 |
+| Kolda | 3 |
 | Fatick | 2 |
 | Kaffrine | 2 |
-| Kolda | 1 |
-| Louga | 1 |
+| Matam | 1 |
 | Kédougou | 1 |
 | Sédhiou | 1 |
 
@@ -24,31 +25,31 @@
 
 | Indicateur | Fiches | Part |
 |---|---|---|
-| adresse renseignee | 113 | 98 % |
-| gps renseigne | 16 | 14 % |
+| adresse renseignee | 124 | 78 % |
+| gps renseigne | 62 | 39 % |
 | gps verifie | 0 | 0 % |
-| telephone | 52 | 45 % |
-| whatsapp | 44 | 38 % |
-| horaires | 4 | 3 % |
-| services | 34 | 30 % |
-| menus avec prix | 4 | 3 % |
+| telephone | 54 | 34 % |
+| whatsapp | 44 | 28 % |
+| horaires | 4 | 2 % |
+| services | 34 | 21 % |
+| menus avec prix | 4 | 2 % |
 | plats catalogue | 6 | — |
 | photos authentiques | 0 | 0 % |
-| illustrations generiques seulement | 8 | 7 % |
+| illustrations generiques seulement | 8 | 5 % |
 | proprietaire confirme | 0 | 0 % |
-| avec source | 115 | 100 % |
-| avec date collecte | 115 | 100 % |
+| avec source | 160 | 100 % |
+| avec date collecte | 160 | 100 % |
 
 ## Champs manquants
 
 | Champ | Fiches concernées |
 |---|---|
-| photo_authentique | 115 |
-| horaires | 111 |
-| menu | 111 |
-| gps | 99 |
-| telephone | 63 |
-| adresse | 2 |
+| photo_authentique | 160 |
+| horaires | 156 |
+| menu | 156 |
+| telephone | 106 |
+| gps | 98 |
+| adresse | 36 |
 
 ## Limites connues
 

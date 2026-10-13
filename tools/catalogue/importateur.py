@@ -352,7 +352,12 @@ def commande_valider(arguments: argparse.Namespace) -> int:
         print(f"  ✗ {rejet['nom']} : {rejet['raison']}")
     for avertissement in resultat.a_verifier:
         print(f"  ! {avertissement['nom']} : {' ; '.join(avertissement['avertissements'][:3])}")
-    return 1 if resultat.rejets else 0
+    doublons_slug = dedoublonnage.slugs_dupliques(resultat.etablissements)
+    if doublons_slug:
+        print(f"Slugs dupliqués        : {len(doublons_slug)} (une seule fiche par slug est conservée en base)")
+        for slug, noms in doublons_slug.items():
+            print(f"  ✗ {slug} : " + " | ".join(noms))
+    return 1 if resultat.rejets or doublons_slug else 0
 
 
 def commande_dedoublonner(arguments: argparse.Namespace) -> int:
@@ -370,6 +375,13 @@ def commande_dedoublonner(arguments: argparse.Namespace) -> int:
 
 def commande_generer(arguments: argparse.Namespace) -> int:
     resultat = charger_fichiers(arguments.fichiers, arguments.source)
+    doublons_slug = dedoublonnage.slugs_dupliques(resultat.etablissements)
+    if doublons_slug:
+        print("Génération refusée : plusieurs fiches partagent le même slug, la base en écraserait.")
+        for slug, noms in doublons_slug.items():
+            print(f"  ✗ {slug} : " + " | ".join(noms))
+        print("Corrigez les numéros de fiche ou les slugs avant de relancer la génération.")
+        return 1
     dossier = Path(arguments.dossier).resolve()
     chemin_asset = dossier / "assets" / "data" / "catalogue.json"
     chemin_sql = dossier / "supabase" / "seed" / "10_etablissements.sql"

@@ -11,7 +11,7 @@ règles.
 |---|---|---|---|
 | `senefinder` | Annuaire public d'entreprises (fiches déclaratives) | https://senefinder.com/fr/search?category=food_restaurants | Données factuelles uniquement (nom, adresse, téléphone professionnel publié). **Aucune image reprise** : les visuels de l'annuaire sont des banques d'images ou des bannières d'annonceurs. Les fiches ne comportent pas de date de vérification : elles sont classées `a_confirmer` ou `partiellement_verifie`, jamais `verifie`. |
 | `senlocal` | Annuaire local, fiches porteuses d'un badge « Vérifié » de l'éditeur | https://senlocal.com/categories/restaurants | Le badge est celui de l'éditeur du site, pas un contrôle DEKK FOOD : les fiches correspondantes sont marquées `partiellement_verifie` et la mention est écrite dans la fiche. Données factuelles seulement. |
-| `openstreetmap` | Base cartographique ouverte (requêtes Overpass) | https://www.openstreetmap.org/ — https://overpass-api.de/ | **Licence ODbL** : attribution « © OpenStreetMap contributors » conservée dans chaque fiche (identifiant de nœud + date d'extraction). Les positions et horaires sont contributifs donc `gps_verifie = false` et `confirme = false`. Requêtes limitées à des rectangles urbains, sans extraction massive. |
+| `openstreetmap` | Base cartographique ouverte (requêtes Overpass) | https://www.openstreetmap.org/ — https://overpass-api.de/ (miroir utilisé : https://overpass.openstreetmap.fr/) | **Licence ODbL** : attribution « © OpenStreetMap contributors » conservée dans chaque fiche (identifiant de nœud + date d'extraction). Les positions et horaires sont contributifs donc `gps_verifie = false` et `confirme = false`. Requêtes limitées à des rectangles urbains, sans extraction massive. |
 | `application_existante` | Données héritées de l'application DEKK FOOD 2.1.0 | dépôt Git (lib/main.dart historique) | Conservées parce qu'elles décrivent des établissements réels, mais **reclassées « à confirmer »** : elles n'étaient adossées à aucune source. Les affirmations non démontrables (contrôles HACCP, notes d'hygiène) ont été **supprimées**, les prix non sourcés sont affichés « à confirmer ». |
 | `restaurateur_terrain` | Informations transmises par l'établissement ou relevées sur place | — | Source de plus haute valeur (horaires, menus, photos autorisées). Nécessite l'accord écrit du restaurateur et devient la `source_id` des éléments concernés. Aucun élément de ce type dans la version actuelle du catalogue. |
 | `recherche_web` | Moteur de recherche | — | Utilisé **uniquement comme piste** à vérifier, jamais comme preuve d'activité ou de prix. |
@@ -89,3 +89,27 @@ ni transmise.
   confirmation sont donc nuls, et l'application le dit à l'écran.
 - Les établissements sans présence en ligne (gargotes, dibiteries de quartier)
   ne pourront être couverts que par relevé terrain ou signalement.
+
+## Relevés OpenStreetMap du 13/10/2026 — méthode et exclusions
+
+Extractions `amenity in (restaurant, fast_food, cafe)` sur des rectangles urbains, via le
+miroir `overpass.openstreetmap.fr` (l'API principale répondait « server too busy »).
+**61 fiches** en sont issues, toutes en `a_confirmer`, `gps_verifie = false`, avec
+l'identifiant du nœud ou du chemin et la date d'extraction.
+
+Communes avec au moins un résultat : Bignona, Diourbel, Fatick, Joal-Fadiouth, Kaffrine, Kaolack, Kolda, Kébémer, Kédougou, Louga, Ourossogui, Richard-Toll, Sédhiou, Tambacounda, Tivaouane, Touba Mosquée.
+
+Agglomérations interrogées **sans aucun POI nommé** : Matam-ville, Vélingara, Foundiougne,
+Kanel, Guinguinéo, Nioro du Rip, Podor, Mékhé, Linguère, Sédhiou, Kédougou (villes), Saint-Louis
+(ville). Une absence dans OpenStreetMap **ne prouve pas** l'absence de restaurants : elle
+signifie que la zone est peu ou pas cartographiée. Ces villes restent à couvrir par d'autres
+sources ou par relevé terrain.
+
+Fiches écartées volontairement (et pourquoi) :
+- noms génériques sans identité propre (« Restaurant », « Dibiterie », « Bar ») ;
+- bars sans restauration déclarée (« Bar » et « Pink Bar » à Ourossogui) ;
+- `amenity=internet_cafe` (« Multi Services Business » à Kaolack, « Miname Techno » à Touba) ;
+- doublon inter-sources arbitré manuellement (« Dibiterie Saf Sap », voir `docs/RAPPORT.md`).
+
+Les tags déclaratifs (`opening_hours`, `diet:*`, `wheelchair`, `stars`, `smoking`) sont
+retranscrits comme déclaratifs : aucun horaire, prix ou service n'en a été déduit.
