@@ -22,8 +22,8 @@ TABLES_ATTENDUES = {
     "entreprises",
     "etablissement_categories",
     "etablissement_exploitation",
-    "etablissement_services",
     "etablissement_sources",
+    "etablissement_services",
     "horaires",
     "images",
     "menus",
@@ -57,4 +57,4 @@ def test_inventaire_des_tables_du_generateur_est_explicite() -> None:
 def test_qualificateur_de_seed_ne_vaut_pas_migration_isolee() -> None:
     source = (RACINE / "tools/catalogue/schema_sql.py").read_text(encoding="utf-8")
     assert "ne crée aucun objet SQL" in source
-    assert "pas un parseur SQL" in source
+    assert "pas d'un parseur SQL" in source
