@@ -17,7 +17,7 @@ from typing import Any
 def _snapshot_public(conn: Any) -> dict[str, Any]:
     """Empreinte des relations publiques, colonnes, contraintes et lignes."""
     result: dict[str, Any] = {
-        "relations": {}, "functions": [], "policies": [], "triggers": [], "acl": []
+        "relations": {}, "functions": [], "policies": [], "triggers": [], "acl": [], "sequences": [], "catalogue_fks_to_public": []
     }
     with conn.cursor() as cur:
         cur.execute("""
@@ -28,6 +28,13 @@ def _snapshot_public(conn: Any) -> dict[str, Any]:
         """)
         relations = cur.fetchall()
         for name, kind in relations:
+            cur.execute("""
+                select c.relrowsecurity, c.relforcerowsecurity
+                from pg_class c
+                join pg_namespace n on n.oid = c.relnamespace
+                where n.nspname = 'public' and c.relname = %s
+            """, (name,))
+            rls_flags = cur.fetchone()
             cur.execute("""
                 select a.attname, format_type(a.atttypid, a.atttypmod), a.attnotnull,
                        pg_get_expr(d.adbin, d.adrelid)
@@ -63,6 +70,7 @@ def _snapshot_public(conn: Any) -> dict[str, Any]:
                 rows.sort()
             payload = {
                 "kind": kind,
+                "rls": rls_flags,
                 "columns": columns,
                 "constraints": constraints,
                 "indexes": indexes,
@@ -114,6 +122,28 @@ def _snapshot_public(conn: Any) -> dict[str, Any]:
             order by 1, 2, 3, 4
         """)
         result["acl"] = cur.fetchall()
+        cur.execute("""
+            select schemaname, sequencename, data_type, start_value, min_value,
+                   max_value, increment_by, cycle, cache_size, last_value
+            from pg_sequences
+            where schemaname = 'public'
+            order by sequencename
+        """)
+        result["sequences"] = cur.fetchall()
+        cur.execute("""
+            select sn.nspname, sc.relname, tn.nspname, tc.relname,
+                   con.conname, pg_get_constraintdef(con.oid, true)
+            from pg_constraint con
+            join pg_class sc on sc.oid = con.conrelid
+            join pg_namespace sn on sn.oid = sc.relnamespace
+            join pg_class tc on tc.oid = con.confrelid
+            join pg_namespace tn on tn.oid = tc.relnamespace
+            where con.contype = 'f'
+              and sn.nspname = 'catalogue'
+              and tn.nspname = 'public'
+            order by sc.relname, con.conname
+        """)
+        result["catalogue_fks_to_public"] = cur.fetchall()
     return json.loads(json.dumps(result, sort_keys=True, default=str))
 
 
@@ -147,6 +177,10 @@ def main() -> int:
             with conn.cursor() as cur:
                 cur.execute(migration.read_text(encoding="utf-8"))
         after = _snapshot_public(conn)
+        if after["catalogue_fks_to_public"]:
+            print("ÉCHEC : clés étrangères du catalogue vers public interdites :",
+                  after["catalogue_fks_to_public"])
+            return 1
         if before != after:
             before_relations = set(before["relations"])
             after_relations = set(after["relations"])
