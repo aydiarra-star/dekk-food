@@ -28,6 +28,7 @@ sys.path.insert(0, str(RACINE))
 
 FICHIERS = [
     RACINE / "supabase/schema.sql",
+    RACINE / "supabase/diagnostics/preflight_migrations_0001_0007.sql",
     RACINE / "supabase/migrations/0001_referentiel_et_catalogue.sql",
     RACINE / "supabase/migrations/0002_menus_images_services.sql",
     RACINE / "supabase/migrations/0003_securite_vues_admin.sql",
