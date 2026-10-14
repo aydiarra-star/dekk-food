@@ -50,6 +50,6 @@ Aucune migration, écriture SQL, modification de RLS/grants, seed ou changement 
 
 La fonction `generation.generer_sql(..., schema_cible="public")` accepte maintenant une cible explicite validée. La valeur par défaut reste strictement `public`, afin de ne pas modifier le seed existant lors des appels actuels. La qualification ne touche que les références SQL `public.` hors chaînes et commentaires ; les noms de schéma invalides sont refusés.
 
-Tests dédiés : `tools/tests/test_schema_sql_target.py` couvre le comportement historique par défaut, la qualification du SQL généré vers `catalogue`, la validation du nom et la préservation des littéraux/commentaires.
+Tests dédiés : `tools/tests/test_schema_sql_target.py` couvre le comportement historique par défaut, la qualification du SQL généré vers `catalogue`, la validation du nom et la préservation des littéraux/commentaires. Les cas de protection incluent aussi les chaînes dollar-quotées PostgreSQL, les chaînes `E'…'` avec antislashs et les commentaires de bloc imbriqués. Le qualificateur reste un outil textuel ciblé, pas un parseur SQL complet.
 
 **Portée limitée, non prête pour la production :** ce changement ne crée pas le schéma cible, ses tables, fonctions, contraintes, triggers, index, policies RLS ou grants. Il ne déplace pas les migrations et n'autorise pas l'exécution du seed vers `catalogue` tant que le schéma complet n'a pas été construit et testé dans PostgreSQL jetable. Le CLI et les migrations ne proposent pas encore de migration de production.
