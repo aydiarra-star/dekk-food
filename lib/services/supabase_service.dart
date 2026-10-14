@@ -4,26 +4,37 @@ import '../models/restaurant.dart';
 class SupabaseService {
   final SupabaseClient _client = Supabase.instance.client;
 
-  // Récupérer la liste des restaurants (avec filtre optionnel par quartier)
+  // Schéma historique observé : restaurants.id est integer et ne comporte
+  // pas de colonne is_active. La publication publique dépend des policies RLS.
   Future<List<Restaurant>> getRestaurants({String? neighborhoodQuery}) async {
-    var query = _client.from('restaurants').select().eq('is_active', true);
+    var query = _client.from('restaurants').select();
 
     if (neighborhoodQuery != null && neighborhoodQuery.isNotEmpty) {
       query = query.ilike('neighborhood', '%$neighborhoodQuery%');
     }
 
     final response = await query;
-    return (response as List).map((json) => Restaurant.fromJson(json)).toList();
+    return (response as List)
+        .map((json) => Restaurant.fromJson(Map<String, dynamic>.from(json)))
+        .toList();
   }
 
-  // Récupérer le menu d'un restaurant
+  // Schéma historique : restaurant_menus (id integer, restaurant_id integer,
+  // name, price, category, is_available). Pas de table menu_items.
   Future<List<MenuItem>> getMenuItems(String restaurantId) async {
+    final numericRestaurantId = int.tryParse(restaurantId);
+    if (numericRestaurantId == null) {
+      return [];
+    }
+
     final response = await _client
-        .from('menu_items')
+        .from('restaurant_menus')
         .select()
-        .eq('restaurant_id', restaurantId)
+        .eq('restaurant_id', numericRestaurantId)
         .eq('is_available', true);
 
-    return (response as List).map((json) => MenuItem.fromJson(json)).toList();
+    return (response as List)
+        .map((json) => MenuItem.fromJson(Map<String, dynamic>.from(json)))
+        .toList();
   }
 }
