@@ -252,3 +252,36 @@ def test_snapshot_detecte_une_modification_des_donnees_historiques():
         assert before != after
         assert before["relations"]["restaurants"]["row_count"] == 1
         assert before["functions"] != []
+
+
+def test_snapshot_detecte_une_modification_de_vue_et_type_personnalise():
+    try:
+        import pgserver  # type: ignore
+        import psycopg  # type: ignore
+    except ImportError as exc:
+        raise AssertionError(f"Les tests du harness exigent pgserver et psycopg : {exc}") from exc
+    server = pgserver.get_server(tempfile.mkdtemp(prefix="dekk-harness-types-"))
+    with psycopg.connect(server.get_uri(), autocommit=True) as conn:
+        with conn.cursor() as cur:
+            cur.execute("""
+                create table public.restaurants (id integer primary key, name text not null);
+                insert into public.restaurants values (42, 'Fiche témoin');
+                create view public.restaurant_summary as
+                    select id, name from public.restaurants where id > 0;
+                create type public.synthetic_status as enum ('draft', 'published');
+            """)
+        before = _snapshot_public(conn)
+        assert before["relations"]["restaurant_summary"]["view_definition"]
+        assert any(t[0] == "synthetic_status" and "draft,published" in t[5]
+                   for t in before["types"])
+        with conn.cursor() as cur:
+            cur.execute("""
+                create or replace view public.restaurant_summary as
+                    select id, name from public.restaurants where id >= 0;
+            """)
+            cur.execute("alter type public.synthetic_status add value 'archived'")
+        after = _snapshot_public(conn)
+        assert before["relations"]["restaurant_summary"]["view_definition"] != after["relations"]["restaurant_summary"]["view_definition"]
+        before_status = next(t for t in before["types"] if t[0] == "synthetic_status")
+        after_status = next(t for t in after["types"] if t[0] == "synthetic_status")
+        assert before_status != after_status
