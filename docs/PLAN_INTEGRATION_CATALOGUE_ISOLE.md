@@ -53,3 +53,20 @@ La fonction `generation.generer_sql(..., schema_cible="public")` accepte mainten
 Tests dédiés : `tools/tests/test_schema_sql_target.py` couvre le comportement historique par défaut, la qualification du SQL généré vers `catalogue`, la validation du nom et la préservation des littéraux/commentaires. Les cas de protection incluent aussi les chaînes dollar-quotées PostgreSQL, les chaînes `E'…'` avec antislashs et les commentaires de bloc imbriqués. Le qualificateur reste un outil textuel ciblé, pas un parseur SQL complet.
 
 **Portée limitée, non prête pour la production :** ce changement ne crée pas le schéma cible, ses tables, fonctions, contraintes, triggers, index, policies RLS ou grants. Il ne déplace pas les migrations et n'autorise pas l'exécution du seed vers `catalogue` tant que le schéma complet n'a pas été construit et testé dans PostgreSQL jetable. Le CLI et les migrations ne proposent pas encore de migration de production.
+
+## Tranche suivante — cible explicite depuis la CLI
+
+La commande `generer` accepte désormais `--schema-cible catalogue`. Le défaut reste `public`, et un test génère le seed dans un dossier temporaire pour vérifier que les requêtes utilisent `catalogue.*` sans toucher aux fichiers canoniques du dépôt. Exemple local, à utiliser uniquement pour produire un artefact de test :
+
+```bash
+python -m tools.catalogue.importateur generer data/seed/*.json --dossier /tmp/dekk-catalogue-test --schema-cible catalogue --date 2026-10-14
+```
+
+Cette option **ne crée pas** les tables, fonctions, vues, contraintes, policies ou privilèges du schéma cible. Elle ne doit donc pas servir à exécuter le seed dans une base réelle à ce stade.
+
+### Blocage identifié avant le test complet des migrations
+
+Les migrations contiennent du SQL dynamique construit dans des chaînes, par exemple dans la migration 0003 les appels `execute format('alter table public.%I ...')` et `execute format('create policy ... on public.%I ...')`. Le qualificateur de seed préserve volontairement les chaînes et ne réécrit donc pas ces références dynamiques. Les fonctions, vues et politiques de sécurité contiennent également des références croisées à contrôler. Appliquer simplement le qualificateur aux migrations laisserait des objets dans `public` et créerait un faux sentiment d'isolation.
+
+Avant de tester l'ensemble des migrations dans le schéma `catalogue`, il faut choisir une méthode de migration explicite (migrations paramétrables par schéma ou adaptation contrôlée et auditée du SQL dynamique), puis vérifier dans PostgreSQL jetable les objets créés, les dépendances et les permissions effectives. Aucun changement de production n'est autorisé par cette étape.
+
