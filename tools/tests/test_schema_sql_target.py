@@ -61,3 +61,15 @@ def test_qualificateurs_deja_qualifies_ne_sont_pas_requalifies():
     assert qualifier_schema_sql(sql, "catalogue") == (
         "select other.restaurants.id, catalogue.restaurants.id from other.restaurants;"
     )
+
+def test_ne_modifie_pas_les_chaines_ou_commentaires_sql():
+    sql = (
+        "select public.restaurants.id, 'https://example.test/public.example' as url; "
+        "-- public.ne_pas_remplacer\n"
+        "/* public.non_plus */ select 1;"
+    )
+    resultat = qualifier_schema_sql(sql, "catalogue")
+    assert "select catalogue.restaurants.id" in resultat
+    assert "'https://example.test/public.example'" in resultat
+    assert "-- public.ne_pas_remplacer" in resultat
+    assert "/* public.non_plus */" in resultat
