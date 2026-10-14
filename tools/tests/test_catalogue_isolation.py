@@ -114,3 +114,49 @@ def test_catalogue_uuid_coexiste_seed_idempotent_et_rls_isole():
                 where n.nspname = 'catalogue' and c.relname = 'restaurants'
             """)
             assert cur.fetchone() == (True,)
+
+            # Le POC ne crée aucun objet relationnel supplémentaire dans public.
+            cur.execute("""
+                select table_name
+                from information_schema.tables
+                where table_schema = 'public' and table_type = 'BASE TABLE'
+                order by table_name
+            """)
+            assert cur.fetchall() == [
+                ("restaurant_menus",),
+                ("restaurant_reviews",),
+                ("restaurants",),
+            ]
+
+            # Les identifiants du catalogue restent UUID ; les identifiants
+            # historiques restent integer, sans FK entre les deux modèles.
+            cur.execute("""
+                select data_type
+                from information_schema.columns
+                where table_schema = 'catalogue'
+                  and table_name = 'restaurants'
+                  and column_name = 'id'
+            """)
+            assert cur.fetchone() == ("uuid",)
+
+            cur.execute("""
+                select data_type
+                from information_schema.columns
+                where table_schema = 'public'
+                  and table_name = 'restaurants'
+                  and column_name = 'id'
+            """)
+            assert cur.fetchone() == ("integer",)
+
+            cur.execute("""
+                select count(*)
+                from pg_constraint fk
+                join pg_class source_table on source_table.oid = fk.conrelid
+                join pg_namespace source_schema on source_schema.oid = source_table.relnamespace
+                join pg_class target_table on target_table.oid = fk.confrelid
+                join pg_namespace target_schema on target_schema.oid = target_table.relnamespace
+                where fk.contype = 'f'
+                  and source_schema.nspname = 'catalogue'
+                  and target_schema.nspname = 'public'
+            """)
+            assert cur.fetchone() == (0,), "Une FK du catalogue pointe vers le modèle historique public."
