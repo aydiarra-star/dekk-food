@@ -387,6 +387,7 @@ def executer_verifications() -> int:
                 return None
             finally:
                 executer("reset role;")
+                executer("select set_config('dekkfood.utilisateur_id', '', false);")
 
         def exiger_refus_role(description: str, role: str, utilisateur: str, sql: str) -> None:
             """Exige que PostgreSQL refuse l'exécution de la requête sous ce rôle."""
@@ -410,6 +411,7 @@ def executer_verifications() -> int:
                     print(f"OK     refus effectif ({role}) : {description}")
             finally:
                 executer("reset role;")
+                executer("select set_config('dekkfood.utilisateur_id', '', false);")
 
         def controler(description: str, obtenu, attendu) -> None:
             nonlocal echecs
@@ -681,74 +683,146 @@ def executer_verifications() -> int:
                 f"select "
                 f"has_table_privilege('anon', 'public.{vue}', 'SELECT'), "
                 f"has_table_privilege('authenticated', 'public.{vue}', 'SELECT'), "
-                f"has_table_privilege('restaurateur', 'public.{vue}', 'SELECT'), "
+                f"has_table_privilege('authenticated', 'public.{vue}', 'INSERT'), "
+                f"has_table_privilege('authenticated', 'public.{vue}', 'UPDATE'), "
+                f"has_table_privilege('authenticated', 'public.{vue}', 'DELETE'), "
                 f"has_table_privilege('administrateur', 'public.{vue}', 'SELECT'), "
                 f"has_table_privilege('service_role', 'public.{vue}', 'SELECT');"
             )[0]
             controler(
-                f"privilèges effectifs de public.{vue} (anon=F, auth=F, resto=F, admin=V, service=V)",
+                f"privilèges effectifs de public.{vue} (anon=F, auth_sel=V, auth_ins/upd/del=F, admin=V, service=V)",
                 privs,
-                (False, False, False, True, True),
+                (False, True, False, False, False, True, True),
             )
-            # Refus d'exécution sous chaque rôle et profil non autorisé
-            exiger_refus_role(f"lecture de public.{vue} par anon", "anon", "", f"select * from public.{vue};")
-            exiger_refus_role(
-                f"lecture de public.{vue} par authenticated sans compte",
-                "authenticated", "", f"select * from public.{vue};",
-            )
-            exiger_refus_role(
-                f"lecture de public.{vue} par un compte authentifié ordinaire",
-                "authenticated", INCONNU, f"select * from public.{vue};",
-            )
-            exiger_refus_role(
-                f"lecture de public.{vue} par un compte lecteur",
-                "authenticated", LECTEUR, f"select * from public.{vue};",
-            )
-            exiger_refus_role(
-                f"lecture de public.{vue} par un compte administrateur inactif (rôle authenticated)",
-                "authenticated", INACTIF_ADMIN, f"select * from public.{vue};",
-            )
-            exiger_refus_role(
-                f"lecture de public.{vue} par un compte administrateur inactif (rôle administrateur)",
-                "administrateur", INACTIF_ADMIN, f"select * from public.{vue};",
-            )
-            exiger_refus_role(
-                f"lecture de public.{vue} par un compte restaurateur inactif",
-                "restaurateur", INACTIF_RESTO, f"select * from public.{vue};",
-            )
-            exiger_refus_role(
-                f"lecture de public.{vue} par un restaurateur (rôle restaurateur)",
-                "restaurateur", RESTO, f"select * from public.{vue};",
-            )
-            exiger_refus_role(
-                f"lecture de public.{vue} par un restaurateur (rôle authenticated)",
-                "authenticated", RESTO, f"select * from public.{vue};",
-            )
-            exiger_refus_role(
-                f"lecture de public.{vue} par un restaurateur rattaché à une autre fiche",
-                "restaurateur", RESTO_AUTRE_PRIVE, f"select * from public.{vue};",
-            )
-            exiger_refus_role(
-                f"lecture de public.{vue} par un restaurateur d'une fiche publiée",
-                "restaurateur", RESTO_AUTRE_PUBLIC, f"select * from public.{vue};",
-            )
+            # Refus d'exécution (SQLSTATE 42501) sous chaque rôle et profil non autorisé
+            # sur SELECT * comme sur SELECT count(*)
+            for req_vue in (f"select * from public.{vue};", f"select count(*) from public.{vue};"):
+                exiger_refus_role(f"lecture ({req_vue}) par anon", "anon", "", req_vue)
+                exiger_refus_role(
+                    f"lecture ({req_vue}) par authenticated sans compte",
+                    "authenticated", "", req_vue,
+                )
+                exiger_refus_role(
+                    f"lecture ({req_vue}) par un compte authentifié ordinaire",
+                    "authenticated", INCONNU, req_vue,
+                )
+                exiger_refus_role(
+                    f"lecture ({req_vue}) par un compte lecteur",
+                    "authenticated", LECTEUR, req_vue,
+                )
+                exiger_refus_role(
+                    f"lecture ({req_vue}) par un compte administrateur inactif (rôle authenticated)",
+                    "authenticated", INACTIF_ADMIN, req_vue,
+                )
+                exiger_refus_role(
+                    f"lecture ({req_vue}) par un compte administrateur inactif (rôle administrateur)",
+                    "administrateur", INACTIF_ADMIN, req_vue,
+                )
+                exiger_refus_role(
+                    f"lecture ({req_vue}) par un compte restaurateur inactif",
+                    "restaurateur", INACTIF_RESTO, req_vue,
+                )
+                exiger_refus_role(
+                    f"lecture ({req_vue}) par un restaurateur (rôle restaurateur)",
+                    "restaurateur", RESTO, req_vue,
+                )
+                exiger_refus_role(
+                    f"lecture ({req_vue}) par un restaurateur (rôle authenticated / JWT Supabase)",
+                    "authenticated", RESTO, req_vue,
+                )
+                exiger_refus_role(
+                    f"lecture ({req_vue}) par un restaurateur rattaché à une autre fiche (rôle restaurateur)",
+                    "restaurateur", RESTO_AUTRE_PRIVE, req_vue,
+                )
+                exiger_refus_role(
+                    f"lecture ({req_vue}) par un restaurateur rattaché à une autre fiche (rôle authenticated)",
+                    "authenticated", RESTO_AUTRE_PRIVE, req_vue,
+                )
+                exiger_refus_role(
+                    f"lecture ({req_vue}) par un restaurateur d'une fiche publiée (rôle authenticated)",
+                    "authenticated", RESTO_AUTRE_PUBLIC, req_vue,
+                )
 
-        # Accès légitime de l'administrateur actif aux vues internes
+        # Accès légitime de l'administrateur actif aux vues internes :
+        # 1) sous le rôle dédié `administrateur` ;
+        # 2) sous le rôle standard Supabase PostgREST `authenticated` avec claim JWT `request.jwt.claims`.
         attendus_admin_vues = {
             "v_acces_comptes": recuperer("select count(*) from public.utilisateurs_admin;")[0][0],
             "v_cloisonnement_public": total_fiches,
             "v_publication_catalogue": total_fiches,
             "v_fiches_a_valider": total_fiches - non_publiees,
             "v_file_travail": total_fiches,
+            "v_doublons_a_examiner": 10,
             "v_qualite_catalogue": 1,
             "v_couverture_par_region": 14,
+            "v_couverture_par_ville": recuperer("select count(*) from public.v_couverture_par_ville;")[0][0],
+            "v_couverture_par_categorie": recuperer("select count(*) from public.v_couverture_par_categorie;")[0][0],
         }
         for vue, attendu in attendus_admin_vues.items():
             controler(
-                f"administrateur actif : lecture de public.{vue}",
+                f"administrateur actif (rôle administrateur) : lecture de public.{vue}",
                 compter("administrateur", ADMIN, f"select count(*) from public.{vue};"),
                 attendu,
             )
+            controler(
+                f"administrateur actif (rôle Supabase authenticated + utilisateur_id) : lecture de public.{vue}",
+                compter("authenticated", ADMIN, f"select count(*) from public.{vue};"),
+                attendu,
+            )
+
+        # Simulation exacte de PostgREST sous Supabase (`SET LOCAL ROLE authenticated`
+        # + GUC `request.jwt.claims` sans `dekkfood.utilisateur_id` ni `service_role`) :
+        try:
+            executer("begin;")
+            executer("select set_config('dekkfood.utilisateur_id', '', true);")
+            executer(
+                f"""select set_config('request.jwt.claims', '{{"sub": "{ADMIN}", "role": "authenticated"}}', true);"""
+            )
+            executer("set local role authenticated;")
+            uid_jwt, est_admin_jwt = recuperer(
+                "select public.utilisateur_courant()::text, public.est_administrateur();"
+            )[0]
+            controler("PostgREST JWT (admin) : utilisateur_courant() extrait du claim sub", uid_jwt, ADMIN)
+            controler("PostgREST JWT (admin) : est_administrateur() vaut true sous rôle authenticated", est_admin_jwt, True)
+            for vue, attendu in attendus_admin_vues.items():
+                lu_jwt = recuperer(f"select count(*) from public.{vue};")[0][0]
+                controler(f"PostgREST JWT (admin sous rôle authenticated) : lecture de public.{vue}", lu_jwt, attendu)
+            nb_doublons_jwt = recuperer("select public.detecter_doublons();")[0][0]
+            controler("PostgREST JWT (admin sous rôle authenticated) : appel detecter_doublons()", nb_doublons_jwt >= 0, True)
+        finally:
+            executer("rollback;")
+            executer("reset role;")
+            executer("select set_config('request.jwt.claims', '', false);")
+
+        # Contre-épreuve PostgREST JWT : un utilisateur ordinaire ou un restaurateur
+        # avec un JWT `{"role": "authenticated", "sub": "..."}` reçoit SQLSTATE 42501.
+        for profil_jwt, sub_jwt in (
+            ("ordinaire", INCONNU),
+            ("lecteur", LECTEUR),
+            ("admin inactif", INACTIF_ADMIN),
+            ("restaurateur", RESTO),
+        ):
+            try:
+                executer("begin;")
+                executer("select set_config('dekkfood.utilisateur_id', '', true);")
+                executer(
+                    f"""select set_config('request.jwt.claims', '{{"sub": "{sub_jwt}", "role": "authenticated"}}', true);"""
+                )
+                executer("set local role authenticated;")
+                try:
+                    executer("select * from public.v_acces_comptes;")
+                    print(f"ÉCHEC  PostgREST JWT ({profil_jwt}) a pu lire v_acces_comptes")
+                    echecs += 1
+                except Exception as exc_jwt:  # noqa: BLE001
+                    if "42501" in str(exc_jwt) or "Accès refusé" in str(exc_jwt):
+                        print(f"OK     PostgREST JWT ({profil_jwt}) refusé sur v_acces_comptes (SQLSTATE 42501)")
+                    else:
+                        print(f"ÉCHEC  PostgREST JWT ({profil_jwt}) erreur inattendue : {exc_jwt}")
+                        echecs += 1
+            finally:
+                executer("rollback;")
+                executer("reset role;")
+                executer("select set_config('request.jwt.claims', '', false);")
 
         # 11. Parcours publics légitimes préservés (vues publiques, menus, contacts, fiches publiées).
         fiches_publiees_attendues = total_fiches - non_publiees
@@ -897,17 +971,21 @@ def executer_verifications() -> int:
                 f"select "
                 f"has_function_privilege('anon', '{fn_signature}', 'EXECUTE'), "
                 f"has_function_privilege('authenticated', '{fn_signature}', 'EXECUTE'), "
-                f"has_function_privilege('restaurateur', '{fn_signature}', 'EXECUTE'), "
-                f"has_function_privilege('administrateur', '{fn_signature}', 'EXECUTE');"
+                f"has_function_privilege('administrateur', '{fn_signature}', 'EXECUTE'), "
+                f"has_function_privilege('service_role', '{fn_signature}', 'EXECUTE');"
             )[0]
             controler(
-                f"EXECUTE sur {fn_signature} (anon=F, auth=F, resto=F, admin=V)",
+                f"EXECUTE sur {fn_signature} (anon=F, auth=V+garde, admin=V, service=V)",
                 privs_fn,
-                (False, False, False, True),
+                (False, True, True, True),
             )
             for role_fn, user_fn in (
                 ("anon", ""),
+                ("authenticated", ""),
                 ("authenticated", INCONNU),
+                ("authenticated", LECTEUR),
+                ("authenticated", RESTO),
+                ("authenticated", INACTIF_ADMIN),
                 ("restaurateur", RESTO),
                 ("administrateur", INACTIF_ADMIN),
             ):

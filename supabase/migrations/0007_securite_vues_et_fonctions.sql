@@ -23,25 +23,37 @@
 --      `public.journaliser` n'avaient pas de `search_path` figé et conservaient
 --      des droits `EXECUTE` ouverts à `PUBLIC` / `anon` / `authenticated`.
 --
--- PRINCIPE DE LA CORRECTION (défense en profondeur côté PostgreSQL)
---   • Création des rôles PostgreSQL dédiés `administrateur` et `restaurateur`
---     (héritant de `authenticated` pour les politiques RLS des tables).
---   • Révocation de `SELECT` sur les 10 vues internes pour `PUBLIC`, `anon`,
---     `authenticated` et `restaurateur` ; attribution de `SELECT` aux seuls
---     rôles `administrateur` et `service_role`.
+-- PRINCIPE DE LA CORRECTION (défense en profondeur compatible Supabase / PostgREST)
+--   • Compatibilité Supabase Auth / PostgREST : sous Supabase, tout utilisateur
+--     connecté (ordinaire, restaurateur ou administrateur) reçoit un JWT dont le
+--     claim `role` vaut `authenticated` et le claim `sub` vaut l'UUID du compte
+--     (`auth.uid()`). Un administrateur réel se connecte donc sous le rôle
+--     PostgreSQL `authenticated` (sans jamais embarquer `service_role` dans le
+--     client Flutter ou le navigateur) et est identifié par sa présence active
+--     dans `public.utilisateurs_admin` (`role in ('admin', 'editeur')` et
+--     `actif = true`).
+--   • Révocation totale (`REVOKE ALL`) sur les 10 vues internes pour `PUBLIC`,
+--     `anon` et `restaurateur` ; attribution du seul droit `SELECT` (aucun droit
+--     d'écriture) à `authenticated`, `administrateur` et `service_role`.
 --   • Activation de `security_invoker = true` et `security_barrier = true` sur
---     les 12 vues du schéma `public` (aucune vue ne s'exécute plus sous les
---     droits de son propriétaire).
---   • Garde explicite `public.exiger_acces_administration()` dans chacune des
---     10 vues internes : même sous le rôle `administrateur`, l'appel échoue
---     (SQLSTATE 42501) si le compte courant n'est pas un administrateur actif
---     dans `public.utilisateurs_admin` (ou `service_role` / superutilisateur).
+--     les 12 vues du schéma `public` : aucune vue ne s'exécute plus sous les
+--     droits de son propriétaire (`postgres`), la RLS des tables sources
+--     s'applique toujours à l'appelant.
+--   • Garde bloquante `public.exiger_acces_administration()` (compilée par
+--     PostgreSQL en `One-Time Filter` avant tout parcours de table) dans chacune
+--     des 10 vues internes : tout appel par un compte `authenticated` ordinaire,
+--     un compte `lecteur`, un compte inactif ou un `restaurateur` lève
+--     immédiatement une erreur PostgreSQL `SQLSTATE 42501`
+--     (`insufficient_privilege`), tandis qu'un administrateur actif (`auth.uid()`
+--     actif dans `utilisateurs_admin`) est autorisé sous `authenticated` comme
+--     sous `administrateur`.
 --   • Préservation des parcours publics : `v_etablissements_publics` et
 --     `v_plats_publics` restent lisibles par `anon` et `authenticated` avec
 --     `security_invoker = true` et filtrage strict des fiches publiées.
 --   • Durcissement des fonctions `SECURITY DEFINER` et d'administration :
 --     `search_path = public, pg_temp` partout, `EXECUTE` révoqué pour `PUBLIC`,
---     `anon`, `authenticated` et `restaurateur` sur les fonctions d'administration.
+--     `anon` et `restaurateur`, et garde `exiger_acces_administration()` en
+--     entrée des fonctions d'administration.
 -- =============================================================================
 
 -- -----------------------------------------------------------------------------
@@ -67,8 +79,57 @@ grant select, insert, update, delete on all tables in schema public to service_r
 grant usage, select on all sequences in schema public to administrateur, restaurateur, service_role;
 
 -- -----------------------------------------------------------------------------
--- 2. Garde d'administration active et durcissement des politiques sensibles
+-- 2. Identité Supabase / PostgREST et garde d'administration active
 -- -----------------------------------------------------------------------------
+-- Lecture unifiée de l'identité courante :
+--   1. `auth.uid()` sur une instance Supabase ;
+--   2. claims JWT posés par PostgREST (`request.jwt.claim.sub` ou
+--      `request.jwt.claims` -> `sub`) ;
+--   3. paramètre de session `dekkfood.utilisateur_id` (harnais de test SQL).
+create or replace function public.utilisateur_courant()
+returns uuid
+language plpgsql
+stable
+security invoker
+set search_path = public, pg_temp
+as $$
+declare
+  v_uid uuid;
+  v_sub text;
+  v_claims text;
+begin
+  if to_regprocedure('auth.uid()') is not null then
+    execute 'select auth.uid()' into v_uid;
+    if v_uid is not null then
+      return v_uid;
+    end if;
+  end if;
+
+  v_sub := nullif(btrim(current_setting('request.jwt.claim.sub', true)), '');
+  if v_sub is not null then
+    return v_sub::uuid;
+  end if;
+
+  v_claims := nullif(btrim(current_setting('request.jwt.claims', true)), '');
+  if v_claims is not null then
+    v_sub := nullif(btrim(v_claims::jsonb ->> 'sub'), '');
+    if v_sub is not null then
+      return v_sub::uuid;
+    end if;
+  end if;
+
+  v_sub := nullif(btrim(current_setting('dekkfood.utilisateur_id', true)), '');
+  if v_sub is not null then
+    return v_sub::uuid;
+  end if;
+
+  return null;
+end;
+$$;
+
+comment on function public.utilisateur_courant() is
+  'Identifiant UUID de l''utilisateur courant : auth.uid() sous Supabase, claim JWT sub sous PostgREST, ou dekkfood.utilisateur_id en test SQL.';
+
 create or replace function public.exiger_acces_administration()
 returns boolean
 language plpgsql
@@ -79,6 +140,15 @@ as $$
 declare
   v_role_effectif text := coalesce(nullif(current_setting('role', true), 'none'), current_user);
 begin
+  -- Un rôle explicitement positionné à `restaurateur` ou `anon` n'est jamais
+  -- autorisé à consulter une vue d'administration, même si un identifiant
+  -- résiduel était présent en session.
+  if v_role_effectif in ('anon', 'restaurateur') then
+    raise exception 'Accès refusé : le rôle % n''est pas autorisé à accéder aux vues ou opérations d''administration.',
+      v_role_effectif
+      using errcode = '42501';
+  end if;
+
   if public.est_administrateur()
      or (
        public.utilisateur_courant() is null
@@ -370,7 +440,13 @@ where public.exiger_acces_administration()
 order by u.role, u.email;
 
 -- Attribution stricte des privilèges sur les 10 vues internes :
--- aucun accès pour PUBLIC, anon, authenticated ou restaurateur.
+-- - aucun accès pour PUBLIC, anon ou restaurateur ;
+-- - SELECT seul (aucun INSERT/UPDATE/DELETE) pour authenticated (requis par
+--   PostgREST lorsqu'un administrateur connecté présente un JWT Supabase de rôle
+--   `authenticated`), administrateur et service_role ;
+-- - tout compte `authenticated` non administrateur actif est bloqué dès l'entrée
+--   de la vue par `One-Time Filter: public.exiger_acces_administration()`
+--   (SQLSTATE 42501) et par `security_invoker = true`.
 do $$
 declare
   vue_interne text;
@@ -393,7 +469,7 @@ begin
       vue_interne
     );
     execute format(
-      'grant select on public.%I to administrateur, service_role',
+      'grant select on public.%I to authenticated, administrateur, service_role',
       vue_interne
     );
   end loop;
@@ -629,18 +705,20 @@ alter function public.similarite_chaines(text, text) set search_path = public, p
 alter function public.similarite_noms(text, text) set search_path = public, pg_temp;
 alter function public.cle_nom_tel(text) set search_path = public, pg_temp;
 
--- 5.4 Droits EXECUTE stricts : aucune élargissement, fermeture des fonctions d'admin.
+-- 5.4 Droits EXECUTE stricts : aucune exposition à PUBLIC / anon / restaurateur,
+--     compatibilité PostgREST (`authenticated` + garde `exiger_acces_administration()`
+--     ou `est_administrateur()` qui lève une exception pour tout non-admin).
 revoke all on function public.detecter_doublons(numeric, integer, numeric) from public, anon, authenticated, restaurateur;
-grant execute on function public.detecter_doublons(numeric, integer, numeric) to administrateur, service_role;
+grant execute on function public.detecter_doublons(numeric, integer, numeric) to authenticated, administrateur, service_role;
 
 revoke all on function public.valider_fiche_par_controle(uuid, text, text, text) from public, anon, authenticated, restaurateur;
-grant execute on function public.valider_fiche_par_controle(uuid, text, text, text) to administrateur, service_role;
+grant execute on function public.valider_fiche_par_controle(uuid, text, text, text) to authenticated, administrateur, service_role;
 
 revoke all on function public.devalider_fiche(uuid, text) from public, anon, authenticated, restaurateur;
-grant execute on function public.devalider_fiche(uuid, text) to administrateur, service_role;
+grant execute on function public.devalider_fiche(uuid, text) to authenticated, administrateur, service_role;
 
 revoke all on function public.exiger_acces_administration() from public, anon, authenticated, restaurateur;
-grant execute on function public.exiger_acces_administration() to administrateur, service_role;
+grant execute on function public.exiger_acces_administration() to authenticated, administrateur, service_role;
 
 revoke all on function public.journaliser() from public, anon;
 grant execute on function public.journaliser() to authenticated, restaurateur, administrateur, service_role;

@@ -234,17 +234,28 @@ Constat complémentaire sur le commit `6a09d16` :
    `search_path` figé et `detecter_doublons` restait exécutable par `PUBLIC` / `anon`.
 
 Corrections apportées (`0007_securite_vues_et_fonctions.sql`) :
+- Compatibilité Supabase Auth / PostgREST (sans `service_role` côté client) : sous
+  Supabase, un administrateur réel connecté reçoit un JWT de rôle PostgreSQL
+  `authenticated` et d'identifiant `sub` (`auth.uid()`). `public.utilisateur_courant()`
+  lit dans l'ordre `auth.uid()`, les claims PostgREST (`request.jwt.claim.sub` /
+  `request.jwt.claims->>'sub'`) et `dekkfood.utilisateur_id`.
 - Rôles PostgreSQL dédiés `administrateur` et `restaurateur` (héritant de `authenticated`
   pour les politiques RLS des tables).
 - `security_invoker = true` et `security_barrier = true` activés sur les **12 vues** du
   schéma `public`.
-- `REVOKE ALL ... FROM PUBLIC, anon, authenticated, restaurateur` et
-  `GRANT SELECT ... TO administrateur, service_role` sur les **10 vues internes**
-  (`v_acces_comptes`, `v_cloisonnement_public`, `v_publication_catalogue`,
-  `v_fiches_a_valider`, `v_file_travail`, `v_doublons_a_examiner`, `v_qualite_catalogue`,
-  `v_couverture_par_region`, `v_couverture_par_ville`, `v_couverture_par_categorie`),
-  doublés de la garde `public.exiger_acces_administration()` (lève `SQLSTATE 42501` si le
-  compte courant n'est pas un administrateur actif).
+- `REVOKE ALL ... FROM PUBLIC, anon, restaurateur` et attribution du seul privilège
+  `SELECT` (aucun `INSERT/UPDATE/DELETE`) à `authenticated, administrateur, service_role`
+  sur les **10 vues internes** (`v_acces_comptes`, `v_cloisonnement_public`,
+  `v_publication_catalogue`, `v_fiches_a_valider`, `v_file_travail`,
+  `v_doublons_a_examiner`, `v_qualite_catalogue`, `v_couverture_par_region`,
+  `v_couverture_par_ville`, `v_couverture_par_categorie`), doublés d'une garde
+  bloquante `WHERE public.exiger_acces_administration()` compilée par PostgreSQL en
+  `One-Time Filter` avant tout parcours de table : tout appel par un compte
+  `authenticated` non administrateur actif (ordinaire, `lecteur`, `admin` inactif ou
+  `restaurateur`) lève immédiatement `SQLSTATE 42501` (`insufficient_privilege`), tandis
+  qu'un administrateur actif (`role in ('admin', 'editeur')` et `actif = true` dans
+  `public.utilisateurs_admin`) est autorisé sous `SET LOCAL ROLE authenticated` (mode
+  PostgREST standard) comme sous `SET ROLE administrateur`.
 - `v_etablissements_publics` et `v_plats_publics` réservées en lecture (`SELECT`) à `anon`,
   `authenticated`, `restaurateur`, `administrateur` et `service_role` avec
   `security_invoker = true` et filtrage strict des fiches publiées.
@@ -253,9 +264,10 @@ Corrections apportées (`0007_securite_vues_et_fonctions.sql`) :
   `motif_non_publication`, `statut_validation`, `validation_par`, `validation_le`,
   `derniere_verification_le` ou `commentaire_verification`.
 - `search_path = public, pg_temp` fixé sur les **17 fonctions** du schéma `public`, et
-  `EXECUTE` révoqué pour `PUBLIC`, `anon`, `authenticated` et `restaurateur` sur
+  `EXECUTE` révoqué pour `PUBLIC`, `anon` et `restaurateur` sur
   `detecter_doublons`, `valider_fiche_par_controle`, `devalider_fiche` et
-  `exiger_acces_administration`.
+  `exiger_acces_administration` (exécutables uniquement par un administrateur actif via
+  `exiger_acces_administration()` / `est_administrateur()`).
 
 ## Catalogue distribué et catalogue interne (réduction à la génération)
 

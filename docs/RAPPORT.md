@@ -369,27 +369,42 @@ reproduits **avant** correction, puis revérifiés après.
   `anon` et `authenticated` sans `search_path` figé, et la garde `WITH CHECK` sur
   `restaurants` lisait la nouvelle ligne au lieu de `OLD`.
 - **Corrections (`0007_securite_vues_et_fonctions.sql`)** :
+  - compatibilité Supabase Auth / PostgREST (sans jamais exposer `service_role` dans
+    Flutter ou le navigateur) : sous Supabase, un administrateur connecté reçoit un JWT
+    portant `"role": "authenticated"` et `"sub": "<uuid_admin>"`. `public.utilisateur_courant()`
+    résout `auth.uid()`, les claims JWT PostgREST (`request.jwt.claim.sub` /
+    `request.jwt.claims->>'sub'`) et `dekkfood.utilisateur_id` ;
   - création des rôles PostgreSQL `administrateur` et `restaurateur` ;
   - activation de `security_invoker = true, security_barrier = true` sur les 12 vues ;
-  - révocation de `SELECT` pour `PUBLIC, anon, authenticated, restaurateur` sur les 10 vues
-    internes (`v_acces_comptes`, `v_cloisonnement_public`, `v_publication_catalogue`,
-    `v_fiches_a_valider`, `v_file_travail`, `v_doublons_a_examiner`, `v_qualite_catalogue`,
-    `v_couverture_par_region`, `v_couverture_par_ville`, `v_couverture_par_categorie`),
-    accordé uniquement à `administrateur, service_role`, avec garde active
-    `public.exiger_acces_administration()` (`SQLSTATE 42501`) ;
+  - révocation totale (`REVOKE ALL`) pour `PUBLIC, anon, restaurateur` et attribution du
+    seul droit `SELECT` (aucun droit d'écriture) à `authenticated, administrateur, service_role`
+    sur les 10 vues internes (`v_acces_comptes`, `v_cloisonnement_public`,
+    `v_publication_catalogue`, `v_fiches_a_valider`, `v_file_travail`,
+    `v_doublons_a_examiner`, `v_qualite_catalogue`, `v_couverture_par_region`,
+    `v_couverture_par_ville`, `v_couverture_par_categorie`), couplée à la garde bloquante
+    `WHERE public.exiger_acces_administration()` (compilée par PostgreSQL en
+    `One-Time Filter` avant tout parcours de table) qui lève immédiatement `SQLSTATE 42501`
+    pour tout appelant `authenticated` non administrateur actif, tout en autorisant un
+    administrateur actif (`role in ('admin', 'editeur')` et `actif = true` dans
+    `public.utilisateurs_admin`) sous `SET LOCAL ROLE authenticated` (PostgREST) comme
+    sous `SET ROLE administrateur` ;
   - déclencheur `BEFORE UPDATE` `trg_restaurants_controle_modification` bloquant toute
     modification de `niveau_verification`, `est_publication_visible`,
     `motif_non_publication`, `statut_validation` ou `commentaire_verification` par un non-admin ;
   - `search_path = public, pg_temp` sur les 17 fonctions du schéma `public`, et révocation
     de `EXECUTE` sur `detecter_doublons`, `valider_fiche_par_controle`, `devalider_fiche`
-    et `exiger_acces_administration` pour `PUBLIC, anon, authenticated, restaurateur`.
-- **Vérifications ajoutées au harnais PostgreSQL et à la CI** : refus d'accès prouvé sur
-  chacune des 10 vues internes et des fonctions d'administration sous `anon`,
-  `authenticated` sans compte, compte authentifié ordinaire, compte `lecteur`, compte
-  `admin` inactif (y compris sous le rôle `administrateur`), compte `restaurateur` inactif,
-  `restaurateur` de la fiche 1 et `restaurateur` rattaché à une autre fiche ; accès
-  administrateur actif et parcours publics (`v_etablissements_publics`, `v_plats_publics`)
-  préservés.
+    et `exiger_acces_administration` pour `PUBLIC, anon, restaurateur` (garde active
+    `exiger_acces_administration()` / `est_administrateur()` levant `SQLSTATE 42501` pour
+    tout compte `authenticated` non administrateur).
+- **Vérifications ajoutées au harnais PostgreSQL et à la CI** : refus d'accès prouvé
+  (`SQLSTATE 42501` sur `SELECT *` et `SELECT count(*)`) sur chacune des 10 vues internes
+  et des fonctions d'administration sous `anon`, `authenticated` sans compte, compte
+  authentifié ordinaire, compte `lecteur`, compte `admin` inactif (sous `authenticated` et
+  sous `administrateur`), compte `restaurateur` inactif, `restaurateur` de la fiche 1 et
+  `restaurateur` rattaché à une autre fiche (sous `restaurateur` et sous `authenticated` /
+  JWT PostgREST) ; accès administrateur actif vérifié sous `SET ROLE administrateur` et
+  sous simulation PostgREST (`SET LOCAL ROLE authenticated` + `request.jwt.claims`) ;
+  parcours publics (`v_etablissements_publics`, `v_plats_publics`) préservés.
 
 ### 5.4 Ce qui n'a pas été fait, et pourquoi
 
