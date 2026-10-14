@@ -99,3 +99,10 @@ def test_refuse_un_sql_qui_n_est_pas_une_chaine():
     with pytest.raises(TypeError):
         qualifier_schema_sql(None, "catalogue")
 
+def test_preserve_les_chaines_postgresql_avec_echappement_e():
+    sql = "select E'foo\\' public.interieur' as valeur, public.restaurants.id;"
+    resultat = qualifier_schema_sql(sql, "catalogue")
+    assert "E'foo\\' public.interieur'" in resultat
+    assert "catalogue.restaurants.id" in resultat
+    assert "catalogue.interieur" not in resultat
+
