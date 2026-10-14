@@ -44,3 +44,12 @@ Les migrations ajoutent également fonctions, triggers, vues, contraintes, polit
 ## Interdictions maintenues
 
 Aucune migration, écriture SQL, modification de RLS/grants, seed ou changement de données sur Supabase de production pendant cette phase. Ne pas fusionner et ne pas déployer avant les critères ci-dessus.
+
+
+## Première tranche de refactorisation livrée — générateur SQL
+
+La fonction `generation.generer_sql(..., schema_cible="public")` accepte maintenant une cible explicite validée. La valeur par défaut reste strictement `public`, afin de ne pas modifier le seed existant lors des appels actuels. La qualification ne touche que les références SQL `public.` hors chaînes et commentaires ; les noms de schéma invalides sont refusés.
+
+Tests dédiés : `tools/tests/test_schema_sql_target.py` couvre le comportement historique par défaut, la qualification du SQL généré vers `catalogue`, la validation du nom et la préservation des littéraux/commentaires.
+
+**Portée limitée, non prête pour la production :** ce changement ne crée pas le schéma cible, ses tables, fonctions, contraintes, triggers, index, policies RLS ou grants. Il ne déplace pas les migrations et n'autorise pas l'exécution du seed vers `catalogue` tant que le schéma complet n'a pas été construit et testé dans PostgreSQL jetable. Le CLI et les migrations ne proposent pas encore de migration de production.
