@@ -2364,12 +2364,12 @@
    "quartier": "Sphères Ministérielles",
    "quartier_libre": "Diamniadio",
    "ville_libre": null,
-   "adresse": "Sphères Ministérielles, Diamniadio",
+   "adresse": null,
    "points_de_repere": null,
    "latitude": null,
    "longitude": null,
    "gps_verifie": false,
-   "telephone": "+221781112233",
+   "telephone": null,
    "telephone_confirme": false,
    "whatsapp": null,
    "whatsapp_confirme": false,
@@ -2379,25 +2379,13 @@
    "instagram": null,
    "commande_en_ligne_url": null,
    "reservation_url": null,
-   "fourchette_prix": {
-    "min": 2500,
-    "max": 6000,
-    "devise": "XOF",
-    "libelle": "2 500 – 6 000 XOF",
-    "confirmee": false
-   },
+   "fourchette_prix": null,
    "ambiance": null,
    "clientele": null,
    "modes_paiement": [],
    "accessibilite": null,
    "equipements": [],
-   "services": [
-    {
-     "code": "a_emporter",
-     "libelle": "À emporter",
-     "confirme": false
-    }
-   ],
+   "services": [],
    "horaires": [],
    "zones_livraison": [],
    "images": [],
@@ -2425,7 +2413,7 @@
    "origine_donnee": "application_existante",
    "date_collecte": "2026-10-13",
    "derniere_verification_le": null,
-   "commentaire_verification": "NON PUBLIÉ : établissement introuvable dans les sources publiques consultées et téléphone de forme manifestement générique (+221 78 111 22 33). Conservé dans le dépôt pour traçabilité ; à vérifier avant toute publication.",
+   "commentaire_verification": null,
    "est_publication_visible": false,
    "motif_non_publication": "publication désactivée dans le fichier de collecte ; niveau de vérification « information indisponible »",
    "regle_publication": "Une fiche n'est publiée que si les quatre conditions suivantes sont réunies : (1) sa région est renseignée (localisation minimale, contrainte de base restaurants_publication_localisation_check) ; (2) elle est rattachée à au moins une source documentée ; (3) son niveau de vérification n'est pas « information indisponible » ; (4) sa validation ne remonte aucune erreur. Le drapeau « est_publication_visible » du fichier de collecte exprime l'intention : la règle ne peut que le restreindre, jamais l'élargir. Une fiche non publiée est CONSERVÉE dans le dépôt, dans le catalogue et dans la base, accompagnée de son motif : aucune donnée n'est supprimée, et l'application l'annonce au lieu de l'afficher comme une fiche ordinaire.",
@@ -2461,7 +2449,9 @@
    },
    "note_moyenne": null,
    "nombre_avis": 0,
-   "commande_integree_disponible": false
+   "commande_integree_disponible": false,
+   "donnees_pratiques_retirees": true,
+   "note_reduction": "Fiche conservée pour la traçabilité du recensement mais non publiée : aucune donnée pratique (adresse, position, contact, prix, horaires, services, image, menu, exploitation) n&#39;est distribuée avec l&#39;application. Les données complètes restent dans les sources du dépôt et dans la base, protégées par les règles d&#39;accès."
   },
   {
    "id": "DF-DK-0018",
@@ -3582,12 +3572,12 @@
    "quartier": "AIBD",
    "quartier_libre": "AIBD",
    "ville_libre": null,
-   "adresse": "Route de l'aéroport Blaise Diagne",
+   "adresse": null,
    "points_de_repere": null,
    "latitude": null,
    "longitude": null,
    "gps_verifie": false,
-   "telephone": "+221778889900",
+   "telephone": null,
    "telephone_confirme": false,
    "whatsapp": null,
    "whatsapp_confirme": false,
@@ -3597,30 +3587,13 @@
    "instagram": null,
    "commande_en_ligne_url": null,
    "reservation_url": null,
-   "fourchette_prix": {
-    "min": 3000,
-    "max": 8000,
-    "devise": "XOF",
-    "libelle": "3 000 – 8 000 XOF",
-    "confirmee": false
-   },
+   "fourchette_prix": null,
    "ambiance": null,
    "clientele": null,
    "modes_paiement": [],
    "accessibilite": null,
    "equipements": [],
-   "services": [
-    {
-     "code": "sur_place",
-     "libelle": "Sur place",
-     "confirme": false
-    },
-    {
-     "code": "a_emporter",
-     "libelle": "À emporter",
-     "confirme": false
-    }
-   ],
+   "services": [],
    "horaires": [],
    "zones_livraison": [],
    "images": [],
@@ -3648,7 +3621,7 @@
    "origine_donnee": "application_existante",
    "date_collecte": "2026-10-13",
    "derniere_verification_le": null,
-   "commentaire_verification": "NON PUBLIÉ : nom et téléphone (+221 77 888 99 00) non vérifiables, forme générique. Conservé pour traçabilité.",
+   "commentaire_verification": null,
    "est_publication_visible": false,
    "motif_non_publication": "publication désactivée dans le fichier de collecte ; niveau de vérification « information indisponible »",
    "regle_publication": "Une fiche n'est publiée que si les quatre conditions suivantes sont réunies : (1) sa région est renseignée (localisation minimale, contrainte de base restaurants_publication_localisation_check) ; (2) elle est rattachée à au moins une source documentée ; (3) son niveau de vérification n'est pas « information indisponible » ; (4) sa validation ne remonte aucune erreur. Le drapeau « est_publication_visible » du fichier de collecte exprime l'intention : la règle ne peut que le restreindre, jamais l'élargir. Une fiche non publiée est CONSERVÉE dans le dépôt, dans le catalogue et dans la base, accompagnée de son motif : aucune donnée n'est supprimée, et l'application l'annonce au lieu de l'afficher comme une fiche ordinaire.",
@@ -3684,7 +3657,9 @@
    },
    "note_moyenne": null,
    "nombre_avis": 0,
-   "commande_integree_disponible": false
+   "commande_integree_disponible": false,
+   "donnees_pratiques_retirees": true,
+   "note_reduction": "Fiche conservée pour la traçabilité du recensement mais non publiée : aucune donnée pratique (adresse, position, contact, prix, horaires, services, image, menu, exploitation) n&#39;est distribuée avec l&#39;application. Les données complètes restent dans les sources du dépôt et dans la base, protégées par les règles d&#39;accès."
   },
   {
    "id": "DF-DK-0021",

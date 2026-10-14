@@ -32,6 +32,8 @@ FICHIERS = [
     RACINE / "supabase/migrations/0002_menus_images_services.sql",
     RACINE / "supabase/migrations/0003_securite_vues_admin.sql",
     RACINE / "supabase/migrations/0004_publication_validation_provenance.sql",
+    RACINE / "supabase/migrations/0005_cloisonnement_public.sql",
+    RACINE / "supabase/migrations/0006_acces_admin_restaurateur.sql",
     RACINE / "supabase/seed/00_referentiel.sql",
 ]
 
@@ -331,6 +333,279 @@ def executer_verifications() -> int:
         executer("select set_config('dekkfood.utilisateur_id', '', false);")
     except Exception as exc:  # noqa: BLE001
         print(f"ÉCHEC  contrôles de validation : {str(exc)[:600]}")
+        echecs += 1
+
+    # --- Cloisonnement public : la visibilité d'une donnée suit celle de sa fiche
+    # Défaut corrigé (migration 0005) : les tables rattachées étaient en
+    # « using (true) », donc un visiteur anonyme pouvait lire le téléphone, les
+    # contacts, les menus, les plats, les images ou les horaires d'une fiche NON
+    # publiée en interrogeant la table fille directement.
+    try:
+        RESTO = "00000000-0000-0000-0000-0000000000b2"
+        INCONNU = "00000000-0000-0000-0000-0000000000b9"
+
+        fiche_privee = recuperer(
+            "select id, slug from public.restaurants where not est_publication_visible order by slug limit 1;"
+        )[0]
+        fiche_publique = recuperer(
+            "select id, slug from public.restaurants where est_publication_visible order by slug limit 1;"
+        )[0]
+        executer(
+            "insert into public.utilisateurs_admin (id, email, role, restaurant_id) "
+            f"values ('{RESTO}', 'resto@dekk.test', 'restaurateur', '{fiche_privee[0]}') "
+            "on conflict (id) do nothing;"
+        )
+
+        erreurs_roles: dict[str, str] = {}
+
+        def compter(role: str, utilisateur: str, sql: str):
+            """Nombre de lignes visibles par un rôle ; None si la requête échoue.
+
+            Le message d'erreur est conservé : une récursion de politiques (0006)
+            doit être distinguée d'un simple refus d'accès.
+            """
+            try:
+                executer("reset role;")
+                executer(f"select set_config('dekkfood.utilisateur_id', '{utilisateur}', false);")
+                executer(f"set role {role};")
+                return recuperer(sql)[0][0]
+            except Exception as exc:  # noqa: BLE001
+                erreurs_roles[f"{role}/{sql[:60]}"] = str(exc).splitlines()[0]
+                return None
+            finally:
+                executer("reset role;")
+
+        def controler(description: str, obtenu, attendu) -> None:
+            nonlocal echecs
+            if obtenu == attendu:
+                print(f"OK     {description} ({obtenu})")
+            else:
+                print(f"ÉCHEC  {description} : {obtenu} au lieu de {attendu}")
+                echecs += 1
+
+        # 1. La fiche non publiée n'est lisible par personne du public.
+        controler(
+            "fiche non publiée invisible pour un visiteur anonyme",
+            compter("anon", "", f"select count(*) from public.restaurants where id = '{fiche_privee[0]}';"),
+            0,
+        )
+        controler(
+            "fiche non publiée invisible pour un compte authentifié quelconque",
+            compter("authenticated", INCONNU,
+                    f"select count(*) from public.restaurants where id = '{fiche_privee[0]}';"),
+            0,
+        )
+
+        # 2. Les tables rattachées ne servent plus de porte dérobée. Le contrôle est
+        #    mené sur toutes les tables qui possèdent des lignes rattachées à une
+        #    fiche non publiée : chacune doit être cloisonnée.
+        tables_filles = [
+            ("contacts", "restaurant_id"),
+            ("menus", "restaurant_id"),
+            ("plats", "restaurant_id"),
+            ("images", "restaurant_id"),
+            ("horaires", "restaurant_id"),
+            ("horaires_exceptionnels", "restaurant_id"),
+            ("zones_livraison", "restaurant_id"),
+            ("etablissement_services", "restaurant_id"),
+            ("etablissement_categories", "restaurant_id"),
+            ("etablissement_sources", "restaurant_id"),
+            ("etablissement_exploitation", "restaurant_id"),
+        ]
+        # Le tri est explicite : sans « order by », PostgreSQL peut renvoyer les
+        # fiches dans un ordre variable et un contrôle pourrait porter, par
+        # inadvertance, sur la fiche d'un tiers au lieu de celle du restaurateur.
+        for table, colonne in tables_filles:
+            lignes = recuperer(
+                f"select r.id, count(f.*) from public.restaurants r "
+                f"join public.{table} f on f.{colonne} = r.id "
+                f"where not r.est_publication_visible group by r.id order by r.id;"
+            )
+            for identifiant, total in lignes:
+                if not total:
+                    continue
+                vu_anon = compter("anon", "", f"select count(*) from public.{table} where {colonne} = '{identifiant}';")
+                vu_admin = compter("authenticated", ADMIN, f"select count(*) from public.{table} where {colonne} = '{identifiant}';")
+                vu_resto = compter("authenticated", RESTO, f"select count(*) from public.{table} where {colonne} = '{identifiant}';")
+                propre = identifiant == fiche_privee[0]
+                suffixe = "de SA fiche" if propre else "de la fiche d'un tiers"
+                controler(f"public.{table} d'une fiche non publiée : invisible en anonyme", vu_anon, 0)
+                controler(f"public.{table} d'une fiche non publiée : conservée pour l'administration", vu_admin, total)
+                controler(f"public.{table} {suffixe} : restaurateur", vu_resto, total if propre else 0)
+
+        # 3. Aucun excès de zèle : les données des fiches publiées restent visibles.
+        for table in ("restaurants", "contacts", "etablissement_sources", "plats"):
+            publiees = recuperer(
+                f"select count(*) from public.{table} f join public.restaurants r "
+                f"on r.id = f.restaurant_id where r.est_publication_visible;"
+            ) if table != "restaurants" else recuperer(
+                "select count(*) from public.restaurants where est_publication_visible;"
+            )
+            attendu = publiees[0][0]
+            requete = (
+                "select count(*) from public.restaurants where est_publication_visible;"
+                if table == "restaurants"
+                else f"select count(*) from public.{table} f join public.restaurants r "
+                     f"on r.id = f.restaurant_id where r.est_publication_visible;"
+            )
+            if attendu:
+                controler(f"public.{table} des fiches publiées : lisible en anonyme", compter("anon", "", requete), attendu)
+
+        # 4. Périmètre du restaurateur. Règle appliquée : il voit SA fiche (publiée ou
+        #    non) et, comme tout le monde, les fiches PUBLIÉES — qui sont des données
+        #    publiques. Il ne voit aucune fiche non publiée appartenant à un tiers et
+        #    n'accède à aucun journal ni note de vérification.
+        controler(
+            "restaurateur : sa seule fiche non publiée visible",
+            compter("authenticated", RESTO,
+                    "select count(*) from public.restaurants where not est_publication_visible;"),
+            1,
+        )
+        controler(
+            "restaurateur : aucune fiche non publiée d'un autre établissement",
+            compter("authenticated", RESTO,
+                    "select count(*) from public.restaurants "
+                    f"where not est_publication_visible and id <> '{fiche_privee[0]}';"),
+            0,
+        )
+        controler(
+            "restaurateur : voit les fiches publiées (données publiques) et la sienne",
+            compter("authenticated", RESTO, "select count(*) from public.restaurants;"),
+            recuperer("select count(*) + 1 from public.restaurants where est_publication_visible;")[0][0],
+        )
+        for table_privee in ("verifications", "revendications", "signalements",
+                             "demandes_correction", "journal_modifications"):
+            controler(
+                f"restaurateur : public.{table_privee} (notes et journaux internes) inaccessible",
+                compter("authenticated", RESTO, f"select count(*) from public.{table_privee};"),
+                0,
+            )
+        # Écriture légitime du restaurateur (repliée : aucune donnée conservée) puis
+        # tentative d'élévation. Les deux contrôles sont menés dans la même
+        # transaction, annulée à la fin.
+        try:
+            executer("begin;")
+            executer(f"select set_config('dekkfood.utilisateur_id', '{RESTO}', true);")
+            executer("set local role authenticated;")
+            executer(
+                "update public.restaurants set description_courte = description_courte "
+                f"where id = '{fiche_privee[0]}';"
+            )
+            print("OK     un restaurateur peut modifier SA fiche")
+            refus = None
+            try:
+                executer(
+                    "update public.restaurants set niveau_verification = 'verifie' "
+                    f"where id = '{fiche_privee[0]}';"
+                )
+            except Exception as exc:  # noqa: BLE001
+                refus = str(exc)
+            if refus is None:
+                print("ÉCHEC  un restaurateur a pu s'attribuer le niveau « vérifié »")
+                echecs += 1
+            elif "recursion" in refus or "stack depth" in refus:
+                print(f"ÉCHEC  élévation refusée par une récursion de politiques, pas par la règle : {refus[:120]}")
+                echecs += 1
+            else:
+                print(f"OK     un restaurateur ne peut pas s'attribuer le niveau « vérifié » ({refus.splitlines()[0][:80]})")
+        except Exception as exc:  # noqa: BLE001
+            print(f"ÉCHEC  écriture légitime du restaurateur : {str(exc)[:300]}")
+            echecs += 1
+        finally:
+            executer("rollback;")
+            executer("reset role;")
+            executer("select set_config('dekkfood.utilisateur_id', '', false);")
+
+        # 5. Le défaut de récursion (0006) : plus aucune requête ne doit échouer
+        #    pour un compte identifié autre qu'administrateur.
+        for description, role, utilisateur, requete in (
+            ("rôle du compte courant lisible sans récursion", "authenticated", RESTO,
+             "select public.role_courant() is not null;"),
+            ("périmètre du restaurateur lisible sans récursion", "authenticated", RESTO,
+             "select public.etablissement_du_restaurateur() is not null;"),
+            ("administration reconnue sans récursion", "authenticated", ADMIN,
+             "select public.est_administrateur();"),
+            ("table d'administration inaccessible au restaurateur (pas de récursion)",
+             "authenticated", RESTO, "select count(*) from public.utilisateurs_admin;"),
+        ):
+            resultat = compter(role, utilisateur, requete)
+            if resultat is None:
+                derniere = list(erreurs_roles.values())[-1]
+                print(f"ÉCHEC  {description} : {derniere[:200]}")
+                echecs += 1
+            else:
+                print(f"OK     {description}")
+
+        # 6. Les journaux et files internes ne sont pas exposés au public.
+        for table in ("journal_modifications", "verifications", "signalements",
+                      "demandes_correction", "revendications",
+                      "import_lots", "import_lignes", "doublons_suspects",
+                      "utilisateurs_admin"):
+            controler(
+                f"public.{table} fermée au public", compter("anon", "", f"select count(*) from public.{table};"), 0
+            )
+
+        # 7. Contrôle structurel : plus aucune politique de lecture « using (true) »
+        #    sur une table rattachée (le test doit rester valable même sans données).
+        restes = recuperer(
+            "select tablename, policyname from pg_policies "
+            "where schemaname = 'public' and cmd in ('SELECT', 'ALL') and btrim(qual) = 'true' "
+            "and tablename not in ('regions', 'departements', 'communes', 'quartiers', "
+            "'types_etablissement', 'categories_culinaires', 'services', 'allergenes', "
+            "'regimes_alimentaires', 'sources');"
+        )
+        if restes:
+            print(f"ÉCHEC  politiques « using (true) » encore présentes : {restes}")
+            echecs += 1
+        else:
+            print("OK     aucune politique « using (true) » sur une table rattachée")
+
+        # 8. Conservation : les fiches non publiées ne sont pas supprimées et leurs
+        #    données restent rattachées (rien n'est perdu, seulement non exposé).
+        total_fiches, non_publiees = recuperer(
+            "select count(*), count(*) filter (where not est_publication_visible) from public.restaurants;"
+        )[0]
+        if total_fiches == 185 and non_publiees == 2:
+            print(f"OK     conservation : {total_fiches} fiches en base, dont {non_publiees} non publiée(s) "
+                  f"et conservée(s) avec leurs données rattachées")
+        else:
+            print(f"ÉCHEC  conservation : {total_fiches} fiche(s) dont {non_publiees} non publiée(s)")
+            echecs += 1
+
+        # 8 bis. Conservation vue depuis l'administration : pour chaque fiche, le
+        #        nombre de données rattachées vu par l'administration doit être égal
+        #        au nombre réel en base (rien n'a été supprimé pour cloisonner).
+        for identifiant, slug in recuperer(
+            "select id, slug from public.restaurants where not est_publication_visible order by slug;"
+        ):
+            reels, vus = recuperer(
+                "select "
+                "(select count(*) from public.contacts c where c.restaurant_id = r.id) "
+                "+ (select count(*) from public.menus m where m.restaurant_id = r.id) "
+                "+ (select count(*) from public.plats p where p.restaurant_id = r.id) "
+                "+ (select count(*) from public.images i where i.restaurant_id = r.id) "
+                "+ (select count(*) from public.etablissement_sources s where s.restaurant_id = r.id), "
+                "0 from public.restaurants r where r.id = %s;" % f"'{identifiant}'"
+            )[0]
+            vus = recuperer(
+                "select contacts + menus + plats + images + sources "
+                f"from public.v_cloisonnement_public where id = '{identifiant}';"
+            )[0][0]
+            controler(f"conservation de la fiche non publiée « {slug} » (données rattachées intactes)", vus, reels)
+
+        # 9. Table héritée sans RLS : fermée (faille latente corrigée en 0005).
+        menu_items = recuperer(
+            "select c.relrowsecurity from pg_class c join pg_namespace n on n.oid = c.relnamespace "
+            "where n.nspname = 'public' and c.relname = 'menu_items';"
+        )
+        if menu_items:
+            controler("table héritée menu_items : RLS activée", menu_items[0][0], True)
+            controler("table héritée menu_items : fermée au public",
+                      compter("anon", "", "select count(*) from public.menu_items;"), 0)
+
+        executer("select set_config('dekkfood.utilisateur_id', '', false);")
+    except Exception as exc:  # noqa: BLE001
+        print(f"ÉCHEC  contrôles de cloisonnement : {str(exc)[:600]}")
         echecs += 1
 
     # --- Parité de publication entre le catalogue embarqué et la base -----------

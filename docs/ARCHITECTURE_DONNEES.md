@@ -167,3 +167,66 @@ catalogue, base) avec son motif — rien n'est supprimé.
 possible), 2 (contact indirect), 3 (relevé terrain), les régions les moins couvertes
 d'abord. Aucune estimation : tout est calculé sur les fiches réellement collectées.
 
+## Cloisonnement public des données rattachées (migration 0005)
+
+La migration 0003 protégeait `restaurants` mais laissait les tables FILLES en
+`for select ... using (true)`. Un visiteur anonyme pouvait donc lire le téléphone,
+l'adresse, les contacts, les menus, les plats, les images ou les horaires d'une
+fiche **non publiée** en interrogeant directement la table associée.
+
+- Démonstration (outil `tools/tests/verifier_schema_postgres.py`, instance
+  PostgreSQL jetable) : avant 0005, `select * from contacts where restaurant_id = <fiche non publiée>`
+  renvoyait bien le contact (+221 78 111 22 33 de `diamniadio-express-diner`) en rôle `anon`.
+- Après 0005 : chaque policy de lecture d'une table fille s'appuie sur sa fiche
+  parente (`exists (select 1 from restaurants r where r.id = <table>.restaurant_id)`),
+  donc sur la policy du parent. Résultat mesuré :
+  - visiteur anonyme : **0** ligne d'une fiche non publiée, et les fiches publiées
+    restent intégralement lisibles (contrôle de non-blocage) ;
+  - administration : accès complet conservé ;
+  - restaurateur : accès à **sa** fiche (publiée ou non) et aucune autre fiche non
+    publiée, aucun journal, aucune note de vérification ;
+  - utilisateur authentifié quelconque : mêmes droits que le public.
+- `menu_items`, table héritée restée sans RLS (donc lisible par `anon`), est
+  désormais fermée à l'administration uniquement.
+- Vue `v_cloisonnement_public` (administration) : par fiche, le nombre de données
+  rattachées, pour prouver que rien n'a été supprimé pour cloisonner.
+
+## Accès administrateur et restaurateur (migration 0006)
+
+Défaut mesuré : les policies de 0003 interrogeaient `utilisateurs_admin`, dont les
+policies appellent `est_administrateur()` → `role_courant()` → `utilisateurs_admin`.
+PostgreSQL refusait alors la requête (`infinite recursion detected in policy for
+relation "restaurants"`) : dès qu'un compte d'administration ou de restaurateur
+existait, **aucune** requête d'un rôle non-superutilisateur sur `restaurants` ni sur
+les tables rattachées n'aboutissait. Les accès n'étaient pas simplement restreints,
+ils étaient inutilisables. Le défaut restait invisible tant que la table des
+comptes était vide.
+
+- `role_courant()`, `est_administrateur()` et `etablissement_du_restaurateur()`
+  passent en `security definer` : elles lisent `utilisateurs_admin` sans repasser
+  par ses policies (fin de la récursion) et ne renvoient que des informations
+  relatives à l'appelant.
+- La contrainte « un restaurateur ne peut pas s'attribuer le niveau vérifié » est
+  rendue effective : la sous-requête comparait la ligne à elle-même (`r.id = id`),
+  la comparaison porte désormais explicitement sur la ligne contrôlée.
+- Vue `v_acces_comptes` (administration) : qui accède à quoi, pour vérifier qu'aucun
+  compte inactif ne conserve d'accès.
+
+## Catalogue distribué et catalogue interne (réduction à la génération)
+
+`assets/data/catalogue.json` est **embarqué dans l'application** et publié en ligne
+(bouton « Déployer » → GitHub Pages). Une fiche non publiée y conservait son
+adresse, son téléphone, sa fourchette de prix et ses services : c'était une
+exposition publique, hors de tout parcours applicatif.
+
+- `tools/catalogue/generation.py` applique désormais `reduire_fiche_non_publiee()` :
+  une fiche non publiée conserve son identité (nom, commune, type), son motif de
+  non-publication et sa provenance, mais aucune donnée pratique (adresse, position,
+  contacts, prix, horaires, services, images, menus, exploitation) n'est distribuée.
+  Le fichier porte les marqueurs `donnees_pratiques_retirees` et `note_reduction`.
+- Le script SQL d'amorçage (`supabase/seed/10_etablissements.sql`) et les sources
+  (`data/seed/*.json`) conservent l'intégralité des données : la conservation est
+  démontrée par comparaison, la base restant protégée par les policies.
+- L'application le dit : `qualiteDistribuee` mesure la complétude sur les fiches
+  réellement diffusées, l'écran de diagnostic l'explique, et la file de travail
+  interne marque les fiches conservées comme « non publiée : conservée, non diffusée ».

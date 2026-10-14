@@ -255,7 +255,96 @@ def construire_fiche_application(etablissement: Etablissement) -> dict[str, Any]
         "nombre_avis": 0,
         "commande_integree_disponible": False,  # activée uniquement fiche par fiche, après accord du restaurant
     }
+    # Séparation catalogue interne / catalogue distribué : une fiche non publiée
+    # est conservée, mais ses données pratiques ne quittent pas le dépôt.
+    if not fiche["est_publication_visible"]:
+        fiche = reduire_fiche_non_publiee(fiche)
     return fiche
+
+
+# Champs de « données pratiques » : adresse exacte, position, contacts, prix,
+# services, horaires, images, menus, exploitation. Ils ne sont JAMAIS distribués
+# avec une fiche non publiée.
+#
+# Raison : `assets/data/catalogue.json` est EMBARQUÉ dans l'application Flutter
+# et publié en ligne (bouton « Déployer » → GitHub Pages). Y laisser ces champs
+# reviendrait à publier l'adresse, le téléphone, les coordonnées ou les menus
+# d'une fiche que le pipeline a justement écartée. Les données complètes restent
+# dans les sources du dépôt (`data/seed/*.json`) et dans la base (protégée par
+# les règles d'accès) : rien n'est supprimé, seulement non distribué.
+CHAMPS_PRATIQUES_NON_PUBLIES = (
+    "adresse",
+    "points_de_repere",
+    "latitude",
+    "longitude",
+    "gps_verifie",
+    "telephone",
+    "telephone_confirme",
+    "whatsapp",
+    "whatsapp_confirme",
+    "email",
+    "site_web",
+    "facebook",
+    "instagram",
+    "commande_en_ligne_url",
+    "reservation_url",
+    "fourchette_prix",
+    "ambiance",
+    "clientele",
+    "modes_paiement",
+    "accessibilite",
+    "equipements",
+    "services",
+    "horaires",
+    "zones_livraison",
+    "images",
+    "image_principale_url",
+    "image_principale_est_generique",
+    "image_principale_legende",
+    "menus",
+    "menu_disponible",
+    "commentaire_verification",
+)
+
+
+def reduire_fiche_non_publiee(fiche: dict[str, Any]) -> dict[str, Any]:
+    """Neutralise les données pratiques d'une fiche non publiée avant distribution.
+
+    La fiche garde son identité (nom, commune, type), son motif de
+    non-publication et sa provenance — la conservation et la traçabilité sont
+    donc démontrables — mais aucune donnée pratique n'est diffusée.
+    """
+    reduite = dict(fiche)
+    for champ in CHAMPS_PRATIQUES_NON_PUBLIES:
+        if champ not in reduite:
+            continue
+        valeur = reduite[champ]
+        if isinstance(valeur, bool):
+            reduite[champ] = False
+        elif isinstance(valeur, list):
+            reduite[champ] = []
+        else:
+            reduite[champ] = None
+    # L'exploitation n'est jamais distribuée pour une fiche non publiée (nom,
+    # entreprise, fonction, source d'un exploitant). Le repère neutre est
+    # conservé pour que l'application affiche « Propriétaire non renseigné »
+    # plutôt que rien du tout.
+    reduite["exploitation"] = [
+        {
+            "role": "exploitant",
+            "libelle": "Propriétaire non renseigné",
+            "statut_confirmation": "inconnu",
+        }
+    ]
+    reduite["donnees_pratiques_retirees"] = True
+    reduite["note_reduction"] = (
+        "Fiche conservée pour la traçabilité du recensement mais non publiée : aucune "
+        "donnée pratique (adresse, position, contact, prix, horaires, services, image, "
+        "menu, exploitation) n&#39;est distribuée avec l&#39;application. Les données "
+        "complètes restent dans les sources du dépôt et dans la base, protégées par les "
+        "règles d&#39;accès."
+    )
+    return reduite
 
 
 def _autorisation_image(etablissement: Etablissement) -> dict[str, Any]:

@@ -226,11 +226,17 @@ class BoutonsContact extends StatelessWidget {
 
     if (etablissement.aDesCoordonnees) {
       final requete = Uri.encodeComponent('${etablissement.latitude},${etablissement.longitude}');
+      final confirmee = etablissement.positionConfirmee;
       boutons.add(ElevatedButton.icon(
-        style: ElevatedButton.styleFrom(backgroundColor: Colors.blue, foregroundColor: Colors.white),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: confirmee ? Colors.blue : Colors.blueGrey,
+          foregroundColor: Colors.white,
+        ),
         onPressed: () => _ouvrir(context, 'https://www.google.com/maps/search/?api=1&query=$requete'),
         icon: const Icon(Icons.directions, size: 18),
-        label: const Text('Itinéraire'),
+        // Tant que la position n'est pas confirmée, le bouton le dit : il ne peut
+        // pas laisser croire à une localisation vérifiée.
+        label: Text(confirmee ? 'Itinéraire' : 'Itinéraire (position indicative)'),
       ));
     } else if (etablissement.adresse != null || etablissement.nom.isNotEmpty) {
       // Sans GPS vérifié, on propose une recherche textuelle sur la carte.

@@ -226,8 +226,32 @@ class CatalogueRepository extends ChangeNotifier {
     await prefs.setStringList('favoris', _favoris.toList());
   }
 
-  List<Etablissement> get favorisEtablissements =>
-      _etablissements.where((element) => _favoris.contains(element.id) || _favoris.contains(element.slug)).toList();
+  /// Liste INTERNE complète des favoris (publiés ou non).
+  /// Réservée aux usages internes : elle peut contenir des fiches non publiées.
+  List<Etablissement> get favorisEtablissements => _favorisTous;
+
+  List<Etablissement> get _favorisTous => _etablissements
+      .where((element) => _favoris.contains(element.id) || _favoris.contains(element.slug))
+      .toList();
+
+  /// Favoris affichables publiquement : uniquement des fiches publiées.
+  List<Etablissement> get favorisPublies =>
+      _favorisTous.where((element) => element.estPublicationVisible).toList();
+
+  /// Favoris dont la fiche est conservée mais non publiée : signalés à
+  /// l'utilisateur sans qu'aucune donnée de la fiche ne soit diffusée.
+  List<Etablissement> get favorisNonPublies =>
+      _favorisTous.where((element) => !element.estPublicationVisible).toList();
+
+  /// Favoris enregistrés qui ne correspondent plus à aucune fiche du catalogue
+  /// (fiche retirée d'une version ultérieure) : ils ne doivent provoquer ni
+  /// plantage ni écran vide inexpliqué.
+  List<String> get favorisOrphelins {
+    final connus = <String>{
+      for (final etablissement in _etablissements) ...[etablissement.id, etablissement.slug],
+    };
+    return _favoris.where((element) => !connus.contains(element)).toList()..sort();
+  }
 
   // ------------------------------------------------------- contributions visiteurs
   /// Enregistre un avis. Sans base connectée, l'avis reste local et « en attente
@@ -271,7 +295,17 @@ class CatalogueRepository extends ChangeNotifier {
     return {for (final entree in entrees) entree.key: entree.value};
   }
 
-  Map<String, int> get qualite {
+  Map<String, int> get qualite => _qualiteDe(_etablissements);
+
+  /// Mêmes mesures, calculées sur les SEULES fiches diffusées par l'application.
+  ///
+  /// L'application ne distribue aucune donnée pratique (adresse, contact,
+  /// position, horaires, menu, image) des fiches non publiées : les taux de
+  /// complétude affichés au visiteur doivent donc porter sur ce périmètre, sans
+  /// quoi ils compteraient des données que personne ne peut consulter.
+  Map<String, int> get qualiteDistribuee => _qualiteDe(etablissementsPublies);
+
+  Map<String, int> _qualiteDe(Iterable<Etablissement> perimetre) {
     int avecAdresse = 0;
     int avecGps = 0;
     int gpsVerifie = 0;
@@ -283,7 +317,7 @@ class CatalogueRepository extends ChangeNotifier {
     int photosAuthentiques = 0;
     int illustrationsSeules = 0;
     int proprietaireConfirme = 0;
-    for (final etablissement in _etablissements) {
+    for (final etablissement in perimetre) {
       if (etablissement.adresse != null) avecAdresse++;
       if (etablissement.aDesCoordonnees) avecGps++;
       if (etablissement.gpsVerifie) gpsVerifie++;
@@ -302,17 +336,19 @@ class CatalogueRepository extends ChangeNotifier {
       }
     }
     final parNiveau = <String, int>{};
-    for (final etablissement in _etablissements) {
+    for (final etablissement in perimetre) {
       parNiveau[etablissement.niveauVerification] = (parNiveau[etablissement.niveauVerification] ?? 0) + 1;
     }
+    // Les deux décomptes de publication décrivent toujours le catalogue entier,
+    // même lorsque le périmètre mesuré est restreint aux fiches publiées.
     final publiees = etablissementsPublies.length;
     final nonPubliees = _etablissements.length - publiees;
     return {
-      'fiches_total': _etablissements.length,
+      'fiches_total': perimetre.length,
       'fiches_publiees': publiees,
       'fiches_non_publiees': nonPubliees,
       'fiches_validees_par_controle':
-          _etablissements.where((element) => element.estValideeParControle).length,
+          perimetre.where((element) => element.estValideeParControle).length,
       'fiches_adresse': avecAdresse,
       'fiches_gps': avecGps,
       'fiches_gps_verifie': gpsVerifie,

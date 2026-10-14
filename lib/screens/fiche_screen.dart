@@ -3,6 +3,13 @@
 /// La fiche affiche TOUJOURS : le niveau de vérification, la date de collecte,
 /// la provenance des informations et la mention « Propriétaire non renseigné »
 /// lorsqu'aucune source publique fiable n'est disponible.
+///
+/// RÈGLE DE PUBLICATION : une fiche non publiée est conservée dans les sources
+/// internes (traçabilité) mais n'est PAS présentée comme une fiche publique,
+/// quel que soit le chemin emprunté (recherche, carte, favoris, diagnostic,
+/// ouverture directe). Cet écran sert alors d'avis interne : il explique le
+/// motif de non-publication sans diffuser les coordonnées, contacts, menus,
+/// photos ni services de l'établissement.
 library;
 
 import 'package:flutter/material.dart';
@@ -25,6 +32,12 @@ class FicheScreen extends StatelessWidget {
     return AnimatedBuilder(
       animation: depot,
       builder: (context, _) {
+        // Accès direct (ou depuis les favoris / le diagnostic) à une fiche non
+        // publiée : on n'affiche AUCUNE donnée publique, seulement le motif.
+        if (!etablissement.estPublicationVisible) {
+          return _AvisFicheNonPubliee(etablissement: etablissement);
+        }
+
         final favori = depot.estFavori(etablissement.id);
         final plats = etablissement.tousLesPlats;
 
@@ -54,16 +67,6 @@ class FicheScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      if (!etablissement.estPublicationVisible) ...[
-                        BandeauInformation(
-                          couleur: Colors.red,
-                          icone: Icons.visibility_off_outlined,
-                          message: 'Fiche non publiée — ${etablissement.motifNonPublication ?? 'motif non renseigné'}. '
-                              'Elle est conservée pour traçabilité et n\u2019apparaît pas dans la recherche. '
-                              'Ces informations ne sont pas vérifiées : ne les considérez pas comme confirmées.',
-                        ),
-                        const SizedBox(height: 12),
-                      ],
                       ImageFiche(
                         image: etablissement.images.isEmpty ? null : etablissement.images.first,
                         hauteur: 210,
@@ -135,13 +138,20 @@ class FicheScreen extends StatelessWidget {
                         ),
                       LigneInfo(
                         icone: Icons.my_location,
-                        libelle: 'Coordonnées GPS',
-                        valeur: etablissement.aDesCoordonnees
+                        libelle: 'Position GPS',
+                        // Les coordonnées ne sont affichées que si elles sont exploitables :
+                        // une valeur aberrante est traitée comme absente.
+                        valeur: etablissement.coordonneesValides
                             ? '${etablissement.latitude}, ${etablissement.longitude}'
-                            : 'Non vérifiées',
-                        precision: etablissement.gpsVerifie
-                            ? 'Position confirmée'
-                            : 'Position non confirmée : utilisez « Localiser » pour une recherche textuelle',
+                            : (etablissement.latitude != null || etablissement.longitude != null
+                                ? 'Coordonnées inexploitables (hors emprise du Sénégal)'
+                                : 'Aucune coordonnée publiée'),
+                        precision: etablissement.positionConfirmee
+                            ? 'Position confirmée par vérification'
+                            : (etablissement.coordonneesValides
+                                ? 'Position NON confirmée : coordonnées indicatives, à valider '
+                                    'sur place avant de vous déplacer'
+                                : 'Utilisez « Localiser » pour une recherche textuelle'),
                       ),
                       if (etablissement.zonesLivraison.isNotEmpty)
                         LigneInfo(
@@ -476,6 +486,65 @@ class CartePlat extends StatelessWidget {
               const Icon(Icons.arrow_forward_ios, size: 14, color: couleurPrincipale),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Écran affiché lorsqu'une fiche non publiée est atteinte par un parcours de
+/// l'application. Il ne diffuse aucune donnée publique : ni adresse, ni
+/// coordonnées, ni contacts, ni menus, ni photos. Il explique pourquoi la fiche
+/// n'est pas publiée et rappelle qu'elle est conservée pour traçabilité.
+class _AvisFicheNonPubliee extends StatelessWidget {
+  final Etablissement etablissement;
+
+  const _AvisFicheNonPubliee({required this.etablissement});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          etablissement.nom,
+          style: const TextStyle(color: Colors.white),
+          overflow: TextOverflow.ellipsis,
+        ),
+        backgroundColor: couleurPrincipale,
+        iconTheme: const IconThemeData(color: Colors.white),
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const BandeauInformation(
+              couleur: Colors.red,
+              icone: Icons.visibility_off_outlined,
+              message: 'Fiche non publiée. DEKK FOOD conserve cette fiche dans sa base interne '
+                  'pour la traçabilité du recensement, mais ne la publie pas : elle n\u2019apparaît '
+                  'ni dans la recherche, ni sur la carte, ni dans les résultats.',
+            ),
+            const SizedBox(height: 14),
+            const TitreSection('Motif de non-publication', icone: Icons.rule),
+            Text(
+              etablissement.motifNonPublication ?? 'Motif non renseigné.',
+              style: const TextStyle(height: 1.4),
+            ),
+            const SizedBox(height: 14),
+            const BandeauInformation(
+              message: 'Aucune information pratique (adresse, téléphone, position, menu, photos) '
+                  'n\u2019est affichée pour cette fiche tant qu\u2019elle n\u2019est pas publiée. '
+                  'Vous pouvez signaler une correction depuis la fiche d\u2019un établissement publié.',
+              icone: Icons.info_outline,
+            ),
+            const SizedBox(height: 14),
+            OutlinedButton.icon(
+              onPressed: () => Navigator.of(context).maybePop(),
+              icon: const Icon(Icons.arrow_back, size: 18),
+              label: const Text('Revenir à la liste'),
+            ),
+          ],
         ),
       ),
     );

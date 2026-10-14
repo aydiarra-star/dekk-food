@@ -29,8 +29,11 @@ class DiagnosticScreen extends StatelessWidget {
         animation: depot,
         builder: (context, _) {
           final qualite = depot.qualite;
+          // Périmètre diffusé : les fiches non publiées sont conservées mais leurs
+          // données pratiques ne sont pas distribuées (voir la règle de publication).
+          final distribuee = depot.qualiteDistribuee;
           final regions = depot.couvertureParRegion;
-          final total = qualite['fiches_total'] ?? 1;
+          final total = distribuee['fiches_total'] ?? 1;
 
 
           return ListView(
@@ -44,22 +47,32 @@ class DiagnosticScreen extends StatelessWidget {
               ),
               const TitreSection('Volume recensé', icone: Icons.inventory_2_outlined),
               _ligne('Fiches au total', '${qualite['fiches_total']}'),
+              _ligne('Fiches publiées', '${qualite['fiches_publiees']}'),
+              _ligne('Fiches non publiées (conservées, non diffusées)',
+                  '${qualite['fiches_non_publiees']}'),
               _ligne('Régions couvertes', '${regions.length} / 14'),
               _ligne('Fiches vérifiées', '${qualite['niveau_verifie'] ?? 0}'),
               _ligne('Partiellement vérifiées', '${qualite['niveau_partiellement_verifie'] ?? 0}'),
               _ligne('À confirmer', '${qualite['niveau_a_confirmer'] ?? 0}'),
               _ligne('Fermeture à vérifier', '${qualite['niveau_fermeture_a_verifier'] ?? 0}'),
-              const TitreSection('Complétude des informations', icone: Icons.fact_check_outlined),
-              _ligneAvecPart('Adresse renseignée', qualite['fiches_adresse'] ?? 0, total),
-              _ligneAvecPart('Coordonnées GPS', qualite['fiches_gps'] ?? 0, total),
-              _ligneAvecPart('GPS vérifié sur place', qualite['fiches_gps_verifie'] ?? 0, total),
-              _ligneAvecPart('Téléphone', qualite['fiches_telephone'] ?? 0, total),
-              _ligneAvecPart('WhatsApp', qualite['fiches_whatsapp'] ?? 0, total),
-              _ligneAvecPart('Horaires', qualite['fiches_horaires'] ?? 0, total),
-              _ligneAvecPart('Menus avec au moins un prix', qualite['fiches_menus'] ?? 0, total),
-              _ligneAvecPart('Photos authentiques', qualite['fiches_photos_authentiques'] ?? 0, total),
-              _ligneAvecPart('Illustrations génériques uniquement', qualite['fiches_illustrations_seules'] ?? 0, total),
-              _ligneAvecPart('Propriétaire confirmé par une source', qualite['fiches_proprietaire_confirme'] ?? 0, total),
+              const TitreSection('Complétude des informations diffusées', icone: Icons.fact_check_outlined),
+              const BandeauInformation(
+                couleur: Colors.blueGrey,
+                icone: Icons.filter_alt_outlined,
+                message: 'Ces taux portent uniquement sur les fiches publiées. L\u2019application ne distribue '
+                    'aucune donnée pratique (adresse, contact, position, horaires, menu, image) des fiches '
+                    'non publiées, qui restent conservées pour la traçabilité du recensement.',
+              ),
+              _ligneAvecPart('Adresse renseignée', distribuee['fiches_adresse'] ?? 0, total),
+              _ligneAvecPart('Coordonnées GPS (indicatives ou confirmées)', distribuee['fiches_gps'] ?? 0, total),
+              _ligneAvecPart('Position confirmée sur place', distribuee['fiches_gps_verifie'] ?? 0, total),
+              _ligneAvecPart('Téléphone', distribuee['fiches_telephone'] ?? 0, total),
+              _ligneAvecPart('WhatsApp', distribuee['fiches_whatsapp'] ?? 0, total),
+              _ligneAvecPart('Horaires', distribuee['fiches_horaires'] ?? 0, total),
+              _ligneAvecPart('Menus avec au moins un prix', distribuee['fiches_menus'] ?? 0, total),
+              _ligneAvecPart('Photos authentiques', distribuee['fiches_photos_authentiques'] ?? 0, total),
+              _ligneAvecPart('Illustrations génériques uniquement', distribuee['fiches_illustrations_seules'] ?? 0, total),
+              _ligneAvecPart('Propriétaire confirmé par une source', distribuee['fiches_proprietaire_confirme'] ?? 0, total),
               const TitreSection('Répartition par région', icone: Icons.map_outlined),
               for (final entree in regions.entries) _ligne(entree.key, '${entree.value} fiche(s)'),
               if (regions.length < 14)
@@ -85,7 +98,8 @@ class DiagnosticScreen extends StatelessWidget {
                     ),
                     title: Text(entree.key.nom, style: const TextStyle(fontSize: 13.5)),
                     subtitle: Text(
-                      '${entree.key.region ?? 'région manquante'} · ${entree.key.niveauLibelle}',
+                      '${entree.key.region ?? 'région manquante'} · ${entree.key.niveauLibelle}'
+                      '${entree.key.estPublicationVisible ? '' : ' · non publiée : conservée, non diffusée'}',
                       style: const TextStyle(fontSize: 11.5),
                     ),
                     trailing: const Icon(Icons.chevron_right, size: 18),

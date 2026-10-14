@@ -120,11 +120,13 @@ Paires à arbitrer par un humain :
 
 | Vérification | Résultat |
 |---|---|
-| Schéma + migrations + seed sur PostgreSQL jetable, deux passes | ✔ |
-| 6 insertions interdites refusées par les contraintes | ✔ (6/6) |
-| Parité de détection des doublons SQL ↔ Python | ✔ (3 paires identiques) |
-| Tests du pipeline (`tools/tests/test_catalogue_pipeline.py`) | ✔ 10/10 |
+| Schéma + migrations (0001 → 0006) + seed sur PostgreSQL jetable, deux passes | ✔ |
+| Insertions interdites refusées par les contraintes | ✔ (11/11) |
+| Parité de détection des doublons SQL ↔ Python | ✔ (10 paires identiques) |
+| Cloisonnement par rôle (anon / administrateur / restaurateur / compte inconnu) | ✔ (90 vérifications, 0 échec, déterministe sur 3 exécutions) |
+| Tests du pipeline (`tools/tests/test_catalogue_pipeline.py`) | ✔ 19/19 |
 | Tests Flutter (`flutter analyze`, `flutter test`) | **non exécutés ici** : aucun SDK Flutter dans l'environnement — confiés à la CI (§3) |
+| Tests de rôles contre la base Supabase de production | **non exécutés** : aucun accès au projet distant depuis cet environnement ; le contrôle a été mené sur un PostgreSQL local appliquant les migrations réelles |
 
 ---
 
@@ -169,6 +171,21 @@ Paires à arbitrer par un humain :
 11. **Vérifications non exécutables ici** : compilation Flutter (web et mobile)
     et tests associés — à lancer en CI ; le déploiement reste le workflow
     existant `.github/workflows/deploy.yml` (branche `main` uniquement).
+12. **Risques résiduels identifiés pendant l'audit du 14/10** (ni corrigés, ni
+    masqués) :
+    - `lib/services/supabase_service.dart` et `lib/models/restaurant.dart` sont du
+      code mort qui interroge un schéma abandonné (`restaurants.is_active`,
+      `menu_items`). Ils ne sont importés nulle part et ne peuvent donc rien
+      divulguer aujourd'hui, mais ils induisent en erreur : à supprimer ou à
+      réécrire sur le schéma actuel.
+    - Les fiches non publiées restent présentes, **réduites**, dans le catalogue
+      distribué (identité, motif, provenance) pour que la conservation et les
+      compteurs restent démontrables. Une séparation totale demande un fichier
+      interne distinct : décision de conception, pas correctif de sécurité.
+    - Les positions restent indicatives : aucune n'est confirmée par une
+      vérification recevable, et le filtre « GPS vérifié » doit donc rester vide.
+    - Le cloisonnement a été prouvé sur PostgreSQL local avec les migrations réelles
+      (rôles `anon` / `authenticated`), pas contre le projet Supabase distant.
 
 ---
 
@@ -189,6 +206,21 @@ flutter pub get
 flutter analyze
 flutter test
 flutter run -d chrome        # ou: flutter build web --release
+
+# 4. Sécurité des parcours publics (rôles réels, PostgreSQL jetable)
+python3 tools/tests/verifier_schema_postgres.py   # 90 vérifications, doit finir par 0 échec
+
+# 5. Conservation et distribution
+python3 - <<'EOF'
+import json
+catalogue = json.load(open('assets/data/catalogue.json'))
+non_publiees = [f for f in catalogue['etablissements'] if not f['est_publication_visible']]
+print(len(catalogue['etablissements']), 'fiches conservées,', len(non_publiees), 'non publiées')
+for fiche in non_publiees:
+    assert fiche['adresse'] is None and fiche['telephone'] is None, fiche['slug']
+    assert fiche['motif_non_publication'] and fiche['sources']
+print('aucune donnée pratique distribuée pour les fiches non publiées : OK')
+EOF
 ```
 
 ---
@@ -230,3 +262,109 @@ flutter run -d chrome        # ou: flutter build web --release
     (preuves acceptées, délais, contrôle avant publication). La base impose déjà
     qu'une revendication ne vaut jamais vérification. Le formulaire Web et l'écran
     d'administration restent à développer (voir §2.7 et §2.8).
+
+## 5. Audit du 14/10/2026 — fiabilité des données et sécurité des parcours publics
+
+Audit ciblé (aucune refonte) sur trois défauts de niveau P0. Les trois ont été
+reproduits **avant** correction, puis revérifiés après.
+
+### 5.1 P0 — GPS : la carte et le filtre présentaient des positions non vérifiées comme vérifiées
+
+- **Constat initial** (`lib/screens/carte_screen.dart`, `lib/models/catalogue.dart`) :
+  le filtre « Avec GPS vérifié » testait la seule présence de coordonnées ; la carte
+  regroupait les fiches sur `aDesCoordonnees` et son bandeau annonçait des fiches
+  « géolocalisées » / « sans coordonnées vérifiées ». Mesure sur le catalogue :
+  **87 fiches ont des coordonnées, 0 est vérifiée** — le filtre retournait donc
+  87 résultats en promettant des positions vérifiées.
+- **Corrections** : une coordonnée n'est exploitable que si elle est complète,
+  numérique et dans l'emprise du Sénégal (mêmes bornes que le pipeline Python) ;
+  `positionConfirmee` exige `gps_verifie` en plus ; le filtre « GPS vérifié » exige
+  désormais explicitement une position confirmée et ne retient donc **aucune** fiche
+  aujourd'hui ; la carte distingue pictogramme, couleur et légende entre position
+  confirmée et position indicative, et son bandeau chiffre les deux ; la fiche
+  affiche « Position NON confirmée : coordonnées indicatives, à valider sur place » ;
+  le bouton d'itinéraire s'intitule « Itinéraire (position indicative) » tant que la
+  position n'est pas confirmée. Les coordonnées sources ne sont pas modifiées et
+  aucune position estimée ne peut devenir confirmée dans l'application.
+- **Tests** : coordonnées présentes + confirmées, présentes non confirmées, absentes,
+  invalides (hors emprise, NaN, infinies, incomplètes), drapeau « vérifié » sur des
+  coordonnées aberrantes, comportement exact du filtre, et
+  « une position n'est déclarée confirmée qu'avec une vérification documentée ».
+
+### 5.2 P0 — Publication : une fiche non publiée restait atteignable, et ses données étaient publiées hors application
+
+- **Constats** : l'écran des favoris listait le catalogue complet (fiches non
+  publiées incluses) et ouvrait leur fiche détaillée ; l'écran de diagnostic
+  (accessible depuis les paramètres) ouvrait toute fiche de la file de travail ; et
+  surtout `assets/data/catalogue.json`, **embarqué dans l'application et publié en
+  ligne**, contenait l'adresse, le téléphone et les services des deux fiches non
+  publiées. Une fiche non publiée n'était donc pas seulement atteignable : ses
+  coordonnées étaient diffusées.
+- **Corrections** : règle unique appliquée — non publiée = conservée, jamais
+  présentée comme une fiche publique. L'écran de détail intercepte toute fiche non
+  publiée (recherche, carte, favoris, diagnostic, ouverture directe) et affiche un
+  avis interne : motif, mention de conservation, et **aucune** donnée pratique. Les
+  favoris sont séparés en fiches publiées (listées), fiches non publiées (comptées,
+  non listées) et favoris orphelins (signalés sans plantage). La génération retire
+  désormais les données pratiques des fiches non publiées avant distribution
+  (`reduire_fiche_non_publiee`), en conservant identité, motif et provenance ; les
+  sources du dépôt et le script SQL d'amorçage gardent l'intégralité. Les compteurs
+  d'application (`qualiteDistribuee`) portent sur les fiches réellement diffusées et
+  l'écran de diagnostic l'explique.
+- **Conservation démontrée** : 185 fiches avant comme après ; 183 publiées / 2 non
+  publiées, inchangées ; les 183 fiches publiées sont identiques au caractère près
+  dans le catalogue distribué ; les 2 fiches non publiées gardent nom, commune,
+  motif, provenance et une ligne « Propriétaire non renseigné ».
+- **Tests** : recherche par nom, identifiant et slug (aucune remontée), listes et
+  compteurs publics, favoris (publiés / non publiés / orphelins), rendu de l'écran de
+  détail en accès direct (aucune donnée pratique affichée), et contrôle de
+  non-régression du catalogue distribué.
+- **Limite connue, à trancher si le besoin devient une exigence stricte** : les
+  fiches non publiées restent présentes (réduites) dans le catalogue distribué pour
+  la traçabilité et les compteurs. Une séparation totale impliquerait un fichier
+  interne distinct non embarqué, ce qui changerait le pipeline de génération.
+
+### 5.3 P0 — Sécurité : les tables rattachées laissaient lire les données des fiches non publiées
+
+- **Constat** (migration `0003`) : `restaurants` était protégée, mais les tables
+  filles (contacts, menus, plats, images, horaires, zones de livraison, services…)
+  conservaient une policy `using (true)`. Démonstration en rôle `anon` sur une fiche
+  non publiée : le contact `+221781112233` était lisible avant correction.
+- **Défaut supplémentaire découvert pendant l'audit** : les policies de 0003
+  interrogeaient `utilisateurs_admin`, dont les policies appellent
+  `est_administrateur()` → `role_courant()` → `utilisateurs_admin` ; PostgreSQL
+  refusait la requête par récursion infinie. Dès qu'un compte administrateur ou
+  restaurateur existait, **aucune** requête d'un rôle non-superutilisateur sur
+  `restaurants` n'aboutissait : les accès « administrateur » et « restaurateur »
+  étaient inutilisables, et la garde « un restaurateur ne peut pas s'attribuer le
+  niveau vérifié » comparait la ligne à elle-même. Le défaut était invisible tant que
+  la table des comptes restait vide.
+- **Corrections** : `0005_cloisonnement_public.sql` fait dépendre la lecture publique
+  de chaque table rattachée de la visibilité de sa fiche parente (donc des policies
+  du parent), ferme la table héritée `menu_items` (restée sans RLS) et ajoute la vue
+  de contrôle `v_cloisonnement_public`. `0006_acces_admin_restaurateur.sql` passe les
+  fonctions d'identité en `security definer`, introduit
+  `etablissement_du_restaurateur()` et rend effectif le refus d'auto-attribution du
+  niveau vérifié, avec la vue `v_acces_comptes`.
+- **Résultats mesurés** (rôles `anon`, `authenticated` administrateur, restaurateur,
+  compte authentifié inconnu) : visiteur anonyme `0` ligne pour toute table d'une
+  fiche non publiée ; administration `= total` (conservation intacte) ; restaurateur
+  `= total` pour sa seule fiche et `0` pour celle d'un tiers ; journaux et notes de
+  vérification inaccessibles ; fiches publiées toujours lisibles (aucun excès de
+  zèle) ; aucune politique `using (true)` restante sur une table rattachée.
+- **Tests** : `tools/tests/verifier_schema_postgres.py` exécute ces contrôles sur une
+  instance PostgreSQL jetable — 90 vérifications, vertes et déterministes.
+  Les rôles ne peuvent pas être testés contre la base Supabase distante (aucun accès
+  au projet en production depuis cet environnement) : le contrôle a été mené sur un
+  PostgreSQL local appliquant les migrations réelles.
+
+### 5.4 Ce qui n'a pas été fait, et pourquoi
+
+- Aucune fusion de la pull request, aucun déploiement, aucune modification de `main`.
+- Aucune fiche supprimée, aucune donnée réelle remplacée, aucun niveau de vérification
+  attribué : `0` fiche validée avant comme après, aucun propriétaire inventé,
+  aucune photo ajoutée.
+- Les coordonnées sources n'ont pas été modifiées ; les bornes géographiques servent
+  au contrôle, pas à la correction.
+- Les positions restent indicatives : seule une vérification recevable pourra
+  confirmer une position, et l'application le dit à chaque écran concerné.

@@ -576,7 +576,41 @@ class Etablissement {
 
   bool get aDesHorairesFiables => horaires.any((horaire) => horaire.confirme);
 
-  bool get aDesCoordonnees => latitude != null && longitude != null;
+  // Emprise géographique du Sénégal — mêmes bornes que le pipeline Python
+  // (tools/catalogue/normalisation.py, SENEGAL_BBOX). Des coordonnées hors de
+  // cette emprise sont traitées comme absentes : mieux vaut pas de position
+  // qu'une position fausse.
+  static const double latitudeMin = 12.0;
+  static const double latitudeMax = 16.8;
+  static const double longitudeMin = -17.8;
+  static const double longitudeMax = -11.2;
+
+  /// Coordonnées exploitables : présentes des deux côtés, numériques et dans
+  /// l'emprise du Sénégal. Ne préjuge en rien de leur vérification sur place.
+  bool get coordonneesValides {
+    final lat = latitude;
+    final lon = longitude;
+    if (lat == null || lon == null) return false;
+    if (lat.isNaN || lon.isNaN || lat.isInfinite || lon.isInfinite) return false;
+    return lat >= latitudeMin && lat <= latitudeMax && lon >= longitudeMin && lon <= longitudeMax;
+  }
+
+  /// Des coordonnées existent-elles et sont-elles exploitables ?
+  /// (Ne signifie PAS que la position a été confirmée.)
+  bool get aDesCoordonnees => coordonneesValides;
+
+  /// La position a-t-elle été confirmée par une vérification recevable ?
+  /// Distinct de [aDesCoordonnees] : une position communautaire (OpenStreetMap,
+  /// par exemple) est disponible sans être confirmée.
+  bool get positionConfirmee => coordonneesValides && gpsVerifie;
+
+  /// Libellé honnête de l'état de la position, utilisé par l'interface.
+  String get etatPosition {
+    if (!coordonneesValides) return 'Position non disponible';
+    return gpsVerifie
+        ? 'Position confirmée'
+        : 'Position non confirmée (coordonnées indicatives, à valider sur place)';
+  }
 
   List<Plat> get tousLesPlats =>
       menus.expand((menu) => menu.plats).toList(growable: false);
@@ -687,7 +721,9 @@ class FiltresCatalogue {
       final prix = etablissement.prixMin ?? etablissement.prixMax;
       if (prix != null && prix > prixMax!) return false;
     }
-    if (seulementGps && !etablissement.aDesCoordonnees) return false;
+    // « Avec GPS vérifié » exige une position CONFIRMÉE (gps_verifie = true),
+    // et non la simple présence de coordonnées indicatives.
+    if (seulementGps && !etablissement.positionConfirmee) return false;
     if (seulementMenus && etablissement.tousLesPlats.isEmpty) return false;
     if (seulementVerifies && !etablissement.estVerifie) return false;
     return true;

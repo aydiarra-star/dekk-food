@@ -1,8 +1,16 @@
 /// Carte interactive des établissements.
 ///
-/// CHOIX DE DONNÉES : seules les fiches dont les coordonnées GPS ont été
-/// vérifiées sont marquées. Les fiches non géolocalisées sont listées à part
-/// avec un lien de recherche textuelle — on n'invente jamais une position.
+/// POLITIQUE DE POSITION (explicite et vérifiable) :
+///  - une fiche n'est marquée que si ses coordonnées sont exploitables
+///    (présentes et dans l'emprise du Sénégal) ;
+///  - une coordonnée disponible n'est PAS une coordonnée confirmée : les
+///    positions non confirmées sont affichées à titre indicatif, avec un
+///    pictogramme, une couleur et une légende distincts ;
+///  - aucune position estimée ne peut devenir « confirmée » dans l'application :
+///    seul le champ gps_verifie (renseigné par une vérification recevable,
+///    côté données) change cet état ;
+///  - les fiches sans coordonnées exploitables sont listées à part, sans
+///    position inventée.
 library;
 
 import 'package:flutter/material.dart';
@@ -20,11 +28,19 @@ class CarteScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final geolocalises =
-        etablissements.where((element) => element.aDesCoordonnees).toList(growable: false);
-    final sansGps = etablissements.where((element) => !element.aDesCoordonnees).toList(growable: false);
+    // Coordonnées exploitables uniquement (les valeurs aberrantes sont traitées
+    // comme absentes par le modèle).
+    final positionnes =
+        etablissements.where((element) => element.coordonneesValides).toList(growable: false);
+    final sansPosition =
+        etablissements.where((element) => !element.coordonneesValides).toList(growable: false);
 
-    final points = geolocalises
+    final confirmees =
+        positionnes.where((element) => element.positionConfirmee).toList(growable: false);
+    final indicatives =
+        positionnes.where((element) => !element.positionConfirmee).toList(growable: false);
+
+    final points = positionnes
         .map((element) => LatLng(element.latitude!, element.longitude!))
         .toList(growable: false);
 
@@ -55,7 +71,7 @@ class CarteScreen extends StatelessWidget {
                   if (points.isNotEmpty)
                     MarkerLayer(
                       markers: [
-                        for (final etablissement in geolocalises)
+                        for (final etablissement in positionnes)
                           Marker(
                             point: LatLng(etablissement.latitude!, etablissement.longitude!),
                             width: 46,
@@ -63,11 +79,17 @@ class CarteScreen extends StatelessWidget {
                             child: GestureDetector(
                               onTap: () => _ouvrirFiche(context, etablissement),
                               child: Tooltip(
-                                message: etablissement.nom,
+                                // Le libellé dit toujours l'état réel de la position.
+                                message: '${etablissement.nom}\n${etablissement.etatPosition}',
                                 child: Icon(
-                                  Icons.location_on,
+                                  etablissement.positionConfirmee
+                                      ? Icons.location_on
+                                      : Icons.location_on_outlined,
                                   size: 38,
-                                  color: etablissement.estVerifie || etablissement.estPartiellementVerifie
+                                  // Position confirmée : vert plein (comme avant).
+                                  // Position indicative : couleur de marque, pictogramme
+                                  // creux — l'incertitude est visible sans casser l'identité.
+                                  color: etablissement.positionConfirmee
                                       ? Colors.green.shade700
                                       : couleurPrincipale,
                                 ),
@@ -88,17 +110,19 @@ class CarteScreen extends StatelessWidget {
                 child: BandeauInformation(
                   couleur: Colors.white,
                   icone: Icons.info_outline,
-                  message: points.isEmpty
-                      ? 'Aucune fiche géolocalisée dans cette sélection. Les coordonnées seront '
-                          'ajoutées après vérification sur place.'
-                      : '${points.length} fiche(s) géolocalisée(s) affichée(s). '
-                          'La géolocalisation est vérifiée progressivement.',
+                  message: _bilanPosition(positionnes, confirmees, indicatives),
                 ),
               ),
+              if (positionnes.isNotEmpty)
+                const Positioned(
+                  left: 10,
+                  bottom: 10,
+                  child: _LegendePosition(),
+                ),
             ],
           ),
         ),
-        if (sansGps.isNotEmpty)
+        if (sansPosition.isNotEmpty)
           Expanded(
             flex: 2,
             child: Column(
@@ -107,15 +131,15 @@ class CarteScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(12, 10, 12, 4),
                   child: Text(
-                    '${sansGps.length} fiche(s) sans coordonnées vérifiées',
+                    '${sansPosition.length} fiche(s) sans coordonnées exploitables',
                     style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
                   ),
                 ),
                 Expanded(
                   child: ListView.builder(
-                    itemCount: sansGps.length,
+                    itemCount: sansPosition.length,
                     itemBuilder: (context, index) {
-                      final etablissement = sansGps[index];
+                      final etablissement = sansPosition[index];
                       return ListTile(
                         dense: true,
                         leading: const Icon(Icons.location_off_outlined, size: 20),
@@ -137,10 +161,71 @@ class CarteScreen extends StatelessWidget {
     );
   }
 
+  /// Bilan chiffré : jamais de formulation laissant croire que toutes les
+  /// positions affichées sont vérifiées.
+  static String _bilanPosition(
+    List<Etablissement> positionnes,
+    List<Etablissement> confirmees,
+    List<Etablissement> indicatives,
+  ) {
+    if (positionnes.isEmpty) {
+      return 'Aucune position exploitable dans cette sélection. Aucune position n\'est inventée : '
+          'les fiches sans coordonnées sont listées sous la carte.';
+    }
+    if (confirmees.isEmpty) {
+      return '${positionnes.length} fiche(s) positionnée(s) : ${indicatives.length} position(s) '
+          'INDICATIVE(S) (coordonnées publiées, non vérifiées sur place), '
+          '0 position confirmée.';
+    }
+    return '${positionnes.length} fiche(s) positionnée(s) : '
+        '${confirmees.length} position(s) confirmée(s), '
+        '${indicatives.length} indicative(s) (non vérifiée(s) sur place).';
+  }
+
   void _ouvrirFiche(BuildContext context, Etablissement etablissement) {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => FicheScreen(etablissement: etablissement)),
+    );
+  }
+}
+
+/// Légende de la carte : elle explique la différence entre les deux pictogrammes.
+class _LegendePosition extends StatelessWidget {
+  const _LegendePosition();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      decoration: BoxDecoration(
+        color: Colors.white.withAlpha((0.92 * 255).round()),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.grey.shade300),
+      ),
+      child: const Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(Icons.location_on, size: 16, color: Color(0xFF2E7D32)),
+              SizedBox(width: 4),
+              Text('Position confirmée', style: TextStyle(fontSize: 11)),
+            ],
+          ),
+          SizedBox(height: 2),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(Icons.location_on_outlined, size: 16, color: couleurPrincipale),
+              SizedBox(width: 4),
+              Text('Position indicative (non vérifiée)', style: TextStyle(fontSize: 11)),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
