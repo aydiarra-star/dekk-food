@@ -29,9 +29,18 @@ jobs:
 
       - name: Vérifier et régénérer le catalogue (aucune divergence tolérée)
         run: |
+          # La date du catalogue est celle du commit vérifié (et non le jour du runner) :
+          # la comparaison reste identique qu'un workflow soit relancé plus tard.
+          # --no-merges couvre le commit de fusion temporaire créé pour les pull requests.
+          DATE="$(git log -1 --format=%cs --no-merges HEAD)"
+          echo "Date de référence du catalogue : $DATE"
           python3 tools/catalogue/importateur.py valider data/seed/*.json
-          python3 tools/catalogue/importateur.py generer data/seed/*.json --dossier . --rapport docs/RAPPORT_COUVERTURE.md
-          git diff --exit-code -- assets/data/catalogue.json supabase/seed/10_etablissements.sql docs/RAPPORT_COUVERTURE.md
+          python3 tools/catalogue/importateur.py generer data/seed/*.json --dossier . \
+            --rapport docs/RAPPORT_COUVERTURE.md --date "$DATE"
+          python3 tools/catalogue/plan_enrichissement.py --date "$DATE"
+          git diff --exit-code -- assets/data/catalogue.json supabase/seed/10_etablissements.sql \
+            docs/RAPPORT_COUVERTURE.md docs/PLAN_ENRICHISSEMENT.md \
+            data/exports/file_de_travail_verification.csv
 
       - name: Tests du pipeline
         run: python3 -m pytest tools/tests -q

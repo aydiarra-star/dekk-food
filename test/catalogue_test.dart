@@ -125,4 +125,70 @@ void main() {
       expect(etablissement.statutLibelle, isNotEmpty);
     }
   });
+
+  test('la publication est décidée par le pipeline et respectée par l\'application', () {
+    final synthese = racine['couverture']['publication'] as Map<String, dynamic>;
+    final publiees = etablissements.where((element) => element.estPublicationVisible).toList();
+    expect(synthese['fiches_publiees'], publiees.length,
+        reason: 'le décompte de publication du catalogue doit correspondre aux fiches publiées');
+    expect(synthese['fiches_publiees'] + synthese['fiches_non_publiees'], etablissements.length,
+        reason: 'toutes les fiches doivent être comptées, publiées ou non');
+    expect((synthese['regle'] as String?)?.isNotEmpty, isTrue,
+        reason: 'la règle de publication doit accompagner le catalogue');
+    for (final etablissement in publiees) {
+      expect(etablissement.region, isNotNull,
+          reason: '${etablissement.id} est publié sans région');
+    }
+  });
+
+  test('une fiche non publiée est conservée et explique pourquoi', () {
+    final nonPubliees = etablissements.where((element) => !element.estPublicationVisible).toList();
+    for (final etablissement in nonPubliees) {
+      expect(etablissement.motifNonPublication, isNotNull,
+          reason: '${etablissement.id} est écartée sans motif : rien ne doit disparaître en silence');
+      expect(etablissement.motifNonPublication, isNotEmpty);
+      expect(etablissement.nom, isNotEmpty, reason: 'une fiche non publiée perd son nom');
+      expect(etablissement.sources, isNotEmpty, reason: 'une fiche non publiée perd ses sources');
+      expect(etablissement.publicationLibelle, contains('non publiée'));
+    }
+  });
+
+  test('« publiée » ne signifie jamais « vérifiée »', () {
+    for (final etablissement in etablissements) {
+      expect(etablissement.statutValidation,
+          isIn(const ['non_validee', 'en_cours', 'validee', 'rejetee']));
+      if (etablissement.statutValidation == 'validee') {
+        expect(etablissement.validationPar, isNotNull,
+            reason: '${etablissement.id} : validation sans personne identifiée');
+        expect(etablissement.validationLe, isNotNull,
+            reason: '${etablissement.id} : validation sans date');
+      }
+      if (etablissement.niveauVerification == 'verifie') {
+        expect(etablissement.estValideeParControle, isTrue,
+            reason: '${etablissement.id} porte le badge « vérifié » sans validation tracée');
+      }
+    }
+  });
+
+  test('chaque fiche expose sa provenance et l\'état des droits sur ses images', () {
+    for (final etablissement in etablissements) {
+      final provenance = (racine['etablissements'] as List)
+          .cast<Map<String, dynamic>>()
+          .firstWhere((element) => element['id'] == etablissement.id)['provenance'] as Map<String, dynamic>;
+      expect((provenance['methode'] as String?)?.isNotEmpty, isTrue,
+          reason: '${etablissement.id} : méthode de collecte non documentée');
+      expect(provenance['nombre_sources'], etablissement.sources.length);
+      expect(provenance['verification_humaine'], etablissement.derniereVerificationLe != null,
+          reason: '${etablissement.id} : une vérification humaine ne se présume pas');
+
+      final droits = (racine['etablissements'] as List)
+          .cast<Map<String, dynamic>>()
+          .firstWhere((element) => element['id'] == etablissement.id)['autorisation_image'] as Map<String, dynamic>;
+      expect(droits['nombre_images'], etablissement.images.length);
+      expect(droits['autorisation_ecrite_restaurant'], isA<bool>());
+      if (etablissement.images.isEmpty) {
+        expect(droits['statut'], 'aucune_image');
+      }
+    }
+  });
 }

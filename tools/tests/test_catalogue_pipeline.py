@@ -182,5 +182,158 @@ def test_aucun_slug_duplique_dans_le_catalogue() -> None:
     doublons = sorted({slug for slug in slugs if slugs.count(slug) > 1})
     assert not doublons, f"slugs dupliqués dans le catalogue : {doublons}"
 
+
+# --------------------------------------------------------------------------- #
+# Publication : règle explicite, sans perte de données
+# --------------------------------------------------------------------------- #
+def test_publication_regle_appliquee_et_motifs_explicites() -> None:
+    """Une fiche n'est publiée que si la règle est satisfaite, sinon elle porte un motif."""
+    donnees = json.loads(CATALOGUE.read_text(encoding="utf-8"))
+    fiches = donnees["etablissements"]
+    assert fiches, "catalogue vide"
+
+    for fiche in fiches:
+        publiee = fiche["est_publication_visible"]
+        if publiee:
+            assert fiche.get("region"), f"publiée sans région : {fiche['id']}"
+            assert fiche.get("sources"), f"publiée sans source : {fiche['id']}"
+            assert fiche.get("niveau_verification") != "information_indisponible", (
+                f"publiée alors que l'information est indisponible : {fiche['id']}"
+            )
+        else:
+            assert fiche.get("motif_non_publication"), (
+                f"fiche non publiée sans motif : {fiche['id']} — rien ne doit être écarté en silence"
+            )
+
+    synthese = donnees["couverture"]["publication"]
+    assert synthese["fiches_publiees"] + synthese["fiches_non_publiees"] == len(fiches), (
+        "le décompte de publication doit couvrir toutes les fiches"
+    )
+    assert synthese["regle"], "la règle de publication doit être publiée avec le catalogue"
+
+
+def test_aucune_fiche_perdue_par_la_publication() -> None:
+    """Non publiée ne veut pas dire supprimée : la fiche reste dans le catalogue et dans les seeds."""
+    donnees = json.loads(CATALOGUE.read_text(encoding="utf-8"))
+    fiches = charger_fiches()
+    assert len(donnees["etablissements"]) == len(fiches), (
+        "le catalogue publié doit contenir exactement les fiches collectées"
+    )
+    non_publiees = [f for f in donnees["etablissements"] if not f["est_publication_visible"]]
+    assert non_publiees, "le jeu de données de référence contient des fiches écartées : elles doivent rester visibles"
+    for fiche in non_publiees:
+        assert fiche["nom"], "une fiche non publiée perd son nom"
+        assert fiche["sources"], "une fiche non publiée perd ses sources (traçabilité exigée)"
+
+
+def test_publication_non_elargie_par_la_regle() -> None:
+    """La règle ne peut que restreindre l'intention exprimée par le fichier de collecte."""
+    for etablissement in charger_fiches():
+        decision = etablissement.publication
+        if decision.visible:
+            assert etablissement.est_publication_visible, (
+                f"{etablissement.nom} : la règle a élargi la publication au-delà du fichier de collecte"
+            )
+
+
+def test_validation_distincte_de_la_publication() -> None:
+    """« Publiée » n'est pas « vérifiée » : aucune fiche n'est validée par un humain à ce stade."""
+    donnees = json.loads(CATALOGUE.read_text(encoding="utf-8"))
+    for fiche in donnees["etablissements"]:
+        assert fiche["statut_validation"] in {"non_validee", "en_cours", "validee", "rejetee"}
+        if fiche["statut_validation"] == "validee":
+            assert fiche.get("validation_par") and fiche.get("validation_le"), (
+                f"validation anonyme sur {fiche['id']} : une validation exige une personne et une date"
+            )
+        if fiche["niveau_verification"] == "verifie":
+            assert fiche["statut_validation"] == "validee", (
+                f"{fiche['id']} est « vérifiée » sans validation tracée"
+            )
+
+
+# --------------------------------------------------------------------------- #
+# Provenance et autorisation d'image
+# --------------------------------------------------------------------------- #
+def test_provenance_exposee_pour_chaque_fiche() -> None:
+    donnees = json.loads(CATALOGUE.read_text(encoding="utf-8"))
+    for fiche in donnees["etablissements"]:
+        provenance = fiche.get("provenance")
+        assert provenance, f"provenance absente sur {fiche['id']}"
+        assert provenance["nombre_sources"] == len(fiche["sources"]), (
+            f"décompte de sources incohérent sur {fiche['id']}"
+        )
+        assert provenance["methode"], f"méthode de collecte non documentée sur {fiche['id']}"
+        # Une vérification humaine n'est jamais présumée.
+        assert provenance["verification_humaine"] == bool(fiche.get("derniere_verification_le"))
+
+
+def test_autorisation_image_jamais_presumee() -> None:
+    donnees = json.loads(CATALOGUE.read_text(encoding="utf-8"))
+    for fiche in donnees["etablissements"]:
+        synthese = fiche["autorisation_image"]
+        assert synthese["nombre_images"] == len(fiche["images"])
+        if synthese["nombre_images"] == 0:
+            assert synthese["statut"] == "aucune_image"
+            assert synthese["autorisation_ecrite_restaurant"] is False
+        if synthese["images_sans_droits_documentes"]:
+            assert synthese["statut"] in {"droits_partiels", "illustrations_generiques_seulement"}, (
+                f"{fiche['id']} : des images sans droits ne peuvent pas être déclarées documentées"
+            )
+        for image in fiche["images"]:
+            if image["est_illustration_generique"]:
+                assert image["correspondance_verifiee"] is False, (
+                    f"{fiche['id']} : une illustration générique ne peut pas être présentée comme authentique"
+                )
+            if image["correspondance_verifiee"]:
+                droits = (
+                    image.get("auteur")
+                    or image.get("licence")
+                    or image.get("autorisation_usage")
+                    or image.get("autorisation_reference")
+                )
+                assert droits, f"{fiche['id']} : photo authentique sans droits documentés"
+
+
+# --------------------------------------------------------------------------- #
+# Données confirmées : jamais sans source
+# --------------------------------------------------------------------------- #
+def test_aucune_donnee_confirmee_sans_source() -> None:
+    """Tout élément marqué confirmé doit citer sa source : on ne confirme rien d'office."""
+    donnees = json.loads(CATALOGUE.read_text(encoding="utf-8"))
+    for fiche in donnees["etablissements"]:
+        sources = fiche.get("sources") or []
+        for contact in fiche.get("contacts") or []:
+            if contact.get("confirme"):
+                assert contact.get("source"), f"{fiche['id']} : contact confirmé sans source"
+        for service in fiche.get("services") or []:
+            if service.get("confirme"):
+                assert sources, f"{fiche['id']} : service confirmé sans aucune source"
+        for image in fiche.get("images") or []:
+            if image.get("correspondance_verifiee"):
+                assert image.get("source") or image.get("licence") or image.get("autorisation_usage"), (
+                    f"{fiche['id']} : image authentique sans source ni droits"
+                )
+        for plat in [p for m in fiche.get("menus") or [] for p in m.get("plats") or []]:
+            if plat.get("statut_confirmation") == "confirme":
+                assert plat.get("prix") is not None, (
+                    f"{fiche['id']} : plat confirmé sans prix — un prix vide ne se confirme pas"
+                )
+
+
+def test_les_doublons_ne_sont_jamais_fusionnes_automatiquement() -> None:
+    """Le dédoublonnage propose, l'humain décide : les deux fiches restent dans le catalogue."""
+    fiches = charger_fiches()
+    donnees = json.loads(CATALOGUE.read_text(encoding="utf-8"))
+    noms = {fiche["nom"] for fiche in donnees["etablissements"]}
+    paires = dedoublonnage.detecter(fiches)
+    examines = 0
+    for paire in paires:
+        if paire.a.nom in noms and paire.b.nom in noms:
+            examines += 1
+    assert examines >= 1, "le jeu de référence contient des paires suspectes : elles doivent rester soumises à examen"
+    assert len(donnees["etablissements"]) == len(fiches), (
+        "aucune fusion automatique ne doit avoir lieu : le nombre de fiches doit être identique"
+    )
+
 if __name__ == "__main__":  # pragma: no cover
     raise SystemExit(pytest.main([__file__, "-q"]))

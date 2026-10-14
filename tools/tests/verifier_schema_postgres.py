@@ -31,6 +31,7 @@ FICHIERS = [
     RACINE / "supabase/migrations/0001_referentiel_et_catalogue.sql",
     RACINE / "supabase/migrations/0002_menus_images_services.sql",
     RACINE / "supabase/migrations/0003_securite_vues_admin.sql",
+    RACINE / "supabase/migrations/0004_publication_validation_provenance.sql",
     RACINE / "supabase/seed/00_referentiel.sql",
 ]
 
@@ -64,6 +65,34 @@ INSERTIONS_INTERDITES = [
         "insert into public.zones_livraison (restaurant_id, libelle_zone, confirme) "
         "select id, 'Test', true from public.restaurants limit 1;",
         "zones_livraison_source_check",
+    ),
+    (
+        "fiche publiée alors que l'information est indisponible",
+        "update public.restaurants set est_publication_visible = true "
+        "where niveau_verification = 'information_indisponible';",
+        "restaurants_information_indisponible_check",
+    ),
+    (
+        "fiche non publiée sans motif",
+        "update public.restaurants set est_publication_visible = false, motif_non_publication = null "
+        "where id = (select id from public.restaurants where est_publication_visible limit 1);",
+        "restaurants_motif_non_publication_check",
+    ),
+    (
+        "validation « validee » sans personne identifiée",
+        "update public.restaurants set statut_validation = 'validee' limit 1;",
+        "restaurants_validation_coherence_check",
+    ),
+    (
+        "niveau « verifie » sans validation tracée",
+        "update public.restaurants set niveau_verification = 'verifie' limit 1;",
+        "restaurants_verifie_exige_validation_check",
+    ),
+    (
+        "photo présentée comme authentique sans droits documentés",
+        "insert into public.images (restaurant_id, url, correspondance_verifiee) "
+        "select id, 'https://exemple.test/photo.jpg', true from public.restaurants limit 1;",
+        "images_authentique_droits_check",
     ),
     (
         "compte restaurateur sans établissement",
@@ -214,6 +243,115 @@ def executer_verifications() -> int:
             echecs += 1
         except Exception:
             print(f"OK     refusé par la base : {nom}")
+
+    # --- Validation humaine : un badge ne s'attribue que par un acte tracé -------
+    ADMIN = "00000000-0000-0000-0000-0000000000a1"
+    try:
+        executer(
+            "insert into public.utilisateurs_admin (id, email, role) "
+            f"values ('{ADMIN}', 'admin@dekk.test', 'admin') on conflict (id) do nothing;"
+        )
+        cible = recuperer(
+            "select id from public.restaurants where est_publication_visible "
+            "order by numero_fiche nulls last limit 1;"
+        )[0][0]
+
+        def refus(description: str, sql: str, attendu: bool = True) -> None:
+            """Vérifie qu'une requête est refusée (ou acceptée) et le signale."""
+            nonlocal echecs
+            try:
+                executer(sql)
+                accepte = True
+            except Exception:
+                accepte = False
+            # attendu = True signifie « la base doit REFUSER cette requête ».
+            if accepte != attendu:
+                print(f"OK     {description} : {'accepté' if accepte else 'refusé'} comme attendu")
+            else:
+                print(f"ÉCHEC  {description} : {'accepté' if accepte else 'refusé'} alors qu'il devrait être "
+                      f"{'accepté' if attendu else 'refusé'}")
+                echecs += 1
+
+        # Sans identité administrateur : aucun badge ne peut être attribué.
+        executer("select set_config('dekkfood.utilisateur_id', '', false);")
+        refus(
+            "validation sans administrateur identifié",
+            f"select public.valider_fiche_par_controle('{cible}', 'verifie', 'appel du 14/10/2026');",
+        )
+
+        executer(f"select set_config('dekkfood.utilisateur_id', '{ADMIN}', false);")
+        refus(
+            "validation sans preuve",
+            f"select public.valider_fiche_par_controle('{cible}', 'verifie', '   ');",
+        )
+        refus(
+            "validation vers un niveau interdit",
+            f"select public.valider_fiche_par_controle('{cible}', 'information_indisponible', 'test');",
+        )
+
+        # Validation réelle : la fiche est marquée vérifiée ET traçable.
+        executer(
+            "select public.valider_fiche_par_controle("
+            f"'{cible}', 'partiellement_verifie', 'appel du responsable le 14/10/2026', 'horaires confirmés');"
+        )
+        niveau, statut, valide_par, verif_le = recuperer(
+            f"select niveau_verification, statut_validation, validation_par, derniere_verification_le "
+            f"from public.restaurants where id = '{cible}';"
+        )[0]
+        if statut == "validee" and valide_par is not None and verif_le is not None:
+            print(f"OK     validation tracée : niveau={niveau}, statut={statut}, validée par {valide_par}")
+        else:
+            print(f"ÉCHEC  validation non tracée : niveau={niveau}, statut={statut}, par={valide_par}")
+            echecs += 1
+
+        # Dévalidation : le badge est retiré et le motif conservé.
+        executer(f"select public.devalider_fiche('{cible}', 'fermeture signalée à vérifier');")
+        niveau, statut = recuperer(
+            f"select niveau_verification, statut_validation from public.restaurants where id = '{cible}';"
+        )[0]
+        if statut == "non_validee" and niveau == "a_confirmer":
+            print("OK     dévalidation tracée (retour à a_confirmer, statut non_validee)")
+        else:
+            print(f"ÉCHEC  dévalidation : niveau={niveau}, statut={statut}")
+            echecs += 1
+
+        # Une revendication ne vaut jamais vérification.
+        refus(
+            "revendication marquée vérifiée sans vérificateur identifié",
+            "insert into public.revendications (restaurant_id, demandeur_nom, email_pro, statut) "
+            f"select '{cible}', 'Responsable test', 'responsable@exemple.test', 'verifiee';",
+        )
+        refus(
+            "rejet de revendication non motivé",
+            "insert into public.revendications (restaurant_id, demandeur_nom, email_pro, statut) "
+            f"select '{cible}', 'Responsable test', 'responsable@exemple.test', 'rejetee';",
+        )
+
+        # L'identité de session est remise à zéro après les contrôles.
+        executer("select set_config('dekkfood.utilisateur_id', '', false);")
+    except Exception as exc:  # noqa: BLE001
+        print(f"ÉCHEC  contrôles de validation : {str(exc)[:600]}")
+        echecs += 1
+
+    # --- Parité de publication entre le catalogue embarqué et la base -----------
+    try:
+        import json as _json
+
+        catalogue = _json.loads((RACINE / "assets/data/catalogue.json").read_text(encoding="utf-8"))
+        non_publiees_catalogue = {f["slug"] for f in catalogue["etablissements"] if not f["est_publication_visible"]}
+        non_publiees_base = {ligne[0] for ligne in recuperer(
+            "select slug from public.restaurants where not est_publication_visible;")}
+        if non_publiees_catalogue == non_publiees_base:
+            print(f"OK     publication identique dans le catalogue et la base "
+                  f"({len(non_publiees_catalogue)} fiche(s) non publiée(s), conservée(s) des deux côtés)")
+        else:
+            print(f"ÉCHEC  divergence de publication : catalogue seul "
+                  f"{sorted(non_publiees_catalogue - non_publiees_base)}, base seule "
+                  f"{sorted(non_publiees_base - non_publiees_catalogue)}")
+            echecs += 1
+    except Exception as exc:  # noqa: BLE001
+        print(f"ÉCHEC  parité de publication : {str(exc)[:600]}")
+        echecs += 1
 
     return 1 if echecs else 0
 

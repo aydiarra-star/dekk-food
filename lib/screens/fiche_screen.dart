@@ -54,6 +54,16 @@ class FicheScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      if (!etablissement.estPublicationVisible) ...[
+                        BandeauInformation(
+                          couleur: Colors.red,
+                          icone: Icons.visibility_off_outlined,
+                          message: 'Fiche non publiée — ${etablissement.motifNonPublication ?? 'motif non renseigné'}. '
+                              'Elle est conservée pour traçabilité et n\u2019apparaît pas dans la recherche. '
+                              'Ces informations ne sont pas vérifiées : ne les considérez pas comme confirmées.',
+                        ),
+                        const SizedBox(height: 12),
+                      ],
                       ImageFiche(
                         image: etablissement.images.isEmpty ? null : etablissement.images.first,
                         hauteur: 210,
@@ -379,8 +389,12 @@ class FicheScreen extends StatelessWidget {
 
   static String _messageVerification(Etablissement etablissement) {
     final date = etablissement.dateCollecte ?? 'date inconnue';
+    final source = etablissement.sources.isEmpty ? 'source non précisée' : etablissement.sources.first.code;
+    final verification = etablissement.derniereVerificationLe;
     return 'Cette fiche n\u2019est pas certifiée : les informations ont été collectées le $date '
-        'et n\u2019ont pas encore été confirmées par l\u2019établissement. '
+        'auprès de « $source »'
+        '${verification == null ? '' : ', relues le $verification'}'
+        ' et n\u2019ont pas encore été confirmées par l\u2019établissement. '
         'Contactez-le avant de vous déplacer.';
   }
 

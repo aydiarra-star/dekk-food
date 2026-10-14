@@ -14,7 +14,7 @@ from datetime import date
 from pathlib import Path
 from typing import Any, Iterable
 
-from .modele import Etablissement, Plat
+from .modele import REGLE_PUBLICATION, Etablissement, Plat
 
 TYPES_LIBELLES = {
     "restaurant": "Restaurant",
@@ -217,11 +217,84 @@ def construire_fiche_application(etablissement: Etablissement) -> dict[str, Any]
         "date_collecte": etablissement.date_collecte,
         "derniere_verification_le": etablissement.derniere_verification_le,
         "commentaire_verification": etablissement.commentaire_verification,
+        # --- Publication : la règle est appliquée ici, et nulle part ailleurs. ---
+        # L'application lit « est_publication_visible » ; une fiche non publiée reste
+        # accessible avec son motif au lieu d'être supprimée ou affichée comme les autres.
+        "est_publication_visible": etablissement.publication.visible,
+        "motif_non_publication": etablissement.publication.motif_texte,
+        "regle_publication": REGLE_PUBLICATION,
+        # --- Validation : une fiche conforme au schéma n'est pas une fiche vérifiée. ---
+        "statut_validation": etablissement.statut_validation,
+        "validation_par": etablissement.validation_par,
+        "validation_le": etablissement.validation_le,
+        "provenance": {
+            "origine_donnee": etablissement.origine_donnee,
+            "nombre_sources": len(etablissement.sources),
+            "sources": [
+                {
+                    "source": source.code,
+                    "url": source.url,
+                    "date_collecte": source.date_collecte,
+                    "niveau_confiance": source.niveau_confiance,
+                    "donnees": source.donnees_collectees,
+                }
+                for source in etablissement.sources
+            ],
+            "date_collecte": etablissement.date_collecte,
+            "derniere_verification_le": etablissement.derniere_verification_le,
+            "verification_humaine": bool(etablissement.derniere_verification_le),
+            "methode": (
+                "vérification humaine documentée"
+                if etablissement.derniere_verification_le
+                else "collecte documentée en ligne, aucune vérification humaine à ce stade"
+            ),
+        },
+        # --- Images : synthèse mesurée des droits, sans jamais présumer d'une autorisation. ---
+        "autorisation_image": _autorisation_image(etablissement),
         "note_moyenne": None,       # aucune note inventée : alimenté par les avis modérés uniquement
         "nombre_avis": 0,
         "commande_integree_disponible": False,  # activée uniquement fiche par fiche, après accord du restaurant
     }
     return fiche
+
+
+def _autorisation_image(etablissement: Etablissement) -> dict[str, Any]:
+    """Décrit l'état réel des droits sur les images d'une fiche (aucune supposition)."""
+    images = list(etablissement.images)
+    authentiques = [i for i in images if not i.est_illustration_generique]
+    avec_droits = [
+        i for i in images
+        if i.autorisation_usage or i.autorisation_reference or i.licence or i.auteur
+    ]
+    ecrite = [i for i in images if i.autorisation_usage or i.autorisation_reference]
+    if not images:
+        statut = "aucune_image"
+    elif not authentiques:
+        statut = "illustrations_generiques_seulement"
+    elif len(avec_droits) == len(images):
+        statut = "droits_documentes"
+    else:
+        statut = "droits_partiels"
+    return {
+        "statut": statut,
+        "nombre_images": len(images),
+        "images_authentiques": len(authentiques),
+        "images_avec_droits_documentes": len(avec_droits),
+        "images_sans_droits_documentes": len(images) - len(avec_droits),
+        "illustrations_generiques": sum(1 for i in images if i.est_illustration_generique),
+        "autorisation_ecrite_restaurant": bool(ecrite),
+        "autorisations": [
+            {
+                "url": i.url,
+                "autorisation_usage": i.autorisation_usage,
+                "autorisation_reference": i.autorisation_reference,
+                "autorisation_obtenue_le": i.autorisation_obtenue_le,
+                "auteur": i.auteur,
+                "licence": i.licence,
+            }
+            for i in ecrite
+        ],
+    }
 
 
 def construire_catalogue(
@@ -258,6 +331,19 @@ def construire_catalogue(
                 "Le recensement national est incomplet par nature : aucune source publique ne "
                 "permet de garantir l'exhaustivité des restaurants du Sénégal."
             ),
+            "publication": {
+                "regle": REGLE_PUBLICATION,
+                "fiches_publiees": sum(1 for f in fiches if f["est_publication_visible"]),
+                "fiches_non_publiees": sum(1 for f in fiches if not f["est_publication_visible"]),
+                "fiches_non_publiees_conservees": True,
+                "fiches_validees_par_controle": sum(
+                    1 for f in fiches if f["statut_validation"] == "validee"
+                ),
+                "commentaire": (
+                    "Les fiches non publiées restent présentes dans ce catalogue et dans la base, "
+                    "avec leur motif ; elles ne sont ni supprimées ni affichées comme les autres."
+                ),
+            },
         },
         "etablissements": fiches,
     }
@@ -318,7 +404,8 @@ def generer_sql(etablissements: Iterable[Etablissement]) -> str:
             "clientele, modes_paiement, accessibilite, equipements, site_web, facebook, instagram, "
             "commande_en_ligne_url, reservation_url, points_de_repere, source_principale_id, source_principale_url, "
             "date_collecte, derniere_verification_le, commentaire_verification, origine_donnee, "
-            "est_publication_visible, image_principale_url"
+            "est_publication_visible, motif_non_publication, statut_validation, "
+            "validation_par, validation_le, image_principale_url"
             ") select "
             f"{_sql(etablissement.numero_fiche)}, {_sql(slug)}, {_sql(etablissement.nom)}, "
             f"{_sql(etablissement.nom_officiel)}, {_sql(etablissement.nom_commercial)}, "
@@ -348,7 +435,11 @@ def generer_sql(etablissements: Iterable[Etablissement]) -> str:
             f"{source_id_expr}, {source_url_expr}, "
             f"{_sql(etablissement.date_collecte)}::date, {_sql(etablissement.derniere_verification_le)}::date, "
             f"{_sql(etablissement.commentaire_verification)}, {_sql(etablissement.origine_donnee)}, "
-            f"{'true' if etablissement.est_publication_visible else 'false'}, "
+            f"{'true' if etablissement.publication.visible else 'false'}, "
+            f"{_sql(etablissement.publication.motif_texte)}, "
+            f"{_sql(etablissement.statut_validation)}, "
+            f"{_sql(etablissement.validation_par)}::uuid, "
+            f"{_sql(etablissement.validation_le)}::timestamptz, "
             f"{_sql(etablissement.image_principale.url if etablissement.image_principale else None)}"
             " on conflict (slug) do update set "
             "numero_fiche = excluded.numero_fiche, name = excluded.name, nom_officiel = excluded.nom_officiel, "
@@ -369,7 +460,12 @@ def generer_sql(etablissements: Iterable[Etablissement]) -> str:
             "source_principale_id = excluded.source_principale_id, source_principale_url = excluded.source_principale_url, "
             "date_collecte = excluded.date_collecte, derniere_verification_le = excluded.derniere_verification_le, "
             "commentaire_verification = excluded.commentaire_verification, origine_donnee = excluded.origine_donnee, "
-            "est_publication_visible = excluded.est_publication_visible, image_principale_url = excluded.image_principale_url;"
+            "est_publication_visible = excluded.est_publication_visible, "
+            "motif_non_publication = excluded.motif_non_publication, "
+            "statut_validation = excluded.statut_validation, "
+            "validation_par = excluded.validation_par, "
+            "validation_le = excluded.validation_le, "
+            "image_principale_url = excluded.image_principale_url;"
         )
 
         # Catégories

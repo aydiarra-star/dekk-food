@@ -46,6 +46,7 @@ Aucune clé secrète ne doit être placée dans le code ni dans le dépôt.
 python3 -m pip install -r tools/requirements.txt
 
 # 1. Contrôler les fichiers de collecte
+python3 tools/catalogue/plan_enrichissement.py     # plan d'enrichissement (docs/PLAN_ENRICHISSEMENT.md + CSV)
 python3 tools/catalogue/importateur.py valider data/seed/*.json
 
 # 2. Chercher les doublons (jamais fusionnés automatiquement)

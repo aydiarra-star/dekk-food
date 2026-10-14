@@ -338,9 +338,31 @@ class Etablissement {
   final String? dateCollecte;
   final String? derniereVerificationLe;
   final String? commentaireVerification;
+
+  /// La fiche est-elle publiée ? Décision calculée par le pipeline selon une règle
+  /// explicite ; une fiche non publiée est CONSERVÉE et porte son motif.
+  final bool estPublicationVisible;
+  final String? motifNonPublication;
+  final String? reglePublication;
+
+  /// « Publiée » ne veut pas dire « vérifiée » : la validation est un acte humain tracé.
+  final String statutValidation;
+  final String? validationPar;
+  final String? validationLe;
   final double? noteMoyenne;
   final int nombreAvis;
   final bool commandeIntegreeDisponible;
+
+  /// Vrai lorsque la fiche a été validée par une personne identifiée.
+  bool get estValideeParControle =>
+      statutValidation == 'validee' && validationPar != null && validationLe != null;
+
+  /// Libellé honnête de l'état de publication, affiché à l'utilisateur.
+  String get publicationLibelle => estPublicationVisible
+      ? (derniereVerificationLe != null
+          ? 'Fiche publiée, vérifiée le $derniereVerificationLe'
+          : 'Fiche publiée — données non encore vérifiées sur place')
+      : 'Fiche non publiée : ${motifNonPublication ?? 'motif non renseigné'}';
 
   const Etablissement({
     required this.id,
@@ -400,6 +422,12 @@ class Etablissement {
     this.dateCollecte,
     this.derniereVerificationLe,
     this.commentaireVerification,
+    this.estPublicationVisible = false,
+    this.motifNonPublication,
+    this.reglePublication,
+    this.statutValidation = 'non_validee',
+    this.validationPar,
+    this.validationLe,
     this.noteMoyenne,
     this.nombreAvis = 0,
     this.commandeIntegreeDisponible = false,
@@ -477,6 +505,12 @@ class Etablissement {
         dateCollecte: json['date_collecte'] as String?,
         derniereVerificationLe: json['derniere_verification_le'] as String?,
         commentaireVerification: json['commentaire_verification'] as String?,
+        estPublicationVisible: (json['est_publication_visible'] ?? false) as bool,
+        motifNonPublication: json['motif_non_publication'] as String?,
+        reglePublication: json['regle_publication'] as String?,
+        statutValidation: (json['statut_validation'] ?? 'non_validee') as String,
+        validationPar: json['validation_par'] as String?,
+        validationLe: json['validation_le'] as String?,
         noteMoyenne: (json['note_moyenne'] as num?)?.toDouble(),
         nombreAvis: (json['nombre_avis'] as num?)?.toInt() ?? 0,
         commandeIntegreeDisponible: json['commande_integree_disponible'] == true,

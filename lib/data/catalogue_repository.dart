@@ -43,6 +43,16 @@ class CatalogueRepository extends ChangeNotifier {
   String? _erreur;
 
   List<Etablissement> get etablissements => List.unmodifiable(_etablissements);
+
+  /// Fiches publiées : celles que le visiteur peut parcourir.
+  /// Une fiche non publiée n'est pas supprimée : elle reste accessible par lien
+  /// direct ou depuis les favoris, avec son motif affiché.
+  List<Etablissement> get etablissementsPublies =>
+      _etablissements.where((element) => element.estPublicationVisible).toList();
+
+  /// Fiches conservées mais non publiées, avec leur motif (transparence totale).
+  List<Etablissement> get etablissementsNonPublies =>
+      _etablissements.where((element) => !element.estPublicationVisible).toList();
   Set<String> get favoris => Set.unmodifiable(_favoris);
   List<Avis> get avisLocaux => List.unmodifiable(_avisLocaux);
   List<Demande> get demandesLocales => List.unmodifiable(_demandesLocales);
@@ -121,7 +131,7 @@ class CatalogueRepository extends ChangeNotifier {
 
   // ------------------------------------------------------------------- recherche
   List<Etablissement> rechercher(FiltresCatalogue filtres) {
-    final resultats = _etablissements.where(filtres.correspond).toList();
+    final resultats = etablissementsPublies.where(filtres.correspond).toList();
     resultats.sort((a, b) => a.nom.toLowerCase().compareTo(b.nom.toLowerCase()));
     return resultats;
   }
@@ -134,11 +144,11 @@ class CatalogueRepository extends ChangeNotifier {
   }
 
   List<String> get regions =>
-      (_etablissements.map((element) => element.region).whereType<String>().toSet().toList())..sort();
+      (etablissementsPublies.map((element) => element.region).whereType<String>().toSet().toList())..sort();
 
   List<String> get typesEtablissement {
     final entrees = <String, String>{};
-    for (final etablissement in _etablissements) {
+    for (final etablissement in etablissementsPublies) {
       final code = etablissement.typeEtablissement;
       if (code != null) entrees[code] = etablissement.typeLibelle;
     }
@@ -152,7 +162,7 @@ class CatalogueRepository extends ChangeNotifier {
 
   List<String> get categories {
     final entrees = <String, String>{};
-    for (final etablissement in _etablissements) {
+    for (final etablissement in etablissementsPublies) {
       for (var index = 0; index < etablissement.categories.length; index++) {
         entrees[etablissement.categories[index]] =
             index < etablissement.categoriesLibelles.length
@@ -177,7 +187,7 @@ class CatalogueRepository extends ChangeNotifier {
   /// Établissements les plus proches d'une position (rayon en kilomètres).
   List<Etablissement> prochesDe(double latitude, double longitude, {double rayonKm = 5}) {
     final resultats = <MapEntry<Etablissement, double>>[];
-    for (final etablissement in _etablissements) {
+    for (final etablissement in etablissementsPublies) {
       if (!etablissement.aDesCoordonnees) continue;
       final distance = distanceKm(
         latitude,
@@ -295,8 +305,14 @@ class CatalogueRepository extends ChangeNotifier {
     for (final etablissement in _etablissements) {
       parNiveau[etablissement.niveauVerification] = (parNiveau[etablissement.niveauVerification] ?? 0) + 1;
     }
+    final publiees = etablissementsPublies.length;
+    final nonPubliees = _etablissements.length - publiees;
     return {
       'fiches_total': _etablissements.length,
+      'fiches_publiees': publiees,
+      'fiches_non_publiees': nonPubliees,
+      'fiches_validees_par_controle':
+          _etablissements.where((element) => element.estValideeParControle).length,
       'fiches_adresse': avecAdresse,
       'fiches_gps': avecGps,
       'fiches_gps_verifie': gpsVerifie,

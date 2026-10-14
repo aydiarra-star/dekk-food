@@ -386,14 +386,16 @@ def commande_generer(arguments: argparse.Namespace) -> int:
     chemin_asset = dossier / "assets" / "data" / "catalogue.json"
     chemin_sql = dossier / "supabase" / "seed" / "10_etablissements.sql"
 
-    catalogue = generation.construire_catalogue(resultat.etablissements)
+    catalogue = generation.construire_catalogue(resultat.etablissements, date_generation=arguments.date)
     generation.ecrire_fichier(chemin_asset, json.dumps(catalogue, ensure_ascii=False, indent=1))
     generation.ecrire_fichier(chemin_sql, generation.generer_sql(resultat.etablissements))
 
     print(f"{len(resultat.etablissements)} fiches écrites dans {chemin_asset}")
     print(f"Script SQL d'amorçage écrit dans {chemin_sql}")
     if arguments.rapport:
-        rapport_couverture = module_rapport.rapport_couverture(resultat.etablissements)
+        rapport_couverture = module_rapport.rapport_couverture(
+            resultat.etablissements, date_rapport=arguments.date
+        )
         generation.ecrire_fichier(
             Path(arguments.rapport), module_rapport.rapport_couverture_markdown(rapport_couverture)
         )
@@ -403,7 +405,9 @@ def commande_generer(arguments: argparse.Namespace) -> int:
 
 def commande_rapport(arguments: argparse.Namespace) -> int:
     resultat = charger_fichiers(arguments.fichiers, arguments.source)
-    rapport_couverture = module_rapport.rapport_couverture(resultat.etablissements)
+    rapport_couverture = module_rapport.rapport_couverture(
+        resultat.etablissements, date_rapport=getattr(arguments, "date", None)
+    )
     texte = (
         json.dumps(rapport_couverture, ensure_ascii=False, indent=2)
         if arguments.format == "json"
@@ -492,12 +496,18 @@ def construire_analyseur() -> argparse.ArgumentParser:
     ajouter_fichiers(generer)
     generer.add_argument("--dossier", default=str(RACINE), help="Racine du dépôt.")
     generer.add_argument("--rapport", help="Chemin du rapport de couverture Markdown à produire.")
+    generer.add_argument(
+        "--date",
+        help="Date du catalogue et du rapport (AAAA-MM-JJ). Défaut : jour d'exécution. "
+        "La vérification automatisée passe la date du commit pour être déterministe.",
+    )
     generer.set_defaults(fonction=commande_generer)
 
     rapport = sous_commandes.add_parser("rapport", help="Rapport de couverture du recensement.")
     ajouter_fichiers(rapport)
     rapport.add_argument("--format", choices=["markdown", "json"], default="markdown")
     rapport.add_argument("--sortie", help="Fichier de sortie (sinon affichage console).")
+    rapport.add_argument("--date", help="Date du rapport (AAAA-MM-JJ). Défaut : jour d'exécution.")
     rapport.set_defaults(fonction=commande_rapport)
 
     importer = sous_commandes.add_parser("importer", help="Importer un lot (validation + doublons + application).")

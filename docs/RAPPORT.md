@@ -207,10 +207,26 @@ flutter run -d chrome        # ou: flutter build web --release
 - Ne pas déclarer le recensement complet tant que la couverture n'est pas
   mesurée et les limites documentées.
 
-12. **Divergence connue entre la base et l'application.** Les deux fiches héritées
-    (Diamniadio Express Diner, La Halte AIBD) sont exclues de la publication par la
-    base (sans région), mais le catalogue embarqué dans l'application les conserve
-    en statut « à vérifier » : il n'expose pas encore de drapeau de publication.
-    À trancher : soit elles sont complétées (région, adresse), soit elles sont
-    retirées du catalogue embarqué — la correction doit passer par le pipeline,
-    avec le même contrôle que le reste (aucune suppression sans validation).
+12. **Divergence base/application : RÉSOLUE (règle de publication explicite).**
+    Le catalogue embarqué expose désormais `est_publication_visible` et
+    `motif_non_publication`, calculés par une règle unique
+    (`tools/catalogue/modele.py`, constante `REGLE_PUBLICATION`) appliquée au
+    catalogue **et** au script d'amorçage SQL. La règle est publiée dans le
+    catalogue (`couverture.publication.regle`) et vérifiée par le harnais
+    PostgreSQL : le catalogue et la base déclarent exactement les mêmes fiches non
+    publiées. Les deux fiches héritées (Diamniadio Express Diner, La Halte AIBD)
+    restent présentes partout — **aucune donnée n'a été supprimée** —, elles ne sont
+    simplement pas publiées, avec un motif affiché à l'écran si on les ouvre.
+13. **Enrichissement : plan calculé, pas d'estimation.** `docs/PLAN_ENRICHISSEMENT.md`
+    hiérarchise les 185 fiches : 105 sont joignables par téléphone/WhatsApp (P1), 80
+    n'ont aucun contact public (P3). Le fichier
+    `data/exports/file_de_travail_verification.csv` sert de feuille de tournée.
+14. **Validation humaine : 0 fiche validée.** Aucune fiche n'est passée par le
+    contrôle (`public.valider_fiche_par_controle`), qui exige une personne identifiée
+    et une preuve. « Publiée » ne veut donc jamais dire « vérifiée » : l'interface et
+    la base distinguent désormais les deux notions, et un test le vérifie.
+15. **Contributions restaurateurs : procédure écrite, formulaire à construire.**
+    La procédure de revendication/correction est formalisée dans `docs/SOURCES.md`
+    (preuves acceptées, délais, contrôle avant publication). La base impose déjà
+    qu'une revendication ne vaut jamais vérification. Le formulaire Web et l'écran
+    d'administration restent à développer (voir §2.7 et §2.8).

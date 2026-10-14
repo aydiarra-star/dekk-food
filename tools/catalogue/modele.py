@@ -151,6 +151,8 @@ class Image:
     auteur: Optional[str] = None
     licence: Optional[str] = None
     autorisation_usage: Optional[str] = None
+    autorisation_reference: Optional[str] = None
+    autorisation_obtenue_le: Optional[str] = None
     source: Optional[str] = None
     source_url: Optional[str] = None
     date_collecte: Optional[str] = None
@@ -169,6 +171,8 @@ class Image:
             auteur=data.get("auteur"),
             licence=data.get("licence"),
             autorisation_usage=data.get("autorisation_usage"),
+            autorisation_reference=data.get("autorisation_reference"),
+            autorisation_obtenue_le=data.get("autorisation_obtenue_le"),
             source=data.get("source"),
             source_url=norm.normaliser_url(data.get("source_url")),
             date_collecte=data.get("date_collecte"),
@@ -186,6 +190,8 @@ class Image:
             "auteur": self.auteur,
             "licence": self.licence,
             "autorisation_usage": self.autorisation_usage,
+            "autorisation_reference": self.autorisation_reference,
+            "autorisation_obtenue_le": self.autorisation_obtenue_le,
             "source": self.source,
             "source_url": self.source_url,
             "date_collecte": self.date_collecte,
@@ -388,6 +394,53 @@ class Exploitation:
         }
 
 
+# --------------------------------------------------------------------------- #
+# Règle de publication (une seule source de vérité : pipeline, base, application)
+# --------------------------------------------------------------------------- #
+REGLE_PUBLICATION = (
+    "Une fiche n'est publiée que si les quatre conditions suivantes sont réunies : "
+    "(1) sa région est renseignée (localisation minimale, contrainte de base "
+    "restaurants_publication_localisation_check) ; "
+    "(2) elle est rattachée à au moins une source documentée ; "
+    "(3) son niveau de vérification n'est pas « information indisponible » ; "
+    "(4) sa validation ne remonte aucune erreur. "
+    "Le drapeau « est_publication_visible » du fichier de collecte exprime l'intention : "
+    "la règle ne peut que le restreindre, jamais l'élargir. "
+    "Une fiche non publiée est CONSERVÉE dans le dépôt, dans le catalogue et dans la base, "
+    "accompagnée de son motif : aucune donnée n'est supprimée, et l'application l'annonce "
+    "au lieu de l'afficher comme une fiche ordinaire."
+)
+
+
+@dataclass
+class DecisionPublication:
+    """Résultat explicite et traçable de la règle de publication."""
+
+    visible: bool
+    motifs: list[str]
+
+    @property
+    def motif_texte(self) -> Optional[str]:
+        return " ; ".join(self.motifs) if self.motifs else None
+
+
+def decider_publication(etablissement: "Etablissement") -> DecisionPublication:
+    """Applique la règle de publication et explique chaque refus par un motif lisible."""
+    motifs: list[str] = []
+    if not etablissement.est_publication_visible:
+        motifs.append("publication désactivée dans le fichier de collecte")
+    if not norm.non_vide(etablissement.region):
+        motifs.append("région non renseignée (localisation minimale exigée)")
+    if not etablissement.sources:
+        motifs.append("aucune source documentée")
+    if etablissement.niveau_verification == "information_indisponible":
+        motifs.append("niveau de vérification « information indisponible »")
+    for probleme in etablissement.valider():
+        if probleme.niveau == "erreur":
+            motifs.append(f"{probleme.code} : {probleme.message}")
+    return DecisionPublication(visible=not motifs, motifs=motifs)
+
+
 @dataclass
 class Etablissement:
     cle: str
@@ -440,6 +493,10 @@ class Etablissement:
     commentaire_verification: Optional[str] = None
     origine_donnee: Optional[str] = None
     est_publication_visible: bool = False
+    motif_non_publication: Optional[str] = None
+    statut_validation: str = "non_validee"
+    validation_par: Optional[str] = None
+    validation_le: Optional[str] = None
 
     # ------------------------------------------------------------------ lecture
     @classmethod
@@ -501,6 +558,10 @@ class Etablissement:
             commentaire_verification=data.get("commentaire_verification"),
             origine_donnee=data.get("origine_donnee"),
             est_publication_visible=bool(data.get("est_publication_visible", False)),
+            motif_non_publication=data.get("motif_non_publication"),
+            statut_validation=data.get("statut_validation") or "non_validee",
+            validation_par=data.get("validation_par"),
+            validation_le=data.get("validation_le"),
         )
 
         # Un numéro fixe ne peut pas être un WhatsApp : on retire ce contact plutôt
@@ -585,6 +646,10 @@ class Etablissement:
             "commentaire_verification": self.commentaire_verification,
             "origine_donnee": self.origine_donnee,
             "est_publication_visible": self.est_publication_visible,
+            "motif_non_publication": self.motif_non_publication,
+            "statut_validation": self.statut_validation,
+            "validation_par": self.validation_par,
+            "validation_le": self.validation_le,
         }
 
     # ------------------------------------------------------------ commodités
@@ -623,6 +688,11 @@ class Etablissement:
     @property
     def est_publiable(self) -> bool:
         return self.est_publication_visible and not any(p.niveau == "erreur" for p in self.valider())
+
+    @property
+    def publication(self) -> "DecisionPublication":
+        """Décision de publication appliquée par le pipeline, la base et l'application."""
+        return decider_publication(self)
 
     # -------------------------------------------------------- validation
     def valider(self) -> list[Probleme]:

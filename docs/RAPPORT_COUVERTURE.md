@@ -1,4 +1,4 @@
-# Couverture du catalogue DEKK FOOD — 2026-10-13
+# Couverture du catalogue DEKK FOOD — 2026-10-14
 
 **185 fiches** au total, réparties sur **14 région(s)**.
 

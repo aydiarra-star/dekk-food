@@ -13,8 +13,15 @@ def _pourcentage(partie: int, total: int) -> str:
     return f"{(100 * partie / total):.0f} %" if total else "—"
 
 
-def rapport_couverture(etablissements: list[Etablissement]) -> dict[str, Any]:
-    """Mesure la couverture réelle et les manques, sans extrapolation."""
+def rapport_couverture(
+    etablissements: list[Etablissement], date_rapport: str | None = None
+) -> dict[str, Any]:
+    """Mesure la couverture réelle et les manques, sans extrapolation.
+
+    La date est injectable pour que la vérification automatisée soit déterministe :
+    régénérer le rapport un autre jour ne doit pas faire échouer la comparaison
+    (la date retenue est celle du commit vérifié, pas celle du jour d'exécution).
+    """
     total = len(etablissements)
     par_region = Counter(e.region or "Région non renseignée" for e in etablissements)
     par_commune = Counter(e.commune or e.ville_libre or "Commune non renseignée" for e in etablissements)
@@ -60,7 +67,7 @@ def rapport_couverture(etablissements: list[Etablissement]) -> dict[str, Any]:
             champs_manquants["source"] += 1
 
     rapport = {
-        "date_rapport": date.today().isoformat(),
+        "date_rapport": date_rapport or date.today().isoformat(),
         "total_fiches": total,
         "regions_couvertes": sorted(par_region.keys()),
         "par_region": dict(par_region.most_common()),
