@@ -66,3 +66,35 @@ Le service Flutter actuellement documenté utilise le modèle historique : `rest
 ## Garde-fous
 
 Aucune connexion ni écriture Supabase de production. Aucun changement de données canoniques. Aucune migration historique modifiée pour simuler l'isolation. Aucune fusion de PR ni aucun déploiement sans autorisation explicite.
+
+
+## 7. Inventaire exact des écritures émises par le générateur
+
+Vérification du code de `tools/catalogue/generation.py` (fonction `generer_sql`, lignes 492–758 dans la révision auditée). Cette liste décrit les colonnes émises par le générateur ; elle ne remplace pas la validation des types, contraintes, FK et index du DDL cible.
+
+| Table cible | Colonnes écrites par le seed | Conflit / idempotence attendu |
+|---|---|---|
+| `restaurants` | `numero_fiche, slug, name, nom_officiel, nom_commercial, cuisine_type, neighborhood, address, adresse_complete, phone, whatsapp, latitude, longitude, is_active, region_id, departement_id, commune_id, quartier_id, ville_libre, type_etablissement_id, description_courte, description_longue, statut, niveau_verification, gps_verifie, fourchette_prix_min, fourchette_prix_max, devise, ambiance, clientele, modes_paiement, accessibilite, equipements, site_web, facebook, instagram, commande_en_ligne_url, reservation_url, points_de_repere, source_principale_id, source_principale_url, date_collecte, derniere_verification_le, commentaire_verification, origine_donnee, est_publication_visible, motif_non_publication, statut_validation, validation_par, validation_le, image_principale_url` | `UNIQUE(slug)`, mise à jour des colonnes métier |
+| `etablissement_categories` | `restaurant_id, categorie_id, est_principale` | `UNIQUE(restaurant_id, categorie_id)` |
+| `contacts` | `restaurant_id, type, valeur, libelle, confirme, est_principal, source_id, source_url, date_collecte` | `UNIQUE(restaurant_id, type, valeur)` |
+| `horaires` | `restaurant_id, jour, service, ferme, ouverture, fermeture, confirme, source_id, source_url, date_verification` | `UNIQUE(restaurant_id, jour, service)` |
+| `etablissement_services` | `restaurant_id, service_id, confirme, source_id` | `UNIQUE(restaurant_id, service_id)` |
+| `zones_livraison` | `restaurant_id, commune_id, libelle_zone, frais_livraison, devise, delai_estime, minimum_commande, confirme, source_id, source_url` | Conflit sur expression `(restaurant_id, coalesce(commune_id, 0), coalesce(libelle_zone, ''))` ; à vérifier impérativement contre le type de `commune_id` et un index unique correspondant |
+| `images` | établissement : `restaurant_id, url, type_media, legende, est_principale, est_illustration_generique, correspondance_verifiee, auteur, licence, autorisation_usage, source_id, source_url, date_collecte, ordre`; plat : `plat_id, url, type_media, legende, est_illustration_generique, correspondance_verifiee, auteur, licence, autorisation_usage, source_id, source_url, date_collecte` | Conflit sur expression avec sentinelle UUID et `url` ; doit correspondre exactement à l'index unique dédié |
+| `menus` | `restaurant_id, nom, type, statut, devise, source_id, source_url, date_collecte, date_debut, date_fin, derniere_maj` | `UNIQUE(restaurant_id, nom, type)` |
+| `plats` | `restaurant_id, menu_id, nom, description, categorie, prix, devise, taille_portion, options, variantes, disponibilite, date_debut, date_fin, statut_confirmation, source_id, source_url, derniere_maj` | `UNIQUE(menu_id, nom)` |
+| `plat_allergenes` | `plat_id, allergene_id` | Clé primaire `(plat_id, allergene_id)` |
+| `plat_regimes` | `plat_id, regime_id` | Clé primaire `(plat_id, regime_id)` |
+| `entreprises` | `raison_sociale, nom_commercial, source_id, source_url, date_verification, statut_confirmation` | Contrôle `NOT EXISTS` sur `raison_sociale`, sans contrainte d'idempotence prouvée par ce fragment |
+| `etablissement_exploitation` | `restaurant_id, entreprise_id, role, source_id, source_url, date_verification, statut_confirmation` | Contrôle `NOT EXISTS` sur établissement, entreprise et rôle |
+| `etablissement_sources` | `restaurant_id, source_id, url_exacte, date_collecte, donnees_collectees, niveau_confiance, collecte_par` | Conflit sur expression `(restaurant_id, source_id, coalesce(url_exacte, ''))`, à valider contre un index unique correspondant |
+
+### Points bloquants révélés par cet inventaire
+
+- Le seed utilise `validation_par::uuid` et une sentinelle UUID pour l'unicité des images. Les types de clés et les colonnes doivent donc être décidés explicitement dans le nouveau modèle ; on ne peut pas déduire un DDL sûr du seul nom des colonnes.
+- Les expressions `ON CONFLICT` sur `zones_livraison`, `images` et `etablissement_sources` exigent des index/contraintes uniques compatibles, y compris les expressions exactes. Une contrainte unique classique ne suffit pas nécessairement.
+- Le générateur ne crée pas de ligne dans `sources`, `regions`, `departements`, `communes`, `quartiers`, `types_etablissement`, `categories_culinaires`, `services`, `allergenes` ou `regimes_alimentaires` : ces référentiels doivent être préremplis ou alimentés par une migration/seed de référence avant les établissements, et les sélections doivent être testées contre des noms/codes réels.
+- Ce seed n'écrit pas dans toutes les tables du modèle historique : le DDL catalogue doit partir des besoins du catalogue, pas d'une copie aveugle de toutes les migrations historiques.
+- L'inventaire est statique et issu du code source. Il ne constitue pas encore une validation par exécution de la totalité des variantes SQL générées (contacts, horaires, menus, images, etc.) sur PostgreSQL jetable.
+
+**Décision maintenue :** aucun DDL dédié n'est déclaré prêt avant d'avoir défini le modèle cible, ajouté les référentiels nécessaires, puis exécuté un seed représentatif deux fois dans PostgreSQL jetable avec assertions de schéma, clés, RLS et invariance de `public`.
