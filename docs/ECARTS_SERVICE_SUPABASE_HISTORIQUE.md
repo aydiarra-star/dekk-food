@@ -22,3 +22,16 @@ Décider explicitement soit de désactiver/documenter ce service tant qu'il n'es
 ## Architecture de compatibilité à prototyper
 
 Préserver `public.restaurants`, `public.restaurant_menus`, `public.restaurant_reviews` et leurs identifiants entiers. Tester le catalogue UUID dans un espace distinct, avec ses propres tables, seed idempotent, clés étrangères et politiques RLS. Le prototype n'est pas une migration de production.
+
+## Correctifs du contrat Flutter — 14 octobre 2026
+
+Le service a été réaligné sur les noms de tables et colonnes relevés en lecture seule :
+
+- liste : `public.restaurants`, sans filtre `is_active` (colonne absente) ;
+- menus : `public.restaurant_menus`, filtrés avec l'ID numérique converti depuis la chaîne ;
+- modèle restaurant : IDs numériques convertis en chaînes, `cuisine_types` traité comme liste, repli du quartier sur `city` ;
+- modèle menu : `name` utilisé comme titre, IDs convertis en chaînes, prix numérique conservé.
+
+Des tests Flutter de désérialisation ont été ajoutés dans `test/models/restaurant_test.dart`.
+
+**Limite sécurité inchangée :** l'inventaire a trouvé RLS activé sans policies pour ces tables. Ces changements de code ne rendent pas les données lisibles par l'application publique à eux seuls. Aucune policy/grant n'a été modifiée ; il faudra concevoir et valider les droits séparément, avec des tests de rôle, avant tout changement de production.
