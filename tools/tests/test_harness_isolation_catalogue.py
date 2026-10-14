@@ -17,7 +17,7 @@ from typing import Any
 def _snapshot_public(conn: Any) -> dict[str, Any]:
     """Empreinte des relations publiques, colonnes, contraintes et lignes."""
     result: dict[str, Any] = {
-        "relations": {}, "functions": [], "policies": [], "triggers": [], "acl": [], "sequences": [], "catalogue_fks_to_public": []
+        "relations": {}, "functions": [], "types": [], "policies": [], "triggers": [], "acl": [], "sequences": [], "catalogue_fks_to_public": []
     }
     with conn.cursor() as cur:
         cur.execute("""
@@ -62,7 +62,15 @@ def _snapshot_public(conn: Any) -> dict[str, Any]:
             """, (name,))
             indexes = cur.fetchall()
             rows = []
-            if kind in ("r", "p"):
+            view_definition = None
+            if kind in ("v", "m"):
+                cur.execute("""
+                    select pg_get_viewdef(c.oid, true)
+                    from pg_class c join pg_namespace n on n.oid = c.relnamespace
+                    where n.nspname = 'public' and c.relname = %s
+                """, (name,))
+                view_definition = cur.fetchone()[0]
+            if kind in ("r", "p", "m"):
                 quoted = '"' + name.replace('"', '""') + '"'
                 cur.execute(f"select to_jsonb(t) from public.{quoted} as t")
                 rows = [json.dumps(row[0], sort_keys=True, ensure_ascii=False, default=str)
@@ -70,13 +78,14 @@ def _snapshot_public(conn: Any) -> dict[str, Any]:
                 rows.sort()
             payload = {
                 "kind": kind,
+                "view_definition": view_definition,
                 "rls": rls_flags,
                 "columns": columns,
                 "constraints": constraints,
                 "indexes": indexes,
-                "row_count": len(rows) if kind in ("r", "p") else None,
+                "row_count": len(rows) if kind in ("r", "p", "m") else None,
                 "rows_sha256": hashlib.sha256("\n".join(rows).encode()).hexdigest()
-                    if kind in ("r", "p") else None,
+                    if kind in ("r", "p", "m") else None,
             }
             result["relations"][name] = json.loads(json.dumps(payload, default=str))
         cur.execute("""
@@ -86,6 +95,18 @@ def _snapshot_public(conn: Any) -> dict[str, Any]:
             where n.nspname = 'public' order by p.proname, 2
         """)
         result["functions"] = cur.fetchall()
+        cur.execute("""
+            select t.typname, t.typtype, format_type(t.oid, null), t.typnotnull,
+                   t.typdefault,
+                   coalesce((select string_agg(e.enumlabel, ',' order by e.enumsortorder)
+                             from pg_enum e where e.enumtypid = t.oid), '') as enum_labels,
+                   coalesce((select string_agg(pg_get_constraintdef(c.oid, true), ' | ' order by c.conname)
+                             from pg_constraint c where c.contypid = t.oid), '') as domain_constraints
+            from pg_type t join pg_namespace n on n.oid = t.typnamespace
+            where n.nspname = 'public' and t.typtype in ('d', 'e', 'r', 'm')
+            order by t.typname
+        """)
+        result["types"] = cur.fetchall()
         cur.execute("""
             select schemaname, tablename, policyname, permissive, roles,
                    cmd, qual, with_check
