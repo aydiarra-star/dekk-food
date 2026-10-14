@@ -50,11 +50,11 @@ def test_catalogue_uuid_coexiste_seed_idempotent_et_rls_isole():
                     name text not null,
                     is_published boolean not null default false
                 );
+                create role anon nologin;
                 alter table catalogue.restaurants enable row level security;
                 create policy catalogue_public_read
                     on catalogue.restaurants for select to anon
                     using (is_published = true);
-                create role anon nologin;
                 grant usage on schema catalogue to anon;
                 grant select on catalogue.restaurants to anon;
 
