@@ -11,8 +11,15 @@ import pytest
 
 
 def _connexion_jetable():
-    pgserver = pytest.importorskip("pgserver")
-    psycopg = pytest.importorskip("psycopg")
+    try:
+        import pgserver  # type: ignore
+        import psycopg  # type: ignore
+    except ImportError as exc:
+        pytest.fail(
+            "Les tests d’isolation exigent pgserver et psycopg ; "
+            "un test sauté ne constitue pas une validation.",
+            pytrace=False,
+        )
     serveur = pgserver.get_server(tempfile.mkdtemp(prefix="dekk-isolation-test-"))
     return psycopg.connect(serveur.get_uri(), autocommit=True)
 
