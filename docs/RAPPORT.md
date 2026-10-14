@@ -358,6 +358,39 @@ reproduits **avant** correction, puis revérifiés après.
   au projet en production depuis cet environnement) : le contrôle a été mené sur un
   PostgreSQL local appliquant les migrations réelles.
 
+### 5.3 bis — Correctif complémentaire (migration `0007`) : vues internes, rôles et fonctions `SECURITY DEFINER`
+
+- **Constat reproduit sur `6a09d16`** : `v_acces_comptes`, `v_cloisonnement_public`,
+  `v_publication_catalogue` et `v_fiches_a_valider` avaient reçu `GRANT SELECT ... TO authenticated`
+  sans `security_invoker = true`. Exécutées sous leur propriétaire (`postgres`), elles
+  exposaient à tout compte `authenticated` (ordinaire, lecteur, inactif ou restaurateur) les
+  emails/rôles de `utilisateurs_admin` et les identifiants/noms/motifs des 2 fiches non
+  publiées. De plus, `public.detecter_doublons()` (`SECURITY DEFINER`) était exécutable par
+  `anon` et `authenticated` sans `search_path` figé, et la garde `WITH CHECK` sur
+  `restaurants` lisait la nouvelle ligne au lieu de `OLD`.
+- **Corrections (`0007_securite_vues_et_fonctions.sql`)** :
+  - création des rôles PostgreSQL `administrateur` et `restaurateur` ;
+  - activation de `security_invoker = true, security_barrier = true` sur les 12 vues ;
+  - révocation de `SELECT` pour `PUBLIC, anon, authenticated, restaurateur` sur les 10 vues
+    internes (`v_acces_comptes`, `v_cloisonnement_public`, `v_publication_catalogue`,
+    `v_fiches_a_valider`, `v_file_travail`, `v_doublons_a_examiner`, `v_qualite_catalogue`,
+    `v_couverture_par_region`, `v_couverture_par_ville`, `v_couverture_par_categorie`),
+    accordé uniquement à `administrateur, service_role`, avec garde active
+    `public.exiger_acces_administration()` (`SQLSTATE 42501`) ;
+  - déclencheur `BEFORE UPDATE` `trg_restaurants_controle_modification` bloquant toute
+    modification de `niveau_verification`, `est_publication_visible`,
+    `motif_non_publication`, `statut_validation` ou `commentaire_verification` par un non-admin ;
+  - `search_path = public, pg_temp` sur les 17 fonctions du schéma `public`, et révocation
+    de `EXECUTE` sur `detecter_doublons`, `valider_fiche_par_controle`, `devalider_fiche`
+    et `exiger_acces_administration` pour `PUBLIC, anon, authenticated, restaurateur`.
+- **Vérifications ajoutées au harnais PostgreSQL et à la CI** : refus d'accès prouvé sur
+  chacune des 10 vues internes et des fonctions d'administration sous `anon`,
+  `authenticated` sans compte, compte authentifié ordinaire, compte `lecteur`, compte
+  `admin` inactif (y compris sous le rôle `administrateur`), compte `restaurateur` inactif,
+  `restaurateur` de la fiche 1 et `restaurateur` rattaché à une autre fiche ; accès
+  administrateur actif et parcours publics (`v_etablissements_publics`, `v_plats_publics`)
+  préservés.
+
 ### 5.4 Ce qui n'a pas été fait, et pourquoi
 
 - Aucune fusion de la pull request, aucun déploiement, aucune modification de `main`.

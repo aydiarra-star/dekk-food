@@ -34,6 +34,7 @@ FICHIERS = [
     RACINE / "supabase/migrations/0004_publication_validation_provenance.sql",
     RACINE / "supabase/migrations/0005_cloisonnement_public.sql",
     RACINE / "supabase/migrations/0006_acces_admin_restaurateur.sql",
+    RACINE / "supabase/migrations/0007_securite_vues_et_fonctions.sql",
     RACINE / "supabase/seed/00_referentiel.sql",
 ]
 
@@ -342,17 +343,29 @@ def executer_verifications() -> int:
     # publiée en interrogeant la table fille directement.
     try:
         RESTO = "00000000-0000-0000-0000-0000000000b2"
+        RESTO_AUTRE_PRIVE = "00000000-0000-0000-0000-0000000000b3"
+        RESTO_AUTRE_PUBLIC = "00000000-0000-0000-0000-0000000000b4"
+        LECTEUR = "00000000-0000-0000-0000-0000000000b5"
+        INACTIF_ADMIN = "00000000-0000-0000-0000-0000000000b6"
+        INACTIF_RESTO = "00000000-0000-0000-0000-0000000000b7"
         INCONNU = "00000000-0000-0000-0000-0000000000b9"
 
-        fiche_privee = recuperer(
-            "select id, slug from public.restaurants where not est_publication_visible order by slug limit 1;"
-        )[0]
+        fiches_privees = recuperer(
+            "select id, slug from public.restaurants where not est_publication_visible order by slug;"
+        )
+        fiche_privee = fiches_privees[0]
+        fiche_privee_2 = fiches_privees[1]
         fiche_publique = recuperer(
             "select id, slug from public.restaurants where est_publication_visible order by slug limit 1;"
         )[0]
         executer(
-            "insert into public.utilisateurs_admin (id, email, role, restaurant_id) "
-            f"values ('{RESTO}', 'resto@dekk.test', 'restaurateur', '{fiche_privee[0]}') "
+            "insert into public.utilisateurs_admin (id, email, role, restaurant_id, actif) values "
+            f"('{RESTO}', 'resto@dekk.test', 'restaurateur', '{fiche_privee[0]}', true), "
+            f"('{RESTO_AUTRE_PRIVE}', 'resto2@dekk.test', 'restaurateur', '{fiche_privee_2[0]}', true), "
+            f"('{RESTO_AUTRE_PUBLIC}', 'restopub@dekk.test', 'restaurateur', '{fiche_publique[0]}', true), "
+            f"('{LECTEUR}', 'lecteur@dekk.test', 'lecteur', null, true), "
+            f"('{INACTIF_ADMIN}', 'inactif-admin@dekk.test', 'admin', null, false), "
+            f"('{INACTIF_RESTO}', 'inactif-resto@dekk.test', 'restaurateur', '{fiche_privee[0]}', false) "
             "on conflict (id) do nothing;"
         )
 
@@ -372,6 +385,29 @@ def executer_verifications() -> int:
             except Exception as exc:  # noqa: BLE001
                 erreurs_roles[f"{role}/{sql[:60]}"] = str(exc).splitlines()[0]
                 return None
+            finally:
+                executer("reset role;")
+
+        def exiger_refus_role(description: str, role: str, utilisateur: str, sql: str) -> None:
+            """Exige que PostgreSQL refuse l'exécution de la requête sous ce rôle."""
+            nonlocal echecs
+            try:
+                executer("reset role;")
+                executer(f"select set_config('dekkfood.utilisateur_id', '{utilisateur}', false);")
+                executer(f"set role {role};")
+                lignes = recuperer(sql)
+                print(
+                    f"ÉCHEC  {description} : requête acceptée ({len(lignes)} ligne(s)) "
+                    f"sous {role} ({utilisateur or 'sans identité'}) alors qu'elle doit être refusée"
+                )
+                echecs += 1
+            except Exception as exc:  # noqa: BLE001
+                message = str(exc).splitlines()[0]
+                if "recursion" in message or "stack depth" in message:
+                    print(f"ÉCHEC  {description} : récursion au lieu d'un refus d'accès : {message[:120]}")
+                    echecs += 1
+                else:
+                    print(f"OK     refus effectif ({role}) : {description}")
             finally:
                 executer("reset role;")
 
@@ -602,6 +638,288 @@ def executer_verifications() -> int:
             controler("table héritée menu_items : RLS activée", menu_items[0][0], True)
             controler("table héritée menu_items : fermée au public",
                       compter("anon", "", "select count(*) from public.menu_items;"), 0)
+
+        # 10. Vues internes et d'administration (migration 0007) :
+        #     - options security_invoker=true et security_barrier=true sur les 12 vues ;
+        #     - SELECT révoqué pour anon, authenticated et restaurateur sur les 10 vues internes ;
+        #     - refus effectif (SQLSTATE 42501) pour anon, authenticated (sans identité),
+        #       compte authentifié ordinaire (INCONNU, LECTEUR), compte inactif
+        #       (INACTIF_ADMIN, INACTIF_RESTO), restaurateur (RESTO, RESTO_AUTRE_PRIVE,
+        #       RESTO_AUTRE_PUBLIC) ;
+        #     - accès préservé pour administrateur actif (ADMIN) et service_role.
+        vues_internes = (
+            "v_acces_comptes",
+            "v_cloisonnement_public",
+            "v_publication_catalogue",
+            "v_fiches_a_valider",
+            "v_file_travail",
+            "v_doublons_a_examiner",
+            "v_qualite_catalogue",
+            "v_couverture_par_region",
+            "v_couverture_par_ville",
+            "v_couverture_par_categorie",
+        )
+        vues_publiques = (
+            "v_etablissements_publics",
+            "v_plats_publics",
+        )
+
+        for vue in (*vues_internes, *vues_publiques):
+            options = recuperer(
+                "select coalesce(c.reloptions, array[]::text[]) "
+                "from pg_class c join pg_namespace n on n.oid = c.relnamespace "
+                f"where n.nspname = 'public' and c.relname = '{vue}';"
+            )[0][0]
+            controler(
+                f"vue public.{vue} : security_invoker et security_barrier activés",
+                {"security_invoker=true", "security_barrier=true"}.issubset(set(options)),
+                True,
+            )
+
+        for vue in vues_internes:
+            privs = recuperer(
+                f"select "
+                f"has_table_privilege('anon', 'public.{vue}', 'SELECT'), "
+                f"has_table_privilege('authenticated', 'public.{vue}', 'SELECT'), "
+                f"has_table_privilege('restaurateur', 'public.{vue}', 'SELECT'), "
+                f"has_table_privilege('administrateur', 'public.{vue}', 'SELECT'), "
+                f"has_table_privilege('service_role', 'public.{vue}', 'SELECT');"
+            )[0]
+            controler(
+                f"privilèges effectifs de public.{vue} (anon=F, auth=F, resto=F, admin=V, service=V)",
+                privs,
+                (False, False, False, True, True),
+            )
+            # Refus d'exécution sous chaque rôle et profil non autorisé
+            exiger_refus_role(f"lecture de public.{vue} par anon", "anon", "", f"select * from public.{vue};")
+            exiger_refus_role(
+                f"lecture de public.{vue} par authenticated sans compte",
+                "authenticated", "", f"select * from public.{vue};",
+            )
+            exiger_refus_role(
+                f"lecture de public.{vue} par un compte authentifié ordinaire",
+                "authenticated", INCONNU, f"select * from public.{vue};",
+            )
+            exiger_refus_role(
+                f"lecture de public.{vue} par un compte lecteur",
+                "authenticated", LECTEUR, f"select * from public.{vue};",
+            )
+            exiger_refus_role(
+                f"lecture de public.{vue} par un compte administrateur inactif (rôle authenticated)",
+                "authenticated", INACTIF_ADMIN, f"select * from public.{vue};",
+            )
+            exiger_refus_role(
+                f"lecture de public.{vue} par un compte administrateur inactif (rôle administrateur)",
+                "administrateur", INACTIF_ADMIN, f"select * from public.{vue};",
+            )
+            exiger_refus_role(
+                f"lecture de public.{vue} par un compte restaurateur inactif",
+                "restaurateur", INACTIF_RESTO, f"select * from public.{vue};",
+            )
+            exiger_refus_role(
+                f"lecture de public.{vue} par un restaurateur (rôle restaurateur)",
+                "restaurateur", RESTO, f"select * from public.{vue};",
+            )
+            exiger_refus_role(
+                f"lecture de public.{vue} par un restaurateur (rôle authenticated)",
+                "authenticated", RESTO, f"select * from public.{vue};",
+            )
+            exiger_refus_role(
+                f"lecture de public.{vue} par un restaurateur rattaché à une autre fiche",
+                "restaurateur", RESTO_AUTRE_PRIVE, f"select * from public.{vue};",
+            )
+            exiger_refus_role(
+                f"lecture de public.{vue} par un restaurateur d'une fiche publiée",
+                "restaurateur", RESTO_AUTRE_PUBLIC, f"select * from public.{vue};",
+            )
+
+        # Accès légitime de l'administrateur actif aux vues internes
+        attendus_admin_vues = {
+            "v_acces_comptes": recuperer("select count(*) from public.utilisateurs_admin;")[0][0],
+            "v_cloisonnement_public": total_fiches,
+            "v_publication_catalogue": total_fiches,
+            "v_fiches_a_valider": total_fiches - non_publiees,
+            "v_file_travail": total_fiches,
+            "v_qualite_catalogue": 1,
+            "v_couverture_par_region": 14,
+        }
+        for vue, attendu in attendus_admin_vues.items():
+            controler(
+                f"administrateur actif : lecture de public.{vue}",
+                compter("administrateur", ADMIN, f"select count(*) from public.{vue};"),
+                attendu,
+            )
+
+        # 11. Parcours publics légitimes préservés (vues publiques, menus, contacts, fiches publiées).
+        fiches_publiees_attendues = total_fiches - non_publiees
+        plats_publics_attendus = recuperer(
+            "select count(*) from public.plats p join public.restaurants r on r.id = p.restaurant_id "
+            "where p.est_actif and r.est_publication_visible and r.statut <> 'ferme_definitivement';"
+        )[0][0]
+        for role_test, user_test, libelle in (
+            ("anon", "", "anon"),
+            ("authenticated", INCONNU, "compte authentifié ordinaire"),
+            ("restaurateur", RESTO, "restaurateur"),
+            ("administrateur", ADMIN, "administrateur"),
+        ):
+            controler(
+                f"parcours public v_etablissements_publics ({libelle})",
+                compter(role_test, user_test, "select count(*) from public.v_etablissements_publics;"),
+                fiches_publiees_attendues,
+            )
+            controler(
+                f"parcours public v_plats_publics ({libelle})",
+                compter(role_test, user_test, "select count(*) from public.v_plats_publics;"),
+                plats_publics_attendus,
+            )
+
+        # 12. Comptes inactifs, comptes ordinaires et restaurateurs d'une autre fiche :
+        #     aucune fuite d'emails, de notes privées, de motifs ni d'identifiants de fiches non publiées.
+        for role_test, user_test, libelle in (
+            ("anon", "", "anon"),
+            ("authenticated", "", "authenticated nu"),
+            ("authenticated", INCONNU, "compte authentifié ordinaire"),
+            ("authenticated", LECTEUR, "compte lecteur"),
+            ("authenticated", INACTIF_ADMIN, "compte admin inactif"),
+            ("restaurateur", INACTIF_RESTO, "compte restaurateur inactif"),
+            ("restaurateur", RESTO_AUTRE_PUBLIC, "restaurateur rattaché à une fiche publiée"),
+        ):
+            controler(
+                f"{libelle} : 0 fiche non publiée visible (identifiants et motifs protégés)",
+                compter(
+                    role_test,
+                    user_test,
+                    "select count(*) from public.restaurants "
+                    "where not est_publication_visible or motif_non_publication is not null;",
+                ),
+                0,
+            )
+            controler(
+                f"{libelle} : 0 compte/email visible dans public.utilisateurs_admin",
+                compter(role_test, user_test, "select count(*) from public.utilisateurs_admin;"),
+                0,
+            )
+            for table_interne in (
+                "verifications",
+                "revendications",
+                "signalements",
+                "demandes_correction",
+                "journal_modifications",
+                "doublons_suspects",
+                "import_lots",
+                "import_lignes",
+                "menu_items",
+            ):
+                controler(
+                    f"{libelle} : 0 ligne dans public.{table_interne}",
+                    compter(role_test, user_test, f"select count(*) from public.{table_interne};"),
+                    0,
+                )
+
+        # Isolation croisée entre les deux restaurateurs rattachés à deux fiches non publiées distinctes :
+        controler(
+            "restaurateur 2 (autre fiche) : ne voit pas la fiche non publiée du restaurateur 1",
+            compter(
+                "restaurateur",
+                RESTO_AUTRE_PRIVE,
+                f"select count(*) from public.restaurants where id = '{fiche_privee[0]}';",
+            ),
+            0,
+        )
+        controler(
+            "restaurateur 2 (autre fiche) : ne voit aucun contact de la fiche non publiée du restaurateur 1",
+            compter(
+                "restaurateur",
+                RESTO_AUTRE_PRIVE,
+                f"select count(*) from public.contacts where restaurant_id = '{fiche_privee[0]}';",
+            ),
+            0,
+        )
+        controler(
+            "restaurateur 1 : ne voit pas la fiche non publiée du restaurateur 2",
+            compter(
+                "restaurateur",
+                RESTO,
+                f"select count(*) from public.restaurants where id = '{fiche_privee_2[0]}';",
+            ),
+            0,
+        )
+
+        # Contrôle du déclencheur BEFORE UPDATE : un restaurateur ne peut modifier ni
+        # niveau_verification (y compris vers partiellement_verifie), ni est_publication_visible,
+        # ni motif_non_publication, ni statut_validation, ni commentaire_verification.
+        for champ_interdit in (
+            "niveau_verification = 'partiellement_verifie'",
+            "est_publication_visible = true",
+            "motif_non_publication = 'tentative de modification'",
+            "statut_validation = 'en_cours'",
+            "commentaire_verification = 'note modifiée par restaurateur'",
+        ):
+            try:
+                executer("begin;")
+                executer(f"select set_config('dekkfood.utilisateur_id', '{RESTO}', true);")
+                executer("set local role restaurateur;")
+                try:
+                    executer(f"update public.restaurants set {champ_interdit} where id = '{fiche_privee[0]}';")
+                    print(f"ÉCHEC  restaurateur a pu modifier {champ_interdit}")
+                    echecs += 1
+                except Exception:
+                    print(f"OK     restaurateur bloqué sur modification de {champ_interdit}")
+            finally:
+                executer("rollback;")
+                executer("reset role;")
+
+        # 13. Fonctions SECURITY DEFINER et fonctions d'administration :
+        #     search_path figé sur toutes les fonctions de public, et EXECUTE révoqué
+        #     sur detecter_doublons / valider_fiche_par_controle / devalider_fiche.
+        fonctions_sans_search_path = recuperer(
+            "select p.proname from pg_proc p join pg_namespace n on n.oid = p.pronamespace "
+            "where n.nspname = 'public' and (p.proconfig is null "
+            "or not ('search_path=public, pg_temp' = any(p.proconfig)));"
+        )
+        controler(
+            "toutes les fonctions de public ont search_path = public, pg_temp",
+            fonctions_sans_search_path,
+            [],
+        )
+        for fn_signature, fn_appel in (
+            ("public.detecter_doublons(numeric, integer, numeric)", "select public.detecter_doublons();"),
+            (
+                "public.valider_fiche_par_controle(uuid, text, text, text)",
+                f"select public.valider_fiche_par_controle('{fiche_publique[0]}', 'verifie', 'preuve');",
+            ),
+            (
+                "public.devalider_fiche(uuid, text)",
+                f"select public.devalider_fiche('{fiche_publique[0]}', 'motif');",
+            ),
+        ):
+            privs_fn = recuperer(
+                f"select "
+                f"has_function_privilege('anon', '{fn_signature}', 'EXECUTE'), "
+                f"has_function_privilege('authenticated', '{fn_signature}', 'EXECUTE'), "
+                f"has_function_privilege('restaurateur', '{fn_signature}', 'EXECUTE'), "
+                f"has_function_privilege('administrateur', '{fn_signature}', 'EXECUTE');"
+            )[0]
+            controler(
+                f"EXECUTE sur {fn_signature} (anon=F, auth=F, resto=F, admin=V)",
+                privs_fn,
+                (False, False, False, True),
+            )
+            for role_fn, user_fn in (
+                ("anon", ""),
+                ("authenticated", INCONNU),
+                ("restaurateur", RESTO),
+                ("administrateur", INACTIF_ADMIN),
+            ):
+                exiger_refus_role(f"appel de {fn_signature}", role_fn, user_fn, fn_appel)
+
+        # Nettoyage des comptes de test supplémentaires afin de laisser la base propre
+        executer("reset role;")
+        executer(
+            "delete from public.utilisateurs_admin where id in ("
+            f"'{RESTO_AUTRE_PRIVE}', '{RESTO_AUTRE_PUBLIC}', '{LECTEUR}', '{INACTIF_ADMIN}', '{INACTIF_RESTO}'"
+            ");"
+        )
 
         executer("select set_config('dekkfood.utilisateur_id', '', false);")
     except Exception as exc:  # noqa: BLE001

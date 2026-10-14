@@ -149,8 +149,7 @@ order by e.est_publication_visible, e.name;
 comment on view public.v_cloisonnement_public is
   'Contrôle de conservation : chaque fiche apparaît avec son état de publication et le nombre de données rattachées. Une fiche non publiée doit afficher ici le même nombre de données rattachées qu''une fiche publiée : rien n''est supprimé, seulement non exposé. La lecture publique des tables filles est cloisonnée par les politiques RLS de la migration 0005.';
 
-revoke all on public.v_cloisonnement_public from anon;
-grant select on public.v_cloisonnement_public to authenticated;
+revoke all on public.v_cloisonnement_public from public, anon, authenticated;
 
 -- -----------------------------------------------------------------------------
 -- 4. Table héritée `menu_items` : RLS absente (fermeture d'une faille latente)

@@ -274,12 +274,8 @@ order by contact_confirme desc, contacts desc, e.name;
 comment on view public.v_fiches_a_valider is
   'File d''enrichissement et de validation : les fiches joignables (contact connu) d''abord, car ce sont celles qu''un appel ou un message peut vérifier directement.';
 
-grant select on public.v_publication_catalogue to authenticated;
-grant select on public.v_fiches_a_valider to authenticated;
-revoke all on public.v_publication_catalogue from anon;
-revoke all on public.v_fiches_a_valider from anon;
+revoke all on public.v_publication_catalogue from public, anon, authenticated;
+revoke all on public.v_fiches_a_valider from public, anon, authenticated;
 
-revoke all on function public.valider_fiche_par_controle(uuid, text, text, text) from public, anon;
-revoke all on function public.devalider_fiche(uuid, text) from public, anon;
-grant execute on function public.valider_fiche_par_controle(uuid, text, text, text) to authenticated;
-grant execute on function public.devalider_fiche(uuid, text) to authenticated;
+revoke all on function public.valider_fiche_par_controle(uuid, text, text, text) from public, anon, authenticated;
+revoke all on function public.devalider_fiche(uuid, text) from public, anon, authenticated;

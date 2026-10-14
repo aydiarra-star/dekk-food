@@ -212,6 +212,51 @@ comptes était vide.
 - Vue `v_acces_comptes` (administration) : qui accède à quoi, pour vérifier qu'aucun
   compte inactif ne conserve d'accès.
 
+## Durcissement des vues internes et des fonctions SECURITY DEFINER (migration 0007)
+
+Constat complémentaire sur le commit `6a09d16` :
+1. `v_publication_catalogue`, `v_fiches_a_valider` (`0004`), `v_cloisonnement_public` (`0005`)
+   et `v_acces_comptes` (`0006`) recevaient `GRANT SELECT ... TO authenticated` et ne
+   définissaient pas `security_invoker = true`. En PostgreSQL, une vue s'exécute par défaut
+   sous les droits de son propriétaire (`postgres`, qui contourne la RLS) : un compte
+   simplement authentifié (ou un restaurateur, ou un compte inactif) pouvait lire les emails
+   et rôles de `v_acces_comptes` ainsi que les identifiants, noms, motifs de non-publication
+   et compteurs des fiches non publiées dans `v_cloisonnement_public` et
+   `v_publication_catalogue`.
+2. Les vues créées en `0003` (`v_couverture_par_region`, `v_couverture_par_ville`,
+   `v_couverture_par_categorie`, `v_qualite_catalogue`, `v_file_travail`,
+   `v_doublons_a_examiner`, `v_etablissements_publics`, `v_plats_publics`) n'avaient ni
+   `security_invoker = true`, ni `REVOKE` explicite.
+3. En PostgreSQL, une sous-requête dans la clause `WITH CHECK` d'une politique `UPDATE` voit
+   déjà la nouvelle ligne : la protection des colonnes de vérification et de publication
+   exige un déclencheur `BEFORE UPDATE` comparant `OLD` et `NEW`.
+4. Les fonctions `SECURITY DEFINER` `detecter_doublons` et `journaliser` n'avaient pas de
+   `search_path` figé et `detecter_doublons` restait exécutable par `PUBLIC` / `anon`.
+
+Corrections apportées (`0007_securite_vues_et_fonctions.sql`) :
+- Rôles PostgreSQL dédiés `administrateur` et `restaurateur` (héritant de `authenticated`
+  pour les politiques RLS des tables).
+- `security_invoker = true` et `security_barrier = true` activés sur les **12 vues** du
+  schéma `public`.
+- `REVOKE ALL ... FROM PUBLIC, anon, authenticated, restaurateur` et
+  `GRANT SELECT ... TO administrateur, service_role` sur les **10 vues internes**
+  (`v_acces_comptes`, `v_cloisonnement_public`, `v_publication_catalogue`,
+  `v_fiches_a_valider`, `v_file_travail`, `v_doublons_a_examiner`, `v_qualite_catalogue`,
+  `v_couverture_par_region`, `v_couverture_par_ville`, `v_couverture_par_categorie`),
+  doublés de la garde `public.exiger_acces_administration()` (lève `SQLSTATE 42501` si le
+  compte courant n'est pas un administrateur actif).
+- `v_etablissements_publics` et `v_plats_publics` réservées en lecture (`SELECT`) à `anon`,
+  `authenticated`, `restaurateur`, `administrateur` et `service_role` avec
+  `security_invoker = true` et filtrage strict des fiches publiées.
+- Déclencheur `trg_restaurants_controle_modification` (`BEFORE UPDATE`) interdisant à tout
+  non-administrateur de modifier `niveau_verification`, `est_publication_visible`,
+  `motif_non_publication`, `statut_validation`, `validation_par`, `validation_le`,
+  `derniere_verification_le` ou `commentaire_verification`.
+- `search_path = public, pg_temp` fixé sur les **17 fonctions** du schéma `public`, et
+  `EXECUTE` révoqué pour `PUBLIC`, `anon`, `authenticated` et `restaurateur` sur
+  `detecter_doublons`, `valider_fiche_par_controle`, `devalider_fiche` et
+  `exiger_acces_administration`.
+
 ## Catalogue distribué et catalogue interne (réduction à la génération)
 
 `assets/data/catalogue.json` est **embarqué dans l'application** et publié en ligne

@@ -156,5 +156,4 @@ order by u.role, u.email;
 comment on view public.v_acces_comptes is
   'Qui accède à quoi : rôle, activité et périmètre. Lisible uniquement par l''administration — la vue sert à vérifier qu''un restaurateur n''a bien que son établissement et qu''aucun compte inactif ne conserve d''accès.';
 
-revoke all on public.v_acces_comptes from anon;
-grant select on public.v_acces_comptes to authenticated;
+revoke all on public.v_acces_comptes from public, anon, authenticated;
