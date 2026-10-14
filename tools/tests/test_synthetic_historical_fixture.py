@@ -72,8 +72,33 @@ def test_fixture_historique_synthetique_est_chargeable_et_representee():
             cur.execute("SELECT public.synthetic_history_marker()")
             assert cur.fetchone()[0] == 42
 
+            # Le trigger refuse une note invalide à l'insertion comme à la mise à jour.
             with pytest.raises(psycopg.errors.RaiseException):
                 cur.execute("""
                     INSERT INTO public.restaurant_reviews (restaurant_id, rating, body)
                     VALUES (42, 6, 'Cette ligne doit être refusée')
                 """)
+
+            with pytest.raises(psycopg.errors.RaiseException):
+                cur.execute("UPDATE public.restaurant_reviews SET rating = 0 WHERE id = 9")
+
+            # Les relations historiques synthétiques conservent leurs contraintes d'intégrité.
+            with pytest.raises(psycopg.errors.ForeignKeyViolation):
+                cur.execute("""
+                    INSERT INTO public.restaurant_menus (restaurant_id, name)
+                    VALUES (999, 'Menu orphelin interdit')
+                """)
+
+            with pytest.raises(psycopg.errors.UniqueViolation):
+                cur.execute("""
+                    INSERT INTO public.restaurant_menus (restaurant_id, name)
+                    VALUES (42, 'Menu synthétique')
+                """)
+
+            # La séquence par défaut reste fonctionnelle après l'insertion d'un ID explicite.
+            cur.execute("""
+                INSERT INTO public.restaurants (name)
+                VALUES ('Restaurant séquence synthétique')
+                RETURNING id
+            """)
+            assert cur.fetchone()[0] == 1000
