@@ -52,3 +52,43 @@ Le fichier `supabase/diagnostics/preflight_migrations_0001_0007.sql` est un cont
 ## État de ce document
 
 Plan préparatoire uniquement. Aucun SQL de migration de compatibilité n'est encore prêt à appliquer. Le précontrôle ajouté est un garde-fou, pas la migration. Le SQL de compatibilité ne doit être écrit qu'après la cartographie complète des dépendances et le choix du modèle d'identifiants.
+
+## Cartographie technique vérifiée — dépendances d'identifiants
+
+Cette section complète le constat initial après lecture des sept migrations et du code Flutter sur la branche de travail. Elle ne constitue pas une autorisation d'appliquer du SQL.
+
+### 1. Références dans les migrations
+
+- **Migration 0001 — référentiel/catalogue :** crée plusieurs relations enfant avec `restaurant_id uuid references public.restaurants(id)`, notamment les catégories d'établissement, l'exploitation/gestionnaires, les contacts, les sources et les vérifications. Les index et triggers s'appuient également sur les colonnes ajoutées à `restaurants`.
+- **Migration 0002 — menus et services :** déclare de nombreuses colonnes `restaurant_id` de type UUID dans `menus`, `plats`, `images`, `horaires`, les zones de livraison, les avis et les tables de liaison/détection de doublons. Certaines contraintes d'index utilisent explicitement un UUID sentinelle.
+- **Migration 0003 — rôles et vues :** `utilisateurs_admin.restaurant_id` est un UUID et les politiques RLS comparent directement `restaurants.id` à cette clé. Plusieurs vues joignent les tables filles par cette relation.
+- **Migrations 0004–0007 :** les vues de publication, les politiques de cloisonnement, la fonction de périmètre restaurateur, le déclencheur de modification et les vues d'administration continuent d'utiliser `restaurants.id` comme identifiant parent. Le changement de clé doit donc être traité comme une modification transversale, pas comme une conversion isolée de colonne.
+- **Seed :** `supabase/seed/00_referentiel.sql` charge le référentiel géographique (ses identifiants numériques sont distincts des identifiants de restaurant). `supabase/seed/10_etablissements.sql` est un fichier généré volumineux ; il doit être analysé par son générateur et ses contrôles de reproductibilité avant d'être adapté. Ne pas éditer manuellement ce fichier généré.
+- **Schéma de référence :** `supabase/schema.sql` crée un premier modèle minimal UUID avec `restaurants` et `menu_items`. Ce fichier ne décrit pas le schéma historique actuellement observé sur le projet distant.
+
+### 2. Références dans Flutter
+
+Deux parcours coexistent actuellement :
+
+1. **Catalogue national principal :** `lib/data/catalogue_repository.dart` charge `assets/data/catalogue.json`, généré à partir des données de `data/seed`. Les identifiants des établissements sont manipulés comme des chaînes dans `lib/models/catalogue.dart` et servent notamment aux favoris et aux contributions locales. Ce parcours embarqué ne nécessite pas de conversion de clé SQL pour afficher le catalogue hors ligne.
+2. **Service Supabase historique :** `lib/services/supabase_service.dart` interroge directement `restaurants` en filtrant `is_active`, puis `menu_items` avec `restaurant_id`. `lib/models/restaurant.dart` déclare les identifiants comme `String` et lit directement les valeurs JSON. Or le schéma distant observé possède des identifiants entiers, tandis que ce modèle attend une chaîne : ce chemin mérite un test d'intégration explicite avant d'être considéré compatible. Les tables `restaurant_menus` et `restaurant_reviews` du projet distant ne sont pas les tables `menus`, `plats` et `avis` du nouveau catalogue.
+3. **Contributions :** les avis et demandes du catalogue utilisent un identifiant d'établissement textuel dans le stockage local. Il ne faut pas supposer que cette chaîne est un UUID de base ni la convertir automatiquement en clé numérique sans une table de correspondance explicite.
+
+### 3. Décision de conception — aucune conversion automatique
+
+La cartographie confirme qu'une simple conversion de `restaurants.id` de integer en UUID casserait des clés étrangères historiques et ne suffirait pas à rendre cohérentes les migrations. Deux options restent à comparer dans un environnement jetable :
+
+- **Option A — préserver la clé entière historique :** conserver les identifiants entiers des trois tables historiques, puis adapter le nouveau catalogue avec une clé UUID distincte et stable, ainsi qu'une correspondance explicite entre l'identifiant historique et l'identifiant de catalogue. Toutes les relations, vues, fonctions, policies et tests concernés doivent utiliser la bonne clé de manière cohérente.
+- **Option B — modèle de catalogue séparé :** garder les trois tables historiques intactes et créer un espace de catalogue UUID distinct, puis migrer les données de façon idempotente avec une table de correspondance vérifiable. Cette option isole davantage l'ancien service Flutter, mais exige de décider si et comment les fiches historiques sont réconciliées avec les fiches du catalogue national.
+
+Aucune des deux options ne doit être choisie seulement sur la base du nom d'un établissement. Le rapprochement des lignes doit utiliser une clé historique conservée, ou être validé explicitement lorsqu'aucune clé stable n'existe.
+
+### 4. Prochaine vérification obligatoire
+
+Avant d'écrire la migration candidate :
+- inspecter les colonnes et contraintes complètes des trois tables distantes en lecture seule, y compris les séquences, triggers, politiques, privilèges et vues dépendantes ;
+- analyser le générateur du seed pour savoir comment les IDs de catalogue sont produits et garantir la reproductibilité ;
+- décider quel parcours Flutter est la source de vérité et tester le service Supabase historique avec les types JSON réellement renvoyés ;
+- créer une fixture locale représentant exactement le schéma distant (integer + six menus), puis tester les deux options sur PostgreSQL jetable, avec exécution répétée, comptes avant/après, intégrité référentielle et tests RLS.
+
+**Aucune migration de compatibilité n'est encore prête à exécuter.** La seule migration sûre à ce stade est celle qui sera démontrée par ces tests sur une copie jetable, puis revue avant toute autorisation séparée de production.
