@@ -16,7 +16,9 @@ from typing import Any
 
 def _snapshot_public(conn: Any) -> dict[str, Any]:
     """Empreinte des relations publiques, colonnes, contraintes et lignes."""
-    result: dict[str, Any] = {"relations": {}, "functions": []}
+    result: dict[str, Any] = {
+        "relations": {}, "functions": [], "policies": [], "triggers": [], "acl": []
+    }
     with conn.cursor() as cur:
         cur.execute("""
             select c.relname, c.relkind
@@ -76,6 +78,42 @@ def _snapshot_public(conn: Any) -> dict[str, Any]:
             where n.nspname = 'public' order by p.proname, 2
         """)
         result["functions"] = cur.fetchall()
+        cur.execute("""
+            select schemaname, tablename, policyname, permissive, roles,
+                   cmd, qual, with_check
+            from pg_policies
+            where schemaname = 'public'
+            order by tablename, policyname
+        """)
+        result["policies"] = cur.fetchall()
+        cur.execute("""
+            select n.nspname, c.relname, t.tgname, pg_get_triggerdef(t.oid, true)
+            from pg_trigger t
+            join pg_class c on c.oid = t.tgrelid
+            join pg_namespace n on n.oid = c.relnamespace
+            where n.nspname = 'public' and not t.tgisinternal
+            order by c.relname, t.tgname
+        """)
+        result["triggers"] = cur.fetchall()
+        cur.execute("""
+            select 'relation', n.nspname, c.relname, c.relkind,
+                   coalesce(c.relacl::text, '')
+            from pg_class c
+            join pg_namespace n on n.oid = c.relnamespace
+            where n.nspname = 'public'
+            union all
+            select 'schema', n.nspname, '', '', coalesce(n.nspacl::text, '')
+            from pg_namespace n where n.nspname = 'public'
+            union all
+            select 'function', n.nspname,
+                   p.proname || '(' || pg_get_function_identity_arguments(p.oid) || ')',
+                   '', coalesce(p.proacl::text, '')
+            from pg_proc p
+            join pg_namespace n on n.oid = p.pronamespace
+            where n.nspname = 'public'
+            order by 1, 2, 3, 4
+        """)
+        result["acl"] = cur.fetchall()
     return json.loads(json.dumps(result, sort_keys=True, default=str))
 
 
