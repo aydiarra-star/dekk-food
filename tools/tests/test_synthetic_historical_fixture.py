@@ -72,7 +72,7 @@ def test_fixture_historique_synthetique_est_chargeable_et_representee():
             cur.execute("SELECT public.synthetic_history_marker()")
             assert cur.fetchone()[0] == 42
 
-            with pytest.raises(psycopg.errors.CheckViolation):
+            with pytest.raises(psycopg.errors.RaiseException):
                 cur.execute("""
                     INSERT INTO public.restaurant_reviews (restaurant_id, rating, body)
                     VALUES (42, 6, 'Cette ligne doit être refusée')
