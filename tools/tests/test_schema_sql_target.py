@@ -73,3 +73,29 @@ def test_ne_modifie_pas_les_chaines_ou_commentaires_sql():
     assert "'https://example.test/public.example'" in resultat
     assert "-- public.ne_pas_remplacer" in resultat
     assert "/* public.non_plus */" in resultat
+
+def test_ne_modifie_pas_les_chaines_dollar_quotees_postgresql():
+    sql = (
+        "select public.restaurants.id; "
+        "do $bloc$ begin perform 'public.texte'; -- public.commentaire\\n"
+        "raise notice 'public.alerte'; end $bloc$; "
+        "select $$public.contenu$$;"
+    )
+    resultat = qualifier_schema_sql(sql, "catalogue")
+    assert "select catalogue.restaurants.id" in resultat
+    assert "$bloc$ begin perform 'public.texte'; -- public.commentaire\\n" in resultat
+    assert "raise notice 'public.alerte'; end $bloc$" in resultat
+    assert "$$public.contenu$$" in resultat
+
+
+def test_preserve_les_commentaires_de_bloc_imbriques():
+    sql = "select public.restaurants.id; /* public.a /* public.b */ public.c */ select 1;"
+    resultat = qualifier_schema_sql(sql, "catalogue")
+    assert "select catalogue.restaurants.id" in resultat
+    assert "/* public.a /* public.b */ public.c */" in resultat
+
+
+def test_refuse_un_sql_qui_n_est_pas_une_chaine():
+    with pytest.raises(TypeError):
+        qualifier_schema_sql(None, "catalogue")
+
