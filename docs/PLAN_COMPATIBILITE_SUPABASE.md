@@ -45,6 +45,10 @@ La voie prudente à étudier est de **conserver les clés entières et les ligne
 - Les trois alertes de sécurité et les deux alertes d'index sont réévaluées après le modèle final.
 - La production reste inchangée pendant toute la préparation et les tests.
 
+## Garde-fou ajouté
+
+Le fichier `supabase/diagnostics/preflight_migrations_0001_0007.sql` est un contrôle structurel non destructif. Il bloque volontairement si `restaurants.id` n'est pas de type UUID ou si les colonnes héritées attendues sont absentes. Il ne corrige pas le schéma et ne remplace pas un test de migration. Il n'a pas été exécuté sur la production.
+
 ## État de ce document
 
-Plan préparatoire uniquement. Ce fichier ne constitue pas une migration SQL exécutable. Le SQL ne doit être écrit qu'après la cartographie complète des dépendances et le choix du modèle d'identifiants.
+Plan préparatoire uniquement. Aucun SQL de migration de compatibilité n'est encore prêt à appliquer. Le précontrôle ajouté est un garde-fou, pas la migration. Le SQL de compatibilité ne doit être écrit qu'après la cartographie complète des dépendances et le choix du modèle d'identifiants.
