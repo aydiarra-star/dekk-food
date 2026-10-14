@@ -15,6 +15,7 @@ from pathlib import Path
 from typing import Any, Iterable
 
 from .modele import REGLE_PUBLICATION, Etablissement, Plat
+from .schema_sql import qualifier_schema_sql
 
 TYPES_LIBELLES = {
     "restaurant": "Restaurant",
@@ -463,8 +464,11 @@ def _lien_source(code: str | None, url: str | None) -> tuple[str, str]:
     return source_id, _sql(url)
 
 
-def generer_sql(etablissements: Iterable[Etablissement]) -> str:
-    """Génère le script SQL idempotent d'amorçage du catalogue."""
+def generer_sql(
+    etablissements: Iterable[Etablissement],
+    schema_cible: str = "public",
+) -> str:
+    """Génère le seed idempotent ; `schema_cible` ne crée pas le schéma ni ses tables."""
     lignes: list[str] = [
         "-- =============================================================================",
         "-- DEKK FOOD / DAKA FOOD — Amorçage du catalogue (fichier GÉNÉRÉ)",
@@ -757,7 +761,7 @@ def generer_sql(etablissements: Iterable[Etablissement]) -> str:
 
     lignes.append("commit;")
     lignes.append("")
-    return "\n".join(lignes)
+    return qualifier_schema_sql("\n".join(lignes), schema_cible)
 
 
 # Correspondance libellés de services/équipements -> codes de la nomenclature.
