@@ -29,11 +29,13 @@ jobs:
 
       - name: Vérifier et régénérer le catalogue (aucune divergence tolérée)
         run: |
-          # La date du catalogue est celle du commit vérifié (et non le jour du runner) :
-          # la comparaison reste identique qu'un workflow soit relancé plus tard.
-          # --no-merges couvre le commit de fusion temporaire créé pour les pull requests.
-          DATE="$(git log -1 --format=%cs --no-merges HEAD)"
-          echo "Date de référence du catalogue : $DATE"
+          # La date de référence est celle déjà portée par le catalogue committé :
+          # la comparaison ne dépend donc ni du jour d'exécution du workflow, ni du
+          # commit de fusion temporaire créé pour une pull request. Si les données
+          # changent sans que le catalogue soit régénéré, le diff apparaît — c'est
+          # précisément ce que ce contrôle doit détecter.
+          DATE="$(python3 -c "import json;print(json.load(open('assets/data/catalogue.json'))['genere_le'])")"
+          echo "Date de référence du catalogue committé : $DATE"
           python3 tools/catalogue/importateur.py valider data/seed/*.json
           python3 tools/catalogue/importateur.py generer data/seed/*.json --dossier . \
             --rapport docs/RAPPORT_COUVERTURE.md --date "$DATE"
