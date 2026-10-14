@@ -106,3 +106,28 @@ def test_preserve_les_chaines_postgresql_avec_echappement_e():
     assert "catalogue.restaurants.id" in resultat
     assert "catalogue.interieur" not in resultat
 
+def test_cli_generer_permet_une_cible_explicite_dans_un_dossier_temporaire(tmp_path):
+    from tools.catalogue.importateur import construire_analyseur
+
+    arguments = construire_analyseur().parse_args([
+        "generer",
+        str(SEED),
+        "--dossier", str(tmp_path),
+        "--schema-cible", "catalogue",
+        "--date", "2026-10-14",
+    ])
+    assert arguments.schema_cible == "catalogue"
+    assert arguments.fonction(arguments) == 0
+
+    sql = (tmp_path / "supabase" / "seed" / "10_etablissements.sql").read_text(encoding="utf-8")
+    assert "insert into catalogue.restaurants" in sql
+    assert "catalogue.sources" in sql
+    assert "public." not in sql
+
+
+def test_cli_generer_conserve_public_par_defaut():
+    from tools.catalogue.importateur import construire_analyseur
+
+    arguments = construire_analyseur().parse_args(["generer", str(SEED)])
+    assert arguments.schema_cible == "public"
+
