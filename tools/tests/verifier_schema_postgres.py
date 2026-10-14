@@ -117,10 +117,14 @@ def _demarrer_instance():
     try:
         import pgserver  # type: ignore
         import psycopg  # type: ignore
-    except ImportError:  # pragma: no cover
-        print("pgserver/psycopg non installés : vérification SQL ignorée "
-              "(pip install -r tools/requirements.txt).")
-        return None
+    except ImportError as exc:  # pragma: no cover
+        # Une vérification d’intégration ignorée ne doit jamais être comptée comme réussie.
+        print(
+            "ÉCHEC : pgserver/psycopg sont obligatoires pour la vérification PostgreSQL "
+            "(pip install -r tools/requirements.txt)."
+        )
+        print(f"Dépendance manquante : {exc}")
+        raise SystemExit(2) from exc
     serveur = pgserver.get_server(tempfile.mkdtemp())
     connexion = psycopg.connect(serveur.get_uri(), autocommit=True)
     connexion.autocommit = True
@@ -129,8 +133,6 @@ def _demarrer_instance():
 
 def executer_verifications() -> int:
     base = _demarrer_instance()
-    if base is None:
-        return 0
 
     def executer(sql: str) -> None:
         with base.cursor() as curseur:
