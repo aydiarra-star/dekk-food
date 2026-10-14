@@ -92,3 +92,27 @@ Avant d'écrire la migration candidate :
 - créer une fixture locale représentant exactement le schéma distant (integer + six menus), puis tester les deux options sur PostgreSQL jetable, avec exécution répétée, comptes avant/après, intégrité référentielle et tests RLS.
 
 **Aucune migration de compatibilité n'est encore prête à exécuter.** La seule migration sûre à ce stade est celle qui sera démontrée par ces tests sur une copie jetable, puis revue avant toute autorisation séparée de production.
+
+## Inventaire distant en lecture seule — 14 octobre 2026
+
+Une requête exclusivement `SELECT` a relu les colonnes, contraintes, index, triggers, policies, vues, séquences et comptes des trois tables du projet Supabase. Aucun DDL/DML n'a été exécuté.
+
+- `public.restaurants` : `id integer` alimenté par `restaurants_id_seq`, clé primaire ; `slug` unique ; colonnes métier historiques telles que `name`, `cuisine_types`, `categories`, `phone`, `address`, `neighborhood`, `opening_hours`, `services`, `rating`, `verified` et autres champs d'affichage.
+- `public.restaurant_menus` : `id integer`, `restaurant_id integer`, catégorie, nom, prix entier, disponibilité/spécialité ; clé étrangère vers `restaurants(id) ON DELETE CASCADE`.
+- `public.restaurant_reviews` : `id integer`, `restaurant_id integer`, auteur, note, commentaire, date ; clé étrangère vers `restaurants(id) ON DELETE CASCADE` et contrainte de note 1–5.
+- Comptes observés : 1 restaurant, 6 menus, 0 avis. Les tests locaux ajoutent un avis synthétique uniquement dans la fixture jetable afin de vérifier que le précontrôle ne touche pas cette table.
+- Les trois tables ont des clés primaires et des séquences entières. Aucun trigger ni vue dépendante n'a été renvoyé par la requête. Aucune policy RLS n'a été renvoyée pour ces trois tables, malgré RLS activé.
+- Index repérés : clés primaires et index unique sur `restaurants.slug`. Les index des colonnes de relation `restaurant_id` restent à évaluer pour les performances ; leur ajout est une décision séparée, pas une condition pour convertir les identifiants.
+
+## Architecture recommandée avant tout SQL de migration
+
+**Recommandation de travail : isoler le catalogue national du contrat historique**, plutôt que renommer ou convertir `public.restaurants` sur lequel reposent les clés étrangères et potentiellement l'application actuelle.
+
+Le prototype à tester doit conserver sans altération :
+- `public.restaurants`, `public.restaurant_menus`, `public.restaurant_reviews` et leurs IDs entiers ;
+- le comportement attendu du service Flutter historique ;
+- les six menus et toute donnée future des tables historiques.
+
+Le nouveau catalogue doit utiliser une table parent UUID distincte (nom de travail `public.catalogue_restaurants`) et des tables de catalogue qui pointent exclusivement vers cette clé. Les migrations du catalogue et le générateur de seed doivent alors être adaptés ensemble ; il ne faut pas faire pointer une FK UUID vers `public.restaurants(id)` entier. Le catalogue Flutter embarqué doit continuer à fonctionner sans dépendre du service historique.
+
+Cette proposition n'est **pas encore une migration exécutable**. Avant de la coder, le test jetable devra prouver que les deux espaces coexistent, que le seed du catalogue est idempotent, que les IDs historiques restent identiques, que les relations des menus/avis historiques restent valides et que les règles RLS/grants du catalogue n'exposent aucune donnée non autorisée. Il faudra également revoir la surface PostgREST exposée et les permissions avant tout accès API au nouveau catalogue.
