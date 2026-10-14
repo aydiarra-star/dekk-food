@@ -17,7 +17,6 @@ SCHEMA = RACINE / "supabase/schema.sql"
 def _connexion_jetable():
     pgserver = pytest.importorskip("pgserver")
     psycopg = pytest.importorskip("psycopg")
-    serveur = pgserver.get_server(str(pytest.TempPathFactory.mktemp)) if False else None
     # pgserver gère le répertoire temporaire et le cycle de vie du processus.
     import tempfile
 
