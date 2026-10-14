@@ -56,5 +56,5 @@ def test_inventaire_des_tables_du_generateur_est_explicite() -> None:
 
 def test_qualificateur_de_seed_ne_vaut_pas_migration_isolee() -> None:
     source = (RACINE / "tools/catalogue/schema_sql.py").read_text(encoding="utf-8")
-    assert "ne rend pas un schéma cible prêt à l'emploi" in source
+    assert "ne crée aucun objet SQL" in source
     assert "pas un parseur SQL" in source
