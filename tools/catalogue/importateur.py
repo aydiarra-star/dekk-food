@@ -388,7 +388,7 @@ def commande_generer(arguments: argparse.Namespace) -> int:
 
     catalogue = generation.construire_catalogue(resultat.etablissements, date_generation=arguments.date)
     generation.ecrire_fichier(chemin_asset, json.dumps(catalogue, ensure_ascii=False, indent=1))
-    generation.ecrire_fichier(chemin_sql, generation.generer_sql(resultat.etablissements))
+    generation.ecrire_fichier(chemin_sql, generation.generer_sql(resultat.etablissements, schema_cible=arguments.schema_cible))
 
     print(f"{len(resultat.etablissements)} fiches écrites dans {chemin_asset}")
     print(f"Script SQL d'amorçage écrit dans {chemin_sql}")
@@ -495,6 +495,11 @@ def construire_analyseur() -> argparse.ArgumentParser:
     generer = sous_commandes.add_parser("generer", help="Générer le catalogue de l'application et le seed SQL.")
     ajouter_fichiers(generer)
     generer.add_argument("--dossier", default=str(RACINE), help="Racine du dépôt.")
+    generer.add_argument(
+        "--schema-cible",
+        default="public",
+        help="Schéma SQL qualifié pour le seed (défaut : public). Ne crée pas le schéma et ne valide pas ses permissions.",
+    )
     generer.add_argument("--rapport", help="Chemin du rapport de couverture Markdown à produire.")
     generer.add_argument(
         "--date",
