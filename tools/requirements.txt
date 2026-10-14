@@ -1,0 +1,8 @@
+# Dépendances du pipeline de collecte et d'import DEKK FOOD.
+# - psycopg  : application des lots d'import sur PostgreSQL/Supabase
+# - openpyxl : lecture des fichiers XLSX (facultatif, uniquement pour ce format)
+# - pytest   : tests automatisés du pipeline
+psycopg[binary]>=3.1
+openpyxl>=3.1
+pytest>=8.0
+pgserver>=0.1

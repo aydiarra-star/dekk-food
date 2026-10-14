@@ -1,0 +1,2058 @@
+{
+  "version": 1,
+  "date_collecte": "2026-10-13",
+  "origine": "annuaires_publics",
+  "description": "Deuxième vague de collecte depuis les annuaires publics Senefinder et Senlocal (pages de recherche publiques consultées le 2026-10-13, sans contournement de protection technique). Les contacts relevés ne sont pas marqués confirmés et aucun menu, prix ou horaire n'est repris lorsqu'il n'est pas publié par la source.",
+  "regles": [
+    "Aucune donnée inventée : les champs absents de la source restent vides.",
+    "Les numéros relevés sont enregistrés tels que publiés par l'annuaire (confirme = false).",
+    "Les fiches portant le badge « Vérifié » de l'annuaire sont marquées partiellement_verifie.",
+    "Les positions GPS ne sont pas publiées par ces annuaires : latitude/longitude restent nulles."
+  ],
+  "etablissements": [
+    {
+      "cle": "senefinder:food-lendroit-dakar-uy4m",
+      "numero_fiche": "DF-DK-0034",
+      "nom": "L'Endroit",
+      "slug": "l-endroit-dakar",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Adresse relevée dans l'annuaire Senefinder (ville de Dakar) ; type d'établissement non précisé par la source.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Dakar Plateau",
+        "quartier_libre": "Dakar",
+        "adresse_complete": "Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221338246425",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-lendroit-dakar-uy4m"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-lendroit-dakar-uy4m",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, telephone",
+          "niveau_confiance": "faible"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-la-traditionnelle-dakar-t5d0",
+      "numero_fiche": "DF-DK-0035",
+      "nom": "La Traditionnelle",
+      "slug": "la-traditionnelle-dakar",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "senegalaise"
+      ],
+      "description_courte": "Restaurant référencé rue Félix Faure à Dakar (annuaire Senefinder) ; catégorie déduite du libellé de l'annonce.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Dakar Plateau",
+        "quartier_libre": "Plateau",
+        "adresse_complete": "Rue Felix Faure, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221338229292",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-la-traditionnelle-dakar-t5d0"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-la-traditionnelle-dakar-t5d0",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, telephone",
+          "niveau_confiance": "faible"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-sapphire-restaurant-dakar-dakar-7ly6",
+      "numero_fiche": "DF-DK-0036",
+      "nom": "SAPPHIRE restaurant Dakar",
+      "slug": "sapphire-restaurant-dakar-dakar",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "internationale"
+      ],
+      "description_courte": "Restaurant référencé sur le boulevard du Président Habib Bourguiba (annuaire Senefinder).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Dakar Plateau",
+        "quartier_libre": "Plateau",
+        "adresse_complete": "Villa N, 1 Boulevard du Président Habib Bourguiba, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "whatsapp",
+          "valeur": "+221784422424",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-sapphire-restaurant-dakar-dakar-7ly6"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-sapphire-restaurant-dakar-dakar-7ly6",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, whatsapp",
+          "niveau_confiance": "faible"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-pur-delice-dakar-dakar-qytk",
+      "numero_fiche": "DF-DK-0037",
+      "nom": "Pur Délice Dakar",
+      "slug": "pur-delice-dakar-dakar",
+      "type_etablissement": "patisserie",
+      "categories": [
+        "patisserie_dessert"
+      ],
+      "description_courte": "Pâtisserie référencée rue Félix Faure (annuaire Senefinder).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Dakar Plateau",
+        "quartier_libre": "Plateau",
+        "adresse_complete": "62 Rue Felix Faure, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "whatsapp",
+          "valeur": "+221784321414",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-pur-delice-dakar-dakar-qytk"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-pur-delice-dakar-dakar-qytk",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, whatsapp",
+          "niveau_confiance": "faible"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-aroma-gelato-vdn-dakar-prgv",
+      "numero_fiche": "DF-DK-0038",
+      "nom": "Aroma Gelato vdn",
+      "slug": "aroma-gelato-vdn-dakar",
+      "type_etablissement": "glacier",
+      "categories": [
+        "patisserie_dessert"
+      ],
+      "description_courte": "Glacier référencé à l'Amitié 3 (VDN) par l'annuaire Senefinder.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Grand Yoff",
+        "quartier_libre": "Amitié 3",
+        "adresse_complete": "Amitié 3 VDN, villa 4436, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221338258081",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-aroma-gelato-vdn-dakar-prgv"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-aroma-gelato-vdn-dakar-prgv",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, telephone",
+          "niveau_confiance": "faible"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-boulangerie-mbacke-dakar-m8x9",
+      "numero_fiche": "DF-DK-0039",
+      "nom": "Boulangerie Mbacké",
+      "slug": "boulangerie-mbacke-dakar",
+      "type_etablissement": "boulangerie",
+      "categories": [
+        "patisserie_dessert",
+        "petit_dejeuner"
+      ],
+      "description_courte": "Boulangerie référencée par l'annuaire Senefinder (quartier « unité 03 »).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Grand Yoff",
+        "quartier_libre": "Unité 03",
+        "adresse_complete": "Unité 03, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "whatsapp",
+          "valeur": "+221784662438",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-boulangerie-mbacke-dakar-m8x9"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-boulangerie-mbacke-dakar-m8x9",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, whatsapp",
+          "niveau_confiance": "faible"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-al-manara-sea-food-dakar-sy93",
+      "numero_fiche": "DF-DK-0040",
+      "nom": "Al Manara Sea food",
+      "slug": "al-manara-sea-food-dakar",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "fruits_de_mer",
+        "grillades"
+      ],
+      "description_courte": "Restaurant de fruits de mer référencé à Ouakam/Mamelles (annuaire Senefinder).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Ouakam",
+        "quartier_libre": "Mamelles Aviation",
+        "adresse_complete": "Ouakam, Mamelles Aviation, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "whatsapp",
+          "valeur": "+221772465050",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-al-manara-sea-food-dakar-sy93"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-al-manara-sea-food-dakar-sy93",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, whatsapp",
+          "niveau_confiance": "faible"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-chez-madame-biaye-dakar-h90o",
+      "numero_fiche": "DF-DK-0041",
+      "nom": "Chez Madame Biaye",
+      "slug": "chez-madame-biaye-dakar",
+      "type_etablissement": "gargote",
+      "categories": [],
+      "description_courte": "Établissement de restauration référencé rue LIB 222 (annuaire Senefinder) ; type exact non documenté par la source.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Grand Yoff",
+        "quartier_libre": "LIB 222",
+        "adresse_complete": "674 Rue LIB 222, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "whatsapp",
+          "valeur": "+221774198634",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-chez-madame-biaye-dakar-h90o"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-chez-madame-biaye-dakar-h90o",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, whatsapp",
+          "niveau_confiance": "faible"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-al-marinas-dakar-ryvt",
+      "numero_fiche": "DF-DK-0042",
+      "nom": "Al Marinas",
+      "slug": "al-marinas-dakar",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Établissement de restauration référencé à Hann Bel-Air (annuaire Senefinder).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Hann Bel-Air",
+        "quartier_libre": "Hann Bel-Air",
+        "adresse_complete": "Hann Bel-Air, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "whatsapp",
+          "valeur": "+221775521634",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-al-marinas-dakar-ryvt"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-al-marinas-dakar-ryvt",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, whatsapp",
+          "niveau_confiance": "faible"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-as-salam-dakar-prnt",
+      "numero_fiche": "DF-DK-0043",
+      "nom": "AS SALAM",
+      "slug": "as-salam-dakar",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Établissement de restauration référencé rue Mass Diokhané (annuaire Senefinder).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Dakar Plateau",
+        "quartier_libre": "Plateau",
+        "adresse_complete": "15 Rue Mass Diokhané, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221338239808",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-as-salam-dakar-prnt"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-as-salam-dakar-prnt",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, telephone",
+          "niveau_confiance": "faible"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-african-food-restaurant-dakar-zfo6",
+      "numero_fiche": "DF-DK-0044",
+      "nom": "African Food Restaurant",
+      "slug": "african-food-restaurant-dakar",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "africaine"
+      ],
+      "description_courte": "Restaurant de cuisine africaine référencé à Dieuppeul Derklé (annuaire Senefinder).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Grand Yoff",
+        "quartier_libre": "Dieuppeul Derklé",
+        "adresse_complete": "Dieuppeul Derklé, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "whatsapp",
+          "valeur": "+221777554091",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-african-food-restaurant-dakar-zfo6"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-african-food-restaurant-dakar-zfo6",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, whatsapp",
+          "niveau_confiance": "faible"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-al-mahdi-dakar-eyma",
+      "numero_fiche": "DF-DK-0045",
+      "nom": "Al Mahdi",
+      "slug": "al-mahdi-dakar",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Établissement de restauration référencé à Yoff (annuaire Senefinder).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Yoff",
+        "quartier_libre": "Yoff",
+        "adresse_complete": "Yoff, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221338205889",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-al-mahdi-dakar-eyma"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-al-mahdi-dakar-eyma",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, telephone",
+          "niveau_confiance": "faible"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-alftone-senegal-dakar-3fdz",
+      "numero_fiche": "DF-DK-0046",
+      "nom": "Alftone Senegal",
+      "slug": "alftone-senegal-dakar",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Établissement référencé par l'annuaire Senefinder ; aucun contact publié par la source.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Grand Yoff",
+        "quartier_libre": "Sipres",
+        "adresse_complete": "91 rond-point Sipres VD, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-alftone-senegal-dakar-3fdz",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse",
+          "niveau_confiance": "faible"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-chez-papa-dakar-tjnw",
+      "numero_fiche": "DF-DK-0047",
+      "nom": "Chez Papa",
+      "slug": "chez-papa-dakar",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Établissement de restauration référencé rue 6 (annuaire Senefinder).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Dakar Plateau",
+        "quartier_libre": "Médina",
+        "adresse_complete": "x 17, Rue 6, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "whatsapp",
+          "valeur": "+221785424001",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-chez-papa-dakar-tjnw"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-chez-papa-dakar-tjnw",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, whatsapp",
+          "niveau_confiance": "faible"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-la-brioche-doree-bourguiba-dakar-to0c",
+      "numero_fiche": "DF-DK-0048",
+      "nom": "La Brioche Dorée Bourguiba",
+      "slug": "la-brioche-doree-bourguiba-dakar",
+      "type_etablissement": "boulangerie",
+      "categories": [
+        "patisserie_dessert",
+        "petit_dejeuner"
+      ],
+      "description_courte": "Enseigne de boulangerie-pâtisserie référencée boulevard Bourguiba (annuaire Senefinder).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Dakar Plateau",
+        "quartier_libre": "Plateau",
+        "adresse_complete": "1530 Rue LIB 226, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221338241438",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-la-brioche-doree-bourguiba-dakar-to0c"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-la-brioche-doree-bourguiba-dakar-to0c",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, telephone",
+          "niveau_confiance": "faible"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-artisan-boulanger-eric-kayser-dakar-ybkk",
+      "numero_fiche": "DF-DK-0049",
+      "nom": "Artisan Boulanger Eric Kayser",
+      "slug": "artisan-boulanger-eric-kayser-dakar",
+      "type_etablissement": "boulangerie",
+      "categories": [
+        "patisserie_dessert",
+        "petit_dejeuner"
+      ],
+      "description_courte": "Boulangerie référencée boulevard de la République (annuaire Senefinder).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Dakar Plateau",
+        "quartier_libre": "Plateau",
+        "adresse_complete": "3 Boulevard de la République, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221338228180",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-artisan-boulanger-eric-kayser-dakar-ybkk"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-artisan-boulanger-eric-kayser-dakar-ybkk",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, telephone",
+          "niveau_confiance": "faible"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-patisserie-fleur-de-lys-ngor-dakar-hlkk",
+      "numero_fiche": "DF-DK-0050",
+      "nom": "Pâtisserie Fleur de Lys Ngor",
+      "slug": "patisserie-fleur-de-lys-ngor-dakar",
+      "type_etablissement": "patisserie",
+      "categories": [
+        "patisserie_dessert"
+      ],
+      "description_courte": "Pâtisserie référencée à Ngor (annuaire Senefinder).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Ngor",
+        "quartier_libre": "Ngor",
+        "adresse_complete": "104 Tally bou Bess, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "whatsapp",
+          "valeur": "+221777218698",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-patisserie-fleur-de-lys-ngor-dakar-hlkk"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-patisserie-fleur-de-lys-ngor-dakar-hlkk",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, whatsapp",
+          "niveau_confiance": "faible"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-nostos-africa-boulangerie-et-patisserie-par-karima-dakar-th6x",
+      "numero_fiche": "DF-DK-0051",
+      "nom": "Nostos Africa Boulangerie et Pâtisserie par Karima",
+      "slug": "nostos-africa-boulangerie-et-patisserie-par-karima-dakar",
+      "type_etablissement": "boulangerie",
+      "categories": [
+        "patisserie_dessert"
+      ],
+      "description_courte": "Boulangerie-pâtisserie référencée rue OKM 188 (annuaire Senefinder). Le nom du gérant n'est pas repris ici : « par Karima » figure dans l'annonce publique mais n'identifie pas une personne documentée comme propriétaire.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Grand Yoff",
+        "quartier_libre": "OKM",
+        "adresse_complete": "1158 Rue OKM 188, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "whatsapp",
+          "valeur": "+221781501196",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-nostos-africa-boulangerie-et-patisserie-par-karima-dakar-th6x"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-nostos-africa-boulangerie-et-patisserie-par-karima-dakar-th6x",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, whatsapp",
+          "niveau_confiance": "faible"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-sobo-dakar-yfom",
+      "numero_fiche": "DF-DK-0052",
+      "nom": "SOBO",
+      "slug": "sobo-dakar",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Établissement de restauration référencé au rond-point JVC (annuaire Senefinder).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Dakar Plateau",
+        "quartier_libre": "Plateau",
+        "adresse_complete": "Rond-point JVC, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "whatsapp",
+          "valeur": "+221781757878",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-sobo-dakar-yfom"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-sobo-dakar-yfom",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, whatsapp",
+          "niveau_confiance": "faible"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-maison-kayser-eric-kayser-dakar-aniy",
+      "numero_fiche": "DF-DK-0053",
+      "nom": "Maison Kayser (Éric Kayser)",
+      "slug": "maison-kayser-eric-kayser-dakar",
+      "type_etablissement": "boulangerie",
+      "categories": [
+        "patisserie_dessert",
+        "petit_dejeuner"
+      ],
+      "description_courte": "Boulangerie-pâtisserie référencée rue de l'Université (annuaire Senefinder).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Dakar Plateau",
+        "quartier_libre": "Plateau",
+        "adresse_complete": "Rue de l'Université, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "whatsapp",
+          "valeur": "+221785980010",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-maison-kayser-eric-kayser-dakar-aniy"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-maison-kayser-eric-kayser-dakar-aniy",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, whatsapp",
+          "niveau_confiance": "faible"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-little-delight-dakar-gm06",
+      "numero_fiche": "DF-DK-0054",
+      "nom": "Little Delight",
+      "slug": "little-delight-dakar",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Établissement de restauration référencé avenue Birago Diop (annuaire Senefinder).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Fann-Point E-Amitié",
+        "quartier_libre": "Point E",
+        "adresse_complete": "4 avenue Birago Diop, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "whatsapp",
+          "valeur": "+221789234348",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-little-delight-dakar-gm06"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-little-delight-dakar-gm06",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, whatsapp",
+          "niveau_confiance": "faible"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-kotao-coffee-almadies-dakar-liyt",
+      "numero_fiche": "DF-DK-0055",
+      "nom": "Kotao Coffee Almadies",
+      "slug": "kotao-coffee-almadies-dakar",
+      "type_etablissement": "cafe_restaurant",
+      "categories": [
+        "brunch",
+        "internationale"
+      ],
+      "description_courte": "Café-restaurant référencé sur la route de King Fahd (annuaire Senefinder).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Ngor",
+        "quartier_libre": "Almadies",
+        "adresse_complete": "Route de King Fahd, Méridien, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "whatsapp",
+          "valeur": "+221777187652",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-kotao-coffee-almadies-dakar-liyt"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-kotao-coffee-almadies-dakar-liyt",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, whatsapp",
+          "niveau_confiance": "faible"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-fast-food-touba-sandaga-dakar-iwph",
+      "numero_fiche": "DF-DK-0056",
+      "nom": "Fast Food Touba Sandaga",
+      "slug": "fast-food-touba-sandaga-dakar",
+      "type_etablissement": "fast_food",
+      "categories": [
+        "street_food",
+        "senegalaise"
+      ],
+      "description_courte": "Fast-food référencé au quartier Lamine Guèye (annuaire Senefinder).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Dakar Plateau",
+        "quartier_libre": "Lamine Guèye",
+        "adresse_complete": "Lamine Guèye, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "whatsapp",
+          "valeur": "+221785366905",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-fast-food-touba-sandaga-dakar-iwph"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-fast-food-touba-sandaga-dakar-iwph",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, whatsapp",
+          "niveau_confiance": "faible"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-les-delices-de-bousso-rufisque-sfah",
+      "numero_fiche": "DF-DK-0057",
+      "nom": "Les délices de bousso",
+      "slug": "les-delices-de-bousso-rufisque",
+      "type_etablissement": "patisserie",
+      "categories": [
+        "patisserie_dessert"
+      ],
+      "description_courte": "Pâtisserie référencée à Rufisque (annuaire Senefinder).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Rufisque",
+        "commune": "Rufisque Est",
+        "quartier_libre": "Santé Yalla",
+        "adresse_complete": "Santé Yalla, Rufisque",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "whatsapp",
+          "valeur": "+221775963680",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-les-delices-de-bousso-rufisque-sfah"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-les-delices-de-bousso-rufisque-sfah",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, whatsapp",
+          "niveau_confiance": "faible"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-o-bon-coin-rufisque-vjwl",
+      "numero_fiche": "DF-DK-0058",
+      "nom": "O' Bon Coin",
+      "slug": "o-bon-coin-rufisque",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Établissement de restauration référencé à Rufisque (annuaire Senefinder).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Rufisque",
+        "commune": "Rufisque Est",
+        "quartier_libre": "Layousse",
+        "adresse_complete": "Ancienne route des Entrepôts Layousse x Keur Diop Bukki, Rufisque",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "whatsapp",
+          "valeur": "+221785474141",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-o-bon-coin-rufisque-vjwl"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-o-bon-coin-rufisque-vjwl",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, whatsapp",
+          "niveau_confiance": "faible"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-restaurant-rio-teranga-rufisque-wn4l",
+      "numero_fiche": "DF-DK-0059",
+      "nom": "Restaurant RIO TERANGA",
+      "slug": "restaurant-rio-teranga-rufisque",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "senegalaise"
+      ],
+      "description_courte": "Restaurant référencé à Rufisque (Keury Kao) par l'annuaire Senefinder.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Rufisque",
+        "commune": "Rufisque Est",
+        "quartier_libre": "Keury Kao",
+        "adresse_complete": "Immeuble Diagne Faye, rue Ousmane Socé Diop, Rufisque",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "whatsapp",
+          "valeur": "+221772403407",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-restaurant-rio-teranga-rufisque-wn4l"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-restaurant-rio-teranga-rufisque-wn4l",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, whatsapp",
+          "niveau_confiance": "faible"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-obs-resto-chicha-thies-nrun",
+      "numero_fiche": "DF-TH-0011",
+      "nom": "OBS Resto Chicha",
+      "slug": "obs-resto-chicha-thies",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Établissement de restauration référencé à Thiès (annuaire Senefinder).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Thiès",
+        "departement": "Thiès",
+        "commune": "Thiès Nord",
+        "quartier_libre": "Escale",
+        "adresse_complete": "Rue Dr Birane Beye, Thiès",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "whatsapp",
+          "valeur": "+221784269172",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-obs-resto-chicha-thies-nrun"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-obs-resto-chicha-thies-nrun",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, whatsapp",
+          "niveau_confiance": "faible"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-la-brioche-doree-mbour-mbour-lne2",
+      "numero_fiche": "DF-TH-0012",
+      "nom": "La Brioche Dorée Mbour",
+      "slug": "la-brioche-doree-mbour-mbour",
+      "type_etablissement": "boulangerie",
+      "categories": [
+        "patisserie_dessert",
+        "petit_dejeuner"
+      ],
+      "description_courte": "Enseigne de boulangerie-pâtisserie référencée à Mbour (annuaire Senefinder).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Thiès",
+        "departement": "Mbour",
+        "commune": "Mbour",
+        "quartier_libre": "Centre",
+        "adresse_complete": "Mbour",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221339575353",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-la-brioche-doree-mbour-mbour-lne2"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-la-brioche-doree-mbour-mbour-lne2",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, telephone",
+          "niveau_confiance": "faible"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senlocal:touky-lounge-the-rooftop",
+      "numero_fiche": "DF-TH-0013",
+      "nom": "Touky Lounge The RoofTop",
+      "slug": "touky-lounge-the-rooftop-saly",
+      "type_etablissement": "restaurant_rooftop",
+      "categories": [
+        "internationale",
+        "grillades"
+      ],
+      "description_courte": "Rooftop-lounge de Saly Niakh Niakhal référencé par Senlocal (fiche avec badge « Vérifié » de l'annuaire ; aucun contrôle sur place par DEKK FOOD).",
+      "statut": "a_verifier",
+      "niveau_verification": "partiellement_verifie",
+      "adresse": {
+        "region": "Thiès",
+        "departement": "Mbour",
+        "commune": "Saly Portudal",
+        "quartier_libre": "Saly Niakh Niakhal",
+        "adresse_complete": "Saly Niakh Niakhal, Saly",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [
+        "terrasse",
+        "vue_mer"
+      ],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senlocal",
+          "url": "https://senlocal.com/entreprises/touky-lounge-the-rooftop",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senlocal",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-salimtoo-cuisinoteque-senegalaise-ngaparou-yab5",
+      "numero_fiche": "DF-TH-0014",
+      "nom": "Salimtoo Cuisinotèque Sénégalaise",
+      "slug": "salimtoo-cuisinoteque-senegalaise-ngaparou",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "senegalaise"
+      ],
+      "description_courte": "Restaurant référencé à Ngaparou (annuaire Senefinder, annonce récente au 2026-10-13).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Thiès",
+        "departement": "Mbour",
+        "commune": "Ngaparou",
+        "quartier_libre": "Ngaparou",
+        "adresse_complete": "Ngaparou",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "whatsapp",
+          "valeur": "+221774596725",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-salimtoo-cuisinoteque-senegalaise-ngaparou-yab5"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-salimtoo-cuisinoteque-senegalaise-ngaparou-yab5",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, whatsapp",
+          "niveau_confiance": "faible"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-boulanger-ndar-gueth-saint-louis-6y24",
+      "numero_fiche": "DF-SL-0001",
+      "nom": "Boulanger Ndar Gueth",
+      "slug": "boulanger-ndar-gueth-saint-louis",
+      "type_etablissement": "boulangerie",
+      "categories": [
+        "patisserie_dessert",
+        "petit_dejeuner"
+      ],
+      "description_courte": "Boulangerie référencée à Saint-Louis (annuaire Senefinder, annonce récente au 2026-10-13).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Saint-Louis",
+        "departement": "Saint-Louis",
+        "commune": "Saint-Louis",
+        "quartier_libre": "Saint-Louis",
+        "adresse_complete": "Saint-Louis",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "whatsapp",
+          "valeur": "+221779610099",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-boulanger-ndar-gueth-saint-louis-6y24"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-boulanger-ndar-gueth-saint-louis-6y24",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, whatsapp",
+          "niveau_confiance": "faible"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-la-saigonnaise-saint-louis-onhs",
+      "numero_fiche": "DF-SL-0002",
+      "nom": "La Saigonnaise",
+      "slug": "la-saigonnaise-saint-louis",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "asiatique"
+      ],
+      "description_courte": "Restaurant référencé à Saint-Louis (annuaire Senefinder) ; cuisine indiquée par le nom de l'enseigne, à confirmer.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Saint-Louis",
+        "departement": "Saint-Louis",
+        "commune": "Saint-Louis",
+        "quartier_libre": "Saint-Louis",
+        "adresse_complete": "Saint-Louis",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221339616481",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-la-saigonnaise-saint-louis-onhs"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-la-saigonnaise-saint-louis-onhs",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, telephone",
+          "niveau_confiance": "faible"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-aux-delices-du-fleuve-saint-louis-afpp",
+      "numero_fiche": "DF-SL-0003",
+      "nom": "Aux Délices du fleuve",
+      "slug": "aux-delices-du-fleuve-saint-louis",
+      "type_etablissement": "patisserie",
+      "categories": [
+        "patisserie_dessert"
+      ],
+      "description_courte": "Pâtisserie référencée 155 rue Blanchot à Saint-Louis (annuaire Senefinder).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Saint-Louis",
+        "departement": "Saint-Louis",
+        "commune": "Saint-Louis",
+        "quartier_libre": "Saint-Louis",
+        "adresse_complete": "155 Rue Blanchot, Saint-Louis",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221339614251",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-aux-delices-du-fleuve-saint-louis-afpp"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-aux-delices-du-fleuve-saint-louis-afpp",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, telephone",
+          "niveau_confiance": "faible"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-farmers-coffee-shop-saint-louis-senegal-saint-louis-uzwx",
+      "numero_fiche": "DF-SL-0004",
+      "nom": "Farmers Coffee Shop Saint-Louis Sénégal",
+      "slug": "farmers-coffee-shop-saint-louis-senegal-saint-louis",
+      "type_etablissement": "cafe_restaurant",
+      "categories": [
+        "petit_dejeuner",
+        "brunch"
+      ],
+      "description_courte": "Café référencé avenue Blaise Diagne à Saint-Louis (annuaire Senefinder).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Saint-Louis",
+        "departement": "Saint-Louis",
+        "commune": "Saint-Louis",
+        "quartier_libre": "Saint-Louis",
+        "adresse_complete": "441 avenue Blaise Diagne, Saint-Louis",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "whatsapp",
+          "valeur": "+221772275084",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-farmers-coffee-shop-saint-louis-senegal-saint-louis-uzwx"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-farmers-coffee-shop-saint-louis-senegal-saint-louis-uzwx",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, whatsapp",
+          "niveau_confiance": "faible"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-coconut-cafe-saint-louis-qos0",
+      "numero_fiche": "DF-SL-0005",
+      "nom": "Coconut cafe",
+      "slug": "coconut-cafe-saint-louis",
+      "type_etablissement": "cafe_restaurant",
+      "categories": [
+        "petit_dejeuner"
+      ],
+      "description_courte": "Café référencé rue Bisson à Saint-Louis (annuaire Senefinder).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Saint-Louis",
+        "departement": "Saint-Louis",
+        "commune": "Saint-Louis",
+        "quartier_libre": "Saint-Louis",
+        "adresse_complete": "445 Rue Bisson, Saint-Louis",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "whatsapp",
+          "valeur": "+221774665554",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-coconut-cafe-saint-louis-qos0"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-coconut-cafe-saint-louis-qos0",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, whatsapp",
+          "niveau_confiance": "faible"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senlocal:restaurant-saharaoui-saint-louis",
+      "numero_fiche": "DF-SL-0006",
+      "nom": "Restaurant Saharaoui",
+      "slug": "restaurant-saharaoui-saint-louis",
+      "type_etablissement": "complexe_restauration",
+      "categories": [
+        "senegalaise",
+        "pizza",
+        "street_food",
+        "patisserie_dessert"
+      ],
+      "description_courte": "Établissement multi-format (restaurant, pâtisserie, pizzeria, fast-food, glacier) du quartier Nord de Saint-Louis, référencé par Senlocal avec badge « Vérifié » de l'annuaire.",
+      "statut": "a_verifier",
+      "niveau_verification": "partiellement_verifie",
+      "adresse": {
+        "region": "Saint-Louis",
+        "departement": "Saint-Louis",
+        "commune": "Saint-Louis",
+        "quartier_libre": "Quartier Nord",
+        "adresse_complete": "Quartier Nord, Saint-Louis",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221774221175",
+          "confirme": false,
+          "source": "senlocal",
+          "source_url": "https://senlocal.com/entreprises/restaurant-saharaoui-saint-louis"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senlocal",
+          "url": "https://senlocal.com/entreprises/restaurant-saharaoui-saint-louis",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, telephone",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senlocal",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-patisserie-diadiouba-fast-food-kaolack-twdr",
+      "numero_fiche": "DF-KL-0001",
+      "nom": "Pâtisserie Diadiouba Fast-Food",
+      "slug": "patisserie-diadiouba-fast-food-kaolack",
+      "type_etablissement": "fast_food",
+      "categories": [
+        "patisserie_dessert",
+        "street_food"
+      ],
+      "description_courte": "Pâtisserie / fast-food référencé rue des Écoles à Kaolack (annuaire Senefinder).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Kaolack",
+        "departement": "Kaolack",
+        "commune": "Kaolack",
+        "quartier_libre": "Kaolack",
+        "adresse_complete": "Rue des Écoles, Kaolack",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "whatsapp",
+          "valeur": "+221781568490",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-patisserie-diadiouba-fast-food-kaolack-twdr"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-patisserie-diadiouba-fast-food-kaolack-twdr",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, whatsapp",
+          "niveau_confiance": "faible"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-restaurant-la-palasse-kaolack-d2sy",
+      "numero_fiche": "DF-KL-0002",
+      "nom": "Restaurant LA PALASSE",
+      "slug": "restaurant-la-palasse-kaolack",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé en face de l'aérodrome de Kaolack (annuaire Senefinder).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Kaolack",
+        "departement": "Kaolack",
+        "commune": "Kaolack",
+        "quartier_libre": "Kaolack",
+        "adresse_complete": "En face de l'aérodrome, sur la nationale, Kaolack",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "whatsapp",
+          "valeur": "+221776141144",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-restaurant-la-palasse-kaolack-d2sy"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-restaurant-la-palasse-kaolack-d2sy",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, whatsapp",
+          "niveau_confiance": "faible"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senlocal:restaurant-blue-bird-kaolack",
+      "numero_fiche": "DF-KL-0003",
+      "nom": "Restaurant Blue Bird",
+      "slug": "restaurant-blue-bird-kaolack",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "senegalaise",
+        "internationale"
+      ],
+      "description_courte": "Restaurant de Kaolack (cuisine sénégalaise, européenne et moyen-orientale) référencé par Senlocal avec badge « Vérifié » de l'annuaire.",
+      "statut": "a_verifier",
+      "niveau_verification": "partiellement_verifie",
+      "adresse": {
+        "region": "Kaolack",
+        "departement": "Kaolack",
+        "commune": "Kaolack",
+        "quartier_libre": "Kaolack",
+        "adresse_complete": "Kaolack",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221339415350",
+          "confirme": false,
+          "source": "senlocal",
+          "source_url": "https://senlocal.com/entreprises/restaurant-blue-bird-kaolack"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senlocal",
+          "url": "https://senlocal.com/entreprises/restaurant-blue-bird-kaolack",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, telephone",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senlocal",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senlocal:la-kaolackoise-restaurant-traiteur",
+      "numero_fiche": "DF-KL-0004",
+      "nom": "La Kaolackoise Restaurant Traiteur",
+      "slug": "la-kaolackoise-restaurant-traiteur-kaolack",
+      "type_etablissement": "traiteur",
+      "categories": [
+        "africaine"
+      ],
+      "description_courte": "Restaurant et traiteur de Kaolack référencé par Senlocal avec badge « Vérifié » de l'annuaire (mariages, événements d'entreprise).",
+      "statut": "a_verifier",
+      "niveau_verification": "partiellement_verifie",
+      "adresse": {
+        "region": "Kaolack",
+        "departement": "Kaolack",
+        "commune": "Kaolack",
+        "quartier_libre": "Kaolack",
+        "adresse_complete": "Kaolack",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221776596526",
+          "confirme": false,
+          "source": "senlocal",
+          "source_url": "https://senlocal.com/entreprises/la-kaolackoise-restaurant-traiteur"
+        }
+      ],
+      "services": [
+        "traiteur"
+      ],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senlocal",
+          "url": "https://senlocal.com/entreprises/la-kaolackoise-restaurant-traiteur",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, telephone",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senlocal",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-resto-savours-touba-nakn",
+      "numero_fiche": "DF-DB-0004",
+      "nom": "Resto Savours",
+      "slug": "resto-savours-touba",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé à Touba (annuaire Senefinder).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Diourbel",
+        "departement": "Mbacké",
+        "commune": "Touba Mosquée",
+        "quartier_libre": "Touba",
+        "adresse_complete": "Rond-point Envie FM, route Pharmacie, Touba",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "whatsapp",
+          "valeur": "+221772530207",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-resto-savours-touba-nakn"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-resto-savours-touba-nakn",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, whatsapp",
+          "niveau_confiance": "faible"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senlocal:kagouleme-resto",
+      "numero_fiche": "DF-ZG-0006",
+      "nom": "Kagouleme Resto",
+      "slug": "kagouleme-resto-ziguinchor",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "fruits_de_mer",
+        "grillades"
+      ],
+      "description_courte": "Restaurant du centre-ville de Ziguinchor (grillades, poissons, crevettes) référencé par Senlocal avec badge « Vérifié » de l'annuaire.",
+      "statut": "a_verifier",
+      "niveau_verification": "partiellement_verifie",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Ziguinchor",
+        "commune": "Ziguinchor",
+        "quartier_libre": "Escale",
+        "adresse_complete": "Escale, Ziguinchor",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221339917424",
+          "confirme": false,
+          "source": "senlocal",
+          "source_url": "https://senlocal.com/entreprises/kagouleme-resto"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senlocal",
+          "url": "https://senlocal.com/entreprises/kagouleme-resto",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, telephone",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senlocal",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-bar-restaurant-chez-parfait-ziguinchor-sbu2",
+      "numero_fiche": "DF-ZG-0007",
+      "nom": "Bar Restaurant chez Parfait",
+      "slug": "bar-restaurant-chez-parfait-ziguinchor",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Bar-restaurant référencé rue du Général de Gaulle à Ziguinchor (annuaire Senefinder).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Ziguinchor",
+        "commune": "Ziguinchor",
+        "quartier_libre": "Centre",
+        "adresse_complete": "Rue du Général de Gaulle, Ziguinchor",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "whatsapp",
+          "valeur": "+221779507733",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-bar-restaurant-chez-parfait-ziguinchor-sbu2"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-bar-restaurant-chez-parfait-ziguinchor-sbu2",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, whatsapp",
+          "niveau_confiance": "faible"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-vito-lunch-restaurant-de-ziguinchor-ziguinchor-zsdu",
+      "numero_fiche": "DF-ZG-0008",
+      "nom": "VITO LUNCH Restaurant de Ziguinchor",
+      "slug": "vito-lunch-restaurant-de-ziguinchor-ziguinchor",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé à l'aéroport de Ziguinchor (annuaire Senefinder).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Ziguinchor",
+        "commune": "Ziguinchor",
+        "quartier_libre": "Aéroport",
+        "adresse_complete": "Aéroport de Ziguinchor",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221339925908",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-vito-lunch-restaurant-de-ziguinchor-ziguinchor-zsdu"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-vito-lunch-restaurant-de-ziguinchor-ziguinchor-zsdu",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, telephone",
+          "niveau_confiance": "faible"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    }
+  ]
+}

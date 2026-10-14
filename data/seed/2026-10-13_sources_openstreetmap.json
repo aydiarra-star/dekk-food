@@ -1,0 +1,3774 @@
+{
+  "version": 1,
+  "date_collecte": "2026-10-13",
+  "origine": "openstreetmap",
+  "description": "Établissements relevés dans la base cartographique publique OpenStreetMap via l'API Overpass le 2026-10-13 (licence ODbL). Cette source permet de couvrir les régions ignorées des annuaires grand public et de disposer de coordonnées publiées, mais ces coordonnées restent communautaires : elles ne valent pas vérification sur place.",
+  "regles": [
+    "Attribution ODbL conservée : chaque fiche cite www.openstreetmap.org et l'identifiant du nœud.",
+    "Coordonnées publiées mais gps_verifie = false : aucune position n'est certifiée.",
+    "Les horaires OSM sont retranscrits tels quels et marqués confirme = false.",
+    "Les noms d'établissements comportant un patronyme ne sont pas interprétés comme des propriétaires."
+  ],
+  "etablissements": [
+    {
+      "cle": "openstreetmap:node/4788392811",
+      "numero_fiche": "DF-FK-0001",
+      "nom": "Tanti",
+      "slug": "tanti-fatick",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "senegalaise"
+      ],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Fatick (capacité déclarée 20 places, vente à emporter). OpenStreetMap (ODbL), extraction du 2026-10-13, node 4788392811 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Fatick",
+        "departement": "Fatick",
+        "commune": "Fatick",
+        "quartier_libre": "Fatick",
+        "adresse_complete": null,
+        "latitude": 14.3297539,
+        "longitude": -16.4038844,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [
+        "a_emporter"
+      ],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/4788392811",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/8598559615",
+      "numero_fiche": "DF-FK-0002",
+      "nom": "Cafe de la gare",
+      "slug": "cafe-de-la-gare-fatick",
+      "type_etablissement": "cafe_restaurant",
+      "categories": [
+        "petit_dejeuner"
+      ],
+      "description_courte": "Café référencé sur OpenStreetMap à Fatick, connexion Wi-Fi annoncée gratuite (SSID « cafedugare »). OpenStreetMap (ODbL), extraction du 2026-10-13, node 8598559615 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Fatick",
+        "departement": "Fatick",
+        "commune": "Fatick",
+        "quartier_libre": "Gare",
+        "adresse_complete": "Fatick",
+        "latitude": 14.3444471,
+        "longitude": -16.4203542,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221777286387",
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/8598559615"
+        }
+      ],
+      "services": [],
+      "horaires": [
+        {
+          "jour": 0,
+          "service": "continu",
+          "ouverture": "00:00",
+          "fermeture": "23:59",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/8598559615",
+          "date_verification": null
+        },
+        {
+          "jour": 1,
+          "service": "continu",
+          "ouverture": "00:00",
+          "fermeture": "23:59",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/8598559615",
+          "date_verification": null
+        },
+        {
+          "jour": 2,
+          "service": "continu",
+          "ouverture": "00:00",
+          "fermeture": "23:59",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/8598559615",
+          "date_verification": null
+        },
+        {
+          "jour": 3,
+          "service": "continu",
+          "ouverture": "00:00",
+          "fermeture": "23:59",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/8598559615",
+          "date_verification": null
+        },
+        {
+          "jour": 4,
+          "service": "continu",
+          "ouverture": "00:00",
+          "fermeture": "23:59",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/8598559615",
+          "date_verification": null
+        },
+        {
+          "jour": 5,
+          "service": "continu",
+          "ouverture": "00:00",
+          "fermeture": "23:59",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/8598559615",
+          "date_verification": null
+        },
+        {
+          "jour": 6,
+          "service": "continu",
+          "ouverture": "00:00",
+          "fermeture": "23:59",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/8598559615",
+          "date_verification": null
+        }
+      ],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/8598559615",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type, téléphone, horaires publiés",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/5366801721",
+      "numero_fiche": "DF-KA-0001",
+      "nom": "Restaurant Tyma Niang",
+      "slug": "restaurant-tyma-niang-kaffrine",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "senegalaise"
+      ],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Kaffrine. Le nom publié par la source comporte un patronyme (« chez Coumba SOW ») : il n'est pas repris ici comme identité de propriétaire, aucune source ne documentant la gérance. OpenStreetMap (ODbL), extraction du 2026-10-13, node 5366801721 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Kaffrine",
+        "departement": "Kaffrine",
+        "commune": "Kaffrine",
+        "quartier_libre": "Centre",
+        "adresse_complete": "Kaffrine",
+        "latitude": 14.0973368,
+        "longitude": -15.5567383,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "774615116",
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/5366801721"
+        }
+      ],
+      "services": [],
+      "horaires": [
+        {
+          "jour": 0,
+          "service": "continu",
+          "ouverture": "08:00",
+          "fermeture": "23:00",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/5366801721",
+          "date_verification": null
+        },
+        {
+          "jour": 1,
+          "service": "continu",
+          "ouverture": "08:00",
+          "fermeture": "23:00",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/5366801721",
+          "date_verification": null
+        },
+        {
+          "jour": 2,
+          "service": "continu",
+          "ouverture": "08:00",
+          "fermeture": "23:00",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/5366801721",
+          "date_verification": null
+        },
+        {
+          "jour": 3,
+          "service": "continu",
+          "ouverture": "08:00",
+          "fermeture": "23:00",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/5366801721",
+          "date_verification": null
+        },
+        {
+          "jour": 4,
+          "service": "continu",
+          "ouverture": "08:00",
+          "fermeture": "23:00",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/5366801721",
+          "date_verification": null
+        },
+        {
+          "jour": 5,
+          "service": "continu",
+          "ouverture": "08:00",
+          "fermeture": "23:00",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/5366801721",
+          "date_verification": null
+        },
+        {
+          "jour": 6,
+          "service": "continu",
+          "ouverture": "08:00",
+          "fermeture": "23:00",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/5366801721",
+          "date_verification": null
+        }
+      ],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/5366801721",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type, téléphone, horaires publiés",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:way/1033465752",
+      "numero_fiche": "DF-KA-0002",
+      "nom": "Hôtel Keur Venus",
+      "slug": "hotel-keur-venus-kaffrine",
+      "type_etablissement": "restaurant_hotel",
+      "categories": [
+        "burgers",
+        "pizza",
+        "fruits_de_mer",
+        "grillades",
+        "internationale"
+      ],
+      "description_courte": "Hôtel-restaurant référencé sur OpenStreetMap à Kaffrine (Escale) : burgers, pizzas, poulet, sandwichs, fruits de mer et grillades annoncés, cuisine halal déclarée, service 24/7. OpenStreetMap (ODbL), extraction du 2026-10-13, way 1033465752 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Kaffrine",
+        "departement": "Kaffrine",
+        "commune": "Kaffrine",
+        "quartier_libre": "Escale",
+        "adresse_complete": "Escale, Kaffrine",
+        "latitude": 14.1031834,
+        "longitude": -15.5491021,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [
+        {
+          "jour": 0,
+          "service": "continu",
+          "ouverture": "00:00",
+          "fermeture": "23:59",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/way/1033465752",
+          "date_verification": null
+        },
+        {
+          "jour": 1,
+          "service": "continu",
+          "ouverture": "00:00",
+          "fermeture": "23:59",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/way/1033465752",
+          "date_verification": null
+        },
+        {
+          "jour": 2,
+          "service": "continu",
+          "ouverture": "00:00",
+          "fermeture": "23:59",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/way/1033465752",
+          "date_verification": null
+        },
+        {
+          "jour": 3,
+          "service": "continu",
+          "ouverture": "00:00",
+          "fermeture": "23:59",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/way/1033465752",
+          "date_verification": null
+        },
+        {
+          "jour": 4,
+          "service": "continu",
+          "ouverture": "00:00",
+          "fermeture": "23:59",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/way/1033465752",
+          "date_verification": null
+        },
+        {
+          "jour": 5,
+          "service": "continu",
+          "ouverture": "00:00",
+          "fermeture": "23:59",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/way/1033465752",
+          "date_verification": null
+        },
+        {
+          "jour": 6,
+          "service": "continu",
+          "ouverture": "00:00",
+          "fermeture": "23:59",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/way/1033465752",
+          "date_verification": null
+        }
+      ],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/way/1033465752",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type, horaires publiés",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/4283971717",
+      "numero_fiche": "DF-TB-0001",
+      "nom": "Chez Eva",
+      "slug": "chez-eva-tambacounda",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap au centre de Tambacounda. OpenStreetMap (ODbL), extraction du 2026-10-13, node 4283971717 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Tambacounda",
+        "departement": "Tambacounda",
+        "commune": "Tambacounda",
+        "quartier_libre": "Centre",
+        "adresse_complete": "Tambacounda",
+        "latitude": 13.7748981,
+        "longitude": -13.6726426,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/4283971717",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/4283975533",
+      "numero_fiche": "DF-TB-0002",
+      "nom": "La Hortensia",
+      "slug": "la-hortensia-tambacounda",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap le long de la route nationale 1 à Tambacounda. OpenStreetMap (ODbL), extraction du 2026-10-13, node 4283975533 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Tambacounda",
+        "departement": "Tambacounda",
+        "commune": "Tambacounda",
+        "quartier_libre": "Centre",
+        "adresse_complete": "Route nationale 1, Tambacounda",
+        "latitude": 13.7747348,
+        "longitude": -13.6770152,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/4283975533",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/5538419822",
+      "numero_fiche": "DF-TB-0003",
+      "nom": "La Petite Baraque 5 Étoiles",
+      "slug": "la-petite-baraque-5-etoiles-tambacounda",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Tambacounda. OpenStreetMap (ODbL), extraction du 2026-10-13, node 5538419822 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Tambacounda",
+        "departement": "Tambacounda",
+        "commune": "Tambacounda",
+        "quartier_libre": "Centre",
+        "adresse_complete": "Tambacounda",
+        "latitude": 13.7766396,
+        "longitude": -13.6748332,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/5538419822",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/6784956929",
+      "numero_fiche": "DF-TB-0004",
+      "nom": "Gueye Services",
+      "slug": "gueye-services-tambacounda",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Établissement de restauration référencé sur OpenStreetMap à Tambacounda (position relevée sur le terrain par un contributeur OSM). OpenStreetMap (ODbL), extraction du 2026-10-13, node 6784956929 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Tambacounda",
+        "departement": "Tambacounda",
+        "commune": "Tambacounda",
+        "quartier_libre": "Sud",
+        "adresse_complete": "Tambacounda",
+        "latitude": 13.7657965,
+        "longitude": -13.6754546,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/6784956929",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/7705155486",
+      "numero_fiche": "DF-TB-0005",
+      "nom": "Saveurs orientales",
+      "slug": "saveurs-orientales-tambacounda",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap au nord du centre de Tambacounda. OpenStreetMap (ODbL), extraction du 2026-10-13, node 7705155486 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Tambacounda",
+        "departement": "Tambacounda",
+        "commune": "Tambacounda",
+        "quartier_libre": "Nord",
+        "adresse_complete": "Tambacounda",
+        "latitude": 13.7843207,
+        "longitude": -13.6742281,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/7705155486",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/8165136278",
+      "numero_fiche": "DF-TB-0006",
+      "nom": "Best burger",
+      "slug": "best-burger-tambacounda",
+      "type_etablissement": "fast_food",
+      "categories": [
+        "burgers",
+        "street_food"
+      ],
+      "description_courte": "Fast-food référencé sur OpenStreetMap à Tambacounda, en face de la route nationale 1. OpenStreetMap (ODbL), extraction du 2026-10-13, node 8165136278 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Tambacounda",
+        "departement": "Tambacounda",
+        "commune": "Tambacounda",
+        "quartier_libre": "Centre",
+        "adresse_complete": "En face de la route nationale 1, Tambacounda",
+        "latitude": 13.7742977,
+        "longitude": -13.6756985,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [
+        {
+          "jour": 0,
+          "service": "continu",
+          "ouverture": "09:00",
+          "fermeture": "03:00",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/8165136278",
+          "date_verification": null
+        },
+        {
+          "jour": 1,
+          "service": "continu",
+          "ouverture": "09:00",
+          "fermeture": "03:00",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/8165136278",
+          "date_verification": null
+        },
+        {
+          "jour": 2,
+          "service": "continu",
+          "ouverture": "09:00",
+          "fermeture": "03:00",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/8165136278",
+          "date_verification": null
+        },
+        {
+          "jour": 3,
+          "service": "continu",
+          "ouverture": "09:00",
+          "fermeture": "03:00",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/8165136278",
+          "date_verification": null
+        },
+        {
+          "jour": 4,
+          "service": "continu",
+          "ouverture": "09:00",
+          "fermeture": "03:00",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/8165136278",
+          "date_verification": null
+        },
+        {
+          "jour": 5,
+          "service": "continu",
+          "ouverture": "09:00",
+          "fermeture": "03:00",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/8165136278",
+          "date_verification": null
+        },
+        {
+          "jour": 6,
+          "service": "continu",
+          "ouverture": "09:00",
+          "fermeture": "03:00",
+          "ferme": false,
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/8165136278",
+          "date_verification": null
+        }
+      ],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/8165136278",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type, horaires publiés",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:way/243590824",
+      "numero_fiche": "DF-TB-0007",
+      "nom": "Le Relais de Tamba",
+      "slug": "le-relais-de-tamba-tambacounda",
+      "type_etablissement": "restaurant_hotel",
+      "categories": [],
+      "description_courte": "Hôtel-restaurant référencé sur OpenStreetMap Route de Kaolack à Tambacounda (22 chambres). OpenStreetMap (ODbL), extraction du 2026-10-13, way 243590824 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Tambacounda",
+        "departement": "Tambacounda",
+        "commune": "Tambacounda",
+        "quartier_libre": "Kaolack",
+        "adresse_complete": "Route de Kaolack, Tambacounda",
+        "latitude": 13.7741602,
+        "longitude": -13.6988486,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "site_web",
+          "valeur": "https://www.horizons-bleus-senegal.com/?-Le-relais-de-Tamba-",
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/way/243590824"
+        }
+      ],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/way/243590824",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/9085125463",
+      "numero_fiche": "DF-SL-0007",
+      "nom": "Restaurant chez-soi",
+      "slug": "restaurant-chez-soi-richard-toll",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Richard-Toll (seule fiche nommée de la ville au moment de l'extraction). OpenStreetMap (ODbL), extraction du 2026-10-13, node 9085125463 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Saint-Louis",
+        "departement": "Dagana",
+        "commune": "Richard-Toll",
+        "quartier_libre": null,
+        "adresse_complete": "Richard-Toll",
+        "latitude": 16.464924,
+        "longitude": -15.680982,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/9085125463",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/9085129867",
+      "numero_fiche": "DF-SL-0008",
+      "nom": "Burger City",
+      "slug": "burger-city-richard-toll",
+      "type_etablissement": "fast_food",
+      "categories": [
+        "burgers",
+        "street_food"
+      ],
+      "description_courte": "Fast-food référencé sur OpenStreetMap à Richard-Toll. OpenStreetMap (ODbL), extraction du 2026-10-13, node 9085129867 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Saint-Louis",
+        "departement": "Dagana",
+        "commune": "Richard-Toll",
+        "quartier_libre": null,
+        "adresse_complete": "Richard-Toll",
+        "latitude": 16.4670861,
+        "longitude": -15.703456,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/9085129867",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/12738922213",
+      "numero_fiche": "DF-SL-0009",
+      "nom": "Le Walo",
+      "slug": "le-walo-richard-toll",
+      "type_etablissement": "fast_food",
+      "categories": [
+        "senegalaise",
+        "grillades"
+      ],
+      "description_courte": "Établissement référencé sur OpenStreetMap à Richard-Toll : « plat du jour et dibi » (mention publiée par la source). OpenStreetMap (ODbL), extraction du 2026-10-13, node 12738922213 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Saint-Louis",
+        "departement": "Dagana",
+        "commune": "Richard-Toll",
+        "quartier_libre": null,
+        "adresse_complete": "Richard-Toll",
+        "latitude": 16.4678299,
+        "longitude": -15.7067277,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/12738922213",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:way/582266136",
+      "numero_fiche": "DF-MT-0001",
+      "nom": "Samassa",
+      "slug": "samassa-ourossogui",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Ourossogui (agglomération de Matam). La source ne publie ni horaire, ni contact, ni prix. OpenStreetMap (ODbL), extraction du 2026-10-13, way 582266136 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Matam",
+        "departement": "Matam",
+        "commune": "Ourossogui",
+        "quartier_libre": null,
+        "adresse_complete": "Ourossogui",
+        "latitude": 15.609299,
+        "longitude": -13.3184344,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/way/582266136",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/1775105881",
+      "numero_fiche": "DF-LG-0002",
+      "nom": "Chez Racky",
+      "slug": "chez-racky-louga",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Louga. La fiche OSM porte la mention « source : GPS survey » (relève d'un contributeur, non vérifiée par DEKK FOOD). OpenStreetMap (ODbL), extraction du 2026-10-13, node 1775105881 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Louga",
+        "departement": "Louga",
+        "commune": "Louga",
+        "quartier_libre": null,
+        "adresse_complete": "Louga",
+        "latitude": 15.6217091,
+        "longitude": -16.2250047,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/1775105881",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/1775978039",
+      "numero_fiche": "DF-LG-0003",
+      "nom": "Itam Ndajé Mi",
+      "slug": "itam-ndaje-mi-louga",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Louga. La fiche OSM porte la mention « source : GPS survey » (relève d'un contributeur, non vérifiée par DEKK FOOD). OpenStreetMap (ODbL), extraction du 2026-10-13, node 1775978039 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Louga",
+        "departement": "Louga",
+        "commune": "Louga",
+        "quartier_libre": null,
+        "adresse_complete": "Louga",
+        "latitude": 15.622071,
+        "longitude": -16.2225901,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/1775978039",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/1810631642",
+      "numero_fiche": "DF-LG-0004",
+      "nom": "Fast Food le Diambour",
+      "slug": "fast-food-le-diambour-louga",
+      "type_etablissement": "fast_food",
+      "categories": [],
+      "description_courte": "Fast-food référencé sur OpenStreetMap à Louga ; la source le classe en cuisine régionale (tag cuisine=regional). Aucun contact publié. OpenStreetMap (ODbL), extraction du 2026-10-13, node 1810631642 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Louga",
+        "departement": "Louga",
+        "commune": "Louga",
+        "quartier_libre": null,
+        "adresse_complete": "Louga",
+        "latitude": 15.6233172,
+        "longitude": -16.2192088,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/1810631642",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/4751286620",
+      "numero_fiche": "DF-LG-0005",
+      "nom": "Restaurant d'application du CFP",
+      "slug": "restaurant-d-application-du-cfp-louga-cfp",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant d'application d'un centre de formation professionnelle, référencé sur OpenStreetMap à Louga (tag addr:city=Louga). L'ouverture au grand public n'est pas confirmée par la source. OpenStreetMap (ODbL), extraction du 2026-10-13, node 4751286620 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Louga",
+        "departement": "Louga",
+        "commune": "Louga",
+        "quartier_libre": null,
+        "adresse_complete": "Louga",
+        "latitude": 15.6267039,
+        "longitude": -16.2336096,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/4751286620",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/7575282485",
+      "numero_fiche": "DF-KD-0002",
+      "nom": "Complexe Délicia",
+      "slug": "complexe-delicia-kolda",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Kolda. La source ne publie ni horaire, ni contact, ni prix. OpenStreetMap (ODbL), extraction du 2026-10-13, node 7575282485 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Kolda",
+        "departement": "Kolda",
+        "commune": "Kolda",
+        "quartier_libre": null,
+        "adresse_complete": "Kolda",
+        "latitude": 12.8897156,
+        "longitude": -14.9394955,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/7575282485",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/7853237214",
+      "numero_fiche": "DF-KD-0003",
+      "nom": "TedoungalFouladou",
+      "slug": "tedoungalfouladou-kolda",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Kolda. La source ne publie ni horaire, ni contact, ni prix. OpenStreetMap (ODbL), extraction du 2026-10-13, node 7853237214 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Kolda",
+        "departement": "Kolda",
+        "commune": "Kolda",
+        "quartier_libre": null,
+        "adresse_complete": "Kolda",
+        "latitude": 12.8921231,
+        "longitude": -14.9406461,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/7853237214",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/4966108121",
+      "numero_fiche": "DF-KL-0005",
+      "nom": "Le Brasero - chez Anouar",
+      "slug": "le-brasero-chez-anouar-kaolack",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "libanaise",
+        "grillades",
+        "pizza"
+      ],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Kaolack. La source déclare les cuisines poulet, libanaise, grillades et pizza, ainsi qu'une ouverture déclarative Mo-Su 07:30-22:00 (non confirmée). Noms alternatifs publiés par la source : Annoire's (en, fr). OpenStreetMap (ODbL), extraction du 2026-10-13, node 4966108121 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Kaolack",
+        "departement": "Kaolack",
+        "commune": "Kaolack",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 14.1387424,
+        "longitude": -16.0734762,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/4966108121",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/5320654424",
+      "numero_fiche": "DF-KL-0006",
+      "nom": "Chez Ami Collé",
+      "slug": "chez-ami-colle-kaolack",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Kaolack. Ni horaire ni contact publiés par la source. OpenStreetMap (ODbL), extraction du 2026-10-13, node 5320654424 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Kaolack",
+        "departement": "Kaolack",
+        "commune": "Kaolack",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 14.0882,
+        "longitude": -16.06324,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/5320654424",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/5320654446",
+      "numero_fiche": "DF-KL-0007",
+      "nom": "Chez touré",
+      "slug": "chez-toure-kaolack",
+      "type_etablissement": "fast_food",
+      "categories": [],
+      "description_courte": "Fast-food référencé sur OpenStreetMap à Kaolack. Ni horaire ni contact publiés par la source. OpenStreetMap (ODbL), extraction du 2026-10-13, node 5320654446 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Kaolack",
+        "departement": "Kaolack",
+        "commune": "Kaolack",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 14.0903954,
+        "longitude": -16.0648331,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/5320654446",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/5416462722",
+      "numero_fiche": "DF-KL-0008",
+      "nom": "Le Maty",
+      "slug": "le-maty-kaolack",
+      "type_etablissement": "fast_food",
+      "categories": [],
+      "description_courte": "Fast-food référencé sur OpenStreetMap à Kaolack. La source ne publie ni horaire ni contact. OpenStreetMap (ODbL), extraction du 2026-10-13, node 5416462722 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Kaolack",
+        "departement": "Kaolack",
+        "commune": "Kaolack",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 14.1382405,
+        "longitude": -16.0725312,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/5416462722",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/6054865069",
+      "numero_fiche": "DF-KL-0009",
+      "nom": "restaurant machallah",
+      "slug": "restaurant-machallah-kaolack",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Kaolack. La source contient une seconde fiche très proche (« Macha Alah », à environ 100 m) : un recoupement humain est nécessaire avant tout rapprochement (aucune fusion automatique). OpenStreetMap (ODbL), extraction du 2026-10-13, node 6054865069 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Kaolack",
+        "departement": "Kaolack",
+        "commune": "Kaolack",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 14.1373902,
+        "longitude": -16.0795601,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/6054865069",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/6054872708",
+      "numero_fiche": "DF-KL-0010",
+      "nom": "Macha Alah",
+      "slug": "macha-alah-kaolack",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Kaolack. La source contient une seconde fiche très proche (« restaurant machallah », à environ 100 m) : recoupement humain nécessaire, aucune fusion automatique. OpenStreetMap (ODbL), extraction du 2026-10-13, node 6054872708 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Kaolack",
+        "departement": "Kaolack",
+        "commune": "Kaolack",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 14.1378029,
+        "longitude": -16.0787628,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/6054872708",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/9522827201",
+      "numero_fiche": "DF-KL-0011",
+      "nom": "Chez Mère Oulèye",
+      "slug": "chez-mere-ouleye-kaolack",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "street_food",
+        "vegetarienne"
+      ],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Kaolack. La source déclare une offre café, sandwich et poulet ainsi que la présence de plats à base de viande et de plats végétariens (tags diet:meat et diet:vegetarian, déclaratifs et non confirmés). OpenStreetMap (ODbL), extraction du 2026-10-13, node 9522827201 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Kaolack",
+        "departement": "Kaolack",
+        "commune": "Kaolack",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 14.1793529,
+        "longitude": -16.0746687,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/9522827201",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/11381104669",
+      "numero_fiche": "DF-KL-0012",
+      "nom": "Chez Abass",
+      "slug": "chez-abass-kaolack",
+      "type_etablissement": "fast_food",
+      "categories": [],
+      "description_courte": "Fast-food référencé sur OpenStreetMap à Kaolack (Route de Gossas). Nom alternatif publié par la source : Maïga Abass. OpenStreetMap (ODbL), extraction du 2026-10-13, node 11381104669 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Kaolack",
+        "departement": "Kaolack",
+        "commune": "Kaolack",
+        "quartier_libre": null,
+        "adresse_complete": "Route de Gossas, Kaolack",
+        "latitude": 14.1697736,
+        "longitude": -16.0744706,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/11381104669",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/11949729829",
+      "numero_fiche": "DF-KL-0013",
+      "nom": "RESTAURANT LA DONIA IVOIRIENNE",
+      "slug": "restaurant-la-donia-ivoirienne-kaolack",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Kaolack. Nom publié tel quel par la source ; ni horaire ni contact publiés. OpenStreetMap (ODbL), extraction du 2026-10-13, node 11949729829 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Kaolack",
+        "departement": "Kaolack",
+        "commune": "Kaolack",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 14.140487,
+        "longitude": -16.0774764,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/11949729829",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/11958155653",
+      "numero_fiche": "DF-KL-0014",
+      "nom": "Tangana",
+      "slug": "tangana-kaolack",
+      "type_etablissement": "fast_food",
+      "categories": [],
+      "description_courte": "Fast-food référencé sur OpenStreetMap à Kaolack. Homonyme relevé au même moment à Touba (région de Diourbel) : établissements distincts, aucune fusion automatique. OpenStreetMap (ODbL), extraction du 2026-10-13, node 11958155653 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Kaolack",
+        "departement": "Kaolack",
+        "commune": "Kaolack",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 14.1406471,
+        "longitude": -16.0810435,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/11958155653",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/11958207817",
+      "numero_fiche": "DF-KL-0015",
+      "nom": "Restaurant Serigne Fallou",
+      "slug": "restaurant-serigne-fallou-kaolack",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Kaolack (Kasnack Nord). Ni horaire ni contact publiés. OpenStreetMap (ODbL), extraction du 2026-10-13, node 11958207817 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Kaolack",
+        "departement": "Kaolack",
+        "commune": "Kaolack",
+        "quartier_libre": null,
+        "adresse_complete": "Kasnack Nord, Kaolack",
+        "latitude": 14.1410829,
+        "longitude": -16.081215,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/11958207817",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/4228039581",
+      "numero_fiche": "DF-DB-0005",
+      "nom": "Pizza Gora",
+      "slug": "pizza-gora-diourbel",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "pizza"
+      ],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Diourbel (nationale N3), spécialisé pizza selon la source. Ni horaire ni contact publiés. OpenStreetMap (ODbL), extraction du 2026-10-13, node 4228039581 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Diourbel",
+        "departement": "Diourbel",
+        "commune": "Diourbel",
+        "quartier_libre": null,
+        "adresse_complete": "N3, Diourbel",
+        "latitude": 14.6557052,
+        "longitude": -16.2345001,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/4228039581",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/7185249489",
+      "numero_fiche": "DF-DB-0006",
+      "nom": "Matt Gui",
+      "slug": "matt-gui-diourbel",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Diourbel ; la source publie aussi le nom wolof « Matt gi ». OpenStreetMap (ODbL), extraction du 2026-10-13, node 7185249489 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Diourbel",
+        "departement": "Diourbel",
+        "commune": "Diourbel",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 14.650459,
+        "longitude": -16.2335495,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/7185249489",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/5232752968",
+      "numero_fiche": "DF-DB-0007",
+      "nom": "Sope S.Fallou",
+      "slug": "sope-s-fallou-touba",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Touba. Ni horaire ni contact publiés par la source. OpenStreetMap (ODbL), extraction du 2026-10-13, node 5232752968 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Diourbel",
+        "departement": "Mbacké",
+        "commune": "Touba Mosquée",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 14.8415689,
+        "longitude": -15.868724,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/5232752968",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/5232752969",
+      "numero_fiche": "DF-DB-0008",
+      "nom": "Buvett Sopes Mbacke Sokhna Lo",
+      "slug": "buvett-sopes-mbacke-sokhna-lo-touba",
+      "type_etablissement": "cafe_restaurant",
+      "categories": [],
+      "description_courte": "Point de vente référencé sur OpenStreetMap à Touba (amenity=cafe). Ni horaire ni contact publiés. OpenStreetMap (ODbL), extraction du 2026-10-13, node 5232752969 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Diourbel",
+        "departement": "Mbacké",
+        "commune": "Touba Mosquée",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 14.8415235,
+        "longitude": -15.8686984,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/5232752969",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/5232752972",
+      "numero_fiche": "DF-DB-0009",
+      "nom": "Poulet de Chair",
+      "slug": "poulet-de-chair-touba",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Touba. Ni horaire ni contact publiés par la source. OpenStreetMap (ODbL), extraction du 2026-10-13, node 5232752972 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Diourbel",
+        "departement": "Mbacké",
+        "commune": "Touba Mosquée",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 14.8412961,
+        "longitude": -15.8686099,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/5232752972",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/5242415246",
+      "numero_fiche": "DF-DB-0010",
+      "nom": "Tangana",
+      "slug": "tangana-touba",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Touba. Homonyme relevé au même moment à Kaolack (établissements distincts) : aucune fusion automatique. OpenStreetMap (ODbL), extraction du 2026-10-13, node 5242415246 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Diourbel",
+        "departement": "Mbacké",
+        "commune": "Touba Mosquée",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 14.8587503,
+        "longitude": -15.8900023,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/5242415246",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/5242482406",
+      "numero_fiche": "DF-DB-0011",
+      "nom": "Dibiterie Serigne fallou",
+      "slug": "dibiterie-serigne-fallou-touba",
+      "type_etablissement": "dibiterie",
+      "categories": [],
+      "description_courte": "Dibiterie référencée sur OpenStreetMap à Touba. Ni horaire ni contact publiés par la source. OpenStreetMap (ODbL), extraction du 2026-10-13, node 5242482406 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Diourbel",
+        "departement": "Mbacké",
+        "commune": "Touba Mosquée",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 14.8619367,
+        "longitude": -15.8798933,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/5242482406",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/5242483393",
+      "numero_fiche": "DF-DB-0012",
+      "nom": "Super saf TAGANA",
+      "slug": "super-saf-tagana-touba",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Touba. Ni horaire ni contact publiés par la source. OpenStreetMap (ODbL), extraction du 2026-10-13, node 5242483393 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Diourbel",
+        "departement": "Mbacké",
+        "commune": "Touba Mosquée",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 14.8600528,
+        "longitude": -15.8850487,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/5242483393",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/5242685624",
+      "numero_fiche": "DF-DB-0014",
+      "nom": "Sokhna Baly Mountakha",
+      "slug": "sokhna-baly-mountakha-touba",
+      "type_etablissement": "fast_food",
+      "categories": [],
+      "description_courte": "Fast-food référencé sur OpenStreetMap à Touba. Ni horaire ni contact publiés par la source. OpenStreetMap (ODbL), extraction du 2026-10-13, node 5242685624 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Diourbel",
+        "departement": "Mbacké",
+        "commune": "Touba Mosquée",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 14.860237,
+        "longitude": -15.877324,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/5242685624",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/1881107248",
+      "numero_fiche": "DF-TH-0015",
+      "nom": "La Taverne du Pêcheur",
+      "slug": "la-taverne-du-pecheur-joal-fadiouth",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Joal. Ni horaire ni contact publiés par la source. OpenStreetMap (ODbL), extraction du 2026-10-13, node 1881107248 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Thiès",
+        "departement": "Mbour",
+        "commune": "Joal-Fadiouth",
+        "quartier_libre": null,
+        "adresse_complete": "Joal",
+        "latitude": 14.1529993,
+        "longitude": -16.8297193,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/1881107248",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/2578467357",
+      "numero_fiche": "DF-TH-0016",
+      "nom": "Restaurant Djiba",
+      "slug": "restaurant-djiba-joal-fadiouth",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "senegalaise"
+      ],
+      "description_courte": "Restaurant référencé sur OpenStreetMap près de Joal-Fadiouth ; la source le classe en cuisine sénégalaise. Ni horaire ni contact publiés. OpenStreetMap (ODbL), extraction du 2026-10-13, node 2578467357 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Thiès",
+        "departement": "Mbour",
+        "commune": "Joal-Fadiouth",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 14.2234514,
+        "longitude": -16.8151018,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/2578467357",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/5017985821",
+      "numero_fiche": "DF-TH-0017",
+      "nom": "Le Djembé",
+      "slug": "le-djembe-joal-fadiouth",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "senegalaise",
+        "francaise"
+      ],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Joal ; la source déclare une cuisine locale et française avec service de café, une ouverture déclarative Mo-Su 11:00-22:00 (non confirmée) et un accès fauteuil roulant signalé comme non praticable. Téléphone et site web publiés par la source, non appelés ni vérifiés par DEKK FOOD. OpenStreetMap (ODbL), extraction du 2026-10-13, node 5017985821 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Thiès",
+        "departement": "Mbour",
+        "commune": "Joal-Fadiouth",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 14.1532349,
+        "longitude": -16.8350389,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221 77 094 58 74",
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/5017985821"
+        },
+        {
+          "type": "site_web",
+          "valeur": "https://www.auberge-djembe.com/",
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/5017985821"
+        }
+      ],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/5017985821",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type, téléphone",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/9876348830",
+      "numero_fiche": "DF-TH-0018",
+      "nom": "Chez Clémence",
+      "slug": "chez-clemence-joal-fadiouth",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "senegalaise"
+      ],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Joal ; la source le classe en cuisine régionale. OpenStreetMap (ODbL), extraction du 2026-10-13, node 9876348830 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Thiès",
+        "departement": "Mbour",
+        "commune": "Joal-Fadiouth",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 14.160484,
+        "longitude": -16.8406132,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/9876348830",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/11819495772",
+      "numero_fiche": "DF-TH-0019",
+      "nom": "\"Coin apéro\" de Louise Faye",
+      "slug": "coin-apero-de-louise-faye-joal-fadiouth",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap dans la zone de Joal-Fadiouth ; la commune exacte reste à confirmer lors d'un relevé terrain. Ni horaire ni contact publiés par la source. OpenStreetMap (ODbL), extraction du 2026-10-13, node 11819495772 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Thiès",
+        "departement": "Mbour",
+        "commune": "Joal-Fadiouth",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 14.1357426,
+        "longitude": -16.7767203,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/11819495772",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/12748082712",
+      "numero_fiche": "DF-TH-0020",
+      "nom": "Chez Pascal",
+      "slug": "chez-pascal-joal-fadiouth",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Joal. Le téléphone publié par la source n'a pas été appelé : il reste à confirmer. OpenStreetMap (ODbL), extraction du 2026-10-13, node 12748082712 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Thiès",
+        "departement": "Mbour",
+        "commune": "Joal-Fadiouth",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 14.1532333,
+        "longitude": -16.8247012,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221 77 719 42 38",
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/12748082712"
+        }
+      ],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/12748082712",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type, téléphone",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:way/558916323",
+      "numero_fiche": "DF-TH-0021",
+      "nom": "La Metisse",
+      "slug": "la-metisse-joal-fadiouth",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Joal. Ni horaire ni contact publiés par la source. OpenStreetMap (ODbL), extraction du 2026-10-13, way 558916323 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Thiès",
+        "departement": "Mbour",
+        "commune": "Joal-Fadiouth",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 14.1577332,
+        "longitude": -16.8376377,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/way/558916323",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/4408092550",
+      "numero_fiche": "DF-TH-0022",
+      "nom": "restaurant khadi",
+      "slug": "restaurant-khadi-tivaouane",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Tivaouane. Ni horaire ni contact publiés par la source. OpenStreetMap (ODbL), extraction du 2026-10-13, node 4408092550 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Thiès",
+        "departement": "Tivaouane",
+        "commune": "Tivaouane",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 14.9596099,
+        "longitude": -16.8082083,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/4408092550",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/4409501739",
+      "numero_fiche": "DF-TH-0023",
+      "nom": "chez papino",
+      "slug": "chez-papino-tivaouane",
+      "type_etablissement": "fast_food",
+      "categories": [],
+      "description_courte": "Fast-food référencé sur OpenStreetMap à Tivaouane. Ni horaire ni contact publiés par la source. OpenStreetMap (ODbL), extraction du 2026-10-13, node 4409501739 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Thiès",
+        "departement": "Tivaouane",
+        "commune": "Tivaouane",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 14.9489208,
+        "longitude": -16.812341,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/4409501739",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/4409568453",
+      "numero_fiche": "DF-TH-0024",
+      "nom": "Cheikh Issa Diene",
+      "slug": "cheikh-issa-diene-tivaouane",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Tivaouane. Ni horaire ni contact publiés par la source. OpenStreetMap (ODbL), extraction du 2026-10-13, node 4409568453 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Thiès",
+        "departement": "Tivaouane",
+        "commune": "Tivaouane",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 14.9560817,
+        "longitude": -16.8157492,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/4409568453",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/4409568455",
+      "numero_fiche": "DF-TH-0025",
+      "nom": "Le Prokhane",
+      "slug": "le-prokhane-tivaouane",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Tivaouane. Ni horaire ni contact publiés par la source. OpenStreetMap (ODbL), extraction du 2026-10-13, node 4409568455 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Thiès",
+        "departement": "Tivaouane",
+        "commune": "Tivaouane",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 14.9559145,
+        "longitude": -16.8160108,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/4409568455",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/4409568461",
+      "numero_fiche": "DF-TH-0026",
+      "nom": "chez amadou maiga",
+      "slug": "chez-amadou-maiga-tivaouane",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Tivaouane. Ni horaire ni contact publiés par la source. OpenStreetMap (ODbL), extraction du 2026-10-13, node 4409568461 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Thiès",
+        "departement": "Tivaouane",
+        "commune": "Tivaouane",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 14.9567373,
+        "longitude": -16.8145181,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/4409568461",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/4410158909",
+      "numero_fiche": "DF-TH-0027",
+      "nom": "Le Virage",
+      "slug": "le-virage-tivaouane",
+      "type_etablissement": "fast_food",
+      "categories": [],
+      "description_courte": "Fast-food référencé sur OpenStreetMap à Tivaouane. Ni horaire ni contact publiés par la source. OpenStreetMap (ODbL), extraction du 2026-10-13, node 4410158909 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Thiès",
+        "departement": "Tivaouane",
+        "commune": "Tivaouane",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 14.955477,
+        "longitude": -16.8170108,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/4410158909",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/4413287301",
+      "numero_fiche": "DF-TH-0028",
+      "nom": "complexe dabakh",
+      "slug": "complexe-dabakh-tivaouane",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Tivaouane. Ni horaire ni contact publiés par la source. OpenStreetMap (ODbL), extraction du 2026-10-13, node 4413287301 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Thiès",
+        "departement": "Tivaouane",
+        "commune": "Tivaouane",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 14.9397943,
+        "longitude": -16.8286027,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/4413287301",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/5379038058",
+      "numero_fiche": "DF-LG-0006",
+      "nom": "L'Endroit idéal",
+      "slug": "l-endroit-ideal-kebemer",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Kébémer. Ni horaire ni contact publiés par la source. OpenStreetMap (ODbL), extraction du 2026-10-13, node 5379038058 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Louga",
+        "departement": "Kébémer",
+        "commune": "Kébémer",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 15.3666067,
+        "longitude": -16.4528391,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/5379038058",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:way/1187858308",
+      "numero_fiche": "DF-LG-0007",
+      "nom": "Restaurant le Cayor",
+      "slug": "restaurant-le-cayor-kebemer",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Kébémer. Ni horaire ni contact publiés par la source. OpenStreetMap (ODbL), extraction du 2026-10-13, way 1187858308 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Louga",
+        "departement": "Kébémer",
+        "commune": "Kébémer",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 15.3744449,
+        "longitude": -16.4492625,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/way/1187858308",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:way/202732567",
+      "numero_fiche": "DF-ZG-0009",
+      "nom": "Complexe MaBelle Service",
+      "slug": "complexe-mabelle-service-bignona",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "senegalaise"
+      ],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Bignona ; la source le classe en cuisine régionale et déclare un accès fauteuil roulant praticable, une zone fumeurs et un accès internet payant (tags déclaratifs, non confirmés). Relevé initial de la source : « bing ». OpenStreetMap (ODbL), extraction du 2026-10-13, way 202732567 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Bignona",
+        "commune": "Bignona",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.8036309,
+        "longitude": -16.2275889,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/way/202732567",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:way/202738017",
+      "numero_fiche": "DF-ZG-0010",
+      "nom": "Restaurant Adji Ngom",
+      "slug": "restaurant-adji-ngom-bignona",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "senegalaise"
+      ],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Bignona (cuisine régionale selon la source). La source déclare une appréciation « 3 étoiles », un accès fauteuil roulant praticable et une zone fumeurs : appréciation déclarative, non contrôlée par DEKK FOOD. OpenStreetMap (ODbL), extraction du 2026-10-13, way 202738017 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Bignona",
+        "commune": "Bignona",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.7987102,
+        "longitude": -16.2254061,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/way/202738017",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/5300760963",
+      "numero_fiche": "DF-ZG-0011",
+      "nom": "Sun Cafe",
+      "slug": "sun-cafe-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap au nord de Cap Skirring. La source ne publie ni horaire ni contact. OpenStreetMap (ODbL), extraction du 2026-10-13, node 5300760963 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.4276278,
+        "longitude": -16.6660012,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/5300760963",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/5492878126",
+      "numero_fiche": "DF-ZG-0012",
+      "nom": "L'acacia, chez Fatou",
+      "slug": "l-acacia-chez-fatou-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Cap Skirring. La source ne publie ni horaire ni contact. OpenStreetMap (ODbL), extraction du 2026-10-13, node 5492878126 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.3866479,
+        "longitude": -16.7364388,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/5492878126",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/5492878323",
+      "numero_fiche": "DF-ZG-0013",
+      "nom": "Carpe Rouge",
+      "slug": "carpe-rouge-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Cap Skirring. La source ne publie ni horaire ni contact. OpenStreetMap (ODbL), extraction du 2026-10-13, node 5492878323 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.3870554,
+        "longitude": -16.7380773,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/5492878323",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/5558705022",
+      "numero_fiche": "DF-ZG-0014",
+      "nom": "Les Palmiers",
+      "slug": "les-palmiers-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Cap Skirring. La source ne publie ni horaire ni contact. OpenStreetMap (ODbL), extraction du 2026-10-13, node 5558705022 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.3869255,
+        "longitude": -16.7393618,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/5558705022",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/6297514397",
+      "numero_fiche": "DF-ZG-0015",
+      "nom": "casa pizzeria",
+      "slug": "casa-pizzeria-cap-skirring",
+      "type_etablissement": "pizzeria",
+      "categories": [
+        "pizza"
+      ],
+      "description_courte": "Pizzeria référencée sur OpenStreetMap à Cap Skirring. Un site web est indiqué par la source ; il n'a pas été ouvert ni contrôlé par DEKK FOOD. OpenStreetMap (ODbL), extraction du 2026-10-13, node 6297514397 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.3854044,
+        "longitude": -16.7358599,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "site_web",
+          "valeur": "https://www.cap-skirring.voyage/pizzeria-cap-skirring-casa-pizza.html",
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/6297514397"
+        }
+      ],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/6297514397",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/6299909316",
+      "numero_fiche": "DF-ZG-0016",
+      "nom": "Chez loulou",
+      "slug": "chez-loulou-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "pizza"
+      ],
+      "description_courte": "Restaurant référencé sur OpenStreetMap rue de Kabrousse (Cap Skirring) ; la source le classe en pizza. Téléphone publié par la source, non appelé par DEKK FOOD. OpenStreetMap (ODbL), extraction du 2026-10-13, node 6299909316 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": "Rue de Kabrousse, Cap Skirring",
+        "latitude": 12.3712665,
+        "longitude": -16.7268051,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "78 432 74 93",
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/6299909316"
+        }
+      ],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/6299909316",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type, téléphone",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/7027861085",
+      "numero_fiche": "DF-ZG-0017",
+      "nom": "Case Bambou",
+      "slug": "case-bambou-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Cap Skirring. Téléphone publié par la source, non appelé par DEKK FOOD. OpenStreetMap (ODbL), extraction du 2026-10-13, node 7027861085 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.387515,
+        "longitude": -16.7382638,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221 77 547 91 26",
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/7027861085"
+        }
+      ],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/7027861085",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type, téléphone",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/9707035057",
+      "numero_fiche": "DF-ZG-0018",
+      "nom": "La petite Suisse",
+      "slug": "la-petite-suisse-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Cap Skirring ; la fiche source porte une date de contrôle communautaire (check_date 2025-02-28) qui ne vaut pas vérification par DEKK FOOD. OpenStreetMap (ODbL), extraction du 2026-10-13, node 9707035057 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.3719604,
+        "longitude": -16.7319171,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/9707035057",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/10287666409",
+      "numero_fiche": "DF-ZG-0019",
+      "nom": "cap7 restauration",
+      "slug": "cap7-restauration-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Cap Skirring. La source ne publie ni horaire ni contact. OpenStreetMap (ODbL), extraction du 2026-10-13, node 10287666409 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.3886128,
+        "longitude": -16.7479818,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/10287666409",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/10709189044",
+      "numero_fiche": "DF-ZG-0020",
+      "nom": "Mussuwam",
+      "slug": "mussuwam-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "senegalaise"
+      ],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Cap Skirring (cuisine régionale selon la source, contrôle communautaire daté du 2025-02-28). Ni le téléphone ni le site web publiés par la source n'ont été vérifiés : le numéro indiqué comporte un nombre de chiffres inhabituel, il reste à confirmer. OpenStreetMap (ODbL), extraction du 2026-10-13, node 10709189044 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.373306,
+        "longitude": -16.7321697,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/10709189044",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/12625727296",
+      "numero_fiche": "DF-ZG-0021",
+      "nom": "Filaos",
+      "slug": "filaos-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "fruits_de_mer"
+      ],
+      "description_courte": "Restaurant référencé sur OpenStreetMap vers Kabrousse ; la source le classe en poisson. Accès fauteuil roulant déclaré non praticable (tag déclaratif). OpenStreetMap (ODbL), extraction du 2026-10-13, node 12625727296 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.3521544,
+        "longitude": -16.7263982,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/12625727296",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/12625732210",
+      "numero_fiche": "DF-ZG-0022",
+      "nom": "Bar de la mer",
+      "slug": "bar-de-la-mer-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Établissement référencé sur OpenStreetMap vers Kabrousse (bar-restaurant). Accès fauteuil roulant déclaré non praticable (tag déclaratif). OpenStreetMap (ODbL), extraction du 2026-10-13, node 12625732210 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.3498297,
+        "longitude": -16.7244241,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/12625732210",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/12626031429",
+      "numero_fiche": "DF-ZG-0023",
+      "nom": "Le Diamota - bar restaurant",
+      "slug": "le-diamota-bar-restaurant-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Bar-restaurant référencé sur OpenStreetMap vers Kabrousse ; ouverture déclarative Mo-Su 09:00-22:00 (non confirmée) et téléphone publié par la source, non appelé par DEKK FOOD. OpenStreetMap (ODbL), extraction du 2026-10-13, node 12626031429 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.3543897,
+        "longitude": -16.7284188,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221 77 657 55 09",
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/12626031429"
+        }
+      ],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/12626031429",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type, téléphone",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/12626083113",
+      "numero_fiche": "DF-ZG-0024",
+      "nom": "Soleil",
+      "slug": "soleil-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap vers Kabrousse. La source ne publie ni horaire ni contact. OpenStreetMap (ODbL), extraction du 2026-10-13, node 12626083113 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.3582705,
+        "longitude": -16.7298521,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/12626083113",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/12626097463",
+      "numero_fiche": "DF-ZG-0025",
+      "nom": "Chez Barlo et Mina - bar restaurant",
+      "slug": "chez-barlo-et-mina-bar-restaurant-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Bar-restaurant référencé sur OpenStreetMap vers Kabrousse. Téléphone publié par la source, non appelé par DEKK FOOD. OpenStreetMap (ODbL), extraction du 2026-10-13, node 12626097463 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.3665884,
+        "longitude": -16.7306921,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221774077326",
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/12626097463"
+        }
+      ],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/12626097463",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type, téléphone",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/12626105420",
+      "numero_fiche": "DF-ZG-0026",
+      "nom": "Kassumay",
+      "slug": "kassumay-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Cap Skirring. Téléphone publié par la source, non appelé par DEKK FOOD. OpenStreetMap (ODbL), extraction du 2026-10-13, node 12626105420 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.3722286,
+        "longitude": -16.7320595,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221774036265",
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/12626105420"
+        }
+      ],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/12626105420",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type, téléphone",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/12626109868",
+      "numero_fiche": "DF-ZG-0027",
+      "nom": "Burette No stress",
+      "slug": "burette-no-stress-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Cap Skirring. La source ne publie ni horaire ni contact. OpenStreetMap (ODbL), extraction du 2026-10-13, node 12626109868 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.3719935,
+        "longitude": -16.7321015,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/12626109868",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/12630031286",
+      "numero_fiche": "DF-ZG-0028",
+      "nom": "Boudody",
+      "slug": "boudody-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Cap Skirring. Téléphone publié par la source, non appelé par DEKK FOOD. OpenStreetMap (ODbL), extraction du 2026-10-13, node 12630031286 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.368563,
+        "longitude": -16.7308137,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221775449752",
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/12630031286"
+        }
+      ],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/12630031286",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type, téléphone",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/12630098151",
+      "numero_fiche": "DF-ZG-0029",
+      "nom": "Africabane",
+      "slug": "africabane-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Cap Skirring. La source ne publie ni horaire ni contact. OpenStreetMap (ODbL), extraction du 2026-10-13, node 12630098151 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.3749759,
+        "longitude": -16.7332617,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/12630098151",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/12630379459",
+      "numero_fiche": "DF-ZG-0030",
+      "nom": "Le paillotin",
+      "slug": "le-paillotin-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "street_food"
+      ],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Cap Skirring ; la source mentionne salades et brochettes. OpenStreetMap (ODbL), extraction du 2026-10-13, node 12630379459 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.3759571,
+        "longitude": -16.7335245,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/12630379459",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/12635790425",
+      "numero_fiche": "DF-ZG-0031",
+      "nom": "Kaye-FI",
+      "slug": "kaye-fi-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap vers Kabrousse. Téléphone publié par la source, non appelé par DEKK FOOD ; la fiche source renvoie aussi vers une photo Wikimedia Commons (non reprise ici). OpenStreetMap (ODbL), extraction du 2026-10-13, node 12635790425 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.3488321,
+        "longitude": -16.7235005,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+22177 773 07 72",
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/12635790425"
+        }
+      ],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/12635790425",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type, téléphone",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/12766745546",
+      "numero_fiche": "DF-ZG-0032",
+      "nom": "Le Régal",
+      "slug": "le-regal-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Cap Skirring. Téléphone publié par la source, non appelé par DEKK FOOD. OpenStreetMap (ODbL), extraction du 2026-10-13, node 12766745546 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.3864734,
+        "longitude": -16.7369784,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221 77 506 57 88",
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/12766745546"
+        }
+      ],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/12766745546",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type, téléphone",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/12766745553",
+      "numero_fiche": "DF-ZG-0033",
+      "nom": "Le petit gourmet",
+      "slug": "le-petit-gourmet-cap-skirring",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Cap Skirring. La source ne publie ni horaire ni contact. OpenStreetMap (ODbL), extraction du 2026-10-13, node 12766745553 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Oussouye",
+        "commune": "Diembéring",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 12.3853345,
+        "longitude": -16.7359807,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/12766745553",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/4985311436",
+      "numero_fiche": "DF-FK-0003",
+      "nom": "Jokkoo",
+      "slug": "jokkoo-sokone",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Sokone. La source ne publie ni horaire ni contact. OpenStreetMap (ODbL), extraction du 2026-10-13, node 4985311436 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Fatick",
+        "departement": "Foundiougne",
+        "commune": "Sokone",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 13.8842123,
+        "longitude": -16.3715018,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/4985311436",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/13477136101",
+      "numero_fiche": "DF-FK-0004",
+      "nom": "Auberge Restaurant Le Cailcedrat",
+      "slug": "auberge-restaurant-le-cailcedrat-sokone",
+      "type_etablissement": "restaurant_hotel",
+      "categories": [],
+      "description_courte": "Auberge-restaurant référencée sur OpenStreetMap à Sokone ; la source déclare un accès Wi-Fi (tag internet_access=wlan, déclaratif) et un téléphone, non appelé par DEKK FOOD. OpenStreetMap (ODbL), extraction du 2026-10-13, node 13477136101 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Fatick",
+        "departement": "Foundiougne",
+        "commune": "Sokone",
+        "quartier_libre": null,
+        "adresse_complete": null,
+        "latitude": 13.8860018,
+        "longitude": -16.3717177,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "774305204",
+          "confirme": false,
+          "source": "openstreetmap",
+          "source_url": "https://www.openstreetmap.org/node/13477136101"
+        }
+      ],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/13477136101",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type, téléphone",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/6342092186",
+      "numero_fiche": "DF-KE-0001",
+      "nom": "Restaurant Le Carrefour",
+      "slug": "restaurant-le-carrefour-kedougou",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap au centre de Kédougou. OpenStreetMap (ODbL), extraction du 2026-10-13, node 6342092186 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Kédougou",
+        "departement": "Kédougou",
+        "commune": "Kédougou",
+        "quartier_libre": "Centre",
+        "adresse_complete": "Kédougou",
+        "latitude": 12.5552069,
+        "longitude": -12.1806154,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/6342092186",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "openstreetmap:node/4600534190",
+      "numero_fiche": "DF-SE-0001",
+      "nom": "Chez Maty",
+      "slug": "chez-maty-sedhiou",
+      "type_etablissement": "restaurant",
+      "categories": [],
+      "description_courte": "Restaurant référencé sur OpenStreetMap à Sédhiou. Aucun contact n'est publié par la source ; le numéro de téléphone sera ajouté après vérification. OpenStreetMap (ODbL), extraction du 2026-10-13, node 4600534190 : position communautaire, non confirmée sur place par DEKK FOOD.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Sédhiou",
+        "departement": "Sédhiou",
+        "commune": "Sédhiou",
+        "quartier_libre": "Centre",
+        "adresse_complete": "Sédhiou",
+        "latitude": 12.7091364,
+        "longitude": -15.5583737,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "horaires": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/4600534190",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, coordonnées, type",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "openstreetmap",
+      "est_publication_visible": true
+    }
+  ]
+}

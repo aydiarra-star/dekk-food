@@ -1,0 +1,133 @@
+"""Tests du ciblage explicite du schéma pour les seeds SQL."""
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+import pytest
+
+from tools.catalogue import generation
+from tools.catalogue.modele import Etablissement
+from tools.catalogue.schema_sql import qualifier_schema_sql
+
+RACINE = Path(__file__).resolve().parents[2]
+SEED = sorted((RACINE / "data" / "seed").glob("*.json"))[0]
+
+
+def _premiere_fiche():
+    donnees = json.loads(SEED.read_text(encoding="utf-8"))
+    return Etablissement.depuis_dict(donnees["etablissements"][0])
+
+
+def test_generateur_expose_schema_cible_sans_changer_la_cible_par_defaut():
+    fiche = _premiere_fiche()
+    sql_historique = generation.generer_sql([fiche])
+    sql_isole = generation.generer_sql([fiche], schema_cible="catalogue")
+
+    assert "insert into public.restaurants" in sql_historique
+    assert "insert into catalogue.restaurants" in sql_isole
+    assert "public." not in sql_isole
+    assert "catalogue.sources" in sql_isole
+
+
+def test_schema_public_reste_strictement_inchange():
+    sql = "insert into public.restaurants values (1); select * from public.sources;"
+    assert qualifier_schema_sql(sql) == sql
+    assert qualifier_schema_sql(sql, "public") == sql
+
+
+def test_schema_cible_remplace_les_qualificateurs_sql():
+    sql = (
+        "insert into public.restaurants values (1); "
+        "select * from public.sources; "
+        "select public.contacts.source_url;"
+    )
+    attendu = (
+        "insert into catalogue.restaurants values (1); "
+        "select * from catalogue.sources; "
+        "select catalogue.contacts.source_url;"
+    )
+    assert qualifier_schema_sql(sql, "catalogue") == attendu
+
+
+@pytest.mark.parametrize("schema", ["", "Public", "public; drop schema public", "catalogue.x", "1schema", "a" * 64])
+def test_schema_cible_invalide_est_refuse(schema):
+    with pytest.raises(ValueError):
+        qualifier_schema_sql("select 1;", schema)
+
+
+def test_qualificateurs_deja_qualifies_ne_sont_pas_requalifies():
+    sql = "select other.restaurants.id, public.restaurants.id from other.restaurants;"
+    assert qualifier_schema_sql(sql, "catalogue") == (
+        "select other.restaurants.id, catalogue.restaurants.id from other.restaurants;"
+    )
+
+def test_ne_modifie_pas_les_chaines_ou_commentaires_sql():
+    sql = (
+        "select public.restaurants.id, 'https://example.test/public.example' as url; "
+        "-- public.ne_pas_remplacer\n"
+        "/* public.non_plus */ select 1;"
+    )
+    resultat = qualifier_schema_sql(sql, "catalogue")
+    assert "select catalogue.restaurants.id" in resultat
+    assert "'https://example.test/public.example'" in resultat
+    assert "-- public.ne_pas_remplacer" in resultat
+    assert "/* public.non_plus */" in resultat
+
+def test_ne_modifie_pas_les_chaines_dollar_quotees_postgresql():
+    sql = (
+        "select public.restaurants.id; "
+        "do $bloc$ begin perform 'public.texte'; -- public.commentaire\\n"
+        "raise notice 'public.alerte'; end $bloc$; "
+        "select $$public.contenu$$;"
+    )
+    resultat = qualifier_schema_sql(sql, "catalogue")
+    assert "select catalogue.restaurants.id" in resultat
+    assert "$bloc$ begin perform 'public.texte'; -- public.commentaire\\n" in resultat
+    assert "raise notice 'public.alerte'; end $bloc$" in resultat
+    assert "$$public.contenu$$" in resultat
+
+
+def test_preserve_les_commentaires_de_bloc_imbriques():
+    sql = "select public.restaurants.id; /* public.a /* public.b */ public.c */ select 1;"
+    resultat = qualifier_schema_sql(sql, "catalogue")
+    assert "select catalogue.restaurants.id" in resultat
+    assert "/* public.a /* public.b */ public.c */" in resultat
+
+
+def test_refuse_un_sql_qui_n_est_pas_une_chaine():
+    with pytest.raises(TypeError):
+        qualifier_schema_sql(None, "catalogue")
+
+def test_preserve_les_chaines_postgresql_avec_echappement_e():
+    sql = "select E'foo\\' public.interieur' as valeur, public.restaurants.id;"
+    resultat = qualifier_schema_sql(sql, "catalogue")
+    assert "E'foo\\' public.interieur'" in resultat
+    assert "catalogue.restaurants.id" in resultat
+    assert "catalogue.interieur" not in resultat
+
+def test_cli_generer_permet_une_cible_explicite_dans_un_dossier_temporaire(tmp_path):
+    from tools.catalogue.importateur import construire_analyseur
+
+    arguments = construire_analyseur().parse_args([
+        "generer",
+        str(SEED),
+        "--dossier", str(tmp_path),
+        "--schema-cible", "catalogue",
+        "--date", "2026-10-14",
+    ])
+    assert arguments.schema_cible == "catalogue"
+    assert arguments.fonction(arguments) == 0
+
+    sql = (tmp_path / "supabase" / "seed" / "10_etablissements.sql").read_text(encoding="utf-8")
+    assert "insert into catalogue.restaurants" in sql
+    assert "catalogue.sources" in sql
+    assert "public." not in sql
+
+
+def test_cli_generer_conserve_public_par_defaut():
+    from tools.catalogue.importateur import construire_analyseur
+
+    arguments = construire_analyseur().parse_args(["generer", str(SEED)])
+    assert arguments.schema_cible == "public"
+

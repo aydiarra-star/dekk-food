@@ -1,7 +1,7 @@
 name: dekk_food
-description: Application de référencement des restaurants au Sénégal.
+description: Catalogue national des restaurants, fast-foods, gargotes et dibiteries du Sénégal.
 publish_to: 'none'
-version: 1.0.0+1
+version: 3.0.0+3
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
@@ -9,8 +9,16 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  supabase_flutter: ^2.3.4
   cupertino_icons: ^1.0.6
+  # Contacts et navigation : appel, WhatsApp, e-mail, site, itinéraire.
+  url_launcher: ^6.2.6
+  # Favoris et contributions conservés hors ligne.
+  shared_preferences: ^2.2.3
+  # Carte interactive (fond de carte OpenStreetMap).
+  flutter_map: ^6.1.0
+  latlong2: ^0.9.0
+  # Base communautaire optionnelle (activable par --dart-define).
+  supabase_flutter: ^2.3.4
 
 dev_dependencies:
   flutter_test:
@@ -19,3 +27,5 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/data/catalogue.json

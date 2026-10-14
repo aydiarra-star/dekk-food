@@ -1,0 +1,872 @@
+{
+  "version": 1,
+  "date_collecte": "2026-10-13",
+  "origine": "application_existante",
+  "description": "Établissements hérités de la version 2.1.0 de l'application DEKK FOOD (lib/main.dart). Les données sont CONSERVÉES mais reclassées : elles étaient publiées sans aucune source. Les photos provenant d'une banque d'images sont marquées « illustration générique », les affirmations d'hygiène non sourcées sont archivées dans « donnees_heritees » et ne sont PLUS publiées, et les notes d'avis inventées sont supprimées (elles ne sont pas reprises ici).",
+  "regle_de_publication": {
+    "partiellement_verifie": "confirmé par au moins deux sources indépendantes (application + annuaire public)",
+    "a_confirmer": "présent dans l'application existante, non recoupé par une source publique",
+    "non_publie": "introuvable dans les sources consultées : conservé dans le dépôt mais non publié tant qu'il n'est pas vérifié"
+  },
+  "etablissements": [
+    {
+      "cle": "app:restaurant-le-lagon-1",
+      "numero_fiche": "DF-DK-0001",
+      "nom": "Restaurant Le Lagon 1",
+      "slug": "restaurant-le-lagon-1",
+      "type_etablissement": "restaurant",
+      "categories": ["francaise", "fruits_de_mer", "internationale"],
+      "cuisine_type": "Française & Poissons",
+      "description_courte": "Restaurant de gastronomie française et de poissons frais à Dakar, installé face à l'océan sur la corniche.",
+      "description_longue": "Établissement de référence du Plateau, le Lagon 1 propose une cuisine française classique et des produits de la mer. L'adresse et le numéro de téléphone sont confirmés par deux sources : l'application DEKK FOOD et l'annuaire Senefinder (fiche du 13/10/2026).",
+      "statut": "a_verifier",
+      "niveau_verification": "partiellement_verifie",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Dakar Plateau",
+        "quartier": "Plateau Centre",
+        "quartier_libre": "Plateau",
+        "adresse_complete": "Route de la Corniche Est, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        { "type": "telephone", "valeur": "+221 33 821 53 22", "confirme": true, "source": "senefinder", "source_url": "https://senefinder.com/fr/business/food-restaurant-le-lagon-1-dakar-izsj" },
+        { "type": "whatsapp", "valeur": "+221 33 821 53 22", "confirme": false, "source": "application_existante" }
+      ],
+      "services": ["sur_place", "reservation"],
+      "fourchette_prix": { "min": 5000, "max": 15000, "devise": "XOF" },
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1544025162-d76694265947",
+          "type_media": "illustration_generique",
+          "est_principale": true,
+          "est_illustration_generique": true,
+          "correspondance_verifiee": false,
+          "auteur": "Inconnu (banque d'images Unsplash)",
+          "licence": "Unsplash License",
+          "source": "application_existante",
+          "legende": "Illustration générique (banque d'images) — ne représente pas l'établissement"
+        }
+      ],
+      "menus": [
+        {
+          "nom": "Carte (données héritées)",
+          "type": "carte",
+          "statut": "a_confirmer",
+          "source": "application_existante",
+          "plats": [
+            {
+              "nom": "Langouste grillée au beurre blanc",
+              "description": "Pêche locale du jour cuisinée au beurre blanc onctueux.",
+              "categorie": "plat_principal",
+              "prix": 14000,
+              "statut_confirmation": "a_confirmer",
+              "disponibilite": "a_confirmer",
+              "donnees_heritees": {
+                "mention_hygiene_non_publiee": "Arrivage direct des pêcheurs artisanaux sans rupture de la chaîne du froid.",
+                "motif_non_publication": "Affirmation non sourcée : aucune vérification d'hygiène n'a été réalisée par DEKK FOOD."
+              },
+              "image": {
+                "url": "https://images.unsplash.com/photo-1535400255456-984241443b28",
+                "type_media": "illustration_generique",
+                "est_illustration_generique": true,
+                "licence": "Unsplash License",
+                "auteur": "Inconnu (banque d'images Unsplash)",
+                "legende": "Illustration générique — ne représente pas le plat servi"
+              }
+            }
+          ]
+        }
+      ],
+      "sources": [
+        { "source": "application_existante", "date_collecte": "2026-10-13", "donnees": "nom, adresse, téléphone, plat", "niveau_confiance": "faible" },
+        { "source": "senefinder", "url": "https://senefinder.com/fr/business/food-restaurant-le-lagon-1-dakar-izsj", "date_collecte": "2026-10-13", "donnees": "téléphone confirmé, adresse (code plus MH9C+3H9)", "niveau_confiance": "moyen" }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "application_existante",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "app:chez-fatou-almadies",
+      "numero_fiche": "DF-DK-0002",
+      "nom": "Chez Fatou",
+      "slug": "chez-fatou-almadies",
+      "type_etablissement": "restaurant",
+      "categories": ["senegalaise", "grillades", "fruits_de_mer", "brunch"],
+      "cuisine_type": "Sénégalaise & Grillades",
+      "description_courte": "Restaurant vue mer sur la corniche des Almadies : cuisine sénégalaise et internationale, brunch, poissons et grillades.",
+      "description_longue": "Adresse emblématique de la corniche des Almadies. Confirmée par trois sources indépendantes (application DEKK FOOD, Senefinder, Senlocal) qui concordent sur le nom, le quartier et le numéro de téléphone fixe.",
+      "statut": "a_verifier",
+      "niveau_verification": "partiellement_verifie",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Ngor",
+        "quartier": "Almadies",
+        "quartier_libre": "Almadies",
+        "adresse_complete": "Corniche des Almadies, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        { "type": "telephone", "valeur": "+221 33 820 92 38", "confirme": true, "source": "senefinder", "source_url": "https://senefinder.com/fr/business/food-chez-fatou-dakar-twox" },
+        { "type": "whatsapp", "valeur": "+221 77 171 05 14", "confirme": false, "source": "senefinder", "source_url": "https://senefinder.com/fr/business/food-chez-fatou-dakar-1k2c" }
+      ],
+      "services": ["sur_place", "reservation", "vue_mer", "brunch"],
+      "fourchette_prix": { "min": 3000, "max": 8000, "devise": "XOF" },
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1537047902294-62a40c20a6ae",
+          "type_media": "illustration_generique",
+          "est_principale": true,
+          "est_illustration_generique": true,
+          "correspondance_verifiee": false,
+          "auteur": "Inconnu (banque d'images Unsplash)",
+          "licence": "Unsplash License",
+          "source": "application_existante",
+          "legende": "Illustration générique (banque d'images) — ne représente pas l'établissement"
+        }
+      ],
+      "menus": [
+        {
+          "nom": "Carte (données héritées)",
+          "type": "carte",
+          "statut": "a_confirmer",
+          "source": "application_existante",
+          "plats": [
+            {
+              "nom": "Ceebu Jën (riz au poisson)",
+              "description": "Plat national, riz au poisson avec légumes variés.",
+              "categorie": "plat_principal",
+              "prix": 3500,
+              "statut_confirmation": "a_confirmer",
+              "disponibilite": "a_confirmer"
+            },
+            {
+              "nom": "Poulet Yassa",
+              "description": "Poulet mariné aux oignons confits, citron vert et moutarde.",
+              "categorie": "plat_principal",
+              "prix": 3000,
+              "statut_confirmation": "a_confirmer",
+              "disponibilite": "a_confirmer"
+            }
+          ]
+        }
+      ],
+      "sources": [
+        { "source": "application_existante", "date_collecte": "2026-10-13", "donnees": "nom, plat, fourchette de prix", "niveau_confiance": "faible" },
+        { "source": "senefinder", "url": "https://senefinder.com/fr/business/food-chez-fatou-dakar-twox", "date_collecte": "2026-10-13", "donnees": "téléphone, quartier", "niveau_confiance": "moyen" },
+        { "source": "senlocal", "url": "https://senlocal.com/entreprises/chez-fatou-almadies-dakar", "date_collecte": "2026-10-13", "donnees": "description, téléphone, quartier", "niveau_confiance": "moyen" }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "application_existante",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "app:seven-seven-dakar",
+      "numero_fiche": "DF-DK-0003",
+      "nom": "Seven Seven Dakar",
+      "slug": "seven-seven-dakar",
+      "type_etablissement": "restaurant",
+      "categories": ["internationale", "grillades"],
+      "cuisine_type": "International & Grillades",
+      "description_courte": "Restaurant de grillades et de cuisine internationale implanté à Ngor.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Ngor",
+        "quartier": "Ngor",
+        "quartier_libre": "Ngor",
+        "adresse_complete": "Route de Ngor, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        { "type": "telephone", "valeur": "+221 78 593 78 78", "confirme": false, "source": "application_existante" }
+      ],
+      "services": ["sur_place"],
+      "fourchette_prix": { "min": 3000, "max": 10000, "devise": "XOF" },
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4",
+          "type_media": "illustration_generique",
+          "est_principale": true,
+          "est_illustration_generique": true,
+          "correspondance_verifiee": false,
+          "auteur": "Inconnu (banque d'images Unsplash)",
+          "licence": "Unsplash License",
+          "source": "application_existante",
+          "legende": "Illustration générique (banque d'images) — ne représente pas l'établissement"
+        }
+      ],
+      "menus": [
+        {
+          "nom": "Carte (données héritées)",
+          "type": "carte",
+          "statut": "a_confirmer",
+          "source": "application_existante",
+          "plats": [
+            {
+              "nom": "Brochettes de gambas",
+              "description": "Gambas marinées aux herbes fines, grillées, accompagnées de riz parfumé.",
+              "categorie": "plat_principal",
+              "prix": 8500,
+              "statut_confirmation": "a_confirmer",
+              "disponibilite": "a_confirmer"
+            },
+            {
+              "nom": "Filet de zébu sauce poivre",
+              "description": "Filet de zébu, sauce au poivre vert et frites maison.",
+              "categorie": "plat_principal",
+              "prix": 7000,
+              "statut_confirmation": "a_confirmer",
+              "disponibilite": "a_confirmer"
+            }
+          ]
+        }
+      ],
+      "sources": [
+        { "source": "application_existante", "date_collecte": "2026-10-13", "donnees": "nom, adresse approximative, téléphone non recoupé", "niveau_confiance": "faible" }
+      ],
+      "date_collecte": "2026-10-13",
+      "commentaire_verification": "Nom conservé du fait de sa notoriété, mais aucune fiche publique concordante n'a été trouvée lors de la collecte : téléphone et adresse à confirmer avant toute mise en avant.",
+      "origine_donnee": "application_existante",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "app:alkimia",
+      "numero_fiche": "DF-DK-0004",
+      "nom": "Alkimia",
+      "slug": "alkimia",
+      "type_etablissement": "restaurant",
+      "categories": ["gastronomique", "internationale"],
+      "cuisine_type": "Gastronomie internationale",
+      "description_courte": "Restaurant haut de gamme de cuisine raffinée à Dakar.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Fann-Point E-Amitié",
+        "quartier": "Fann Résidence",
+        "quartier_libre": "Fann Résidence",
+        "adresse_complete": "Fann Résidence, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        { "type": "telephone", "valeur": "+221 33 869 00 00", "confirme": false, "source": "application_existante" },
+        { "type": "telephone", "valeur": "+221 33 820 68 68", "confirme": false, "source": "senefinder", "source_url": "https://senefinder.com/fr/business/food-alkimia-dakar-2ghg" }
+      ],
+      "services": ["sur_place", "reservation"],
+      "fourchette_prix": { "min": 6000, "max": 18000, "devise": "XOF" },
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5",
+          "type_media": "illustration_generique",
+          "est_principale": true,
+          "est_illustration_generique": true,
+          "correspondance_verifiee": false,
+          "auteur": "Inconnu (banque d'images Unsplash)",
+          "licence": "Unsplash License",
+          "source": "application_existante",
+          "legende": "Illustration générique (banque d'images) — ne représente pas l'établissement"
+        }
+      ],
+      "menus": [],
+      "sources": [
+        { "source": "application_existante", "date_collecte": "2026-10-13", "donnees": "nom, quartier (Fann Résidence)", "niveau_confiance": "faible" },
+        { "source": "senefinder", "url": "https://senefinder.com/fr/business/food-alkimia-dakar-2ghg", "date_collecte": "2026-10-13", "donnees": "adresse (Route des Almadies), téléphone", "niveau_confiance": "moyen" }
+      ],
+      "date_collecte": "2026-10-13",
+      "commentaire_verification": "CONFLIT de localisation : l'application indique Fann Résidence, la fiche Senefinder indique la route des Almadies. Les deux adresses ne peuvent pas être publiées simultanément : à trancher auprès de l'établissement.",
+      "origine_donnee": "application_existante",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "app:le-jardin-thai",
+      "numero_fiche": "DF-DK-0005",
+      "nom": "Le Jardin Thaï",
+      "slug": "le-jardin-thai",
+      "type_etablissement": "restaurant",
+      "categories": ["asiatique", "thaie"],
+      "cuisine_type": "Asiatique & Thaïlandaise",
+      "description_courte": "Spécialités thaïlandaises à Mermoz.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Mermoz-Sacré-Cœur",
+        "quartier": "Mermoz",
+        "quartier_libre": "Mermoz",
+        "adresse_complete": "Avenue Bourguiba, Mermoz, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        { "type": "telephone", "valeur": "+221 33 825 12 34", "confirme": false, "source": "application_existante" }
+      ],
+      "services": ["sur_place"],
+      "fourchette_prix": { "min": 4000, "max": 11000, "devise": "XOF" },
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1552611052-33e04de081de",
+          "type_media": "illustration_generique",
+          "est_principale": true,
+          "est_illustration_generique": true,
+          "correspondance_verifiee": false,
+          "auteur": "Inconnu (banque d'images Unsplash)",
+          "licence": "Unsplash License",
+          "source": "application_existante",
+          "legende": "Illustration générique (banque d'images) — ne représente pas l'établissement"
+        }
+      ],
+      "menus": [
+        {
+          "nom": "Carte (données héritées)",
+          "type": "carte",
+          "statut": "a_confirmer",
+          "source": "application_existante",
+          "plats": [
+            {
+              "nom": "Pad Thaï aux crevettes",
+              "description": "Nouilles de riz sautées, crevettes et sauce tamarin.",
+              "categorie": "plat_principal",
+              "prix": 6500,
+              "statut_confirmation": "a_confirmer",
+              "disponibilite": "a_confirmer"
+            }
+          ]
+        }
+      ],
+      "sources": [
+        { "source": "application_existante", "date_collecte": "2026-10-13", "donnees": "nom, quartier", "niveau_confiance": "faible" }
+      ],
+      "date_collecte": "2026-10-13",
+      "commentaire_verification": "Numéro de téléphone de forme générique (+221 33 825 12 34) : très probablement un exemple, à ne pas publier comme réel avant vérification.",
+      "origine_donnee": "application_existante",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "app:reine-margarita",
+      "numero_fiche": "DF-DK-0006",
+      "nom": "Reine Margarita",
+      "slug": "reine-margarita",
+      "type_etablissement": "pizzeria",
+      "categories": ["italienne", "pizza"],
+      "cuisine_type": "Italienne & Pizzeria",
+      "description_courte": "Pizzeria dakaroise proposant pizzas et pâtes italiennes.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Dakar Plateau",
+        "quartier": "Plateau Centre",
+        "quartier_libre": "Plateau",
+        "adresse_complete": "Dakar Plateau",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        { "type": "telephone", "valeur": "+221 78 444 99 55", "confirme": false, "source": "application_existante" }
+      ],
+      "services": ["sur_place", "a_emporter"],
+      "fourchette_prix": { "min": 3000, "max": 7000, "devise": "XOF" },
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+          "type_media": "illustration_generique",
+          "est_principale": true,
+          "est_illustration_generique": true,
+          "correspondance_verifiee": false,
+          "auteur": "Inconnu (banque d'images Unsplash)",
+          "licence": "Unsplash License",
+          "source": "application_existante",
+          "legende": "Illustration générique (banque d'images) — ne représente pas l'établissement"
+        }
+      ],
+      "menus": [],
+      "sources": [
+        { "source": "application_existante", "date_collecte": "2026-10-13", "donnees": "nom, type, quartier", "niveau_confiance": "faible" }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "application_existante",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "app:ngor-bi",
+      "numero_fiche": "DF-DK-0007",
+      "nom": "N'Gor Bi",
+      "slug": "ngor-bi",
+      "type_etablissement": "restaurant_plage",
+      "categories": ["fruits_de_mer", "grillades", "senegalaise"],
+      "cuisine_type": "Poissons & Grillades",
+      "description_courte": "Grillades de poissons sur la plage de Ngor.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Ngor",
+        "quartier": "Plage de Ngor",
+        "quartier_libre": "Ngor",
+        "adresse_complete": "Plage de Ngor, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        { "type": "telephone", "valeur": "+221 77 632 45 89", "confirme": false, "source": "application_existante" }
+      ],
+      "services": ["sur_place", "vue_mer"],
+      "fourchette_prix": { "min": 3000, "max": 9000, "devise": "XOF" },
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1544025162-d76694265947",
+          "type_media": "illustration_generique",
+          "est_principale": true,
+          "est_illustration_generique": true,
+          "correspondance_verifiee": false,
+          "auteur": "Inconnu (banque d'images Unsplash)",
+          "licence": "Unsplash License",
+          "source": "application_existante",
+          "legende": "Illustration générique (banque d'images) — ne représente pas l'établissement"
+        }
+      ],
+      "menus": [],
+      "sources": [
+        { "source": "application_existante", "date_collecte": "2026-10-13", "donnees": "nom, quartier, téléphone non recoupé", "niveau_confiance": "faible" }
+      ],
+      "date_collecte": "2026-10-13",
+      "commentaire_verification": "La zone de la plage de Ngor compte de nombreux établissements : le nom exact et le téléphone doivent être confirmés sur place avant publication comme établissement distinct.",
+      "origine_donnee": "application_existante",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "app:le-cozy-point-e",
+      "numero_fiche": "DF-DK-0008",
+      "nom": "Le Cozy",
+      "slug": "le-cozy-point-e",
+      "type_etablissement": "restaurant",
+      "categories": ["internationale", "burgers"],
+      "cuisine_type": "Brasserie & Burgers",
+      "description_courte": "Brasserie décontractée du Point E proposant burgers et grillades.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Fann-Point E-Amitié",
+        "quartier": "Point E",
+        "quartier_libre": "Point E",
+        "adresse_complete": "Point E, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        { "type": "telephone", "valeur": "+221 33 824 11 22", "confirme": false, "source": "application_existante" }
+      ],
+      "services": ["sur_place"],
+      "fourchette_prix": { "min": 3500, "max": 9000, "devise": "XOF" },
+      "images": [
+        {
+          "url": "https://images.unsplash.com/photo-1550547660-d9450f859349",
+          "type_media": "illustration_generique",
+          "est_principale": true,
+          "est_illustration_generique": true,
+          "correspondance_verifiee": false,
+          "auteur": "Inconnu (banque d'images Unsplash)",
+          "licence": "Unsplash License",
+          "source": "application_existante",
+          "legende": "Illustration générique (banque d'images) — ne représente pas l'établissement"
+        }
+      ],
+      "menus": [],
+      "sources": [
+        { "source": "application_existante", "date_collecte": "2026-10-13", "donnees": "nom, quartier", "niveau_confiance": "faible" }
+      ],
+      "date_collecte": "2026-10-13",
+      "commentaire_verification": "Téléphone de forme générique : à vérifier.",
+      "origine_donnee": "application_existante",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "app:le-patio-ouakam",
+      "numero_fiche": "DF-DK-0009",
+      "nom": "Le Patio",
+      "slug": "le-patio-ouakam",
+      "type_etablissement": "restaurant",
+      "categories": ["libanaise", "mediterraneenne"],
+      "cuisine_type": "Libanaise & Méditerranéenne",
+      "description_courte": "Mezzés libanais et grillades orientales à Ouakam.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Ouakam",
+        "quartier": "Ouakam",
+        "quartier_libre": "Ouakam",
+        "adresse_complete": "Route de Ouakam, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        { "type": "telephone", "valeur": "+221 77 123 44 55", "confirme": false, "source": "application_existante" }
+      ],
+      "services": ["sur_place"],
+      "fourchette_prix": { "min": 3500, "max": 10000, "devise": "XOF" },
+      "images": [],
+      "menus": [],
+      "sources": [
+        { "source": "application_existante", "date_collecte": "2026-10-13", "donnees": "nom, quartier", "niveau_confiance": "faible" }
+      ],
+      "date_collecte": "2026-10-13",
+      "commentaire_verification": "Téléphone de forme générique : à vérifier. Aucune image disponible.",
+      "origine_donnee": "application_existante",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "app:le-requin-rufisque",
+      "numero_fiche": "DF-DK-0010",
+      "nom": "Le Requin",
+      "slug": "le-requin-rufisque",
+      "type_etablissement": "restaurant",
+      "categories": ["senegalaise", "fruits_de_mer"],
+      "cuisine_type": "Poissons & Cuisine sénégalaise",
+      "description_courte": "Restaurant de poissons et de plats locaux à Rufisque.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Rufisque",
+        "commune": "Rufisque Est",
+        "quartier": "Rufisque Centre",
+        "quartier_libre": "Rufisque Centre",
+        "adresse_complete": "Rufisque, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        { "type": "telephone", "valeur": "+221 33 836 10 20", "confirme": false, "source": "application_existante" }
+      ],
+      "services": ["sur_place"],
+      "fourchette_prix": { "min": 2500, "max": 6000, "devise": "XOF" },
+      "images": [],
+      "menus": [],
+      "sources": [
+        { "source": "application_existante", "date_collecte": "2026-10-13", "donnees": "nom, ville", "niveau_confiance": "faible" }
+      ],
+      "date_collecte": "2026-10-13",
+      "commentaire_verification": "Adresse précise inconnue : le boulevard Maurice Delafosse mentionné dans l'application n'a pas pu être vérifié.",
+      "origine_donnee": "application_existante",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "app:le-baobab-saly",
+      "numero_fiche": "DF-TH-0001",
+      "nom": "Le Baobab Saly",
+      "slug": "le-baobab-saly",
+      "type_etablissement": "restaurant",
+      "categories": ["fruits_de_mer", "internationale"],
+      "cuisine_type": "Poissons & Fruits de mer",
+      "description_courte": "Restaurant de bord de mer de la station de Saly, spécialisé dans les produits de la mer.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Thiès",
+        "departement": "Mbour",
+        "commune": "Saly Portudal",
+        "quartier": "Saly Station",
+        "quartier_libre": "Saly",
+        "adresse_complete": "Station Saly, Saly Portudal",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        { "type": "telephone", "valeur": "+221 33 957 12 34", "confirme": false, "source": "application_existante" }
+      ],
+      "services": ["sur_place", "vue_mer"],
+      "fourchette_prix": { "min": 4000, "max": 12000, "devise": "XOF" },
+      "images": [],
+      "menus": [],
+      "sources": [
+        { "source": "application_existante", "date_collecte": "2026-10-13", "donnees": "nom, station", "niveau_confiance": "faible" }
+      ],
+      "date_collecte": "2026-10-13",
+      "commentaire_verification": "Téléphone de forme générique : à vérifier. Un établissement portant ce nom figurait dans la liste de recherche fournie par le commanditaire.",
+      "origine_donnee": "application_existante",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "app:la-kaz-mbour",
+      "numero_fiche": "DF-TH-0002",
+      "nom": "La Kaz' Mbour",
+      "slug": "la-kaz-mbour",
+      "type_etablissement": "restaurant",
+      "categories": ["senegalaise", "grillades"],
+      "cuisine_type": "Sénégalaise & Grillades",
+      "description_courte": "Grillades et plats locaux à Mbour.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Thiès",
+        "departement": "Mbour",
+        "commune": "Mbour",
+        "quartier": "Mbour Centre",
+        "quartier_libre": "Mbour",
+        "adresse_complete": "Mbour, Thiès",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        { "type": "telephone", "valeur": "+221 77 412 88 99", "confirme": false, "source": "application_existante" }
+      ],
+      "services": ["sur_place"],
+      "fourchette_prix": { "min": 2500, "max": 7000, "devise": "XOF" },
+      "images": [],
+      "menus": [],
+      "sources": [
+        { "source": "application_existante", "date_collecte": "2026-10-13", "donnees": "nom, ville", "niveau_confiance": "faible" }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "application_existante",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "app:le-pelican-ngaparou",
+      "numero_fiche": "DF-TH-0003",
+      "nom": "Le Pelican",
+      "slug": "le-pelican-ngaparou",
+      "type_etablissement": "restaurant",
+      "categories": ["francaise", "fruits_de_mer"],
+      "cuisine_type": "Française & Fusion",
+      "description_courte": "Restaurant de bord de mer à Ngaparou.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Thiès",
+        "departement": "Mbour",
+        "commune": "Ngaparou",
+        "quartier": "Ngaparou Centre",
+        "quartier_libre": "Ngaparou",
+        "adresse_complete": "Ngaparou, Petite Côte",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        { "type": "telephone", "valeur": "+221 33 958 60 50", "confirme": false, "source": "application_existante" }
+      ],
+      "services": ["sur_place", "vue_mer"],
+      "fourchette_prix": { "min": 5000, "max": 14000, "devise": "XOF" },
+      "images": [],
+      "menus": [],
+      "sources": [
+        { "source": "application_existante", "date_collecte": "2026-10-13", "donnees": "nom, commune", "niveau_confiance": "faible" }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "application_existante",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "app:la-case-de-la-somone",
+      "numero_fiche": "DF-TH-0004",
+      "nom": "La Case de la Somone",
+      "slug": "la-case-de-la-somone",
+      "type_etablissement": "restaurant",
+      "categories": ["fruits_de_mer", "senegalaise"],
+      "cuisine_type": "Poissons & Spécialités locales",
+      "description_courte": "Restaurant de la lagune de la Somone proposant poissons et grillades.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Thiès",
+        "departement": "Mbour",
+        "commune": "Somone",
+        "quartier": "Somone",
+        "quartier_libre": "Somone",
+        "adresse_complete": "Lagune de la Somone, Thiès",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        { "type": "telephone", "valeur": "+221 33 957 88 00", "confirme": false, "source": "application_existante" }
+      ],
+      "services": ["sur_place", "vue_mer"],
+      "fourchette_prix": { "min": 4000, "max": 10000, "devise": "XOF" },
+      "images": [],
+      "menus": [],
+      "sources": [
+        { "source": "application_existante", "date_collecte": "2026-10-13", "donnees": "nom, site naturel", "niveau_confiance": "faible" }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "application_existante",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "app:lescale-de-popenguine",
+      "numero_fiche": "DF-TH-0005",
+      "nom": "L'Escale de Popenguine",
+      "slug": "lescale-de-popenguine",
+      "type_etablissement": "restaurant",
+      "categories": ["senegalaise", "fruits_de_mer"],
+      "cuisine_type": "Traditionnelle & Poissons",
+      "description_courte": "Restaurant face à l'océan à Popenguine.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Thiès",
+        "departement": "Mbour",
+        "commune": "Popenguine",
+        "quartier": "Popenguine",
+        "quartier_libre": "Popenguine",
+        "adresse_complete": "Popenguine, Thiès",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        { "type": "telephone", "valeur": "+221 33 952 11 11", "confirme": false, "source": "application_existante" }
+      ],
+      "services": ["sur_place", "vue_mer"],
+      "fourchette_prix": { "min": 3000, "max": 8000, "devise": "XOF" },
+      "images": [],
+      "menus": [],
+      "sources": [
+        { "source": "application_existante", "date_collecte": "2026-10-13", "donnees": "nom, commune", "niveau_confiance": "faible" }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "application_existante",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "app:le-palm-beach-nianing",
+      "numero_fiche": "DF-TH-0006",
+      "nom": "Le Palm Beach Nianing",
+      "slug": "le-palm-beach-nianing",
+      "type_etablissement": "restaurant_plage",
+      "categories": ["grillades", "fruits_de_mer"],
+      "cuisine_type": "Grillades & Plage",
+      "description_courte": "Restaurant de plage à Nianing.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Thiès",
+        "departement": "Mbour",
+        "commune": "Nianing",
+        "quartier": "Nianing",
+        "quartier_libre": "Nianing",
+        "adresse_complete": "Baie de Nianing, Thiès",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        { "type": "telephone", "valeur": "+221 33 957 44 33", "confirme": false, "source": "application_existante" }
+      ],
+      "services": ["sur_place", "vue_mer"],
+      "fourchette_prix": { "min": 4000, "max": 11000, "devise": "XOF" },
+      "images": [],
+      "menus": [],
+      "sources": [
+        { "source": "application_existante", "date_collecte": "2026-10-13", "donnees": "nom, commune", "niveau_confiance": "faible" }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "application_existante",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "app:diamniadio-express-diner",
+      "numero_fiche": null,
+      "nom": "Diamniadio Express Diner",
+      "slug": "diamniadio-express-diner",
+      "type_etablissement": "fast_food",
+      "categories": ["burgers", "street_food"],
+      "cuisine_type": "Fast-food & Repas rapides",
+      "description_courte": "Point de restauration rapide à Diamniadio.",
+      "statut": "a_verifier",
+      "niveau_verification": "information_indisponible",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Rufisque",
+        "commune": "Diamniadio",
+        "quartier": "Sphères Ministérielles",
+        "quartier_libre": "Diamniadio",
+        "adresse_complete": "Sphères Ministérielles, Diamniadio",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        { "type": "telephone", "valeur": "+221 78 111 22 33", "confirme": false, "source": "application_existante" }
+      ],
+      "services": ["a_emporter"],
+      "fourchette_prix": { "min": 2500, "max": 6000, "devise": "XOF" },
+      "images": [],
+      "menus": [],
+      "sources": [
+        { "source": "application_existante", "date_collecte": "2026-10-13", "donnees": "nom, quartier", "niveau_confiance": "faible" }
+      ],
+      "date_collecte": "2026-10-13",
+      "commentaire_verification": "NON PUBLIÉ : établissement introuvable dans les sources publiques consultées et téléphone de forme manifestement générique (+221 78 111 22 33). Conservé dans le dépôt pour traçabilité ; à vérifier avant toute publication.",
+      "origine_donnee": "application_existante",
+      "est_publication_visible": false
+    },
+    {
+      "cle": "app:la-halte-aibd",
+      "numero_fiche": null,
+      "nom": "La Halte AIBD",
+      "slug": "la-halte-aibd",
+      "type_etablissement": "fast_food",
+      "categories": ["senegalaise", "street_food"],
+      "cuisine_type": "Traditionnelle & Snack",
+      "description_courte": "Point de restauration à proximité de l'aéroport international Blaise Diagne.",
+      "statut": "a_verifier",
+      "niveau_verification": "information_indisponible",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Rufisque",
+        "commune": "Diamniadio",
+        "quartier": "AIBD",
+        "quartier_libre": "AIBD",
+        "adresse_complete": "Route de l'aéroport Blaise Diagne",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        { "type": "telephone", "valeur": "+221 77 888 99 00", "confirme": false, "source": "application_existante" }
+      ],
+      "services": ["sur_place", "a_emporter"],
+      "fourchette_prix": { "min": 3000, "max": 8000, "devise": "XOF" },
+      "images": [],
+      "menus": [],
+      "sources": [
+        { "source": "application_existante", "date_collecte": "2026-10-13", "donnees": "nom, quartier", "niveau_confiance": "faible" }
+      ],
+      "date_collecte": "2026-10-13",
+      "commentaire_verification": "NON PUBLIÉ : nom et téléphone (+221 77 888 99 00) non vérifiables, forme générique. Conservé pour traçabilité.",
+      "origine_donnee": "application_existante",
+      "est_publication_visible": false
+    }
+  ]
+}

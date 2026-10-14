@@ -1,0 +1,1826 @@
+{
+  "version": 1,
+  "date_collecte": "2026-10-13",
+  "origine": "annuaires_publics",
+  "description": "Première vague de collecte à partir de sources publiques accessibles (Senefinder, Senlocal). Aucun prix, aucune note d'avis et aucun horaire n'est repris : ces sources n'en publient pas de manière fiable. Les coordonnées GPS ne sont pas reprises : les annuaires ne les exposent pas dans le HTML public (certains affichent des codes Plus, non convertis sans référence vérifiée). Les téléphones/WhatsApp sont enregistrés comme informations « à confirmer » (déclaratifs, non testés par un appel).",
+  "regles": [
+    "Aucune donnée n'est publiée sans source et date de collecte.",
+    "Les fiches marquées « Vérifié » par un annuaire ne sont PAS marquées vérifiées par DEKK FOOD : le contrôle par l'éditeur du site n'est pas un contrôle par DEKK FOOD.",
+    "Les établissements sans activité de restauration (salles de sport, boîtes de nuit seules) sont écartés du catalogue."
+  ],
+  "etablissements": [
+    {
+      "cle": "senefinder:food-le-bazoff-dakar-ykrg",
+      "numero_fiche": "DF-DK-0011",
+      "nom": "Le Bazoff",
+      "slug": "le-bazoff-dakar",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "internationale"
+      ],
+      "description_courte": "Restaurant référencé par l'annuaire Senefinder à Dakar (adresse indiquée par un code Plus : PG3R+X2Q, rue AAB 09).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Dakar Plateau",
+        "quartier_libre": "Dakar",
+        "adresse_complete": "Rue AAB 09, Dakar (code Plus PG3R+X2Q)",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221 33 864 92 92",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-le-bazoff-dakar-ykrg"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-le-bazoff-dakar-ykrg",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, telephone",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-taiyo-dakar-cztm",
+      "numero_fiche": "DF-DK-0012",
+      "nom": "TAÏYO",
+      "slug": "taiyo-dakar",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "asiatique",
+        "japonaise"
+      ],
+      "description_courte": "Restaurant de cuisine japonaise et asiatique situé 19 rue Victor Hugo, au Plateau (fiche Annuaire Senefinder).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Dakar Plateau",
+        "quartier": "Plateau Centre",
+        "quartier_libre": "Plateau",
+        "adresse_complete": "19 rue Victor Hugo, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "whatsapp",
+          "valeur": "+221 78 306 80 80",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-taiyo-dakar-cztm"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-taiyo-dakar-cztm",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, whatsapp",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-shadys-grill-dakar-vzm0",
+      "numero_fiche": "DF-DK-0013",
+      "nom": "Shady's Grill",
+      "slug": "shadys-grill-dakar",
+      "type_etablissement": "grillades",
+      "categories": [
+        "grillades",
+        "street_food"
+      ],
+      "description_courte": "Grillades sur la route de l'aéroport, en face de la CBAO (fiche Annuaire Senefinder).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Yoff",
+        "quartier_libre": "Route de l'aéroport",
+        "adresse_complete": "Route de l'aéroport, en face de la CBAO, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221 70 007 70 09",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-shadys-grill-dakar-vzm0"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-shadys-grill-dakar-vzm0",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, telephone",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-la-terrasse-dakar-japv",
+      "numero_fiche": "DF-DK-0014",
+      "nom": "La Terrasse",
+      "slug": "la-terrasse-dakar",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "internationale"
+      ],
+      "description_courte": "Restaurant situé boulevard Martin Luther King, sur la route de la Corniche Ouest (fiche Annuaire Senefinder).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Fann-Point E-Amitié",
+        "quartier_libre": "Corniche Ouest",
+        "adresse_complete": "Boulevard Martin Luther King, route de la Corniche Ouest, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221 33 839 90 40",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-la-terrasse-dakar-japv"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-la-terrasse-dakar-japv",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, telephone",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-casa-teranga-dakar-1ohl",
+      "numero_fiche": "DF-DK-0015",
+      "nom": "Casa Teranga",
+      "slug": "casa-teranga-almadies",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "senegalaise",
+        "internationale"
+      ],
+      "description_courte": "Restaurant de la Pointe des Almadies référencé dans l'annuaire Senefinder.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Ngor",
+        "quartier": "Almadies",
+        "quartier_libre": "Pointe des Almadies",
+        "adresse_complete": "Pointe des Almadies, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "whatsapp",
+          "valeur": "773706903",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-casa-teranga-dakar-1ohl"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-casa-teranga-dakar-1ohl",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, whatsapp (numéro incomplet dans la source)",
+          "niveau_confiance": "faible"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "commentaire_verification": "Le numéro WhatsApp publié par la source ne compte que 9 chiffres sans indicatif : à confirmer auprès de l'établissement.",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-prieto-dakar-ox5z",
+      "numero_fiche": "DF-DK-0016",
+      "nom": "Prieto",
+      "slug": "prieto-almadies",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "internationale",
+        "grillades"
+      ],
+      "description_courte": "Restaurant de la Pointe des Almadies référencé dans l'annuaire Senefinder.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Ngor",
+        "quartier": "Almadies",
+        "quartier_libre": "Pointe des Almadies",
+        "adresse_complete": "Pointe des Almadies, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "whatsapp",
+          "valeur": "+221 78 731 18 18",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-prieto-dakar-ox5z"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-prieto-dakar-ox5z",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, whatsapp",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-exotik-beach-dakar-1ck0",
+      "numero_fiche": "DF-DK-0017",
+      "nom": "Exotik Beach",
+      "slug": "exotik-beach-almadies",
+      "type_etablissement": "restaurant_plage",
+      "categories": [
+        "grillades",
+        "fruits_de_mer"
+      ],
+      "description_courte": "Restaurant de plage sur la corniche des Almadies (fiche Annuaire Senefinder).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Ngor",
+        "quartier": "Almadies",
+        "quartier_libre": "Corniche des Almadies",
+        "adresse_complete": "Corniche des Almadies, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "whatsapp",
+          "valeur": "771525858",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-exotik-beach-dakar-1ck0"
+        }
+      ],
+      "services": [
+        "vue_mer"
+      ],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-exotik-beach-dakar-1ck0",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, whatsapp",
+          "niveau_confiance": "faible"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "commentaire_verification": "Numéro WhatsApp publié sans indicatif : à confirmer.",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-esamai-dakar-dl1u",
+      "numero_fiche": "DF-DK-0018",
+      "nom": "ESAMAÏ",
+      "slug": "esamai-dakar",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "internationale"
+      ],
+      "description_courte": "Restaurant de la route des Mamelles référencé dans l'annuaire Senefinder.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Ouakam",
+        "quartier": "Mamelles",
+        "quartier_libre": "Route des Mamelles",
+        "adresse_complete": "Route des Mamelles, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "whatsapp",
+          "valeur": "+221 78 688 26 55",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-esamai-dakar-dl1u"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-esamai-dakar-dl1u",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, whatsapp",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-le-cabanon-dakar-qoko",
+      "numero_fiche": "DF-DK-0019",
+      "nom": "Le Cabanon",
+      "slug": "le-cabanon-almadies",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "internationale",
+        "fruits_de_mer"
+      ],
+      "description_courte": "Restaurant de la corniche des Almadies (fiche Annuaire Senefinder, également cité dans la liste de recherche du commanditaire).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Ngor",
+        "quartier": "Almadies",
+        "quartier_libre": "Corniche des Almadies",
+        "adresse_complete": "Corniche des Almadies, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "whatsapp",
+          "valeur": "+221 78 146 41 41",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-le-cabanon-dakar-qoko"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-le-cabanon-dakar-qoko",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, whatsapp",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-geeza-dakar-0t1a",
+      "numero_fiche": "DF-DK-0020",
+      "nom": "Ge'eza",
+      "slug": "geeza-point-e",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "ethiopienne",
+        "africaine"
+      ],
+      "description_courte": "Restaurant du Point E, avenue Birago Diop (fiche Annuaire Senefinder).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Fann-Point E-Amitié",
+        "quartier": "Point E",
+        "quartier_libre": "Point E",
+        "adresse_complete": "Avenue Birago Diop (ex rue 5), Point E, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "whatsapp",
+          "valeur": "+221 78 660 07 07",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-geeza-dakar-0t1a"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-geeza-dakar-0t1a",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, whatsapp",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-la-parilla-dakar-7m3m",
+      "numero_fiche": "DF-DK-0021",
+      "nom": "La Parilla",
+      "slug": "la-parilla-dakar",
+      "type_etablissement": "grillades",
+      "categories": [
+        "grillades",
+        "internationale"
+      ],
+      "description_courte": "Grillades, 6 rue Émile Zola à Dakar (fiche Annuaire Senefinder). Également cité dans la liste de recherche du commanditaire.",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Dakar Plateau",
+        "quartier": "Plateau Centre",
+        "quartier_libre": "Plateau",
+        "adresse_complete": "6 rue Émile Zola, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "whatsapp",
+          "valeur": "+221 70 644 55 59",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-la-parilla-dakar-7m3m"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-la-parilla-dakar-7m3m",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, whatsapp",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "commentaire_verification": "Le même numéro WhatsApp est publié pour deux fiches distinctes (La Parilla et Beluga) : doublon de coordonnées dans la source, à trancher auprès des établissements.",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-restaurant-le-beluga-dakar-2mkb",
+      "numero_fiche": "DF-DK-0022",
+      "nom": "Beluga",
+      "slug": "beluga-dakar",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "internationale",
+        "fruits_de_mer"
+      ],
+      "description_courte": "Restaurant situé 162 rue Mousse Diop à Dakar (fiche Annuaire Senefinder).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Médina",
+        "quartier": "Médina",
+        "quartier_libre": "Médina",
+        "adresse_complete": "162 rue Mousse Diop, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "whatsapp",
+          "valeur": "+221 70 644 55 59",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-restaurant-le-beluga-dakar-2mkb"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-restaurant-le-beluga-dakar-2mkb",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, whatsapp",
+          "niveau_confiance": "faible"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "commentaire_verification": "Numéro WhatsApp identique à celui de La Parilla : à vérifier impérativement avant affichage (risque de contact erroné).",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-melos-patisserie-dakar-m5xo",
+      "numero_fiche": "DF-DK-0023",
+      "nom": "Melo's Patisserie",
+      "slug": "melos-patisserie-dakar",
+      "type_etablissement": "patisserie",
+      "categories": [
+        "patisserie_dessert",
+        "petit_dejeuner"
+      ],
+      "description_courte": "Pâtisserie située devant le phare des Mamelles (fiche Annuaire Senefinder).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Ouakam",
+        "quartier": "Mamelles",
+        "quartier_libre": "Phare des Mamelles",
+        "adresse_complete": "Devant le phare des Mamelles, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "whatsapp",
+          "valeur": "+221 78 389 19 94",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-melos-patisserie-dakar-m5xo"
+        }
+      ],
+      "services": [
+        "a_emporter"
+      ],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-melos-patisserie-dakar-m5xo",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, whatsapp",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senlocal:la-boule",
+      "numero_fiche": "DF-DK-0024",
+      "nom": "La Boule",
+      "slug": "la-boule-point-e",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "internationale"
+      ],
+      "description_courte": "Restaurant et lieu de soirées du Point E, rue Birago, à Dakar (fiche Senlocal).",
+      "statut": "a_verifier",
+      "niveau_verification": "partiellement_verifie",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Fann-Point E-Amitié",
+        "quartier": "Point E",
+        "quartier_libre": "Point E",
+        "adresse_complete": "Rue Birago, Point E, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221 78 468 43 43",
+          "confirme": false,
+          "source": "senlocal",
+          "source_url": "https://senlocal.com/entreprises/la-boule"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senlocal",
+          "url": "https://senlocal.com/entreprises/la-boule",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, telephone, description",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senlocal",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senlocal:polygon-lounge",
+      "numero_fiche": "DF-DK-0025",
+      "nom": "Polygon Lounge",
+      "slug": "polygon-lounge-mermoz",
+      "type_etablissement": "bar_lounge_restaurant",
+      "categories": [
+        "internationale"
+      ],
+      "description_courte": "Lounge et lieu de sorties nocturnes à Mermoz, voisin du restaurant Keurgui (fiche Senlocal).",
+      "statut": "a_verifier",
+      "niveau_verification": "partiellement_verifie",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Mermoz-Sacré-Cœur",
+        "quartier": "Mermoz",
+        "quartier_libre": "Mermoz",
+        "adresse_complete": "Mermoz, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221 78 798 07 07",
+          "confirme": false,
+          "source": "senlocal",
+          "source_url": "https://senlocal.com/entreprises/polygon-lounge"
+        },
+        {
+          "type": "whatsapp",
+          "valeur": "+221 78 798 07 07",
+          "confirme": false,
+          "source": "senlocal",
+          "source_url": "https://senlocal.com/entreprises/polygon-lounge"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senlocal",
+          "url": "https://senlocal.com/entreprises/polygon-lounge",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, contacts, description",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senlocal",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senlocal:ngor-timiss",
+      "numero_fiche": "DF-DK-0026",
+      "nom": "Ngor Timiss",
+      "slug": "ngor-timiss",
+      "type_etablissement": "restaurant_plage",
+      "categories": [
+        "grillades",
+        "fruits_de_mer"
+      ],
+      "description_courte": "Restaurant-lounge-plage de la corniche des Almadies à Ngor : grillades, poisson, fruits de mer, piscine et soirées (fiche Senlocal).",
+      "statut": "a_verifier",
+      "niveau_verification": "partiellement_verifie",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Ngor",
+        "quartier": "Ngor",
+        "quartier_libre": "Ngor",
+        "adresse_complete": "Corniche des Almadies, Ngor, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221 78 125 19 23",
+          "confirme": false,
+          "source": "senlocal",
+          "source_url": "https://senlocal.com/entreprises/ngor-timiss"
+        }
+      ],
+      "services": [
+        "vue_mer",
+        "piscine"
+      ],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senlocal",
+          "url": "https://senlocal.com/entreprises/ngor-timiss",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, telephone, description, equipements",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senlocal",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senlocal:le-zebu-sur-le-toit",
+      "numero_fiche": "DF-DK-0027",
+      "nom": "Le Zébu sur le Toit",
+      "slug": "le-zebu-sur-le-toit-ngor",
+      "type_etablissement": "restaurant_rooftop",
+      "categories": [
+        "internationale",
+        "grillades"
+      ],
+      "description_courte": "Restaurant-rooftop à Ngor : cuisine conviviale, cocktails et vue panoramique (fiche Senlocal).",
+      "statut": "a_verifier",
+      "niveau_verification": "partiellement_verifie",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Ngor",
+        "quartier": "Ngor",
+        "quartier_libre": "Ngor",
+        "adresse_complete": "Ngor, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senlocal",
+          "url": "https://senlocal.com/entreprises/le-zebu-sur-le-toit",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, type, description",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "commentaire_verification": "Aucun téléphone publié par la source : contact à compléter auprès de l'établissement.",
+      "origine_donnee": "senlocal",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senlocal:maison-b",
+      "numero_fiche": "DF-DK-0028",
+      "nom": "Maison B",
+      "slug": "maison-b-ngor",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "africaine"
+      ],
+      "description_courte": "Restaurant africain à Ngor, connu pour sa soirée kizomba hebdomadaire (fiche Senlocal).",
+      "statut": "a_verifier",
+      "niveau_verification": "partiellement_verifie",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Ngor",
+        "quartier": "Ngor",
+        "quartier_libre": "Ngor",
+        "adresse_complete": "Ngor, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senlocal",
+          "url": "https://senlocal.com/entreprises/maison-b",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, quartier, description",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senlocal",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senlocal:3-flamingos",
+      "numero_fiche": "DF-DK-0029",
+      "nom": "3 Flamingos",
+      "slug": "3-flamingos-almadies",
+      "type_etablissement": "bar_lounge_restaurant",
+      "categories": [
+        "internationale"
+      ],
+      "description_courte": "Bar-restaurant de la corniche des Almadies avec terrasse face à la mer et soirées à thème (fiche Senlocal).",
+      "statut": "a_verifier",
+      "niveau_verification": "partiellement_verifie",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Ngor",
+        "quartier": "Almadies",
+        "quartier_libre": "Corniche des Almadies",
+        "adresse_complete": "Corniche des Almadies, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [
+        "terrasse",
+        "vue_mer"
+      ],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senlocal",
+          "url": "https://senlocal.com/entreprises/3-flamingos",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, description",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senlocal",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senlocal:yoka-lounge",
+      "numero_fiche": "DF-DK-0030",
+      "nom": "Yoka Lounge",
+      "slug": "yoka-lounge-almadies",
+      "type_etablissement": "bar_lounge_restaurant",
+      "categories": [
+        "africaine",
+        "congolaise",
+        "internationale"
+      ],
+      "description_courte": "Restaurant-lounge afro fusion de la Pointe des Almadies : cuisine congolaise et africaine, cocktails, soirées live du mercredi au dimanche (fiche Senlocal).",
+      "statut": "a_verifier",
+      "niveau_verification": "partiellement_verifie",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Ngor",
+        "quartier": "Almadies",
+        "quartier_libre": "Pointe des Almadies",
+        "adresse_complete": "Pointe des Almadies, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221 77 791 13 12",
+          "confirme": false,
+          "source": "senlocal",
+          "source_url": "https://senlocal.com/entreprises/yoka-lounge"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senlocal",
+          "url": "https://senlocal.com/entreprises/yoka-lounge",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, telephone, description",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senlocal",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senlocal:lepicerie-dakar",
+      "numero_fiche": "DF-DK-0031",
+      "nom": "L'Épicerie Dakar",
+      "slug": "lepicerie-dakar",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "francaise",
+        "internationale"
+      ],
+      "description_courte": "Restaurant, épicerie fine et cave à vins au Plateau : cuisine raffinée, service traiteur et événements (fiche Senlocal). Également cité dans la liste de recherche du commanditaire.",
+      "statut": "a_verifier",
+      "niveau_verification": "partiellement_verifie",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Dakar Plateau",
+        "quartier": "Plateau Centre",
+        "quartier_libre": "Plateau",
+        "adresse_complete": "Plateau, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221 78 582 26 99",
+          "confirme": false,
+          "source": "senlocal",
+          "source_url": "https://senlocal.com/entreprises/lepicerie-dakar"
+        }
+      ],
+      "services": [
+        "traiteur"
+      ],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senlocal",
+          "url": "https://senlocal.com/entreprises/lepicerie-dakar",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, telephone, description, services",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senlocal",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senlocal:le-jardin-d-orient",
+      "numero_fiche": "DF-DK-0032",
+      "nom": "Le Jardin d'Orient",
+      "slug": "le-jardin-d-orient-mamelles",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "chinoise",
+        "asiatique"
+      ],
+      "description_courte": "Restaurant de la corniche Ouest (plage des Mamelles) : spécialités chinoises et plats occidentaux, brunch du dimanche (fiche Senlocal).",
+      "statut": "a_verifier",
+      "niveau_verification": "partiellement_verifie",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Ouakam",
+        "quartier": "Mamelles",
+        "quartier_libre": "Corniche Ouest",
+        "adresse_complete": "Corniche Ouest, plage des Mamelles, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [
+        "brunch"
+      ],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senlocal",
+          "url": "https://senlocal.com/entreprises/le-jardin-d-orient",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, description",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "commentaire_verification": "Senlocal publie un numéro invraisemblable (« 778899999 ») pour cette fiche : il n'est PAS repris (risque d'appel erroné). Contact à collecter auprès de l'établissement.",
+      "origine_donnee": "senlocal",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senlocal:brasserie-le-jardin",
+      "numero_fiche": "DF-DK-0033",
+      "nom": "Brasserie Le Jardin",
+      "slug": "brasserie-le-jardin-casino",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "internationale"
+      ],
+      "description_courte": "Restaurant-brasserie au sein du Casino du Cap-Vert à Dakar, connu pour son buffet méchoui hebdomadaire (fiche Senlocal).",
+      "statut": "a_verifier",
+      "niveau_verification": "partiellement_verifie",
+      "adresse": {
+        "region": "Dakar",
+        "departement": "Dakar",
+        "commune": "Dakar Plateau",
+        "quartier_libre": "Dakar",
+        "adresse_complete": "Casino du Cap-Vert, Dakar",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [],
+      "services": [
+        "buffet"
+      ],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senlocal",
+          "url": "https://senlocal.com/entreprises/brasserie-le-jardin",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, description, service",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senlocal",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senlocal:le-petit-zing",
+      "numero_fiche": "DF-TH-0007",
+      "nom": "Le Petit Zing",
+      "slug": "le-petit-zing-saly",
+      "type_etablissement": "bar_lounge_restaurant",
+      "categories": [
+        "internationale"
+      ],
+      "description_courte": "Restaurant et bar-spectacle de Saly, avec carte de restauration et soirées live (fiche Senlocal). Également cité dans la liste de recherche du commanditaire.",
+      "statut": "a_verifier",
+      "niveau_verification": "partiellement_verifie",
+      "adresse": {
+        "region": "Thiès",
+        "departement": "Mbour",
+        "commune": "Saly Portudal",
+        "quartier": "Saly Station",
+        "quartier_libre": "Saly",
+        "adresse_complete": "Saly, Petite Côte",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221 33 957 01 58",
+          "confirme": false,
+          "source": "senlocal",
+          "source_url": "https://senlocal.com/entreprises/le-petit-zing"
+        },
+        {
+          "type": "whatsapp",
+          "valeur": "+221 33 957 01 58",
+          "confirme": false,
+          "source": "senlocal",
+          "source_url": "https://senlocal.com/entreprises/le-petit-zing"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senlocal",
+          "url": "https://senlocal.com/entreprises/le-petit-zing",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, ville, contacts, description",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "commentaire_verification": "Le numéro publié est un fixe : la mention WhatsApp de la source est reprise telle quelle mais reste à confirmer.",
+      "origine_donnee": "senlocal",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senlocal:terrou-bi-saly",
+      "numero_fiche": "DF-TH-0008",
+      "nom": "Terrou-Bi Saly",
+      "slug": "terrou-bi-saly",
+      "type_etablissement": "bar_lounge_restaurant",
+      "categories": [
+        "internationale",
+        "gastronomique"
+      ],
+      "description_courte": "Restaurant-casino de la station de Saly : restaurant bistronomique et bar lounge, ouvert 7j/7 depuis midi selon la source (fiche Senlocal).",
+      "statut": "a_verifier",
+      "niveau_verification": "partiellement_verifie",
+      "adresse": {
+        "region": "Thiès",
+        "departement": "Mbour",
+        "commune": "Saly Portudal",
+        "quartier": "Saly Portudal",
+        "quartier_libre": "Saly Portudal",
+        "adresse_complete": "Saly Portudal, Petite Côte",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221 33 939 72 72",
+          "confirme": false,
+          "source": "senlocal",
+          "source_url": "https://senlocal.com/entreprises/terrou-bi-saly"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senlocal",
+          "url": "https://senlocal.com/entreprises/terrou-bi-saly",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, ville, telephone, description, jours d'ouverture",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "commentaire_verification": "La source indique « ouvert 7j/7 depuis midi » et une fermeture annoncée à 03h00 : horaires à confirmer avant affichage « ouvert maintenant ».",
+      "origine_donnee": "senlocal",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-the-caribbean-restaurant-saly-5cqs",
+      "numero_fiche": "DF-TH-0009",
+      "nom": "The Caribbean Restaurant",
+      "slug": "the-caribbean-restaurant-saly",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "creole",
+        "internationale"
+      ],
+      "description_courte": "Restaurant situé au carrefour de Saly (fiche Annuaire Senefinder).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Thiès",
+        "departement": "Mbour",
+        "commune": "Saly Portudal",
+        "quartier_libre": "Carrefour Saly",
+        "adresse_complete": "Carrefour Saly, Petite Côte",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "whatsapp",
+          "valeur": "+221 77 679 77 92",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-the-caribbean-restaurant-saly-5cqs"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-the-caribbean-restaurant-saly-5cqs",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, ville, whatsapp",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senlocal:complexe-nice-time-thies",
+      "numero_fiche": "DF-TH-0010",
+      "nom": "Complexe Nice Time",
+      "slug": "complexe-nice-time-thies",
+      "type_etablissement": "complexe_restauration",
+      "categories": [
+        "senegalaise",
+        "internationale",
+        "patisserie_dessert"
+      ],
+      "description_courte": "Complexe réunissant restaurant, pâtisserie-glacier, salle de réception et hôtel dans le quartier M'Doucouré à Thiès (fiche Senlocal).",
+      "statut": "a_verifier",
+      "niveau_verification": "partiellement_verifie",
+      "adresse": {
+        "region": "Thiès",
+        "departement": "Thiès",
+        "commune": "Thiès Nord",
+        "quartier": "M'Doucouré",
+        "quartier_libre": "M'Doucouré",
+        "adresse_complete": "M'Doucouré, Thiès",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221 33 954 04 42",
+          "confirme": false,
+          "source": "senlocal",
+          "source_url": "https://senlocal.com/entreprises/complexe-nice-time-thies"
+        }
+      ],
+      "services": [
+        "salle_privee"
+      ],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senlocal",
+          "url": "https://senlocal.com/entreprises/complexe-nice-time-thies",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, quartier, telephone, description, jours d'ouverture",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senlocal",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senlocal:complexe-hessos-kolda",
+      "numero_fiche": "DF-KD-0001",
+      "nom": "Complexe Hesso",
+      "slug": "complexe-hesso-kolda",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "senegalaise",
+        "internationale"
+      ],
+      "description_courte": "Restaurant du quartier Doumassou à Kolda, proposant cuisine locale et internationale (fiche Senlocal).",
+      "statut": "a_verifier",
+      "niveau_verification": "partiellement_verifie",
+      "adresse": {
+        "region": "Kolda",
+        "departement": "Kolda",
+        "commune": "Kolda",
+        "quartier": "Doumassou",
+        "quartier_libre": "Doumassou",
+        "adresse_complete": "Doumassou, Kolda",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221 77 152 76 81",
+          "confirme": false,
+          "source": "senlocal",
+          "source_url": "https://senlocal.com/entreprises/complexe-hesso-kolda"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senlocal",
+          "url": "https://senlocal.com/entreprises/complexe-hesso-kolda",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, quartier, telephone, description",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senlocal",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senlocal:complexe-tawfekh-diourbel",
+      "numero_fiche": "DF-DB-0001",
+      "nom": "Complexe Tawfekh",
+      "slug": "complexe-tawfekh-diourbel",
+      "type_etablissement": "restaurant_hotel",
+      "categories": [
+        "senegalaise"
+      ],
+      "description_courte": "Complexe hôtelier de Diourbel avec restaurant et terrasse, à 300 mètres de la gare (fiche Senlocal).",
+      "statut": "a_verifier",
+      "niveau_verification": "partiellement_verifie",
+      "adresse": {
+        "region": "Diourbel",
+        "departement": "Diourbel",
+        "commune": "Diourbel",
+        "quartier": "Escale Diourbel",
+        "quartier_libre": "Escale",
+        "adresse_complete": "Quartier Escale, Diourbel",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221 33 971 52 19",
+          "confirme": false,
+          "source": "senlocal",
+          "source_url": "https://senlocal.com/entreprises/complexe-tawfekh-diourbel"
+        }
+      ],
+      "services": [
+        "terrasse"
+      ],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senlocal",
+          "url": "https://senlocal.com/entreprises/complexe-tawfekh-diourbel",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, quartier, telephone, description",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senlocal",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senlocal:il-pellicano-louga",
+      "numero_fiche": "DF-LG-0001",
+      "nom": "Hôtel-Restaurant Il Pellicano",
+      "slug": "il-pellicano-louga",
+      "type_etablissement": "restaurant_hotel",
+      "categories": [
+        "senegalaise",
+        "italienne"
+      ],
+      "description_courte": "Hôtel-restaurant 3 étoiles à Louga (HLM Bagdad) : cuisine sénégalaise et italienne, jardin et parking gardé (fiche Senlocal).",
+      "statut": "a_verifier",
+      "niveau_verification": "partiellement_verifie",
+      "adresse": {
+        "region": "Louga",
+        "departement": "Louga",
+        "commune": "Louga",
+        "quartier": "HLM Bagdad",
+        "quartier_libre": "HLM Bagdad",
+        "adresse_complete": "HLM Bagdad, Louga",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221 33 987 02 27",
+          "confirme": false,
+          "source": "senlocal",
+          "source_url": "https://senlocal.com/entreprises/il-pellicano-louga"
+        }
+      ],
+      "services": [
+        "parking"
+      ],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senlocal",
+          "url": "https://senlocal.com/entreprises/il-pellicano-louga",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, quartier, telephone, description, equipements",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senlocal",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senlocal:restaurant-traiteur-les-astuces-ziguinchor",
+      "numero_fiche": "DF-ZG-0001",
+      "nom": "Restaurant Traiteur Les Astuces",
+      "slug": "restaurant-traiteur-les-astuces-ziguinchor",
+      "type_etablissement": "traiteur",
+      "categories": [
+        "senegalaise",
+        "internationale",
+        "fruits_de_mer"
+      ],
+      "description_courte": "Restaurant traiteur du quartier universitaire de Ziguinchor, en face du campus de l'Université Assane Seck : cuisine locale et internationale, poissons frais, service traiteur événementiel (fiche Senlocal). Également cité dans la liste de recherche du commanditaire.",
+      "statut": "a_verifier",
+      "niveau_verification": "partiellement_verifie",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Ziguinchor",
+        "commune": "Ziguinchor",
+        "quartier_libre": "Quartier universitaire",
+        "adresse_complete": "Face au campus de l'Université Assane Seck, Ziguinchor",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221 78 445 43 43",
+          "confirme": false,
+          "source": "senlocal",
+          "source_url": "https://senlocal.com/entreprises/restaurant-traiteur-les-astuces-ziguinchor"
+        }
+      ],
+      "services": [
+        "traiteur"
+      ],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senlocal",
+          "url": "https://senlocal.com/entreprises/restaurant-traiteur-les-astuces-ziguinchor",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, telephone, description, services",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senlocal",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senlocal:restaurant-la-douma",
+      "numero_fiche": "DF-ZG-0002",
+      "nom": "Restaurant La Douma",
+      "slug": "restaurant-la-douma-ziguinchor",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "africaine",
+        "internationale",
+        "fruits_de_mer"
+      ],
+      "description_courte": "Restaurant de cuisine africaine et internationale à Ziguinchor, réputé pour ses fruits de mer et grillades, situé derrière le stade Aline Sitoé Diatta (fiche Senlocal). Également cité dans la liste de recherche du commanditaire.",
+      "statut": "a_verifier",
+      "niveau_verification": "partiellement_verifie",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Ziguinchor",
+        "commune": "Ziguinchor",
+        "quartier_libre": "Derrière le stade Aline Sitoé Diatta",
+        "adresse_complete": "Derrière le stade Aline Sitoé Diatta, Ziguinchor",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221 33 991 99 78",
+          "confirme": false,
+          "source": "senlocal",
+          "source_url": "https://senlocal.com/entreprises/restaurant-la-douma"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senlocal",
+          "url": "https://senlocal.com/entreprises/restaurant-la-douma",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, telephone, description",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senlocal",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-restaurant-le-diobas-ziguinchor-epmn",
+      "numero_fiche": "DF-ZG-0003",
+      "nom": "Restaurant Le Diobas",
+      "slug": "restaurant-le-diobas-ziguinchor",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "senegalaise",
+        "africaine"
+      ],
+      "description_courte": "Restaurant situé au rond-point Aline Sitoé Diatta à Ziguinchor (fiche Annuaire Senefinder).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Ziguinchor",
+        "commune": "Ziguinchor",
+        "quartier_libre": "Rond-point Aline Sitoé Diatta",
+        "adresse_complete": "Rond-point Aline Sitoé Diatta, Ziguinchor",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "whatsapp",
+          "valeur": "221769253400",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-restaurant-le-diobas-ziguinchor-epmn"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-restaurant-le-diobas-ziguinchor-epmn",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, whatsapp",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-les-jardins-de-lalliance-ziguinchor-sq2f",
+      "numero_fiche": "DF-ZG-0004",
+      "nom": "Les Jardins de l'Alliance",
+      "slug": "les-jardins-de-lalliance-ziguinchor",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "francaise",
+        "internationale"
+      ],
+      "description_courte": "Restaurant de l'avenue Émile Badiane à Ziguinchor (fiche Annuaire Senefinder).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Ziguinchor",
+        "commune": "Ziguinchor",
+        "quartier_libre": "Avenue Émile Badiane",
+        "adresse_complete": "Avenue Émile Badiane, Ziguinchor",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "whatsapp",
+          "valeur": "221776537116",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-les-jardins-de-lalliance-ziguinchor-sq2f"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-les-jardins-de-lalliance-ziguinchor-sq2f",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, adresse, whatsapp",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-baneto-ziguinchor-2qiy",
+      "numero_fiche": "DF-ZG-0005",
+      "nom": "Baneto",
+      "slug": "baneto-ziguinchor",
+      "type_etablissement": "restaurant",
+      "categories": [
+        "internationale"
+      ],
+      "description_courte": "Restaurant référencé à Ziguinchor (fiche Annuaire Senefinder, sans adresse précise publiée).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Ziguinchor",
+        "departement": "Ziguinchor",
+        "commune": "Ziguinchor",
+        "quartier_libre": "Ziguinchor",
+        "adresse_complete": null,
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "telephone",
+          "valeur": "+221 33 991 44 23",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-baneto-ziguinchor-2qiy"
+        }
+      ],
+      "services": [],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-baneto-ziguinchor-2qiy",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, ville, telephone",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "commentaire_verification": "Adresse non publiée par la source : à compléter.",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-epicerie-patisserie-touba-ainz",
+      "numero_fiche": "DF-DB-0002",
+      "nom": "Épicerie Pâtisserie",
+      "slug": "epicerie-patisserie-touba",
+      "type_etablissement": "patisserie",
+      "categories": [
+        "patisserie_dessert"
+      ],
+      "description_courte": "Épicerie-pâtisserie référencée à Touba (fiche Annuaire Senefinder).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Diourbel",
+        "departement": "Mbacké",
+        "commune": "Touba Mosquée",
+        "quartier": "Touba Mosquée",
+        "quartier_libre": "Touba",
+        "adresse_complete": "Touba",
+        "latitude": null,
+        "longitude": null,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "whatsapp",
+          "valeur": "221778132555",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-epicerie-patisserie-touba-ainz"
+        }
+      ],
+      "services": [
+        "a_emporter"
+      ],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-epicerie-patisserie-touba-ainz",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, ville, whatsapp",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    },
+    {
+      "cle": "senefinder:food-dibiterie-saf-sap-touba-p5nf",
+      "numero_fiche": "DF-DB-0003",
+      "nom": "Dibiterie Saf Sap",
+      "slug": "dibiterie-saf-sap-touba",
+      "type_etablissement": "dibiterie",
+      "categories": [
+        "grillades",
+        "street_food"
+      ],
+      "description_courte": "Dibiterie de Touba présente dans l'annuaire Senefinder ; position et téléphone recoupés sur OpenStreetMap (même numéro : 76 696 61 70).",
+      "statut": "a_verifier",
+      "niveau_verification": "a_confirmer",
+      "adresse": {
+        "region": "Diourbel",
+        "departement": "Mbacké",
+        "commune": "Touba Mosquée",
+        "quartier": "Touba Mosquée",
+        "quartier_libre": "Touba",
+        "adresse_complete": "Touba",
+        "latitude": 14.8676154,
+        "longitude": -15.8753464,
+        "gps_verifie": false
+      },
+      "contacts": [
+        {
+          "type": "whatsapp",
+          "valeur": "221766966170",
+          "confirme": false,
+          "source": "senefinder",
+          "source_url": "https://senefinder.com/fr/business/food-dibiterie-saf-sap-touba-p5nf"
+        }
+      ],
+      "services": [
+        "a_emporter"
+      ],
+      "images": [],
+      "menus": [],
+      "sources": [
+        {
+          "source": "senefinder",
+          "url": "https://senefinder.com/fr/business/food-dibiterie-saf-sap-touba-p5nf",
+          "date_collecte": "2026-10-13",
+          "donnees": "nom, ville, whatsapp",
+          "niveau_confiance": "moyen"
+        },
+        {
+          "source": "openstreetmap",
+          "url": "https://www.openstreetmap.org/node/5242525308",
+          "date_collecte": "2026-10-13",
+          "donnees": "coordonnées GPS, téléphone (recoupement de la fiche senefinder)",
+          "niveau_confiance": "moyen"
+        }
+      ],
+      "date_collecte": "2026-10-13",
+      "origine_donnee": "senefinder",
+      "est_publication_visible": true
+    }
+  ]
+}

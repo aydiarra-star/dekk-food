@@ -1,0 +1,18 @@
+# Dépendances et artefacts de compilation
+node_modules/
+build/
+.dart_tool/
+.packages
+.flutter-plugins
+.flutter-plugins-dependencies
+*.iml
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+
+# Divers
+.DS_Store
+*.log

@@ -1,0 +1,103 @@
+name: CI
+
+# Vérifie chaque proposition de changement SANS déployer :
+# - cohérence des fichiers de collecte et du catalogue généré ;
+# - tests du pipeline Python et du schéma PostgreSQL (instance jetable) ;
+# - analyse et tests Flutter, puis compilation web à blanc.
+on:
+  pull_request:
+  push:
+    branches: [ 'arena/**', main ]
+
+permissions:
+  contents: read
+
+jobs:
+  donnees-et-base:
+    name: Données et base
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Installer Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Installer les dépendances du pipeline
+        run: pip install -r tools/requirements.txt
+
+      - name: Vérifier et régénérer le catalogue (aucune divergence tolérée)
+        run: |
+          # La date de référence est celle déjà portée par le catalogue committé :
+          # la comparaison ne dépend donc ni du jour d'exécution du workflow, ni du
+          # commit de fusion temporaire créé pour une pull request. Si les données
+          # changent sans que le catalogue soit régénéré, le diff apparaît — c'est
+          # précisément ce que ce contrôle doit détecter.
+          DATE="$(python3 -c "import json;print(json.load(open('assets/data/catalogue.json'))['genere_le'])")"
+          echo "Date de référence du catalogue committé : $DATE"
+          python3 tools/catalogue/importateur.py valider data/seed/*.json
+          python3 tools/catalogue/importateur.py generer data/seed/*.json --dossier . \
+            --rapport docs/RAPPORT_COUVERTURE.md --date "$DATE"
+          python3 tools/catalogue/plan_enrichissement.py --date "$DATE"
+          git diff --exit-code -- assets/data/catalogue.json supabase/seed/10_etablissements.sql \
+            docs/RAPPORT_COUVERTURE.md docs/PLAN_ENRICHISSEMENT.md \
+            data/exports/file_de_travail_verification.csv
+
+      - name: Tests du pipeline
+        run: python3 -m pytest tools/tests -q
+
+      - name: Vérification du schéma sur un PostgreSQL jetable
+        run: python3 tools/tests/verifier_schema_postgres.py
+
+  application:
+    name: Application Flutter
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Installer Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      # Les sorties sont renvoyées dans les annotations du job : elles restent
+      # lisibles même lorsque les journaux complets de l'exécution ne sont pas
+      # téléchargeables.
+      - name: Installer les dépendances
+        run: |
+          set +e
+          flutter pub get > /tmp/pub.log 2>&1
+          code=$?
+          if [ $code -ne 0 ]; then
+            head -n 10 /tmp/pub.log | sed 's/%/%25/g' | while IFS= read -r ligne; do echo "::error title=flutter pub get::${ligne}"; done
+            exit $code
+          fi
+          tail -n 3 /tmp/pub.log
+
+      - name: Analyse statique
+        run: |
+          set +e
+          flutter analyze > /tmp/analyze.log 2>&1
+          code=$?
+          if [ $code -ne 0 ]; then
+            head -n 10 /tmp/analyze.log | sed 's/%/%25/g' | while IFS= read -r ligne; do echo "::error title=flutter analyze::${ligne}"; done
+            cat /tmp/analyze.log
+            exit $code
+          fi
+          tail -n 3 /tmp/analyze.log
+
+      - name: Tests
+        run: |
+          set +e
+          flutter test > /tmp/test.log 2>&1
+          code=$?
+          if [ $code -ne 0 ]; then
+            head -n 10 /tmp/test.log | sed 's/%/%25/g' | while IFS= read -r ligne; do echo "::error title=flutter test::${ligne}"; done
+            cat /tmp/test.log
+            exit $code
+          fi
+          tail -n 3 /tmp/test.log
+
+      - name: Compilation web à blanc
+        run: flutter build web --release --base-href=/dekk-food/
