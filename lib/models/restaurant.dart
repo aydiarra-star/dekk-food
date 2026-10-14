@@ -22,16 +22,25 @@ class Restaurant {
   });
 
   factory Restaurant.fromJson(Map<String, dynamic> json) {
+    final cuisines = json['cuisine_types'] ?? json['cuisine_type'];
+    final cuisineType = cuisines is List
+        ? cuisines.map((value) => value.toString()).join(', ')
+        : (cuisines?.toString() ?? '');
+
     return Restaurant(
-      id: json['id'],
-      name: json['name'],
-      cuisineType: json['cuisine_type'],
-      neighborhood: json['neighborhood'],
-      address: json['address'],
-      phone: json['phone'],
-      whatsapp: json['whatsapp'],
-      latitude: json['latitude'] != null ? (json['latitude'] as num).toDouble() : null,
-      longitude: json['longitude'] != null ? (json['longitude'] as num).toDouble() : null,
+      id: json['id']?.toString() ?? '',
+      name: json['name']?.toString() ?? '',
+      cuisineType: cuisineType,
+      neighborhood: (json['neighborhood'] ?? json['city'] ?? '').toString(),
+      address: json['address']?.toString(),
+      phone: json['phone']?.toString(),
+      whatsapp: json['whatsapp']?.toString(),
+      latitude: json['latitude'] != null
+          ? (json['latitude'] as num).toDouble()
+          : null,
+      longitude: json['longitude'] != null
+          ? (json['longitude'] as num).toDouble()
+          : null,
     );
   }
 }
@@ -55,12 +64,12 @@ class MenuItem {
 
   factory MenuItem.fromJson(Map<String, dynamic> json) {
     return MenuItem(
-      id: json['id'],
-      restaurantId: json['restaurant_id'],
-      title: json['title'],
-      description: json['description'],
+      id: json['id']?.toString() ?? '',
+      restaurantId: json['restaurant_id']?.toString() ?? '',
+      title: (json['name'] ?? json['title'] ?? '').toString(),
+      description: json['description']?.toString(),
       price: (json['price'] as num).toDouble(),
-      category: json['category'],
+      category: json['category']?.toString(),
     );
   }
 }
