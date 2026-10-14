@@ -34,6 +34,7 @@ def qualifier_schema_sql(sql: str, schema_cible: str = "public") -> str:
     etat = "normal"
     delimiteur_dollar = ""
     profondeur_commentaire = 0
+    chaine_echappement = False
 
     while i < len(sql):
         courant = sql[i]
@@ -41,12 +42,17 @@ def qualifier_schema_sql(sql: str, schema_cible: str = "public") -> str:
 
         if etat == "chaine":
             resultat.append(courant)
+            if chaine_echappement and courant == "\\" and i + 1 < len(sql):
+                resultat.append(suivant)
+                i += 2
+                continue
             if courant == "'" and suivant == "'":
                 resultat.append(suivant)
                 i += 2
                 continue
             if courant == "'":
                 etat = "normal"
+                chaine_echappement = False
             i += 1
             continue
 
@@ -96,6 +102,12 @@ def qualifier_schema_sql(sql: str, schema_cible: str = "public") -> str:
 
         if courant == "'":
             resultat.append(courant)
+            # PostgreSQL E'...' autorise les échappements par antislash.
+            chaine_echappement = (
+                i > 0
+                and sql[i - 1] in "eE"
+                and (i < 2 or not (sql[i - 2].isalnum() or sql[i - 2] in "_$"))
+            )
             etat = "chaine"
             i += 1
         elif courant == '"':
