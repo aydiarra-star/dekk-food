@@ -132,3 +132,22 @@ def test_cli_generer_conserve_public_par_defaut():
     arguments = construire_analyseur().parse_args(["generer", str(SEED)])
     assert arguments.schema_cible == "public"
 
+def test_generation_sql_est_reproductible_a_date_et_source_identiques(tmp_path):
+    from tools.catalogue.importateur import construire_analyseur
+
+    sorties = []
+    for nom_dossier in ("premiere", "seconde"):
+        dossier = tmp_path / nom_dossier
+        arguments = construire_analyseur().parse_args([
+            "generer",
+            str(SEED),
+            "--dossier", str(dossier),
+            "--schema-cible", "catalogue",
+            "--date", "2026-10-14",
+        ])
+        assert arguments.fonction(arguments) == 0
+        sorties.append(
+            (dossier / "supabase" / "seed" / "10_etablissements.sql").read_bytes()
+        )
+
+    assert sorties[0] == sorties[1]
