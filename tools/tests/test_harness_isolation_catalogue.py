@@ -101,9 +101,16 @@ def _snapshot_public(conn: Any) -> dict[str, Any]:
                    coalesce((select string_agg(e.enumlabel, ',' order by e.enumsortorder)
                              from pg_enum e where e.enumtypid = t.oid), '') as enum_labels,
                    coalesce((select string_agg(pg_get_constraintdef(c.oid, true), ' | ' order by c.conname)
-                             from pg_constraint c where c.contypid = t.oid), '') as domain_constraints
+                             from pg_constraint c where c.contypid = t.oid), '') as domain_constraints,
+                   coalesce((select string_agg(
+                               format('%s:%s:%s', a.attname, format_type(a.atttypid, a.atttypmod), a.attnotnull),
+                               ',' order by a.attnum)
+                             from pg_class rc
+                             join pg_attribute a on a.attrelid = rc.oid
+                             where rc.reltype = t.oid and a.attnum > 0 and not a.attisdropped),
+                            '') as composite_attributes
             from pg_type t join pg_namespace n on n.oid = t.typnamespace
-            where n.nspname = 'public' and t.typtype in ('d', 'e', 'r', 'm')
+            where n.nspname = 'public' and t.typtype in ('c', 'd', 'e', 'r', 'm')
             order by t.typname
         """)
         result["types"] = cur.fetchall()
@@ -252,6 +259,32 @@ def test_snapshot_detecte_une_modification_des_donnees_historiques():
         assert before != after
         assert before["relations"]["restaurants"]["row_count"] == 1
         assert before["functions"] != []
+
+
+def test_snapshot_detecte_une_modification_de_type_composite():
+    try:
+        import pgserver  # type: ignore
+        import psycopg  # type: ignore
+    except ImportError as exc:
+        raise AssertionError(f"Les tests du harness exigent pgserver et psycopg : {exc}") from exc
+    server = pgserver.get_server(tempfile.mkdtemp(prefix="dekk-harness-composite-"))
+    with psycopg.connect(server.get_uri(), autocommit=True) as conn:
+        with conn.cursor() as cur:
+            cur.execute("""
+                create type public.synthetic_address as (
+                    street text,
+                    postal_code integer
+                );
+            """)
+        before = _snapshot_public(conn)
+        before_type = next(t for t in before["types"] if t[0] == "synthetic_address")
+        assert "street:text" in before_type[7]
+        with conn.cursor() as cur:
+            cur.execute("alter type public.synthetic_address add attribute country text")
+        after = _snapshot_public(conn)
+        after_type = next(t for t in after["types"] if t[0] == "synthetic_address")
+        assert before_type != after_type
+        assert "country:text" in after_type[7]
 
 
 def test_snapshot_detecte_une_modification_de_vue_et_type_personnalise():
