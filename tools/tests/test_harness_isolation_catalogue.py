@@ -503,6 +503,20 @@ def test_fixture_historique_minimale_est_verifiee():
             """)
         assert _verifier_fixture_historique(conn) == []
         with conn.cursor() as cur:
+            cur.execute("""
+                alter table public.restaurant_menus
+                    drop constraint restaurant_menus_restaurant_id_fkey
+            """)
+        assert (
+            "public.restaurant_menus.restaurant_id ne référence pas public.restaurants(id)"
+            in _verifier_fixture_historique(conn)
+        )
+        with conn.cursor() as cur:
+            cur.execute("""
+                alter table public.restaurant_menus
+                    add constraint restaurant_menus_restaurant_id_fkey
+                    foreign key (restaurant_id) references public.restaurants(id)
+            """)
             cur.execute("delete from public.restaurant_menus")
         assert "public.restaurant_menus ne contient aucune ligne témoin" in (
             _verifier_fixture_historique(conn)
