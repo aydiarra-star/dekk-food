@@ -123,6 +123,7 @@ def test_cli_generer_permet_une_cible_explicite_dans_un_dossier_temporaire(tmp_p
     assert "insert into catalogue.restaurants" in sql
     assert "catalogue.sources" in sql
     assert "public." not in sql
+    assert "-- Généré le 2026-10-14" in sql
 
 
 def test_cli_generer_conserve_public_par_defaut():
@@ -131,3 +132,22 @@ def test_cli_generer_conserve_public_par_defaut():
     arguments = construire_analyseur().parse_args(["generer", str(SEED)])
     assert arguments.schema_cible == "public"
 
+def test_generation_sql_est_reproductible_a_date_et_source_identiques(tmp_path):
+    from tools.catalogue.importateur import construire_analyseur
+
+    sorties = []
+    for nom_dossier in ("premiere", "seconde"):
+        dossier = tmp_path / nom_dossier
+        arguments = construire_analyseur().parse_args([
+            "generer",
+            str(SEED),
+            "--dossier", str(dossier),
+            "--schema-cible", "catalogue",
+            "--date", "2026-10-14",
+        ])
+        assert arguments.fonction(arguments) == 0
+        sorties.append(
+            (dossier / "supabase" / "seed" / "10_etablissements.sql").read_bytes()
+        )
+
+    assert sorties[0] == sorties[1]

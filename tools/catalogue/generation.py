@@ -467,13 +467,14 @@ def _lien_source(code: str | None, url: str | None) -> tuple[str, str]:
 def generer_sql(
     etablissements: Iterable[Etablissement],
     schema_cible: str = "public",
+    date_generation: str | None = None,
 ) -> str:
     """Génère le seed idempotent ; `schema_cible` ne crée pas le schéma ni ses tables."""
     lignes: list[str] = [
         "-- =============================================================================",
         "-- DEKK FOOD / DAKA FOOD — Amorçage du catalogue (fichier GÉNÉRÉ)",
         "-- Source : data/seed/*.json via tools/catalogue (ne pas modifier à la main).",
-        f"-- Généré le {date.today().isoformat()}",
+        f"-- Généré le {date_generation or date.today().isoformat()}",
         "-- Le script est idempotent : il met à jour les fiches existantes (clé : slug).",
         "-- =============================================================================",
         "",
