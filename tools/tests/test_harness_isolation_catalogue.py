@@ -551,3 +551,60 @@ def test_snapshot_detecte_la_perte_de_propriete_d_une_sequence():
             cur.execute("alter sequence public.sequence_owner_probe_seq owned by none")
         after = _snapshot_public(conn)
         assert before["sequence_ownership"] != after["sequence_ownership"]
+
+
+def test_snapshot_detecte_les_changements_de_policies_triggers_et_acl():
+    try:
+        import pgserver  # type: ignore
+        import psycopg  # type: ignore
+    except ImportError as exc:
+        raise AssertionError(f"Les tests du harness exigent pgserver et psycopg : {exc}") from exc
+    server = pgserver.get_server(tempfile.mkdtemp(prefix="dekk-harness-security-snapshot-"))
+    with psycopg.connect(server.get_uri(), autocommit=True) as conn:
+        with conn.cursor() as cur:
+            cur.execute("""
+                create role synthetic_reader;
+                create table public.security_probe (id integer primary key, visible boolean not null);
+                insert into public.security_probe values (1, true);
+                create function public.security_probe_trigger_fn()
+                returns trigger language plpgsql as $$
+                begin
+                    new.visible := coalesce(new.visible, false);
+                    return new;
+                end;
+                $$;
+                create trigger security_probe_trigger
+                    before insert on public.security_probe
+                    for each row execute function public.security_probe_trigger_fn();
+                alter table public.security_probe enable row level security;
+                create policy security_probe_policy on public.security_probe
+                    for select to synthetic_reader using (visible);
+                grant select on public.security_probe to synthetic_reader;
+            """)
+        before = _snapshot_public(conn)
+        assert any(policy[2] == "security_probe_policy" for policy in before["policies"])
+        assert any(trigger[2] == "security_probe_trigger" for trigger in before["triggers"])
+        assert any(entry[2] == "security_probe" and "synthetic_reader" in str(entry[4])
+                   for entry in before["acl"])
+
+        with conn.cursor() as cur:
+            cur.execute("drop policy security_probe_policy on public.security_probe")
+        after_policy = _snapshot_public(conn)
+        assert before["policies"] != after_policy["policies"]
+
+        with conn.cursor() as cur:
+            cur.execute("""
+                create policy security_probe_policy on public.security_probe
+                    for select to synthetic_reader using (id > 0)
+            """)
+        before_trigger = _snapshot_public(conn)
+        with conn.cursor() as cur:
+            cur.execute("drop trigger security_probe_trigger on public.security_probe")
+        after_trigger = _snapshot_public(conn)
+        assert before_trigger["triggers"] != after_trigger["triggers"]
+
+        before_acl = _snapshot_public(conn)
+        with conn.cursor() as cur:
+            cur.execute("revoke select on public.security_probe from synthetic_reader")
+        after_acl = _snapshot_public(conn)
+        assert before_acl["acl"] != after_acl["acl"]
