@@ -388,7 +388,14 @@ def commande_generer(arguments: argparse.Namespace) -> int:
 
     catalogue = generation.construire_catalogue(resultat.etablissements, date_generation=arguments.date)
     generation.ecrire_fichier(chemin_asset, json.dumps(catalogue, ensure_ascii=False, indent=1))
-    generation.ecrire_fichier(chemin_sql, generation.generer_sql(resultat.etablissements, schema_cible=arguments.schema_cible))
+    generation.ecrire_fichier(
+        chemin_sql,
+        generation.generer_sql(
+            resultat.etablissements,
+            schema_cible=arguments.schema_cible,
+            date_generation=arguments.date,
+        ),
+    )
 
     print(f"{len(resultat.etablissements)} fiches écrites dans {chemin_asset}")
     print(f"Script SQL d'amorçage écrit dans {chemin_sql}")
