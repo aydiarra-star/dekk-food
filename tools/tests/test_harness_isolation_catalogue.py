@@ -243,6 +243,28 @@ def _verifier_fixture_historique(conn: Any) -> list[str]:
             cur.execute(f'SELECT count(*) FROM public."{table}"')
             if cur.fetchone()[0] < 1:
                 erreurs.append(f"public.{table} ne contient aucune ligne témoin")
+
+        # Les deux tables enfants doivent réellement référencer restaurants(id).
+        # Vérifier seulement le nom et le type des colonnes laisserait passer
+        # une fixture incomplète, donc incapable de tester l'intégrité historique.
+        for table in ("restaurant_menus", "restaurant_reviews"):
+            cur.execute("""
+                select count(*)
+                from pg_constraint con
+                join pg_class child on child.oid = con.conrelid
+                join pg_namespace child_ns on child_ns.oid = child.relnamespace
+                join pg_class parent on parent.oid = con.confrelid
+                join pg_namespace parent_ns on parent_ns.oid = parent.relnamespace
+                where con.contype = 'f'
+                  and child_ns.nspname = 'public' and child.relname = %s
+                  and parent_ns.nspname = 'public' and parent.relname = 'restaurants'
+                  and pg_get_constraintdef(con.oid, true) like '%(restaurant_id)%'
+                  and pg_get_constraintdef(con.oid, true) like '%REFERENCES restaurants(id)%'
+            """, (table,))
+            if cur.fetchone()[0] < 1:
+                erreurs.append(
+                    f"public.{table}.restaurant_id ne référence pas public.restaurants(id)"
+                )
     return erreurs
 
 def _relations_catalogue(conn: Any) -> set[tuple[str, str]]:
@@ -469,9 +491,11 @@ def test_fixture_historique_minimale_est_verifiee():
                 create table public.restaurants (id integer primary key, name text not null);
                 create table public.restaurant_menus (
                     id integer primary key, restaurant_id integer not null
+                        references public.restaurants(id)
                 );
                 create table public.restaurant_reviews (
                     id integer primary key, restaurant_id integer not null
+                        references public.restaurants(id)
                 );
                 insert into public.restaurants values (42, 'Témoin');
                 insert into public.restaurant_menus values (7, 42);
