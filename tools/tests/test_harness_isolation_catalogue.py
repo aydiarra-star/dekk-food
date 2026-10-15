@@ -175,6 +175,20 @@ def _snapshot_public(conn: Any) -> dict[str, Any]:
     return json.loads(json.dumps(result, sort_keys=True, default=str))
 
 
+
+def _relations_catalogue(conn: Any) -> set[tuple[str, str]]:
+    """Liste les tables/vues du schéma catalogue pour éviter une fausse preuve à vide."""
+    with conn.cursor() as cur:
+        cur.execute("""
+            select c.relname, c.relkind
+            from pg_class c
+            join pg_namespace n on n.oid = c.relnamespace
+            where n.nspname = 'catalogue'
+              and c.relkind in ('r', 'p', 'v', 'm', 'f')
+            order by c.relname, c.relkind
+        """)
+        return set(cur.fetchall())
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--historical-fixture", type=Path, required=True,
@@ -200,11 +214,17 @@ def main() -> int:
         with conn.cursor() as cur:
             cur.execute(fixture.read_text(encoding="utf-8"))
         before = _snapshot_public(conn)
+        relations_catalogue_avant = _relations_catalogue(conn)
         for migration in migrations:
             print(f"Application jetable : {migration.name}")
             with conn.cursor() as cur:
                 cur.execute(migration.read_text(encoding="utf-8"))
         after = _snapshot_public(conn)
+        relations_catalogue_apres = _relations_catalogue(conn)
+        nouvelles_relations_catalogue = relations_catalogue_apres - relations_catalogue_avant
+        if not nouvelles_relations_catalogue:
+            print("ÉCHEC : aucune nouvelle table/vue catalogue détectée ; une migration vide ne constitue pas une preuve.")
+            return 1
         if after["catalogue_fks_to_public"]:
             print("ÉCHEC : clés étrangères du catalogue vers public interdites :",
                   after["catalogue_fks_to_public"])
@@ -318,3 +338,19 @@ def test_snapshot_detecte_une_modification_de_vue_et_type_personnalise():
         before_status = next(t for t in before["types"] if t[0] == "synthetic_status")
         after_status = next(t for t in after["types"] if t[0] == "synthetic_status")
         assert before_status != after_status
+
+
+def test_harness_refuse_un_schema_catalogue_sans_relation():
+    try:
+        import pgserver  # type: ignore
+        import psycopg  # type: ignore
+    except ImportError as exc:
+        raise AssertionError(f"Les tests du harness exigent pgserver et psycopg : {exc}") from exc
+    server = pgserver.get_server(tempfile.mkdtemp(prefix="dekk-harness-catalogue-vide-"))
+    with psycopg.connect(server.get_uri(), autocommit=True) as conn:
+        with conn.cursor() as cur:
+            cur.execute("create schema catalogue")
+        assert _relations_catalogue(conn) == set()
+        with conn.cursor() as cur:
+            cur.execute("create table catalogue.etablissements (id uuid primary key)")
+        assert _relations_catalogue(conn) == {("etablissements", "r")}
