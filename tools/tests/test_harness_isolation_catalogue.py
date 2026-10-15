@@ -253,13 +253,20 @@ def _verifier_fixture_historique(conn: Any) -> list[str]:
                 from pg_constraint con
                 join pg_class child on child.oid = con.conrelid
                 join pg_namespace child_ns on child_ns.oid = child.relnamespace
-                join pg_class parent on parent.oid = con.confrelid
                 join pg_namespace parent_ns on parent_ns.oid = parent.relnamespace
+                join pg_attribute child_attr
+                  on child_attr.attrelid = child.oid
+                 and child_attr.attname = 'restaurant_id'
+                 and not child_attr.attisdropped
+                join pg_attribute parent_attr
+                  on parent_attr.attrelid = parent.oid
+                 and parent_attr.attname = 'id'
+                 and not parent_attr.attisdropped
                 where con.contype = 'f'
                   and child_ns.nspname = 'public' and child.relname = %s
                   and parent_ns.nspname = 'public' and parent.relname = 'restaurants'
-                  and pg_get_constraintdef(con.oid, true) like '%(restaurant_id)%'
-                  and pg_get_constraintdef(con.oid, true) like '%REFERENCES restaurants(id)%'
+                  and con.conkey = ARRAY[child_attr.attnum]::smallint[]
+                  and con.confkey = ARRAY[parent_attr.attnum]::smallint[]
             """, (table,))
             if cur.fetchone()[0] < 1:
                 erreurs.append(
