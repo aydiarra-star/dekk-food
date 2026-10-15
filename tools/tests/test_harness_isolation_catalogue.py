@@ -253,6 +253,7 @@ def _verifier_fixture_historique(conn: Any) -> list[str]:
                 from pg_constraint con
                 join pg_class child on child.oid = con.conrelid
                 join pg_namespace child_ns on child_ns.oid = child.relnamespace
+                join pg_class parent on parent.oid = con.confrelid
                 join pg_namespace parent_ns on parent_ns.oid = parent.relnamespace
                 join pg_attribute child_attr
                   on child_attr.attrelid = child.oid
