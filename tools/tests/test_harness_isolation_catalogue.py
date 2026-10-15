@@ -500,8 +500,8 @@ def test_snapshot_detecte_la_perte_de_propriete_d_une_sequence():
                     owned by public.sequence_owner_probe.id;
             """)
         before = _snapshot_public(conn)
-        assert ("public", "sequence_owner_probe_seq", "public",
-                "sequence_owner_probe", "id", "a") in before["sequence_ownership"]
+        assert ["public", "sequence_owner_probe_seq", "public",
+                "sequence_owner_probe", "id", "a"] in before["sequence_ownership"]
         with conn.cursor() as cur:
             cur.execute("alter sequence public.sequence_owner_probe_seq owned by none")
         after = _snapshot_public(conn)
