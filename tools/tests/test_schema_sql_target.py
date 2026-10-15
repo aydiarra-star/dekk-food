@@ -123,6 +123,7 @@ def test_cli_generer_permet_une_cible_explicite_dans_un_dossier_temporaire(tmp_p
     assert "insert into catalogue.restaurants" in sql
     assert "catalogue.sources" in sql
     assert "public." not in sql
+    assert "-- Généré le 2026-10-14" in sql
 
 
 def test_cli_generer_conserve_public_par_defaut():
