@@ -17,7 +17,7 @@ from typing import Any
 def _snapshot_public(conn: Any) -> dict[str, Any]:
     """Empreinte des relations publiques, colonnes, contraintes et lignes."""
     result: dict[str, Any] = {
-        "relations": {}, "functions": [], "types": [], "policies": [], "triggers": [], "acl": [], "sequences": [], "catalogue_fks_to_public": []
+        "relations": {}, "functions": [], "types": [], "policies": [], "triggers": [], "acl": [], "sequences": [], "sequence_ownership": [], "catalogue_fks_to_public": []
     }
     with conn.cursor() as cur:
         cur.execute("""
@@ -158,6 +158,24 @@ def _snapshot_public(conn: Any) -> dict[str, Any]:
             order by sequencename
         """)
         result["sequences"] = cur.fetchall()
+        cur.execute("""
+            select seq_ns.nspname, seq.relname,
+                   tbl_ns.nspname, tbl.relname, attr.attname,
+                   dep.deptype
+            from pg_class seq
+            join pg_namespace seq_ns on seq_ns.oid = seq.relnamespace
+            join pg_depend dep on dep.classid = 'pg_class'::regclass
+                             and dep.objid = seq.oid
+                             and dep.refclassid = 'pg_class'::regclass
+                             and dep.deptype in ('a', 'i')
+            join pg_class tbl on tbl.oid = dep.refobjid
+            join pg_namespace tbl_ns on tbl_ns.oid = tbl.relnamespace
+            join pg_attribute attr on attr.attrelid = tbl.oid
+                                  and attr.attnum = dep.refobjsubid
+            where seq_ns.nspname = 'public' and seq.relkind = 'S'
+            order by seq.relname
+        """)
+        result["sequence_ownership"] = cur.fetchall()
         cur.execute("""
             select sn.nspname, sc.relname, tn.nspname, tc.relname,
                    con.conname, pg_get_constraintdef(con.oid, true)
@@ -465,3 +483,26 @@ def test_fixture_historique_minimale_est_verifiee():
         assert "public.restaurant_menus ne contient aucune ligne témoin" in (
             _verifier_fixture_historique(conn)
         )
+
+def test_snapshot_detecte_la_perte_de_propriete_d_une_sequence():
+    try:
+        import pgserver  # type: ignore
+        import psycopg  # type: ignore
+    except ImportError as exc:
+        raise AssertionError(f"Les tests du harness exigent pgserver et psycopg : {exc}") from exc
+    server = pgserver.get_server(tempfile.mkdtemp(prefix="dekk-harness-sequence-owner-"))
+    with psycopg.connect(server.get_uri(), autocommit=True) as conn:
+        with conn.cursor() as cur:
+            cur.execute("""
+                create table public.sequence_owner_probe (id integer);
+                create sequence public.sequence_owner_probe_seq;
+                alter sequence public.sequence_owner_probe_seq
+                    owned by public.sequence_owner_probe.id;
+            """)
+        before = _snapshot_public(conn)
+        assert ("public", "sequence_owner_probe_seq", "public",
+                "sequence_owner_probe", "id", "a") in before["sequence_ownership"]
+        with conn.cursor() as cur:
+            cur.execute("alter sequence public.sequence_owner_probe_seq owned by none")
+        after = _snapshot_public(conn)
+        assert before["sequence_ownership"] != after["sequence_ownership"]
