@@ -193,6 +193,40 @@ def migrations_historiques_interdites(noms: list[str]) -> list[str]:
     return sorted(set(noms) & MIGRATIONS_HISTORIQUES_INTERDITES)
 
 
+
+def _verifier_fixture_historique(conn: Any) -> list[str]:
+    """Refuse une fixture trop vide pour représenter le contrat historique minimal."""
+    erreurs: list[str] = []
+    tables = {
+        "restaurants": {"id": "integer"},
+        "restaurant_menus": {"id": "integer", "restaurant_id": "integer"},
+        "restaurant_reviews": {"id": "integer", "restaurant_id": "integer"},
+    }
+    with conn.cursor() as cur:
+        for table, colonnes_attendues in tables.items():
+            cur.execute("""
+                select a.attname, format_type(a.atttypid, a.atttypmod)
+                from pg_attribute a
+                join pg_class c on c.oid = a.attrelid
+                join pg_namespace n on n.oid = c.relnamespace
+                where n.nspname = 'public' and c.relname = %s
+                  and a.attnum > 0 and not a.attisdropped
+            """, (table,))
+            colonnes = dict(cur.fetchall())
+            if not colonnes:
+                erreurs.append(f"public.{table} absent ou sans colonnes")
+                continue
+            for colonne, type_attendu in colonnes_attendues.items():
+                if colonnes.get(colonne) != type_attendu:
+                    erreurs.append(
+                        f"public.{table}.{colonne}: type attendu {type_attendu}, "
+                        f"trouvé {colonnes.get(colonne, 'absent')}"
+                    )
+            cur.execute(f'SELECT count(*) FROM public."{table}"')
+            if cur.fetchone()[0] < 1:
+                erreurs.append(f"public.{table} ne contient aucune ligne témoin")
+    return erreurs
+
 def _relations_catalogue(conn: Any) -> set[tuple[str, str]]:
     """Liste les tables/vues du schéma catalogue pour éviter une fausse preuve à vide."""
     with conn.cursor() as cur:
@@ -237,6 +271,12 @@ def main() -> int:
     try:
         with conn.cursor() as cur:
             cur.execute(fixture.read_text(encoding="utf-8"))
+        erreurs_fixture = _verifier_fixture_historique(conn)
+        if erreurs_fixture:
+            parser.error(
+                "Fixture historique insuffisante pour le contrat minimal : "
+                + "; ".join(erreurs_fixture)
+            )
         before = _snapshot_public(conn)
         relations_catalogue_avant = _relations_catalogue(conn)
         for migration in migrations:
@@ -396,3 +436,32 @@ def test_harness_accepte_une_serie_dediee_catalogue():
         "catalogue_0001_schema.sql",
         "catalogue_0002_policies.sql",
     ]) == []
+
+
+def test_fixture_historique_minimale_est_verifiee():
+    try:
+        import pgserver  # type: ignore
+        import psycopg  # type: ignore
+    except ImportError as exc:
+        raise AssertionError(f"Les tests du harness exigent pgserver et psycopg : {exc}") from exc
+    server = pgserver.get_server(tempfile.mkdtemp(prefix="dekk-harness-fixture-check-"))
+    with psycopg.connect(server.get_uri(), autocommit=True) as conn:
+        with conn.cursor() as cur:
+            cur.execute("""
+                create table public.restaurants (id integer primary key, name text not null);
+                create table public.restaurant_menus (
+                    id integer primary key, restaurant_id integer not null
+                );
+                create table public.restaurant_reviews (
+                    id integer primary key, restaurant_id integer not null
+                );
+                insert into public.restaurants values (42, 'Témoin');
+                insert into public.restaurant_menus values (7, 42);
+                insert into public.restaurant_reviews values (9, 42);
+            """)
+        assert _verifier_fixture_historique(conn) == []
+        with conn.cursor() as cur:
+            cur.execute("delete from public.restaurant_menus")
+        assert "public.restaurant_menus ne contient aucune ligne témoin" in (
+            _verifier_fixture_historique(conn)
+        )
