@@ -176,6 +176,23 @@ def _snapshot_public(conn: Any) -> dict[str, Any]:
 
 
 
+
+MIGRATIONS_HISTORIQUES_INTERDITES = {
+    "0001_referentiel_et_catalogue.sql",
+    "0002_menus_images_services.sql",
+    "0003_securite_vues_admin.sql",
+    "0004_publication_validation_provenance.sql",
+    "0005_cloisonnement_public.sql",
+    "0006_acces_admin_restaurateur.sql",
+    "0007_securite_vues_et_fonctions.sql",
+}
+
+
+def migrations_historiques_interdites(noms: list[str]) -> list[str]:
+    """Repère les migrations historiques qui ne doivent pas servir de série catalogue."""
+    return sorted(set(noms) & MIGRATIONS_HISTORIQUES_INTERDITES)
+
+
 def _relations_catalogue(conn: Any) -> set[tuple[str, str]]:
     """Liste les tables/vues du schéma catalogue pour éviter une fausse preuve à vide."""
     with conn.cursor() as cur:
@@ -203,6 +220,13 @@ def main() -> int:
     migrations = sorted(migration_dir.glob("*.sql")) if migration_dir.is_dir() else []
     if not migrations:
         parser.error(f"Aucune migration catalogue dédiée trouvée dans {migration_dir}; aucune validation ne peut être revendiquée.")
+    interdites = migrations_historiques_interdites([migration.name for migration in migrations])
+    if interdites:
+        parser.error(
+            "Migrations historiques interdites dans le harness catalogue : "
+            + ", ".join(interdites)
+            + ". Créer une série autonome de migrations catalogue ; ne pas transformer/appliquer les historiques."
+        )
     try:
         import pgserver  # type: ignore
         import psycopg  # type: ignore
@@ -354,3 +378,21 @@ def test_harness_refuse_un_schema_catalogue_sans_relation():
         with conn.cursor() as cur:
             cur.execute("create table catalogue.etablissements (id uuid primary key)")
         assert _relations_catalogue(conn) == {("etablissements", "r")}
+
+
+def test_harness_refuse_les_migrations_historiques():
+    assert migrations_historiques_interdites([
+        "0001_referentiel_et_catalogue.sql",
+        "0004_publication_validation_provenance.sql",
+        "catalogue_0001_schema.sql",
+    ]) == [
+        "0001_referentiel_et_catalogue.sql",
+        "0004_publication_validation_provenance.sql",
+    ]
+
+
+def test_harness_accepte_une_serie_dediee_catalogue():
+    assert migrations_historiques_interdites([
+        "catalogue_0001_schema.sql",
+        "catalogue_0002_policies.sql",
+    ]) == []
